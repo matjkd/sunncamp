@@ -2,5 +2,6 @@ application/config/database.php
 application/config/config.php
 images/captcha/*
 nbproject/*
+stats/*
 .htaccess
 
