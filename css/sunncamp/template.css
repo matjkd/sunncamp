@@ -39,14 +39,13 @@ font-family:Verdana, Geneva, sans-serif;
 }
 #header {
 
-height:450px;
+height:250px;
 width:100%;
 
 display:block;
 position:relative;
    z-index:15;
-background:url('/images/template/flyerdirect/headerback.jpg') repeat-x #0033DD; 
-border-bottom: solid 5px #ffffff;
+background:url('/images/template/flyerdirect/headerback.jpg') repeat-x #0033DD; border-bottom: solid 5px #ffffff;
  -moz-box-shadow: 0px 6px 19px #000000;
     -webkit-box-shadow: 0px 6px 19px #000000;
     box-shadow: 0px 6px 19px #000000;
@@ -54,7 +53,7 @@ border-bottom: solid 5px #ffffff;
 
 #footer {
 
-height:60px;
+height:65px;
 width:960px;
     background-color: #ffffff;
 display:block;
@@ -102,7 +101,7 @@ font-size: 14px;
 padding-top: 0px;
 border-top: solid 0px #4a5b63;
 line-height:31px;;
-background: url('/images/template/flyerdirect/menuback.jpg') repeat-x #cd0a0a;
+
  -moz-box-shadow: 0px 6px 19px #000000;
     -webkit-box-shadow: 0px 6px 19px #000000;
     box-shadow: 0px 6px 19px #000000;

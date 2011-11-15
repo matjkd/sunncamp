@@ -11,6 +11,13 @@ Menu link:<?=form_input('menu', $row->menu)?>
 <textarea cols=65 rows=20 name="content" id="content" class='wymeditor'><?=$row->content?></textarea>
 <br/>
 
+Meta Description<br/>
+<textarea  cols=65 rows=2 name="meta_desc"><?=$row->meta_desc?></textarea>
+<br/>
+
+Meta Title<br/>
+<textarea  cols=65 rows=2 name="meta_title"><?=$row->meta_title?></textarea>
+<br/>
 
 Extra: 
 <br/><?=form_input('extra', $row->extra)?><br/>
