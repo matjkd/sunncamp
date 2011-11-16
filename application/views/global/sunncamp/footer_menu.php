@@ -1,8 +1,8 @@
 
 
 <div class="footermenu" >
-Copyright &copy; 2011. Sunncamp
-Email:<a href="mailto:info@sunncamp.net">info@sunncamp.co.uk</a><br/>
+Copyright &copy; <?=$config_company_name?> 2011. <?=$config_email?>
+Email:<a href="mailto:<?=$config_email?>"><?=$config_email?></a><br/>
 <?=$this->load->view('global/sunncamp/menu')?> 
 
 </div>

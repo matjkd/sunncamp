@@ -13,32 +13,33 @@
     </head>
 
     <body>
+        <div id="header_container">
+            <div id="header">
 
-        <div id="header">
+                <div  class="container_24" style="height:100px;">
+                    <div class="grid_17">
+                        <img style="margin-top:75px;" src="<? base_url() ?>images/template/sunncamp/tagline.png"/>
+                    </div>
 
-            <div id="logo" class="container_24">
-                <div class="grid_18">
-                   logo
+                    <div id="logo" class="grid_7">
+
+                    </div>
+
+                </div>
+                <div style="clear:both"></div>
+
+                <div id="menutop">
+
+                    <div style="width:960px; margin:0 auto;">
+
+                        <?= $this->load->view('global/sunncamp/menu') ?>
+                    </div> 
                 </div>
 
-                <div class="grid_6">
-                   contact
-                </div>
+
 
             </div>
-            <div style="clear:both"></div>
-
-            <div id="menutop">
-
-                <div style="width:960px; margin:0 auto;">
-                 
-                    <?= $this->load->view('global/sunncamp/menu') ?>
-                </div> 
-            </div>
-
-           
-
-        </div>
+        </div>   
         <div id="container">
 
 
