@@ -15,7 +15,7 @@
 <script src="<?= base_url() ?>js/wymeditor/jquery.wymeditor.min.js"></script>
 
 <script src="<?= base_url() ?>js/plugins.js"></script>
-<script src="<?= base_url() ?>js/flyer/plugins.js"></script>
+<script src="<?= base_url() ?>js/sunncamp/plugins.js"></script>
 
 <script src="<?= base_url() ?>js/script.js"></script>
 <script src="<?= base_url() ?>js/sunncamp/script.js"></script>

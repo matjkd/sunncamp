@@ -17,8 +17,8 @@
             <div id="header">
 
                 <div  class="container_24" style="height:100px;">
-                    <div class="grid_17">
-                        <img style="margin-top:75px;" src="<? base_url() ?>images/template/sunncamp/tagline.png"/>
+                    <div class="grid_17" style="margin-left:0;">
+                        <img style="margin-top:75px;" src="<?= base_url() ?>images/template/sunncamp/tagline.png"/>
                     </div>
 
                     <div id="logo" class="grid_7">
@@ -42,6 +42,11 @@
         </div>   
         <div id="container">
 
+            <?php if(isset($slideshow) && $slideshow != NULL) { ?>
+            <div id="slideshow_container" class="container_24">
+                <?= $this->load->view($slideshow) ?>
+            </div>
+            <?php } ?>
 
             <div id="bodycontainer" class="container_24">
 
@@ -114,7 +119,7 @@
         </div>
 
         <!--! end of #container -->
-        <?= $this->load->view('template/flyer/footer') ?>
+        <?= $this->load->view('template/sunncamp/footer') ?>
 
     </body>
 </html>

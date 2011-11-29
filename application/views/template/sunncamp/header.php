@@ -20,7 +20,7 @@
 <link href='http://fonts.googleapis.com/css?family=Sansita+One' rel='stylesheet' type='text/css'>
 
 <!-- CSS : implied media="all" -->
-<link rel="stylesheet" href="<?= base_url() ?>css/custom-theme/jquery-ui-1.8.9.custom.css">
+
 <link rel="stylesheet" href="<?= base_url() ?>css/grid.css">
 <link rel="stylesheet" href="<?= base_url() ?>css/style.css?v=2">
 <link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/template.css">

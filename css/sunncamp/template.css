@@ -11,13 +11,11 @@ html {
 body {
  
 line-height:22px;
-font-family:Verdana, Geneva, sans-serif;
+font-family:sans-serif;
 font-size:12px;
 }
 
-@font-face { font-family: 'spinnaker2';
-src: url('/fonts/Spinnaker-Regular.ttf');
-}
+
 p {
     margin-bottom:8px;
     text-align: left;
@@ -25,17 +23,15 @@ p {
 #container {
     
     width:960px;
-    margin:20px auto;
+    margin:40px auto;
     display:block;
 position:relative;
-    -moz-box-shadow: 5px 6px 19px #000000;
-    -webkit-box-shadow: 5px 6px 19px #000000;
-    box-shadow: 5px 6px 19px #000000;
+   
     
       z-index:5;
 }
 h1 {
-font-family:Verdana, Geneva, sans-serif;
+font-family:sans-serif;
   font-size: 20px;
   font-style: normal; 
   font-weight: 700;
@@ -52,19 +48,24 @@ font-family:Verdana, Geneva, sans-serif;
     height:162px;
     display:block;
 }
+#slideshow_container{
+    background:#ffffff;;
+    height:400px;
+    display:block;
+    padding:10px;
+    width:940px;
+}
 #header {
 
-height:162px;
+height:161px;
 width:100%;
 
 display:block;
 position:relative;
    z-index:15;
 background:url('/images/template/sunncamp/bigheaderback.jpg') no-repeat top center; 
-    border-bottom: solid 5px #ffffff;
- -moz-box-shadow: 0px 6px 19px #000000;
-    -webkit-box-shadow: 0px 6px 19px #000000;
-    box-shadow: 0px 6px 19px #000000;
+    border-bottom: solid 5px #010750;
+ 
 }
 
 #footer {
@@ -95,7 +96,7 @@ background:url('/images/template/sunncamp/logo.png') no-repeat;
 padding-top:0px;
 text-align: left;
 padding-bottom:0px;
-height:97px;
+height:102px;
 color:#ffffff;
 position:relative;
 display:block;
@@ -109,25 +110,23 @@ margin-right:auto;
 #menutop {
 
 width:100%;
-height:31px;
-text-align: right;
+height:41px;
+text-align: left;
 font-family: sans-serif;
-text-transform: capitalize;
-font-weight: bolder;
-font-size: 14px;
+text-transform: uppercase;
+background:url('/images/template/sunncamp/menuback.jpg') repeat-x;
+font-size: 12px;
 padding-top: 0px;
-border-top: solid 0px #4a5b63;
-line-height:31px;;
+border-bottom: solid 1px #9fceee;
+line-height:38px;;
 
- -moz-box-shadow: 0px 6px 19px #000000;
-    -webkit-box-shadow: 0px 6px 19px #000000;
-    box-shadow: 0px 6px 19px #000000;
+ 
     z-index:25;
     display:block;
 position:relative;
 }
 #menutop ul {
-   
+   height:41px;
         margin-right:auto;
     margin-left:auto;
 }
@@ -136,10 +135,21 @@ display:inline;
 padding-right:25px;
 }
 
-#menutop a {
+#menutop ul li a {
+    display:block;
+    float:left;
+    padding:0 15px;
+    height:41px;
 text-decoration:none;
 color: #ffffff;
 }
+#menutop ul li a:hover {
+ height:41px;
+background: #3d77c0;
+background:-webkit-gradient(linear, 0% 76%, 0% 21%, from(#3d77c0), to(#4183c7))
+
+}
+
 .socialicons {
     padding-top:20px;
     float:right; position:relative; padding-right:10px;
@@ -243,4 +253,199 @@ br
    display:block;
    width:185px;
    text-decoration: none;
+}
+
+
+/* CSS Document for featured items */
+.lof-slidecontent{
+	position:relative;
+	overflow:hidden;
+	border:#F4F4F4 solid 1px;
+	width:935px;
+	height:400px;
+}
+.lof-slidecontent .preload{
+	height:100%;
+	width:100%;
+	background:#FFF;
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:100000;
+	color:#FFF;
+	text-align:center
+}
+.lof-slidecontent .preload div{
+	height:100%;
+	width:100%;
+	background:transparent url(../images/load-indicator.gif) no-repeat scroll 50% 50%;
+}
+.lof-main-outer{
+	position:relative;
+	height:100%;
+	width:640px;
+	z-index:3px;
+	overflow:hidden;
+}
+
+
+/*******************************************************/
+.lof-main-item-desc{
+	z-index:100px;
+	position:absolute;
+	top:150px;
+	left:50px;
+	width:400px;
+	background:url(/images/transparent_bg.png);
+
+	/* filter:0.7(opacity:60) */
+}
+.lof-main-item-desc p{
+	color:#FFF;
+	margin:0 8px;
+	padding:8px 0
+}
+.lof-main-item-desc h3 a{
+	color:#FFF;	
+	margin:0;
+	font-size:140%;
+	padding:20px 8px 2px;
+	font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,sans-serif;
+}
+.lof-main-item-desc h3 a:hover{
+	color:#FF6;
+	text-decoration:underline;
+}
+
+
+/* main flash */
+ul.lof-main-wapper{
+	/* margin-right:auto; */
+	overflow:hidden;
+	background:transparent url(/images/load-indicator.gif) no-repeat scroll 50% 50%;
+	padding:0px;
+	margin:0;
+	height:400px;
+	width:640px;
+	position:absolute;
+	overflow:hidden;
+}
+
+ul.lof-main-wapper li{
+	overflow:hidden;
+	padding:0px;
+	margin:0px;
+	height:100%;
+	width:640px;
+	float:left;
+}
+.lof-opacity  li{
+	position:absolute;
+	top:0;
+	left:0;
+	float:inherit;
+}
+ul.lof-main-wapper li img{
+	padding:1px 0 0 0;	
+	width:640px;
+}
+
+li-desc{
+	z-index:100px;
+	position:absolute;
+	top:150px;
+	left:50px;
+	width:400px;
+	background:url(/images/transparent_bg.png);
+
+	/* filter:0.7(opacity:60) */
+}
+li-desc p{
+	color:#FFF;
+	margin:0 8px;
+	padding:8px 0
+}
+li-desc h3 a{
+	color:#FFF;	
+	margin:0;
+	font-size:140%;
+	padding:20px 8px 2px;
+	font-family:"Trebuchet MS",Trebuchet,Arial,Verdana,sans-serif;
+}
+li-desc h3 a:hover{
+	color:#FF6;
+	text-decoration:underline;
+}
+
+/* item navigator */
+ul.lof-navigator{
+	top:0;
+	padding:0;
+	margin:0;
+	position:absolute;
+	width:100%;
+}
+ul.lof-navigator li{
+	cursor:hand; 
+	cursor:pointer;
+	list-style:none;
+	width:100%;
+	padding:0;
+	margin:0;
+	overflow:hidden;
+}
+.lof-navigator-outer{
+	position:absolute;
+	right:0;
+	top:00px;
+	z-index:100;
+	height:400px;
+	width:310px;
+	overflow:hidden;
+	color:#FFF
+}
+.lof-navigator li.active{
+	background:url(/images/arrow-bg.png) no-repeat scroll left center; 
+	color:#FFF
+}
+.lof-navigator li:hover{
+	
+}
+
+
+.lof-navigator li h3{
+	color: #2e4f7e;
+	font-size:100%;
+	padding:15px 0 0 !important;
+	margin:0;
+
+}
+.lof-navigator li div{
+	
+	color:#555;
+	height:100%;
+        line-height:16px;
+	position:relative;
+	margin-left:15px;
+	padding-left:15px;
+	border-top:1px solid #E1E1E1;
+}
+
+.lof-navigator li.active div{
+	background:url(/images/grad-bg.gif);
+	color:#FFF;
+}
+.lof-navigator li img{
+	height:60px;
+	width:60px;
+	margin:15px 15px 10px 0px;
+	float:left;
+	padding:0px;
+	border:#2e4f7e solid 3px;
+}
+.lof-navigator li.active img{
+	border:#6C8E5C  solid 1px;
+}
+.lof-navigator li.active h3{
+	color:#FFF;
 }
