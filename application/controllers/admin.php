@@ -8,6 +8,7 @@ class Admin extends MY_Controller {
         $this->is_logged_in();
         $this->load->model('content_model');
         $this->load->model('products_model');
+        $this->load->model('gallery_model');
         $this->load->model('menu_model');
     }
 
@@ -75,8 +76,6 @@ class Admin extends MY_Controller {
         }
     }
 
-  
-  
     function submit_content() {
         $this->form_validation->set_rules('title', 'Title', 'trim|max_length[255]');
         $this->form_validation->set_rules('content', 'Content', 'trim');
@@ -95,46 +94,109 @@ class Admin extends MY_Controller {
             }
         }
     }
-    
-    
-/**
- * 
- */
+
+    /**
+     * 
+     */
     function add_product($product_id = 0) {
-        
+
         //first create a blank product and retrieve an ID
         // TODO only add product if coming from correct button
-        if($product_id == 0){
-        $this->products_model->create_product();
-        $data['product_id'] = mysql_insert_id();
+        if ($product_id == 0) {
+            $this->products_model->create_product();
+            $data['product_id'] = mysql_insert_id();
         } else {
-             $data['product_id'] = $product_id;
+            $data['product_id'] = $product_id;
         }
+
+        $data['images'] = $this->products_model->get_product_images($data['product_id']);
         $data['product'] = $this->products_model->get_product($data['product_id']);
+        $data['categories'] = $this->products_model->get_product_categories($data['product_id']);
+        $data['attributes'] = $this->products_model->get_attributes($data['product_id']);
         $data['main_content'] = "global/add_product";
-        
+
         $this->load->vars($data);
         $this->load->view('template/main');
     }
-    
-    
-     function update_product($product_id) {
+
+    function update_product($product_id) {
         $this->form_validation->set_rules('product_name', 'product name', 'trim|required');
         if ($this->form_validation->run() == FALSE) { // validation hasn'\t been passed
             echo "validation error";
         } else { // passed validation proceed to post success logic
-            
             $this->products_model->edit_product($product_id);
 
             redirect("admin/add_product/$product_id");
         }
     }
-
     
-   /**
-    * sort the images for a product
-    */ 
-     function ajaxsort() {
+    function add_product_category($id) {
+        //check if category name is in database already
+        
+        //if it is add the category id and product id to category link table
+        
+        //if it isn't create category, then add cateogry id and product id to category link table
+    }
+
+    /**
+     * 
+     */
+    function upload_image() {
+
+
+        $id = $this->input->post('product_id');
+        $this->gallery_path = "images/products";
+
+        //check file path exists.
+        //maybe extend this check for each subfolder in future
+
+        $path = $this->config_base_path . $this->gallery_path . '/' . $id . '/';
+
+        //create directories if required
+        if (file_exists($path)) {
+
+            // folder exists
+        } else {
+
+            //create folders
+            mkdir('' . $this->config_base_path . $this->gallery_path . '/' . $id . '/');
+            mkdir('' . $this->config_base_path . $this->gallery_path . '/' . $id . '/thumbs/');
+            mkdir('' . $this->config_base_path . $this->gallery_path . '/' . $id . '/medium/');
+            mkdir('' . $this->config_base_path . $this->gallery_path . '/' . $id . '/large/');
+        }
+
+
+
+        if ($this->input->post('upload')) {
+            $this->gallery_model->do_upload($id);
+        }
+
+        redirect("admin/add_product/$id");
+    }
+
+    /**
+     * 
+     */
+    function add_attribute($id) {
+        $this->form_validation->set_rules('option_category', 'option category', 'trim|required|max_length[255]');
+        $this->form_validation->set_rules('option', 'option', 'trim|required');
+        $this->form_validation->set_rules('stock_level', 'stock level', 'trim|required');
+        if ($this->form_validation->run() == FALSE) { // validation hasn'\t been passed
+            echo "validation error";
+        } else { // passed validation proceed to post success logic
+            if ($this->products_model->add_attribute()) { // the information has therefore been successfully saved in the db
+                redirect('/admin/add_product/' . $id);   // or whatever logic needs to occur
+            } else {
+                echo 'An error occurred saving your information. Please try again later';
+                // Or whatever error handling is necessary
+            }
+        }
+    }
+
+    /**
+     * sort the images for a product
+     */
+    function ajaxsort() {
         $pages = $this->input->post('pageorder');
 
 
@@ -201,10 +263,6 @@ class Admin extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/main');
     }
-
- 
-
-  
 
     function do_upload() {
         if (isset($_FILES['file'])) {
