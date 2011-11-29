@@ -449,3 +449,20 @@ ul.lof-navigator li{
 .lof-navigator li.active h3{
 	color:#FFF;
 }
+
+.label {
+    clear:left;
+    float:left;
+    padding-right:5px;
+    width:200px;
+    font-weight: bold;
+}
+
+.editproduct {
+        float:left;
+    width:300px;
+}
+.editarea {
+    float:left;
+    width:300px;
+}

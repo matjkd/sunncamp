@@ -221,3 +221,23 @@ $(document).ready(function() {
 $(function(){
     $("#paginate").pagination();
 });
+
+
+//This sorts the product images
+$(function() {
+    $( "#sortablethumb" ).sortable({
+        update: function(event,ui)
+        {
+            var order = $('#sortablethumb').sortable('serialize');
+            $.post("/admin/images/ajaxsort", {
+                pageorder: order
+            } );
+        //alert(order);
+        }
+    });
+    $( "#sortablethumb" ).disableSelection();
+    var order1 = $('#sortablethumb').sortable('serialize');
+    $.post("/admin/images/ajaxsort", {
+        pageorder: order1
+    } );	
+});

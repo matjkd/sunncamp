@@ -16,7 +16,7 @@
 
 <script src="<?= base_url() ?>js/plugins.js"></script>
 <script src="<?= base_url() ?>js/sunncamp/plugins.js"></script>
-
+<script src="<?= base_url() ?>js/jeditable.js"></script>
 <script src="<?= base_url() ?>js/script.js"></script>
 <script src="<?= base_url() ?>js/sunncamp/script.js"></script>
 <!-- end concatenated and minified scripts-->

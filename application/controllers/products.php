@@ -10,7 +10,7 @@ class Products extends MY_Controller {
 	
 	function index()
 	{
-		redirect('welcome/home', 'refresh');
+		redirect('welcome/', 'refresh');
 	}
 	function main()
 	{
@@ -22,7 +22,7 @@ class Products extends MY_Controller {
 		else
 			{
 				$this->session->set_flashdata('message', "No Product Selected.");	
-				redirect('welcome/home', 'refresh');
+				redirect('welcome', 'refresh');
 			}
 		
 		
