@@ -19,6 +19,18 @@ class Products_model extends CI_Model {
         return $query->result();
     }
 
+    function add_to_category_link($cat_id, $product_id) {
+        //check cat isn't already in links table
+        //if not add to list
+        $new_list_entry = array(
+            'product_category_id' => $cat_id,
+            'product_id' => $product_id
+        );
+
+        $insert = $this->db->insert('product_category_link', $new_list_entry);
+        return $insert;
+    }
+
     function get_product($id) {
 
         $this->db->where('product_id', $id);
@@ -66,17 +78,143 @@ class Products_model extends CI_Model {
     function get_all_products() {
         $this->db->join('cat_links', 'cat_links.product_id=products.product_id');
         $query = $this->db->get('products');
-        if ($query->num_rows > 0)
-            ; {
+        if ($query->num_rows > 0) {
             return $query->result();
         }
 
         return FALSE;
     }
-    
-    function get_product_categories() {
-        
-        
+
+    /**
+     * Get product categories
+     * @return type 
+     */
+    function get_product_categories($product_id) {
+        $this->db->where('product_category_link.product_id', $product_id);
+        $this->db->join('product_categories', 'product_category_link.product_category_id = product_categories.product_category_id', 'left');
+        $query = $this->db->get('product_category_link');
+
+        if ($query->num_rows > 0) {
+            return $query->result();
+        }
+
+        return FALSE;
+    }
+
+    /**
+     *
+     * @param type $param
+     * @return type 
+     */
+    function autocomplete_product_categories($param) {
+        $data = array();
+
+
+
+        $where = "product_category_name REGEXP '^$param'";
+        $this->db->where($where);
+
+
+        $query = $this->db->get('product_categories');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row)
+                $data[] = $row;
+            $query->free_result();
+
+            return $data;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
+     *
+     * @param type $param
+     * @return type 
+     */
+    function autocomplete_product_options($param) {
+        $data = array();
+
+        $where = "option_category REGEXP '^$param'";
+        $this->db->where($where);
+        $this->db->group_by('option_category ');
+
+
+        $query = $this->db->get('product_options');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row)
+                $data[] = $row;
+            $query->free_result();
+
+            return $data;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
+     * Get product potion  categories
+     * @return type 
+     */
+    function get_option_categories() {
+
+        $query = $this->db->get('product_options');
+        if ($query->num_rows > 0) {
+            return $query->result();
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * 
+     */
+    function update_option($option_id) {
+        $option_update = array(
+            'option_category' => ucfirst(strtolower($this->input->post('option_category'))),
+            'option' => ucfirst(strtolower($this->input->post('option'))),
+            'stock_level' => $this->input->post('stock_level'),
+            'updated' => now()
+        );
+
+
+
+
+        $this->db->where('option_id', $option_id);
+        $update = $this->db->update('product_options', $option_update);
+        return $update;
+    }
+
+    function delete_option($option_id) {
+
+        $this->db->where('option_id', $option_id);
+        $update = $this->db->delete('product_options');
+        return $update;
+    }
+
+    /**
+     *
+     * @param type $category
+     * @return type 
+     */
+    function create_new_cat($category) {
+
+
+        $new_cat_entry = array(
+            'product_category_name' => ucfirst(strtolower($category)),
+        );
+
+        $insert = $this->db->insert('product_categories', $new_cat_entry);
+        return $insert;
+    }
+
+    function delete_product_category($category_link_id) {
+
+        $this->db->where('category_link_id', $category_link_id);
+        $update = $this->db->delete('product_category_link');
+        return $update;
     }
 
     function create_product() {

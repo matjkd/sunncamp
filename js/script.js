@@ -3,14 +3,6 @@
 
  
 
-
-
-
-
- 
-
-
-
     })(this.jQuery);
 
 
@@ -45,27 +37,6 @@ jQuery(function() {
 });
 
 
-
-//jquery cycle
-$(document).ready(function() {
-    $('.cycle').cycle({
-        fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-        speedIn:  2000, 
-        speedOut: 2000, 
-        timeout:   10000
-    });
-//$('.cycle').css("display", "block");
-});
-
-$(document).ready(function() {
-    $('.slideshow').cycle({
-        speedIn:  2000,
-        speedOut: 2000,
-        timeout:   10000,
-        fx: 'fade' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-    });
-    $('.slideshow').css("display", "block");
-});
 
 /**
  * --------------------------------------------------------------------
@@ -184,60 +155,8 @@ $(document).ready(function() {
 
 })(jQuery);
 
-//jquery ui buttons
-$(function() {
-    $("button, input:submit").button();
-		
-});
+
+        
 
 
-//date picker on menu page
 
-$(document).ready(function() {
-    $( "#datepicker" ).datepicker({
-        dateFormat : 'DD, d MM, yy',
-        onSelect : function(dateText, inst)
-        {
-            var epoch = $.datepicker.formatDate('@', $(this).datepicker('getDate')) / 1000;
-
-            $('#alternate').val(epoch);
-        }
-    });
-
-
-    $( "#datepicker2" ).datepicker({
-        dateFormat : 'DD, d MM, yy',
-        onSelect : function(dateText, inst)
-        {
-            var epoch = $.datepicker.formatDate('@', $(this).datepicker('getDate')) / 1000;
-
-            $('#alternate2').val(epoch);
-        }
-    });
-
-
-});
-
-$(function(){
-    $("#paginate").pagination();
-});
-
-
-//This sorts the product images
-$(function() {
-    $( "#sortablethumb" ).sortable({
-        update: function(event,ui)
-        {
-            var order = $('#sortablethumb').sortable('serialize');
-            $.post("/admin/images/ajaxsort", {
-                pageorder: order
-            } );
-        //alert(order);
-        }
-    });
-    $( "#sortablethumb" ).disableSelection();
-    var order1 = $('#sortablethumb').sortable('serialize');
-    $.post("/admin/images/ajaxsort", {
-        pageorder: order1
-    } );	
-});

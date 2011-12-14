@@ -80,13 +80,13 @@ h1 {
 }
 #backfooter {
     display:block;
-    position:absolute;
+    position:relative;
 
     z-index:0;
     margin-top: -45px;
     padding-top:50px;
     width:100%;
-    height:100%;
+
     color: #AAA;
 
 }
@@ -460,14 +460,14 @@ ul.lof-navigator li{
 
 .product_input_l {
     float:left;
-   margin:0px 5px 5px 0;
+    margin:0px 5px 5px 0;
     width:318px;
     padding:5px;
     border:1px solid #ababab;
 }
 .product_input_r {
     float:left;
-   margin:0px 0 5px 5px;
+    margin:0px 0 5px 5px;
     width:318px;
     padding:5px;
     border:1px solid #ababab;
@@ -503,4 +503,22 @@ img {
 }
 #gallery:after {
     content: "."; visibility: hidden; display: block; clear: both; height: 0; font-size: 0;
+}
+
+
+#attributes input {
+    border:1px solid #dddddd;
+    width:50px;
+}
+
+#label_attribute {
+    float:left;
+    background:#dddddd;
+    border:0px solid #dddddd;
+    width:46px;
+    padding:0 3px;
+    
+}
+.deletebutton input {
+    width:20px;
 }

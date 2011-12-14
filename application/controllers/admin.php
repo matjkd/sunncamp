@@ -17,7 +17,7 @@ class Admin extends MY_Controller {
         $data['pages'] = $this->content_model->get_all_content();
         $data['seo_links'] = $this->content_model->get_seo_links();
         $this->load->vars($data);
-        $this->load->view('template/main');
+        $this->load->view('template/sunncamp/admin');
     }
 
     function content() {
@@ -30,7 +30,7 @@ class Admin extends MY_Controller {
         $data['main'] = "pages/dynamic";
         $data['edit'] = "admin/edit/$id";
         $this->load->vars($data);
-        $this->load->view('template/main');
+        $this->load->view('template/sunncamp/admin');
     }
 
     function edit() {
@@ -46,7 +46,7 @@ class Admin extends MY_Controller {
 
 
         $this->load->vars($data);
-        $this->load->view('template/main');
+        $this->load->view('template/sunncamp/admin');
     }
 
     function edit_product() {
@@ -61,9 +61,38 @@ class Admin extends MY_Controller {
 
 
         $this->load->vars($data);
-        $this->load->view('template/main');
+        $this->load->view('template/sunncamp/admin');
     }
 
+    /**
+     * 
+     */
+    function edit_attribute() {
+
+
+        $submitted = $this->input->post('submit');
+        $option_id = $this->input->post('option_id');
+        $product_id = $this->input->post('product_id');
+
+        if ($submitted == 'Update') {
+            $this->form_validation->set_rules('option_category', 'Option Category', 'trim|required');
+            $this->form_validation->set_rules('option', 'Option', 'trim|required');
+            $this->form_validation->set_rules('stock_level', 'Stock Level', 'trim|required');
+
+            $this->products_model->update_option($option_id);
+        }
+
+        if ($submitted == 'X') {
+            echo "delete";
+
+            $this->products_model->delete_option($option_id);
+        }
+        redirect("admin/add_product/$product_id");
+    }
+
+    /**
+     * 
+     */
     function edit_content() {
         $this->form_validation->set_rules('menu', 'menu', 'trim|required');
         if ($this->form_validation->run() == FALSE) { // validation hasn'\t been passed
@@ -76,6 +105,9 @@ class Admin extends MY_Controller {
         }
     }
 
+    /**
+     * 
+     */
     function submit_content() {
         $this->form_validation->set_rules('title', 'Title', 'trim|max_length[255]');
         $this->form_validation->set_rules('content', 'Content', 'trim');
@@ -108,34 +140,73 @@ class Admin extends MY_Controller {
         } else {
             $data['product_id'] = $product_id;
         }
-
+        $data['leftside'] = "admin/product_sidebox";
         $data['images'] = $this->products_model->get_product_images($data['product_id']);
         $data['product'] = $this->products_model->get_product($data['product_id']);
         $data['categories'] = $this->products_model->get_product_categories($data['product_id']);
+
         $data['attributes'] = $this->products_model->get_attributes($data['product_id']);
         $data['main_content'] = "global/add_product";
 
         $this->load->vars($data);
-        $this->load->view('template/main');
+        $this->load->view('template/sunncamp/admin');
     }
 
+    /**
+     *
+     * @param type $product_id 
+     */
     function update_product($product_id) {
+
         $this->form_validation->set_rules('product_name', 'product name', 'trim|required');
         if ($this->form_validation->run() == FALSE) { // validation hasn'\t been passed
-            echo "validation error";
+            echo validation_errors();
         } else { // passed validation proceed to post success logic
             $this->products_model->edit_product($product_id);
 
             redirect("admin/add_product/$product_id");
         }
     }
-    
+
+    /**
+     *
+     * @param type $id 
+     */
     function add_product_category($id) {
+
+        $category = $this->input->post('product_category');
         //check if category name is in database already
-        
-        //if it is add the category id and product id to category link table
-        
-        //if it isn't create category, then add cateogry id and product id to category link table
+        $catdata = $this->products_model->autocomplete_product_categories($category);
+        if ($catdata) {
+
+            // The cat is in the database already
+            // now add to the cat  list
+            foreach ($catdata as $row):
+                $cat_id = $row['product_category_id'];
+            endforeach;
+            $this->products_model->add_to_category_link($cat_id, $id);
+
+
+            echo "they are in there";
+        } else {
+
+            // The cat isn't in the database
+            // TODO check for similar names
+            // add to database, then add to users list
+            $this->products_model->create_new_cat($category);
+            $cat_id = $this->db->insert_id();
+            $this->products_model->add_to_category_link($cat_id, $id);
+            echo "new cat";
+        }
+
+        redirect("admin/add_product/$id");
+    }
+    
+    function remove_category($id) {
+        $category_link_id = $this->input->post('category_link_id');
+         $this->products_model->delete_product_category($category_link_id);
+         
+          redirect("admin/add_product/$id");
     }
 
     /**
@@ -235,7 +306,7 @@ class Admin extends MY_Controller {
 
         $data['slideshow'] = 'header/slideshow';
         $this->load->vars($data);
-        $this->load->view('template/main');
+        $this->load->view('template/sunncamp/admin');
     }
 
     function add_new_menu() {
@@ -261,7 +332,7 @@ class Admin extends MY_Controller {
 
         $data['slideshow'] = 'header/slideshow';
         $this->load->vars($data);
-        $this->load->view('template/main');
+        $this->load->view('template/sunncamp/admin');
     }
 
     function do_upload() {
@@ -285,7 +356,7 @@ class Admin extends MY_Controller {
         $data['pages'] = $this->content_model->get_all_content();
 
         $this->load->vars($data);
-        $this->load->view('template/main');
+        $this->load->view('template/sunncamp/admin');
     }
 
     function add_seo_content() {
@@ -294,7 +365,7 @@ class Admin extends MY_Controller {
         $data['pages'] = $this->content_model->get_all_content();
         $data['category'] = "seo";
         $this->load->vars($data);
-        $this->load->view('template/main');
+        $this->load->view('template/sunncamp/admin');
     }
 
     function is_logged_in() {

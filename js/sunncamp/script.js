@@ -1,28 +1,61 @@
-$(document).ready( function(){	
-    $('#lofslidecontent45').lofJSidernews( {
-        interval:10000,
-        direction:'opacity',
-        duration:1000,
-        easing:'easeInOutQuad'
-    } );						
+      
+        
+//autocomplete categories
+$(function() {
+    $( "#autocompletecategories" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "/datasource/json_categories",
+                data: {
+                    term: $("#autocompletecategories").val()
+                },
+                dataType: "json",
+                type: "POST",
+                success: function(data){
+                    response($.map(data, function(item){
+                       return {
+                           label: item.label,
+                           value: item.label
+                       } 
+                        
+                    }));
+                }
+            });
+        },
+        minLength: 2
+        
+    });
 });
 
+      
         
-   
-//Modal dialog increase the default animation speed to exaggerate the effect
-$.fx.speeds._default = 500;
-$(document).ready(function(){
-    $( "#dialog" ).dialog({
-        autoOpen: false,
-        show: "fade",
-        hide: "fade",
-        width: 500
-    });
-
-    $( "#opener" ).click(function() {
-        $( "#dialog" ).dialog( "open" );
-        return false;
+//autocomplete options
+$(function() {
+    $( "#autocompleteoptions" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "/datasource/json_options",
+                data: {
+                    term: $("#autocompleteoptions").val()
+                },
+                dataType: "json",
+                type: "POST",
+                success: function(data){
+                    response($.map(data, function(item){
+                       return {
+                           label: item.label,
+                           value: item.label
+                       } 
+                        
+                    }));
+                }
+            });
+        },
+        minLength: 2
+        
     });
 });
-        
+
+
+
      

@@ -77,13 +77,13 @@ foreach ($product as $row):
         <div class="product_input_l">
             <div class="label">Product er</div>
 
-            <input name="product_name" value=""/>
+            <input name="product_na2" value=""/>
         </div>
 
         <div class="product_input_r">
             <div class="label">Product ref</div>
 
-            <input name="product_ref" value=""/>
+            <input name="product_2ref" value=""/>
         </div>
 
         <div style="clear:both;">
@@ -103,59 +103,5 @@ endforeach;
 
 
 
-<!--add attributes/options and stock level MOVE TO SIDE BOX-->
-
-<?php if ($attributes != NULL) {
-    foreach ($attributes as $row): ?>
-
-        <?= $row->option_category ?> - <?= $row->option ?> - <?= $row->stock_level ?><br/>
 
 
-    <?php endforeach;
-} ?>
-
-<?= form_open('admin/add_attribute/' . $product_id) ?>
-<div class="product_input_l">
-    If this product has no options, just enter 'none' in both the option category and option. Then enter the stock level.
-    <div class="label">Option Category (eg. colour)</div>
-
-    <input name="option_category" value=""/>
-
-    <div class="label">Option (eg. red)</div>
-
-    <input  name="option" value=""/>
-
-    <div class="label">Stock Level</div>
-
-    <input name="stock_level" value=""/>
-    <input  type="hidden" name="product_id" value="<?= $product_id ?>"/>
-</div>  
-<input type="submit" />     
-<?= form_close() ?>
-<!--end of adding options-->
-
-
-<!--set product categories-->
-<?php if ($categories != NULL) {
-    foreach ($categories as $row): ?>
-
-        <?= $row->category ?><br/>
-
-
-    <?php endforeach;
-} ?>
-
-<?= form_open('admin/add_product_category/' . $product_id) ?>
-<div class="product_input_l">
-   
-    <div class="label">Product Category</div>
-
-    <input name="product_category" value=""/>
-
-    
-    <input  type="hidden" name="product_id" value="<?= $product_id ?>"/>
-</div>  
-<input type="submit" />     
-<?= form_close() ?>
-
-<!--end of product categories-->
