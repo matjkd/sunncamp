@@ -75,15 +75,15 @@ class Admin extends MY_Controller {
         $product_id = $this->input->post('product_id');
 
         if ($submitted == 'Update') {
-            $this->form_validation->set_rules('option_category', 'Option Category', 'trim|required');
-            $this->form_validation->set_rules('option', 'Option', 'trim|required');
+            $this->form_validation->set_rules('option_category', 'Option Category', 'trim');
+            $this->form_validation->set_rules('option', 'Option', 'trim');
             $this->form_validation->set_rules('stock_level', 'Stock Level', 'trim|required');
 
             $this->products_model->update_option($option_id);
         }
 
         if ($submitted == 'X') {
-            echo "delete";
+
 
             $this->products_model->delete_option($option_id);
         }
@@ -132,7 +132,7 @@ class Admin extends MY_Controller {
      */
     function add_product($product_id = 0) {
 
-        //first create a blank product and retrieve an ID
+        // First create a blank product and retrieve an ID
         // TODO only add product if coming from correct button
         if ($product_id == 0) {
             $this->products_model->create_product();
@@ -140,6 +140,7 @@ class Admin extends MY_Controller {
         } else {
             $data['product_id'] = $product_id;
         }
+        
         $data['leftside'] = "admin/product_sidebox";
         $data['images'] = $this->products_model->get_product_images($data['product_id']);
         $data['product'] = $this->products_model->get_product($data['product_id']);
@@ -201,12 +202,12 @@ class Admin extends MY_Controller {
 
         redirect("admin/add_product/$id");
     }
-    
+
     function remove_category($id) {
         $category_link_id = $this->input->post('category_link_id');
-         $this->products_model->delete_product_category($category_link_id);
-         
-          redirect("admin/add_product/$id");
+        $this->products_model->delete_product_category($category_link_id);
+
+        redirect("admin/add_product/$id");
     }
 
     /**
@@ -248,9 +249,50 @@ class Admin extends MY_Controller {
     /**
      * 
      */
+    function delete_image() {
+        //set variables
+        $product_id = $this->input->post('id');
+        $image_id = $this->input->post('image_id');
+        $this->gallery_path = "./images/products";
+
+        //get image data first
+        $this->db->from('product_images');
+        $this->db->where('product_image_id', $image_id);
+        $this->db->where('product_id', $product_id);
+        $query = $this->db->get();
+
+        if ($query->num_rows == 1) {
+
+            foreach ($query->result_array() as $row):
+
+                $filename = $row['filename'];
+
+
+            endforeach;
+        }
+
+        //delete image data
+        $this->db->where('product_image_id', $image_id);
+        $this->db->where('product_id', $product_id);
+        $this->db->delete('product_images');
+
+        //delete images from server
+
+        unlink($this->gallery_path . '/' . $product_id . '/' . $filename . '');
+        // unlink($this->gallery_path . '/' . $product_id . '/large/' . $filename . '');
+        unlink($this->gallery_path . '/' . $product_id . '/medium/' . $filename . '');
+        unlink($this->gallery_path . '/' . $product_id . '/thumbs/' . $filename . '');
+
+
+        redirect("admin/add_product/$product_id");
+    }
+
+    /**
+     * 
+     */
     function add_attribute($id) {
-        $this->form_validation->set_rules('option_category', 'option category', 'trim|required|max_length[255]');
-        $this->form_validation->set_rules('option', 'option', 'trim|required');
+        $this->form_validation->set_rules('option_category', 'option category', 'trim|max_length[255]');
+        $this->form_validation->set_rules('option', 'option', 'trim');
         $this->form_validation->set_rules('stock_level', 'stock level', 'trim|required');
         if ($this->form_validation->run() == FALSE) { // validation hasn'\t been passed
             echo "validation error";

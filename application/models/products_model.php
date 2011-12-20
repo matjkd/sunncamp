@@ -64,10 +64,26 @@ class Products_model extends CI_Model {
     }
 
     function add_attribute() {
+
+        if ($this->input->post('option_category') != NULL) {
+            $option_category = ucfirst(strtolower($this->input->post('option_category')));
+        } else {
+            $option_category = "None";
+        }
+
+        if ($this->input->post('option') != NULL) {
+            $optionname = ucfirst(strtolower($this->input->post('option')));
+        } else {
+            $optionname = "None";
+        }
+        
+        //TODO check if attribute is already part of product, and instead of adding again,
+        // add onto/or replace (need to check which is best, maybe bring up an option
+        
         $form_data = array(
             'product_id' => $this->input->post('product_id'),
-            'option_category' => ucfirst(strtolower($this->input->post('option_category'))),
-            'option' => ucfirst(strtolower($this->input->post('option'))),
+            'option_category' => $option_category,
+            'option' => $optionname,
             'stock_level' => $this->input->post('stock_level'),
         );
 
