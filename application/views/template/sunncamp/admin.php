@@ -57,7 +57,7 @@
                     if (isset($sidebox) && $sidebox != NULL) {
                         $mainsize = "grid_12";
                     } else {
-                        $mainsize = "grid_17";
+                        $mainsize = "grid_18";
                     }
                     ?>
 
@@ -137,6 +137,7 @@
 <script src="<?= base_url() ?>js/jeditable.js"></script>
 
 
+<script src="<?= base_url() ?>js/libs/jquery.dataTables.min.js"></script>
 
 <script src="<?= base_url() ?>js/script.js"></script>
 <script src="<?= base_url() ?>js/sunncamp/script.js"></script>

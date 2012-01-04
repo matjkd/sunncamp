@@ -10,6 +10,10 @@ class Products_model extends CI_Model {
         parent::__construct();
     }
 
+    /**
+     * get content categories
+     * @return type 
+     */
     function get_cats() {
 
         $this->db->order_by('order');
@@ -52,6 +56,14 @@ class Products_model extends CI_Model {
         return FALSE;
     }
 
+    function get_all_product_cats() {
+        $this->db->order_by('product_category_name');
+        $query = $this->db->get('product_categories');
+
+
+        return $query->result();
+    }
+
     function get_attributes($id) {
         $this->db->where('product_id', $id);
         $this->db->order_by('option_category');
@@ -76,10 +88,10 @@ class Products_model extends CI_Model {
         } else {
             $optionname = "None";
         }
-        
+
         //TODO check if attribute is already part of product, and instead of adding again,
         // add onto/or replace (need to check which is best, maybe bring up an option
-        
+
         $form_data = array(
             'product_id' => $this->input->post('product_id'),
             'option_category' => $option_category,

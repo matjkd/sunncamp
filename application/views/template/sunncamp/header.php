@@ -19,6 +19,11 @@
 <link rel="stylesheet" href="<?= base_url() ?>css/grid.css">
 <link rel="stylesheet" href="<?= base_url() ?>css/style.css?v=2">
 <link rel="stylesheet" href="<?= base_url() ?>css/jquery.jqzoom.css">
+
+<!--datatables stylesheets-->
+<link rel="stylesheet" href="<?= base_url() ?>css/demo_table.css">
+<link rel="stylesheet" href="<?= base_url() ?>css/demo_table_jui.css">
+
 <link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/template.css">
 
 <link rel="stylesheet" href="<?= base_url() ?>css/black_blue/jquery-ui-1.8.16.custom.css">

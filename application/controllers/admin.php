@@ -140,7 +140,7 @@ class Admin extends MY_Controller {
         } else {
             $data['product_id'] = $product_id;
         }
-        
+
         $data['leftside'] = "admin/product_sidebox";
         $data['images'] = $this->products_model->get_product_images($data['product_id']);
         $data['product'] = $this->products_model->get_product($data['product_id']);
@@ -408,6 +408,29 @@ class Admin extends MY_Controller {
         $data['category'] = "seo";
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
+    }
+
+    function list_products($cat = NULL) {
+        $data['main_content'] = "admin/list_products";
+        $data['leftside'] = "admin/productlist_sidebox";
+
+        $cat = $this->input->post('cats');
+        $data['products'] = $this->content_model->get_all_products($cat);
+
+
+        $data['categories'] = $this->products_model->get_all_product_cats();
+
+        $this->load->vars($data);
+        $this->load->view('template/sunncamp/admin');
+    }
+
+    function delete_product() {
+
+        $product_id = $this->input->post('product_id');
+
+        //delete product images
+        //delete product options
+        //delete product
     }
 
     function is_logged_in() {
