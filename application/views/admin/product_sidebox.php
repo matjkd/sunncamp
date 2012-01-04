@@ -5,7 +5,7 @@
 
 <?= form_open('admin/add_attribute/' . $product_id) ?>
 <div class="product_input_l" style="width:98%; margin-top:10px;">
-    If this product has no options, just enter 'none' in both the option category and option. Then enter the stock level. At least one option is required to add a stock level.
+    If this product has no options, just enter the stock level. 
     <div class="label">Attribute Category (eg. colour)</div>
 
     <input id="autocompleteoptions" name="option_category" value=""/>
@@ -69,3 +69,6 @@
     } ?>
 </div>
 <!--end of product categories-->
+
+
+<?=$this->load->view('admin/dashboard')?>

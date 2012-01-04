@@ -17,3 +17,6 @@
 <?=form_dropdown('cats', $cat)?>
 <?=form_submit('submit', 'Submit')?>
 <?=form_close()?>
+
+
+<?=$this->load->view('admin/dashboard')?>

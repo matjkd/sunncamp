@@ -1,1 +1,0 @@
-<img src="<?=base_url()?>images/template/flyerdirect/printing.jpg" width="200px"/>

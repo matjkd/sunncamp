@@ -70,9 +70,9 @@ h1 {
 
 #footer {
 
-    height:65px;
+    height:165px;
     width:960px;
-    background-color: #ffffff;
+    background: url('/images/backgrounds/footerbackground.jpg') repeat-x;
     display:block;
     position:relative;
 
@@ -521,4 +521,23 @@ img {
 }
 .deletebutton input {
     width:20px;
+}
+
+#sidecats {
+    background:#010750;
+    color:#ffffff;
+    margin-right:5px;
+    padding:10px;
+}
+#sidecats p {
+    border-bottom:1px solid;
+    border-bottom-color: #3d77c0;
+}
+
+#productview {
+    
+    float:left;
+    padding:10px;
+    
+    
 }

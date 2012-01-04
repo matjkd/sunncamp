@@ -55,20 +55,13 @@
                 <div id="textcontainer">
                     <?php
                     if (isset($sidebox) && $sidebox != NULL) {
-                        $mainsize = "grid_12";
+                        $mainsize = "grid_16";
                     } else {
-                        $mainsize = "grid_17";
+                        $mainsize = "grid_24";
                     }
                     ?>
 
-                    <div class="grid_6">
-
-
-side box
-
-
-
-                    </div >
+         
 
 
 
@@ -82,7 +75,7 @@ side box
                     </div>
 
                     <?php if (isset($sidebox) && $sidebox != NULL) { ?>
-                        <div class="grid_6">
+                        <div class="grid_8">
 
                             <?= $this->load->view($sidebox) ?>
 

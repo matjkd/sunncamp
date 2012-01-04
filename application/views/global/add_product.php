@@ -70,18 +70,18 @@ foreach ($product as $row):
         <div class="product_input_r">
             <div class="label">Product ref</div>
 
-            <input name="product_ref" value=""/>
+            <input name="product_ref" value="<?= $row->product_ref?>"/>
         </div>
 
 
         <div class="product_input_l">
-            <div class="label">Product er</div>
+            <div class="label">? more options, need info ?</div>
 
             <input name="product_na2" value=""/>
         </div>
 
         <div class="product_input_r">
-            <div class="label">Product ref</div>
+            <div class="label">? more options, need info ?</div>
 
             <input name="product_2ref" value=""/>
         </div>

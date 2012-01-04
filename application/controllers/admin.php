@@ -411,6 +411,10 @@ class Admin extends MY_Controller {
     }
 
     function list_products($cat = NULL) {
+        
+        //trim products with no data
+        $this->products_model->trim_products();
+        
         $data['main_content'] = "admin/list_products";
         $data['leftside'] = "admin/productlist_sidebox";
 

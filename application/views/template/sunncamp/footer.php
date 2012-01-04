@@ -29,12 +29,14 @@
 
         $(document).ready(function() {
             $('.jqzoom').jqzoom({
-                zoomType: 'standard',
+                zoomType: 'innerzoom',
                 lens:true,
                 preloadImages: false,
-                alwaysOn:false
+                alwaysOn:false,
+                 showEffect : 'fadein',  
+            hideEffect: 'fadeout'  
             });
-    	
+        	
         });
 
 

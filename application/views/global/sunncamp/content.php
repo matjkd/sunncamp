@@ -1,4 +1,4 @@
-<!--Main content page for flyerdirect site-->
+<!--Main content page for sunncamp site-->
 
 
 
@@ -21,8 +21,8 @@ else {
 }?>
 
 
-<?php  $body = str_replace("FlyerDirect", "<strong>FlyerDirect</strong>", "$body");?>
-<?php  $body = str_replace("Flyer Direct", "<strong>Flyer Direct</strong>", "$body");?>
+<?php  $body = str_replace("sunncamp", "<strong>SunnCamp</strong>", "$body");?>
+
 <?=$body?>
 
 <?php endforeach;?>

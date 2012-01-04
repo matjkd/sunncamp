@@ -18,7 +18,7 @@
     ul#thumblist{display:block;}
     ul#thumblist li{float:left;margin-right:2px;list-style:none;}
     ul#thumblist li a{display:block;border:1px solid #CCC;}
-     ul#thumblist li a img{width:70px; height:70px;}
+    ul#thumblist li a img{width:70px; height:70px;}
     ul#thumblist li a.zoomThumbActive{
         border:1px solid red;
     }
@@ -32,30 +32,27 @@
 </style>
 
 
-<div class="clearfix" id="content" style="margin-top:100px;margin-left:0px; height:500px;width:500px;" >
+<div class="clearfix" id="content" style="margin-top:50px;margin-left:0px; height:500px;width:500px;" >
     <div class="clearfix">
-        <a href="http://sunnflair.redstudio.co.uk/images/products/5/Swift_Gold_large.jpg" class="jqzoom" rel='gal1'  title="triumph" >
-            <img src="http://sunnflair.redstudio.co.uk/images/products/5/medium/Swift_Gold_large.jpg"  title="triumph"  style="border: 4px solid #666;">
+        <?php foreach($defaultimage as $row): ?>
+        <a href="<?= base_url() ?>images/products/<?=$row->product_id?>/<?=$row->filename?>" class="jqzoom" rel='gal1'  title="<?=$row->filename?>" >
+            <img height="300px" src="<?= base_url() ?>images/products/<?=$row->product_id?>/medium/<?=$row->filename?>"  title="<?=$row->filename?>"  style="border: 4px solid #666;">
         </a>
-        
+     <?php endforeach; ?>
     </div>
     <br/>
     <div class="clearfix" >
         <ul id="thumblist" class="clearfix" >
-          
-             <li><a  class="zoomThumbActive" href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '<?=base_url()?>images/products/5/medium/Swift_Gold_large.jpg',largeimage: '<?=base_url()?>images/products/5/Swift_Gold_large.jpg'}">
-                    <img src='<?=base_url()?>images/products/5/thumbs/Swift_Gold_large.jpg'>
+<?php foreach($images as $row): ?>
+            
+            <li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '<?= base_url() ?>images/products/<?=$row->product_id?>/medium/<?=$row->filename?>',largeimage: '<?= base_url() ?>images/products/<?=$row->product_id?>/<?=$row->filename?>'}">
+                    <img src='<?= base_url() ?>images/products/<?=$row->product_id?>/thumbs/<?=$row->filename?>'>
                 </a>
             </li>
             
-            <li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '<?=base_url()?>images/products/5/medium/Swift_Porch_GOLD_large.jpg',largeimage: '<?=base_url()?>images/products/5/Swift_Porch_GOLD_large.jpg'}">
-                    <img src='<?=base_url()?>images/products/5/thumbs/Swift_Porch_GOLD_large.jpg'>
-                </a>
-            </li>
-            <li><a  href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '<?=base_url()?>images/products/5/medium/Ultima_180_Plus__Blue-Grey__large.jpg',largeimage: '<?=base_url()?>images/products/5/Ultima_180_Plus__Blue-Grey__large.jpg'}">
-                    <img src='<?=base_url()?>images/products/5/thumbs/Ultima_180_Plus__Blue-Grey__large.jpg'>
-                </a>
-            </li>
+            <?php endforeach; ?>
+
+          
         </ul>
     </div>
 </div>

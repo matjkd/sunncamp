@@ -55,9 +55,25 @@ class Products_model extends CI_Model {
 
         return FALSE;
     }
+    
+      function get_default_image($id) {
+        $this->db->where('product_id', $id);
+        $this->db->limit(1);
+        $query = $this->db->get('product_images');
+        if ($query->num_rows > 0) {
+            return $query->result();
+        }
+
+        return FALSE;
+    }
 
     function get_all_product_cats() {
-        $this->db->order_by('product_category_name');
+
+        $this->db->order_by('product_categories.product_category_name');
+
+        // this limits it to cats with products in
+        $this->db->join('product_category_link', 'product_category_link.product_category_id = product_categories.product_category_id');
+        $this->db->group_by('product_categories.product_category_name');
         $query = $this->db->get('product_categories');
 
 
@@ -108,6 +124,33 @@ class Products_model extends CI_Model {
         $query = $this->db->get('products');
         if ($query->num_rows > 0) {
             return $query->result();
+        }
+
+        return FALSE;
+    }
+
+    function get_products_by_cat($category_name) {
+
+       
+        
+        $this->db->join('product_images', 'product_images.product_id=products.product_id', 'left');
+
+         $this->db->join('product_category_link', 'product_category_link.product_id=products.product_id');
+        
+        $this->db->join('product_categories', 'product_categories.product_category_id=product_category_link.product_category_id');
+
+       
+
+        $this->db->where('product_categories.product_category_name', $category_name);
+
+        $this->db->group_by('products.product_name');
+
+        $query = $this->db->get('products');
+
+        if ($query->num_rows > 0) {
+
+            return $query->result();
+            
         }
 
         return FALSE;
@@ -222,6 +265,12 @@ class Products_model extends CI_Model {
         return $update;
     }
 
+    function trim_products() {
+        $this->db->where('notnull', 0);
+        $trim = $this->db->delete('products');
+        return $trim;
+    }
+
     /**
      *
      * @param type $category
@@ -264,6 +313,8 @@ class Products_model extends CI_Model {
         $content_update = array(
             'product_desc' => $this->input->post('product_desc'),
             'product_name' => $this->input->post('product_name'),
+            'product_ref' => $this->input->post('product_ref'),
+            'notnull' => 1
         );
 
 

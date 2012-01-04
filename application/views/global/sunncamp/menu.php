@@ -1,7 +1,7 @@
 
     		<ul>
     		<li><?=anchor('/', 'home')?></li>
-                <li><?=anchor('/services', 'services')?></li>
+                <li><?=anchor('/products', 'products')?></li>
                   <li><?=anchor('/about', 'about us')?></li>
                
                     <li><?=anchor('/jobs', 'jobs')?></li>
@@ -13,7 +13,7 @@
 		if($is_logged_in != 0 || $role == 1)
 		{
 		
-                    echo anchor('admin', 'Admin');
+                    echo "<li>".anchor('/admin/list_products', 'Admin')."</li>";
                        
 		}
                 

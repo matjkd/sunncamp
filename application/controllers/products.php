@@ -12,10 +12,23 @@ class Products extends MY_Controller {
     }
 
     function index() {
-        redirect('welcome/', 'refresh');
+        redirect('products/main', 'refresh');
     }
 
-    function main($product_id) {
+    /**
+     * Main product page
+     */
+    function main() {
+        $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['sidebox'] = "sidebox/product_cats";
+        $data['content'] = $this->content_model->get_content('products');
+        $data['main_content'] = "global/sunncamp/content";
+
+        $this->load->vars($data);
+        $this->load->view('template/main');
+    }
+
+    function show($product_id) {
 
         $segment_active = $this->uri->segment(3);
         if ($segment_active != NULL) {
@@ -26,6 +39,7 @@ class Products extends MY_Controller {
 
         //get product
         $data['images'] = $this->products_model->get_product_images($product_id);
+         $data['defaultimage'] = $this->products_model->get_default_image($product_id);
         $data['product'] = $this->products_model->get_product($product_id);
         $data['categories'] = $this->products_model->get_product_categories($product_id);
         $data['attributes'] = $this->products_model->get_attributes($product_id);
@@ -51,6 +65,19 @@ class Products extends MY_Controller {
             $data['message'] = $this->session->flashdata('message');
         }
 
+
+        $this->load->vars($data);
+        $this->load->view('template/main');
+    }
+
+    function category($category_name) {
+
+        $data['title'] = $category_name;
+        $data['products'] = $this->products_model->get_products_by_cat($category_name);
+        $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['sidebox'] = "sidebox/product_cats";
+        $data['content'] = $this->content_model->get_content('product_category');
+        $data['main_content'] = "pages/product_category";
 
         $this->load->vars($data);
         $this->load->view('template/main');
