@@ -89,7 +89,7 @@ class Welcome extends MY_Controller {
         $id = 'login';
         $data['content'] = $this->content_model->get_content($id);
         $data['main_content'] = "user/login_form";
-        $data['title'] = "Login to Eagle";
+        $data['title'] = "Login to SunnCamp";
 
         $data['page'] = "login";
         $this->load->vars($data);

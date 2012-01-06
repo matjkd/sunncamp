@@ -20,6 +20,7 @@ class Products extends MY_Controller {
      */
     function main() {
         $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['sidebox'] = "sidebox/product_cats";
         $data['content'] = $this->content_model->get_content('products');
         $data['main_content'] = "global/sunncamp/content";
@@ -41,6 +42,14 @@ class Products extends MY_Controller {
         $data['images'] = $this->products_model->get_product_images($product_id);
          $data['defaultimage'] = $this->products_model->get_default_image($product_id);
         $data['product'] = $this->products_model->get_product($product_id);
+         foreach ($data['product'] as $row):
+
+            $data['product_name'] = $row->product_name;
+        
+
+        endforeach;
+        
+        
         $data['categories'] = $this->products_model->get_product_categories($product_id);
         $data['attributes'] = $this->products_model->get_attributes($product_id);
 
@@ -56,6 +65,8 @@ class Products extends MY_Controller {
             $data['slideshow'] = $row->slideshow;
 
         endforeach;
+         $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['sidebox'] = "sidebox/product_cats";
         $data['sidebar'] = "sidebox/side";
         $data['main_content'] = "pages/view_product";
 
@@ -74,7 +85,13 @@ class Products extends MY_Controller {
 
         $data['title'] = $category_name;
         $data['products'] = $this->products_model->get_products_by_cat($category_name);
+        foreach($data['products'] as $row):
+            
+            $data['cat_id'] = $row->parent;
+            
+        endforeach;
         $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['sidebox'] = "sidebox/product_cats";
         $data['content'] = $this->content_model->get_content('product_category');
         $data['main_content'] = "pages/product_category";

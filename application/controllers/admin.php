@@ -411,10 +411,10 @@ class Admin extends MY_Controller {
     }
 
     function list_products($cat = NULL) {
-        
+
         //trim products with no data
         $this->products_model->trim_products();
-        
+
         $data['main_content'] = "admin/list_products";
         $data['leftside'] = "admin/productlist_sidebox";
 
@@ -433,9 +433,19 @@ class Admin extends MY_Controller {
         $product_id = $this->input->post('product_id');
 
         //delete product images
+        $this->products_model->delete_product_images($product_id);
+
         //delete product options
+        $this->products_model->delete_product_options($product_id);
+
+        //delete category links
+        $this->products_model->delete_product_category_link($product_id);
+        
         //delete product
+        $this->products_model->delete_product($product_id);
     }
+    
+   
 
     function is_logged_in() {
         $is_logged_in = $this->session->userdata('is_logged_in');

@@ -10,9 +10,10 @@ html {
 
 body {
 
-    line-height:22px;
-    font-family:sans-serif;
-    font-size:12px;
+    line-height:1.4;
+    font-family:verdana, sans-serif;
+    font-size:13px;
+    color: #666;
 }
 
 
@@ -509,6 +510,7 @@ img {
 #attributes input {
     border:1px solid #dddddd;
     width:50px;
+    font-size:12px;
 }
 
 #label_attribute {
@@ -517,7 +519,8 @@ img {
     border:0px solid #dddddd;
     width:46px;
     padding:0 3px;
-    
+    font-size:12px;
+
 }
 .deletebutton input {
     width:20px;
@@ -535,9 +538,81 @@ img {
 }
 
 #productview {
-    
+
     float:left;
     padding:10px;
-    
-    
+
+
+}
+
+/*
+        root element for the scrollable.
+        when scrolling occurs this element stays still.
+*/
+.scrollable {
+
+    /* required settings */
+    position:relative;
+    overflow:hidden;
+    width: 660px;
+    height:90px;
+}
+
+/*
+        root element for scrollable items. Must be absolutely positioned
+        and it should have a extremely large width to accommodate scrollable items.
+        it's enough that you set width and height for the root element and
+        not for this element.
+*/
+.scrollable .items {
+    /* this cannot be too large */
+    width:20000em;
+    position:absolute;
+}
+
+/*
+        a single item. must be floated in horizontal scrolling.
+        typically, this element is the one that *you* will style
+        the most.
+*/
+.items div {
+    float:left;
+}
+
+ul.catmenu, ul.catmenu ul {
+  list-style-type:none;
+  margin: 0;
+  padding: 0;
+  width: 15em;
+}
+
+ul.catmenu a {
+  display: block;
+  text-decoration: none;	
+}
+
+ul.catmenu li {
+  margin-top: 1px;
+}
+
+ul.catmenu li a {
+  background: #333;
+  color: #fff;	
+  padding: 0.5em;
+}
+
+ul.catmenu li a:hover {
+  background: #000;
+}
+
+ul.catmenu li ul li a {
+  background: #ccc;
+  color: #000;
+  padding-left: 20px;
+}
+
+ul.catmenu li ul li a:hover {
+  background: #aaa;
+  border-left: 5px #000 solid;
+  padding-left: 15px;
 }

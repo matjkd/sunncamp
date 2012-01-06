@@ -1,9 +1,24 @@
+<?php if(isset($cat_id)) { $cat_parent = $cat_id; } else { $cat_parent = 0;} ?>
+
 <div id="sidecats">
-    product categories<br/>
-    
-    <?php foreach($categories as $row): ?>
+    product categories<br/> 
+    <ul id="catmenu" class="catmenu noaccordion expandfirst">
+        <?php foreach ($category_parents as $row): ?>
+            <li style="position:static;">
 
-    <p><a href="<?=base_url()?>products/category/<?=$row->product_category_name?>"><?=$row->product_category_name?></a></p>
+                <a href="#"><?= $row->parent_name ?></a>
+                <ul style="display:block;" <?php if($cat_parent == $row->parent_id) { ?>class="current"<?php } ?>>
+                    <?php
+                    foreach ($categories as $row2):
 
-<?php endforeach; ?>
+                        if ($row2->parent == $row->parent_id) {
+                            ?>
+
+                            <li><a href="<?= base_url() ?>products/category/<?= $row2->product_category_name ?>"><?= $row2->product_category_name ?></a></li>
+                        <?php }
+                    endforeach; ?>
+                </ul>
+            </li>
+        <?php endforeach; ?>
+    </ul>
 </div>

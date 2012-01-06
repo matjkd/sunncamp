@@ -55,8 +55,8 @@ class Products_model extends CI_Model {
 
         return FALSE;
     }
-    
-      function get_default_image($id) {
+
+    function get_default_image($id) {
         $this->db->where('product_id', $id);
         $this->db->limit(1);
         $query = $this->db->get('product_images');
@@ -69,12 +69,28 @@ class Products_model extends CI_Model {
 
     function get_all_product_cats() {
 
-        $this->db->order_by('product_categories.product_category_name');
+        $this->db->order_by('product_category_parents.parent_name');
 
         // this limits it to cats with products in
         $this->db->join('product_category_link', 'product_category_link.product_category_id = product_categories.product_category_id');
+        $this->db->join('product_category_parents', 'product_category_parents.parent_id = product_categories.parent');
         $this->db->group_by('product_categories.product_category_name');
         $query = $this->db->get('product_categories');
+
+
+        return $query->result();
+    }
+
+    function get_all_product_parents($populated = 1) {
+
+        $this->db->order_by('product_category_parents.parent_name');
+        if ($populated == 1) {
+            $this->db->join('product_categories', 'product_categories.parent = product_category_parents.parent_id');
+
+            $this->db->join('product_category_link', 'product_category_link.product_category_id = product_categories.product_category_id');
+        }
+        $this->db->group_by('product_category_parents.parent_name');
+        $query = $this->db->get('product_category_parents');
 
 
         return $query->result();
@@ -131,15 +147,15 @@ class Products_model extends CI_Model {
 
     function get_products_by_cat($category_name) {
 
-       
-        
+
+
         $this->db->join('product_images', 'product_images.product_id=products.product_id', 'left');
 
-         $this->db->join('product_category_link', 'product_category_link.product_id=products.product_id');
-        
+        $this->db->join('product_category_link', 'product_category_link.product_id=products.product_id');
+
         $this->db->join('product_categories', 'product_categories.product_category_id=product_category_link.product_category_id');
 
-       
+
 
         $this->db->where('product_categories.product_category_name', $category_name);
 
@@ -150,7 +166,6 @@ class Products_model extends CI_Model {
         if ($query->num_rows > 0) {
 
             return $query->result();
-            
         }
 
         return FALSE;
@@ -303,8 +318,84 @@ class Products_model extends CI_Model {
         return $insert;
     }
 
-    function delete_product() {
-        
+    function delete_product($product_id) {
+        $this->db->where('product_id', $product_id);
+
+        $delete = $this->db->delete('products');
+        return $delete;
+    }
+
+    function delete_product_options($product_id) {
+        $this->db->where('product_id', $product_id);
+
+        $delete = $this->db->delete('product_options');
+        return $delete;
+    }
+
+    function delete_product_category_link($product_id) {
+        $this->db->where('product_id', $product_id);
+
+        $delete = $this->db->delete('product_category_link');
+        return $delete;
+    }
+
+    /**
+     *
+     * @param type $product_id
+     * @return type 
+     */
+    function delete_product_images($product_id) {
+
+        $id = $product_id;
+        //delete Large files
+        $mydir = './images/products/' . $id . '/large/';
+        $d = dir($mydir);
+        while ($entry = $d->read()) {
+            if ($entry != "." && $entry != "..") {
+                unlink($mydir . $entry);
+            }
+        }
+        $d->close();
+        rmdir($mydir);
+
+        //delete Medium files
+        $mydir = './images/products/' . $id . '/medium/';
+        $d = dir($mydir);
+        while ($entry = $d->read()) {
+            if ($entry != "." && $entry != "..") {
+                unlink($mydir . $entry);
+            }
+        }
+        $d->close();
+        rmdir($mydir);
+
+        //delete thumbs files
+        $mydir = './images/products/' . $id . '/thumbs/';
+        $d = dir($mydir);
+        while ($entry = $d->read()) {
+            if ($entry != "." && $entry != "..") {
+                unlink($mydir . $entry);
+            }
+        }
+        $d->close();
+        rmdir($mydir);
+
+        //delete root files
+        $mydir = './images/products/' . $id . '/';
+        $d = dir($mydir);
+        while ($entry = $d->read()) {
+            if ($entry != "." && $entry != "..") {
+                unlink($mydir . $entry);
+            }
+        }
+        $d->close();
+        rmdir($mydir);
+
+        //delete database entries
+        $this->db->where('product_id', $product_id);
+
+        $delete = $this->db->delete('product_images');
+        return $delete;
     }
 
     function edit_product($id) {

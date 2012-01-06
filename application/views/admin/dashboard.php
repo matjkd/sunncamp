@@ -13,3 +13,4 @@
 <a href="<?=base_url()?>admin/list_products">List Products</a><br/>
 <a href="<?=base_url()?>admin/add_product">Add New Product</a><br/>
 <a href="<?=base_url()?>admin/add_content">Add Content</a><br/>
+<a href="<?=base_url()?>backend/category_admin">Category Admin</a><br/>

@@ -32,7 +32,7 @@
             <input  type="hidden" name="option_id" value="<?= $row->option_id ?>"/>
             <input  type="hidden" name="product_id" value="<?= $row->product_id ?>"/>
             <input type="submit" name="submit" value="Update" />   
-            <input style="width:15px;" class="deletebutton" type="submit" name="submit" value="X" /> 
+            <input style="width:12px; padding-left: 1px;" class="deletebutton" type="submit" name="submit" value="X" /> 
             <br/>
             <?= form_close() ?>
         <?php endforeach;

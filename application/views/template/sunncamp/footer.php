@@ -10,8 +10,10 @@
 
 
 
+
 <!-- scripts concatenated and minified via ant build script-->
 <script src="<?= base_url() ?>js/wymeditor/jquery.wymeditor.min.js"></script>
+
 
 <script src="<?= base_url() ?>js/plugins.js"></script>
 <script src="<?= base_url() ?>js/sunncamp/plugins.js"></script>
@@ -23,24 +25,18 @@
 <script src="<?= base_url() ?>js/sunncamp/script.js"></script>
 
 <?php if (isset($imagezoom) && $imagezoom == TRUE) { ?>
-    <script src="<?= base_url() ?>js/jquery.jqzoom-core-pack.js"></script>
+<script src="http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js"></script>
+    <script src="<?= base_url() ?>js/cloud-zoom.1.0.2.min.js"></script>
+<script>
+// execute your scripts when the DOM is ready. this is mostly a good habit
+$(function() {
 
-    <script type="text/javascript">
+	// initialize scrollable
+	$(".scrollable").scrollable();
 
-        $(document).ready(function() {
-            $('.jqzoom').jqzoom({
-                zoomType: 'innerzoom',
-                lens:true,
-                preloadImages: false,
-                alwaysOn:false,
-                 showEffect : 'fadein',  
-            hideEffect: 'fadeout'  
-            });
-        	
-        });
-
-
-    </script>
+});
+</script>
+   
 
 <?php } ?>
 
