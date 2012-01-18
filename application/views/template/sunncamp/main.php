@@ -57,7 +57,7 @@
                     if (isset($sidebox) && $sidebox != NULL) {
                         $mainsize = "grid_16";
                     } else {
-                        $mainsize = "grid_24";
+                        $mainsize = "container_24";
                     }
                     ?>
 
@@ -67,10 +67,11 @@
 
 
 
-                    <div class="<?= $mainsize ?>">
+                    <div class="<?= $mainsize ?>" >
+                        <div style="padding:0px;">
                         <?= $this->load->view('global/alert') ?>
                         <?= $this->load->view($main_content) ?>
-
+                        </div>
 
                     </div>
 
@@ -89,7 +90,13 @@
             </div>
 
             <div class="container_24" id="footer">
-                <div class="grid_18">
+                 <div class="grid_6">
+                    <?= $this->load->view('global/sunncamp/login') ?>
+                </div>
+                 <div class="grid_6">
+                    &nbsp;
+                </div>
+                <div class="grid_6">
                     <?= $this->load->view('global/sunncamp/links') ?>
                 </div>
                 <div class="grid_6">

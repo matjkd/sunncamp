@@ -25,6 +25,21 @@ class Datasource extends CI_Controller {
         $this->load->view('template/json');
     }
     
+     public function json_features() {
+        $term = $this->input->post('term');
+        $data['source'] = $this->products_model->autocomplete_product_features($term);
+        $this->load->vars($data);
+        $this->load->view('template/json_features');
+    }
+    
+    
+     public function json_specs() {
+        $term = $this->input->post('term');
+        $data['source'] = $this->products_model->autocomplete_product_specs($term);
+        $this->load->vars($data);
+        $this->load->view('template/json_specs');
+    }
+    
         public function json_options() {
         $term = $this->input->post('term');
         $data['source'] = $this->products_model->autocomplete_product_options($term);

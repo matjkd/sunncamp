@@ -22,10 +22,68 @@ $(function() {
                 }
             });
         },
-        minLength: 2
+        minLength: 1
         
     });
 });
+
+
+      
+        
+//autocomplete features
+$(function() {
+    $( "#autocompletefeatures" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "/datasource/json_features",
+                data: {
+                    term: $("#autocompletefeatures").val()
+                },
+                dataType: "json",
+                type: "POST",
+                success: function(data){
+                    response($.map(data, function(item){
+                       return {
+                           label: item.label,
+                           value: item.label
+                       } 
+                        
+                    }));
+                }
+            });
+        },
+        minLength: 1
+        
+    });
+});
+
+//autocomplete specs
+$(function() {
+    $( "#autocompletespecs" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: "/datasource/json_specs",
+                data: {
+                    term: $("#autocompletespecs").val()
+                },
+                dataType: "json",
+                type: "POST",
+                success: function(data){
+                    response($.map(data, function(item){
+                       return {
+                           label: item.label,
+                           value: item.label
+                       } 
+                        
+                    }));
+                }
+            });
+        },
+        minLength: 1
+        
+    });
+});
+
 
       
         
@@ -51,9 +109,24 @@ $(function() {
                 }
             });
         },
-        minLength: 2
+        minLength: 1
         
     });
+});
+
+
+
+$(function() {
+ 	
+	$("#specorder").sortable({
+   update: function(event,ui)
+        {
+          $.post("/admin/sortspecs", { pages: $('#specorder').sortable('serialize') } );
+        }
+  });
+	$("#specorder").disableSelection();
+	 	
+  	
 });
 
 

@@ -70,5 +70,39 @@
 </div>
 <!--end of product categories-->
 
+<!--set product features-->
+
+<hr/>
+<?= form_open('admin/add_product_feature/' . $product_id) ?>
+<div class="ui-widget">
+
+    <div class="label">Product Features</div>
+
+    <input  id="autocompletefeatures" name="product_feature" value=""/>
+
+    <input type="submit" />  
+
+</div>  
+<input  type="hidden" name="product_id" value="<?= $product_id ?>"/>
+
+<?= form_close() ?>
+
+<div id="attributes">      
+    <?php if ($features != NULL) {
+        foreach ($features as $row): ?>
+            <?= form_open('admin/remove_feature/' . $product_id) ?>
+            <input style="width:190px" disabled="disabled" value="<?= $row->feature_name ?>"/>
+            <input  type="hidden" name="feature_link_id" value="<?= $row->feature_link_id ?>"/>
+
+            <input style="width:15px;" class="deletebutton" type="submit" value="X" /> <br/>
+            <?= form_close() ?>
+        <?php endforeach;
+    } ?>
+</div>
+<!--end of product features-->
+<hr/>
+
+
+
 
 <?=$this->load->view('admin/dashboard')?>

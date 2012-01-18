@@ -50,7 +50,7 @@ $route['login'] = '/welcome/login';
 $route['charity'] = '/welcome/home';
 $route['services'] = '/welcome/home';
 $route['design'] = '/welcome/home';
-$route['print'] = '/welcome/home';
+$route['faq'] = '/welcome/home';
 $route['404_override'] = '';
 
 

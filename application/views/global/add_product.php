@@ -55,7 +55,7 @@ foreach ($product as $row):
 
 
 
-    echo form_open('admin/update_product/' . $row->product_id);
+    echo form_open('a630dmin/update_product/' . $row->product_id);
     ?>
 
 
@@ -70,21 +70,11 @@ foreach ($product as $row):
         <div class="product_input_r">
             <div class="label">Product ref</div>
 
-            <input name="product_ref" value="<?= $row->product_ref?>"/>
+            <input name="product_ref" value="<?= $row->product_ref ?>"/>
         </div>
 
 
-        <div class="product_input_l">
-            <div class="label">? more options, need info ?</div>
 
-            <input name="product_na2" value=""/>
-        </div>
-
-        <div class="product_input_r">
-            <div class="label">? more options, need info ?</div>
-
-            <input name="product_2ref" value=""/>
-        </div>
 
         <div style="clear:both;">
             <textarea name="product_desc" id="product_desc"  class="wymeditor" style="width:100%;"><?= $row->product_desc ?></textarea>
@@ -102,6 +92,46 @@ endforeach;
 <!--end of product details-->
 
 
+<!--set product specs-->
+
+<hr/>
+<?= form_open('admin/add_product_spec/' . $product_id) ?>
+<div class="ui-widget">
+
+    <div class="label">Product Specifications</div>
+
+    <input  id="autocompletespecs" name="product_spec" value=""/>
+    <input  id="spec_value" name="spec_value" value=""/>
+    <input type="submit" />  
+
+</div>  
+<input  type="hidden" name="product_id" value="<?= $product_id ?>"/>
+
+<?= form_close() ?>
+<style>
+	#specorder { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+	#specorder li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.0em; height: 18px; }
+	#specorder li span { position: absolute; margin-left: -1.3em; }
+	</style>
+<div id="attributes">   <ul id="specorder">   
+    <?php if ($specs != NULL) {
+        foreach ($specs as $row): ?>
+        <li id="page_<?= $row->spec_link_id ?>" class="ui-state-default">
+            <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+                <?= form_open('admin/remove_spec/' . $product_id) ?>
+
+                <input type="hidden"  disabled="disabled" value="<?= $row->spec_desc ?>"/>
+                <input type="hidden"  disabled="disabled" value="<?= $row->spec_value ?>"/>
+                <input  type="hidden" name="spec_link_id" value="<?= $row->spec_link_id ?>"/>
+<?= $row->spec_desc ?>: <?= $row->spec_value ?>
+                <input style="width:18px; float:right;" class="ui-icon ui-icon-circle-close" type="submit" value="X" />
+        </li>
+                <?= form_close() ?>
+           
+        <?php endforeach;
+    } ?> </ul>
+</div>
+<!--end of product specs-->
 
 
 

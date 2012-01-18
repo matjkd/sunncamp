@@ -145,6 +145,8 @@ class Admin extends MY_Controller {
         $data['images'] = $this->products_model->get_product_images($data['product_id']);
         $data['product'] = $this->products_model->get_product($data['product_id']);
         $data['categories'] = $this->products_model->get_product_categories($data['product_id']);
+        $data['features'] = $this->products_model->get_product_features($data['product_id']);
+        $data['specs'] = $this->products_model->get_product_specs($data['product_id']);
 
         $data['attributes'] = $this->products_model->get_attributes($data['product_id']);
         $data['main_content'] = "global/add_product";
@@ -203,9 +205,111 @@ class Admin extends MY_Controller {
         redirect("admin/add_product/$id");
     }
 
+    /**
+     *
+     * @param type $id 
+     */
+    function add_product_feature($id) {
+
+        $feature = $this->input->post('product_feature');
+        //check if category name is in database already
+        $featuredata = $this->products_model->autocomplete_product_features($feature);
+        if ($featuredata) {
+
+            // The feature is in the database already
+            // now add to the  list
+            foreach ($featuredata as $row):
+                $feature_id = $row['feature_id'];
+            endforeach;
+            $this->products_model->add_to_feature_link($feature_id, $id);
+
+
+            echo "they are in there";
+        } else {
+
+            // The feature isn't in the database
+            // Don't add it. That's for somewhere else
+            // add to database, then add to users list
+            //  $this->products_model->create_new_cat($category);
+            //   $cat_id = $this->db->insert_id();
+            //  $this->products_model->add_to_category_link($cat_id, $id);
+            //  echo "new cat";
+        }
+
+        redirect("admin/add_product/$id");
+    }
+
     function remove_category($id) {
         $category_link_id = $this->input->post('category_link_id');
         $this->products_model->delete_product_category($category_link_id);
+
+        redirect("admin/add_product/$id");
+    }
+    
+    
+    function remove_feature($id) {
+        $feature_link_id = $this->input->post('feature_link_id');
+        $this->products_model->delete_product_feature($feature_link_id);
+
+        redirect("admin/add_product/$id");
+    }
+    
+    
+    function remove_spec($id) {
+        $spec_link_id = $this->input->post('spec_link_id');
+        $this->products_model->delete_product_spec($spec_link_id);
+
+        redirect("admin/add_product/$id");
+    }
+    
+      /**
+     * change order of list with jquery ui autocomplete
+     */
+    function sortspecs() {
+        $pages = $this->input->post('pages');
+        parse_str($pages, $pageOrder);
+
+        // list id is retrieved from the ID on the sortable list
+        foreach ($pageOrder['page'] as $key => $value):
+            mysql_query("UPDATE ignite_product_spec_link SET `spec_order` = '$key' WHERE `spec_link_id` = '$value'") or die(mysql_error());
+
+
+        //$this->db->update('practice_area_links', $pro_update);
+        endforeach;
+    }
+
+    /**
+     *
+     * @param type $id 
+     */
+    function add_product_spec($id) {
+
+        $spec = $this->input->post('product_spec');
+        $spec_value = $this->input->post('spec_value');
+        //check if category name is in database already
+        $specdata = $this->products_model->autocomplete_product_specs($spec);
+       
+        if ($specdata) {
+
+            // The spec is in the database already
+            // now add to the spec  list
+            foreach ($specdata as $row):
+                $spec_id = $row['spec_id'];
+            endforeach;
+            $this->products_model->add_to_spec_link($spec_id, $spec_value, $id);
+
+
+            echo "they are in there";
+        } else {
+
+            // The specisn't in the database
+            // TODO check for similar names
+            // add to database, then add to users list
+            $this->products_model->create_new_spec($spec);
+            $spec_id = $this->db->insert_id();
+                 $this->products_model->add_to_spec_link($spec_id, $spec_value, $id);
+            echo "new spec";
+        }
 
         redirect("admin/add_product/$id");
     }
@@ -440,12 +544,10 @@ class Admin extends MY_Controller {
 
         //delete category links
         $this->products_model->delete_product_category_link($product_id);
-        
+
         //delete product
         $this->products_model->delete_product($product_id);
     }
-    
-   
 
     function is_logged_in() {
         $is_logged_in = $this->session->userdata('is_logged_in');

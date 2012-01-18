@@ -26,7 +26,7 @@
 
 <link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/template.css">
 <link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/scrollable.css">
-<link rel="stylesheet" href="<?= base_url() ?>css/black_blue/jquery-ui-1.8.16.custom.css">
+<link rel="stylesheet" href="<?= base_url() ?>css/redmond/jquery-ui-1.8.17.custom.css">
 
 
 

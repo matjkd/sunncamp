@@ -23,6 +23,12 @@ class Products_model extends CI_Model {
         return $query->result();
     }
 
+    /**
+     *
+     * @param type $cat_id
+     * @param type $product_id
+     * @return type 
+     */
     function add_to_category_link($cat_id, $product_id) {
         //check cat isn't already in links table
         //if not add to list
@@ -35,6 +41,48 @@ class Products_model extends CI_Model {
         return $insert;
     }
 
+    /**
+     *
+     * @param type $feature_id
+     * @param type $product_id
+     * @return type 
+     */
+    function add_to_feature_link($feature_id, $product_id) {
+        //check cat isn't already in links table
+        //if not add to list
+        $new_list_entry = array(
+            'feature_id' => $feature_id,
+            'product_id' => $product_id
+        );
+
+        $insert = $this->db->insert('product_feature_link', $new_list_entry);
+        return $insert;
+    }
+
+    /**
+     *
+     * @param type $feature_id
+     * @param type $product_id
+     * @return type 
+     */
+    function add_to_spec_link($spec_id, $spec_value, $product_id) {
+        //check spec isn't already in links table
+        //if not add to list
+        $new_list_entry = array(
+            'spec_id' => $spec_id,
+            'product_id' => $product_id,
+            'spec_value' => $spec_value
+        );
+
+        $insert = $this->db->insert('product_spec_link', $new_list_entry);
+        return $insert;
+    }
+
+    /**
+     *
+     * @param type $id
+     * @return type 
+     */
     function get_product($id) {
 
         $this->db->where('product_id', $id);
@@ -188,6 +236,39 @@ class Products_model extends CI_Model {
     }
 
     /**
+     * Get product features
+     * @return type 
+     */
+    function get_product_features($product_id) {
+        $this->db->where('product_feature_link.product_id', $product_id);
+        $this->db->join('product_features', 'product_feature_link.feature_id = product_features.feature_id', 'left');
+        $query = $this->db->get('product_feature_link');
+
+        if ($query->num_rows > 0) {
+            return $query->result();
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * Get product specs
+     * @return type 
+     */
+    function get_product_specs($product_id) {
+        $this->db->where('product_spec_link.product_id', $product_id);
+        $this->db->join('product_specifications', 'product_spec_link.spec_id = product_specifications.spec_id', 'left');
+        $this->db->order_by('product_spec_link.spec_order');
+        $query = $this->db->get('product_spec_link');
+
+        if ($query->num_rows > 0) {
+            return $query->result();
+        }
+
+        return FALSE;
+    }
+
+    /**
      *
      * @param type $param
      * @return type 
@@ -202,6 +283,60 @@ class Products_model extends CI_Model {
 
 
         $query = $this->db->get('product_categories');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row)
+                $data[] = $row;
+            $query->free_result();
+
+            return $data;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
+     *
+     * @param type $param
+     * @return type 
+     */
+    function autocomplete_product_features($param) {
+        $data = array();
+
+
+
+        $where = "feature_name REGEXP '^$param'";
+        $this->db->where($where);
+
+
+        $query = $this->db->get('product_features');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row)
+                $data[] = $row;
+            $query->free_result();
+
+            return $data;
+        } else {
+            return FALSE;
+        }
+    }
+
+    /**
+     *
+     * @param type $param
+     * @return type 
+     */
+    function autocomplete_product_specs($param) {
+        $data = array();
+
+
+
+        $where = "spec_desc REGEXP '^$param'";
+        $this->db->where($where);
+
+
+        $query = $this->db->get('product_specifications');
 
         if ($query->num_rows() > 0) {
             foreach ($query->result_array() as $row)
@@ -302,10 +437,35 @@ class Products_model extends CI_Model {
         return $insert;
     }
 
+    function create_new_spec($spec) {
+
+
+        $new_spec_entry = array(
+            'spec_desc' => ucfirst(strtolower($spec)),
+        );
+
+        $insert = $this->db->insert('product_specifications', $new_spec_entry);
+        return $insert;
+    }
+
     function delete_product_category($category_link_id) {
 
         $this->db->where('category_link_id', $category_link_id);
         $update = $this->db->delete('product_category_link');
+        return $update;
+    }
+
+    function delete_product_feature($feature_link_id) {
+
+        $this->db->where('feature_link_id', $feature_link_id);
+        $update = $this->db->delete('product_feature_link');
+        return $update;
+    }
+
+    function delete_product_spec($spec_link_id) {
+
+        $this->db->where('spec_link_id', $spec_link_id);
+        $update = $this->db->delete('product_spec_link');
         return $update;
     }
 

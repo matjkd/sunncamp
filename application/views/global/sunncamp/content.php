@@ -1,11 +1,13 @@
 <!--Main content page for sunncamp site-->
-
+<div style="padding:10px;">
 
 
 <?php foreach($content as $row):?>
-
+<?php if(isset($row->image_strip)) { ?>
+<img src="<?=base_url()?>images/titles/<?=$row->image_strip?>"/>
+<?php } else { ?>
 <h1><?=$row->title?></h1>
-
+<?php } ?>
 <?php 
 $is_logged_in = $this->session->userdata('is_logged_in');
 		if(!isset($is_logged_in) || $is_logged_in == true)
@@ -33,3 +35,5 @@ else {
 			<?=$this->load->view('extra/'.$row->extra)?>
 			<?php }?>
 	<?php endforeach;?>
+
+</div>

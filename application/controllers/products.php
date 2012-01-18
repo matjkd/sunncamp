@@ -40,18 +40,21 @@ class Products extends MY_Controller {
 
         //get product
         $data['images'] = $this->products_model->get_product_images($product_id);
-         $data['defaultimage'] = $this->products_model->get_default_image($product_id);
+        $data['defaultimage'] = $this->products_model->get_default_image($product_id);
         $data['product'] = $this->products_model->get_product($product_id);
-         foreach ($data['product'] as $row):
+        foreach ($data['product'] as $row):
 
             $data['product_name'] = $row->product_name;
-        
-
+            $data['product_desc'] = $row->product_desc;
+            $data['product_ref'] = $row->product_ref;
+            
         endforeach;
-        
-        
+
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['categories'] = $this->products_model->get_product_categories($product_id);
         $data['attributes'] = $this->products_model->get_attributes($product_id);
+        $data['features'] = $this->products_model->get_product_features($product_id);
+        $data['specs'] = $this->products_model->get_product_specs($product_id);
 
         $data['imagezoom'] = TRUE;
         $data['content'] = $this->content_model->get_content($data['menu']);
@@ -65,8 +68,8 @@ class Products extends MY_Controller {
             $data['slideshow'] = $row->slideshow;
 
         endforeach;
-         $data['categories'] = $this->products_model->get_all_product_cats();
-        $data['sidebox'] = "sidebox/product_cats";
+        $data['categories'] = $this->products_model->get_all_product_cats();
+        // $data['sidebox'] = "sidebox/product_cats";
         $data['sidebar'] = "sidebox/side";
         $data['main_content'] = "pages/view_product";
 
@@ -85,10 +88,10 @@ class Products extends MY_Controller {
 
         $data['title'] = $category_name;
         $data['products'] = $this->products_model->get_products_by_cat($category_name);
-        foreach($data['products'] as $row):
-            
+        foreach ($data['products'] as $row):
+
             $data['cat_id'] = $row->parent;
-            
+
         endforeach;
         $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
