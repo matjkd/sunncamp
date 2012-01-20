@@ -116,7 +116,7 @@ endforeach;
 <div id="attributes">   <ul id="specorder">   
     <?php if ($specs != NULL) {
         foreach ($specs as $row): ?>
-        <li id="page_<?= $row->spec_link_id ?>" class="ui-state-default">
+        <li id="page_<?= $row->spec_link_id ?>" class="cattable">
             <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
                 <?= form_open('admin/remove_spec/' . $product_id) ?>
 

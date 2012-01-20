@@ -83,13 +83,16 @@ class Products extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/main');
     }
-
+/**
+ *
+ * @param type $category_name safe name
+ */
     function category($category_name) {
 
         $data['title'] = $category_name;
         $data['products'] = $this->products_model->get_products_by_cat($category_name);
         foreach ($data['products'] as $row):
-
+            $data['title'] = $row->product_category_name;
             $data['cat_id'] = $row->parent;
 
         endforeach;

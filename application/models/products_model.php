@@ -192,7 +192,11 @@ class Products_model extends CI_Model {
 
         return FALSE;
     }
-
+/**
+ *
+ * @param type $category_name safe name
+ * @return type 
+ */
     function get_products_by_cat($category_name) {
 
 
@@ -205,7 +209,7 @@ class Products_model extends CI_Model {
 
 
 
-        $this->db->where('product_categories.product_category_name', $category_name);
+        $this->db->where('product_categories.category_safename', $category_name);
 
         $this->db->group_by('products.product_name');
 
@@ -243,6 +247,20 @@ class Products_model extends CI_Model {
         $this->db->where('product_feature_link.product_id', $product_id);
         $this->db->join('product_features', 'product_feature_link.feature_id = product_features.feature_id', 'left');
         $query = $this->db->get('product_feature_link');
+
+        if ($query->num_rows > 0) {
+            return $query->result();
+        }
+
+        return FALSE;
+    }
+    /**
+     *
+     * @return type 
+     */
+     function get_all_product_features() {
+      
+        $query = $this->db->get('product_features');
 
         if ($query->num_rows > 0) {
             return $query->result();

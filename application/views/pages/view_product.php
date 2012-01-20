@@ -91,7 +91,7 @@
 
             <h2>Description</h2>
             <?= $product_desc ?>
-
+    <?php if($specs != NULL) { ?>
             <h2>Specifications</h2>
              <div style="width:100%; border-bottom:solid 2px #000080; height:0px; padding:4px 0 2px; clear:both;">  </div>
             <?php foreach ($specs as $row): ?>
@@ -105,10 +105,13 @@
                 </div>
 
             <?php endforeach; ?>
+              <?php } ?>
         </div>
     </div>
 
     <div class="grid_8" >
+        
+        <?php if($features != NULL) { ?>
         <div id="keyFeatures" >
             <h2>Key Features</h2>
              <?php foreach ($features as $row): ?>
@@ -117,6 +120,7 @@
            <?php endforeach; ?>
             
         </div>
+        <?php } ?>
     </div>
 
 </div>

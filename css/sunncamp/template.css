@@ -105,6 +105,13 @@ h2 {
     color: #AAA;
 
 }
+
+.spanlink {
+    color: #607890;
+text-decoration: underline;
+cursor: pointer;
+    
+}
 #logo {
 
     background:url('/images/template/sunncamp/logo.png') no-repeat;
@@ -121,6 +128,16 @@ h2 {
 
 
 
+}
+.cattable {
+    margin:3px 0 ;
+    padding:2px 2px 2px 6px;
+    background: #ddd;
+  border:solid 1px #5b6b8a;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+    
 }
 #menutop {
 

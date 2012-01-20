@@ -42,29 +42,30 @@
 <!--set product categories-->
 
 <hr/>
-<?= form_open('admin/add_product_category/' . $product_id) ?>
+
 <div class="ui-widget">
 
     <div class="label">Product Category</div>
 
     <input  id="autocompletecategories" name="product_category" value=""/>
 
-    <input type="submit" />  
+   
+    <span style="width:18px; float:right;" class="ui-icon ui-icon-circle-plus spanlink" onclick="addCategorytoProduct(<?= $product_id ?>)" ></span>
 
 </div>  
 <input  type="hidden" name="product_id" value="<?= $product_id ?>"/>
 
-<?= form_close() ?>
 
-<div id="attributes">      
+
+<div id="categories">      
     <?php if ($categories != NULL) {
         foreach ($categories as $row): ?>
-            <?= form_open('admin/remove_category/' . $product_id) ?>
-            <input style="width:190px" disabled="disabled" value="<?= $row->product_category_name ?>"/>
-            <input  type="hidden" name="category_link_id" value="<?= $row->category_link_id ?>"/>
+          
 
-            <input style="width:15px;" class="deletebutton" type="submit" value="X" /> <br/>
-            <?= form_close() ?>
+<div class="cattable" id="categorylink_<?= $row->category_link_id ?>"><?= $row->product_category_name ?>
+              <span  style="width:18px; float:right;" class="ui-icon ui-icon-circle-close spanlink" onclick="deleteCategoryfromProduct('<?= $product_id ?>', '<?= $row->category_link_id ?>')" >X</span></div>
+
+            
         <?php endforeach;
     } ?>
 </div>
@@ -78,10 +79,14 @@
 
     <div class="label">Product Features</div>
 
-    <input  id="autocompletefeatures" name="product_feature" value=""/>
-
-    <input type="submit" />  
-
+    <select name="product_feature">
+        <?php foreach ($allfeatures as $row): ?>
+<option value="<?= $row->feature_id ?>"><?= $row->feature_name ?></option>
+        <?php endforeach; ?>
+    </select>
+        <input type="submit" />  
+        
+        
 </div>  
 <input  type="hidden" name="product_id" value="<?= $product_id ?>"/>
 
@@ -94,6 +99,10 @@
             <input style="width:190px" disabled="disabled" value="<?= $row->feature_name ?>"/>
             <input  type="hidden" name="feature_link_id" value="<?= $row->feature_link_id ?>"/>
 
+
+
+
+
             <input style="width:15px;" class="deletebutton" type="submit" value="X" /> <br/>
             <?= form_close() ?>
         <?php endforeach;
@@ -105,4 +114,5 @@
 
 
 
-<?=$this->load->view('admin/dashboard')?>
+<?=
+$this->load->view('admin/dashboard')?>

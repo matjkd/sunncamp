@@ -14,7 +14,7 @@
                         if ($row2->parent == $row->parent_id) {
                             ?>
 
-                            <li><a href="<?= base_url() ?>products/category/<?= $row2->product_category_name ?>"><?= $row2->product_category_name ?></a></li>
+                            <li><a href="<?= base_url() ?>products/category/<?= $row2->category_safename ?>"><?= $row2->product_category_name ?></a></li>
                         <?php }
                     endforeach; ?>
                 </ul>

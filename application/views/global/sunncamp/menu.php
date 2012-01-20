@@ -3,8 +3,9 @@
     		<li><?=anchor('/', 'home')?></li>
                 <li><?=anchor('/products', 'products')?></li>
                   <li><?=anchor('/about', 'about us')?></li>
-               
-                    <li><?=anchor('/jobs', 'jobs')?></li>
+                <li><?=anchor('/stockists', 'stockists')?></li>
+                  <li><?=anchor('/instruction_manuals', 'Instruction Manuals')?></li>
+                    <li><?=anchor('/faq', 'faq')?></li>
                   <li><?=anchor('/contact', 'contact')?></li>
                   
             

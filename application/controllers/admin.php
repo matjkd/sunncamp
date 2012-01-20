@@ -146,6 +146,7 @@ class Admin extends MY_Controller {
         $data['product'] = $this->products_model->get_product($data['product_id']);
         $data['categories'] = $this->products_model->get_product_categories($data['product_id']);
         $data['features'] = $this->products_model->get_product_features($data['product_id']);
+        $data['allfeatures'] = $this->products_model->get_all_product_features();
         $data['specs'] = $this->products_model->get_product_specs($data['product_id']);
 
         $data['attributes'] = $this->products_model->get_attributes($data['product_id']);
@@ -175,9 +176,10 @@ class Admin extends MY_Controller {
      *
      * @param type $id 
      */
-    function add_product_category($id) {
+    function add_product_category() {
 
         $category = $this->input->post('product_category');
+        $id = $this->input->post('product_id');
         //check if category name is in database already
         $catdata = $this->products_model->autocomplete_product_categories($category);
         if ($catdata) {
@@ -187,10 +189,12 @@ class Admin extends MY_Controller {
             foreach ($catdata as $row):
                 $cat_id = $row['product_category_id'];
             endforeach;
+            
+            //add a check that the category hasn't already been added
             $this->products_model->add_to_category_link($cat_id, $id);
 
 
-            echo "they are in there";
+            $return =$cat_id;
         } else {
 
             // The cat isn't in the database
@@ -199,10 +203,10 @@ class Admin extends MY_Controller {
             $this->products_model->create_new_cat($category);
             $cat_id = $this->db->insert_id();
             $this->products_model->add_to_category_link($cat_id, $id);
-            echo "new cat";
+            $return = $cat_id;
         }
-
-        redirect("admin/add_product/$id");
+        echo $return;
+        //redirect("admin/add_product/$id");
     }
 
     /**
@@ -211,58 +215,37 @@ class Admin extends MY_Controller {
      */
     function add_product_feature($id) {
 
-        $feature = $this->input->post('product_feature');
-        //check if category name is in database already
-        $featuredata = $this->products_model->autocomplete_product_features($feature);
-        if ($featuredata) {
+        $feature_id = $this->input->post('product_feature');
 
-            // The feature is in the database already
-            // now add to the  list
-            foreach ($featuredata as $row):
-                $feature_id = $row['feature_id'];
-            endforeach;
-            $this->products_model->add_to_feature_link($feature_id, $id);
+        $this->products_model->add_to_feature_link($feature_id, $id);
 
-
-            echo "they are in there";
-        } else {
-
-            // The feature isn't in the database
-            // Don't add it. That's for somewhere else
-            // add to database, then add to users list
-            //  $this->products_model->create_new_cat($category);
-            //   $cat_id = $this->db->insert_id();
-            //  $this->products_model->add_to_category_link($cat_id, $id);
-            //  echo "new cat";
-        }
 
         redirect("admin/add_product/$id");
     }
 
-    function remove_category($id) {
+    function remove_category() {
+        $id = $this->input->post('product_id');
         $category_link_id = $this->input->post('category_link_id');
         $this->products_model->delete_product_category($category_link_id);
 
-        redirect("admin/add_product/$id");
+        echo "category removed";
     }
-    
-    
+
     function remove_feature($id) {
         $feature_link_id = $this->input->post('feature_link_id');
         $this->products_model->delete_product_feature($feature_link_id);
 
         redirect("admin/add_product/$id");
     }
-    
-    
+
     function remove_spec($id) {
         $spec_link_id = $this->input->post('spec_link_id');
         $this->products_model->delete_product_spec($spec_link_id);
 
         redirect("admin/add_product/$id");
     }
-    
-      /**
+
+    /**
      * change order of list with jquery ui autocomplete
      */
     function sortspecs() {
@@ -288,7 +271,7 @@ class Admin extends MY_Controller {
         $spec_value = $this->input->post('spec_value');
         //check if category name is in database already
         $specdata = $this->products_model->autocomplete_product_specs($spec);
-       
+
         if ($specdata) {
 
             // The spec is in the database already
@@ -307,7 +290,7 @@ class Admin extends MY_Controller {
             // add to database, then add to users list
             $this->products_model->create_new_spec($spec);
             $spec_id = $this->db->insert_id();
-                 $this->products_model->add_to_spec_link($spec_id, $spec_value, $id);
+            $this->products_model->add_to_spec_link($spec_id, $spec_value, $id);
             echo "new spec";
         }
 
