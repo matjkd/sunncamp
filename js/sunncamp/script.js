@@ -13,10 +13,10 @@ $(function() {
                 type: "POST",
                 success: function(data){
                     response($.map(data, function(item){
-                       return {
-                           label: item.label,
-                           value: item.label
-                       } 
+                        return {
+                            label: item.label,
+                            value: item.label
+                        } 
                         
                     }));
                 }
@@ -43,10 +43,10 @@ $(function() {
                 type: "POST",
                 success: function(data){
                     response($.map(data, function(item){
-                       return {
-                           label: item.label,
-                           value: item.label
-                       } 
+                        return {
+                            label: item.label,
+                            value: item.label
+                        } 
                         
                     }));
                 }
@@ -70,10 +70,10 @@ $(function() {
                 type: "POST",
                 success: function(data){
                     response($.map(data, function(item){
-                       return {
-                           label: item.label,
-                           value: item.label
-                       } 
+                        return {
+                            label: item.label,
+                            value: item.label
+                        } 
                         
                     }));
                 }
@@ -100,10 +100,10 @@ $(function() {
                 type: "POST",
                 success: function(data){
                     response($.map(data, function(item){
-                       return {
-                           label: item.label,
-                           value: item.label
-                       } 
+                        return {
+                            label: item.label,
+                            value: item.label
+                        } 
                         
                     }));
                 }
@@ -118,13 +118,15 @@ $(function() {
 
 $(function() {
  	
-	$("#specorder").sortable({
-   update: function(event,ui)
+    $("#specorder").sortable({
+        update: function(event,ui)
         {
-          $.post("/admin/sortspecs", { pages: $('#specorder').sortable('serialize') } );
+            $.post("/admin/sortspecs", {
+                pages: $('#specorder').sortable('serialize')
+            } );
         }
-  });
-	$("#specorder").disableSelection();
+    });
+    $("#specorder").disableSelection();
 	 	
   	
 });
@@ -132,46 +134,48 @@ $(function() {
 
 $(function() {
  	
-	$("#sortablethumb").sortable({
-   update: function(event,ui)
+    $("#sortablethumb").sortable({
+        update: function(event,ui)
         {
-          $.post("/admin/ajaxsort", { pages: $('#sortablethumb').sortable('serialize') } );
+            $.post("/admin/ajaxsort", {
+                pages: $('#sortablethumb').sortable('serialize')
+            } );
         }
-  });
-	$("#sortablethumb").disableSelection();
+    });
+    $("#sortablethumb").disableSelection();
 	 	
   	
 });
 
 function addFeaturetoProduct(product_id) {
 
- var feature = $('#feature_select').val();
-  loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var feature = $('#feature_select').val();
+    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
   
-  if (feature) {
+    if (feature) {
   
-   $('#features').append(loadergif);
-   $.post('/admin/add_product_feature/', {
-        product_id: product_id,
-        product_feature: feature
-   }, function(data) {
-   var featuretext = $("#feature_select option:selected").text();
-    $('.gifloader').remove();
-    var newfeature = "<div class='cattable' id='featurelink_" + data + "'>" + featuretext + "<span  style='width:18px; float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteFeaturefromProduct(" + product_id +  "," + data + ")' >X</span></div>";
-    $('#features').append(newfeature);
+        $('#features').append(loadergif);
+        $.post('/admin/add_product_feature/', {
+            product_id: product_id,
+            product_feature: feature
+        }, function(data) {
+            var featuretext = $("#feature_select option:selected").text();
+            $('.gifloader').remove();
+            var newfeature = "<div class='cattable' id='featurelink_" + data + "'>" + featuretext + "<span  style='width:18px; float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteFeaturefromProduct(" + product_id +  "," + data + ")' >X</span></div>";
+            $('#features').append(newfeature);
     
-   });
+        });
    
-  }
+    }
 
 }
 
 function deleteFeaturefromProduct(product_id, feature_id){
 
-   var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
     
 
-                $('#features').append(loadergif);
+    $('#features').append(loadergif);
     $.post('/admin/remove_feature/', {
         product_id: product_id,
         feature_link_id: feature_id
@@ -218,10 +222,10 @@ function addCategorytoProduct(product_id) {
 function deleteCategoryfromProduct(product_id, link_id) {
       
       
-     var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
     
 
-                $('#categories').append(loadergif);
+    $('#categories').append(loadergif);
     $.post('/admin/remove_category/', {
         product_id: product_id,
         category_link_id: link_id
@@ -237,37 +241,39 @@ function deleteCategoryfromProduct(product_id, link_id) {
 }
 
 function deleteAttribute(option_id) {
-var answer = confirm("Are you sure you want to delete this attribute?");
-if(answer) {  
+    var answer = confirm("Are you sure you want to delete this attribute?");
+    if(answer) {  
         var option_category = $('#option_category_' + option_id + '').val(),
         option = $('#option_' + option_id + '').val(),
         stock_level = $('#stock_level_' + option_id + '').val(),
         loadergif = $('<img class="gifloader" src="/images/load.gif" />');
        
        
-          $.post('/admin/delete_attribute/', {
-        option_id: option_id,
-        stock_level: stock_level,
-        option: option,
-        option_category: option_category
-    }, function(data) {
+        $.post('/admin/delete_attribute/', {
+            option_id: option_id,
+            stock_level: stock_level,
+            option: option,
+            option_category: option_category
+        }, function(data) {
       
-        $('.gifloader').remove();
-         $('#row_' + option_id + '').remove();               
-    });
+            $('.gifloader').remove();
+            $('#row_' + option_id + '').remove();               
+        });
         
-      } else { return false; }  
+    } else {
+        return false;
+    }  
 }
 
 function updateAttribute(option_id) {
         
-        var option_category = $('#option_category_' + option_id + '').val(),
-        option = $('#option_' + option_id + '').val(),
-        stock_level = $('#stock_level_' + option_id + '').val(),
-        loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var option_category = $('#option_category_' + option_id + '').val(),
+    option = $('#option_' + option_id + '').val(),
+    stock_level = $('#stock_level_' + option_id + '').val(),
+    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
         
        
-        $.post('/admin/edit_attribute/', {
+    $.post('/admin/edit_attribute/', {
         option_id: option_id,
         stock_level: stock_level,
         option: option,
@@ -278,12 +284,17 @@ function updateAttribute(option_id) {
        
         $('#row_' + option_id + '').css('background','#d23b07');
         
+        $('#row_' + option_id + ' input:nth-child(1)').css('color','gray');
+        $('#row_' + option_id + ' input:nth-child(2)').css('color','gray');
+        $('#row_' + option_id + ' input:nth-child(3)').css('color','gray');
+         
+         
         $('#row_' + option_id + '').animate({
    
-    "backgroundColor": "#ffffff"
-  }, 1500 );
-        
-       $('.gifloader').remove();
+            "backgroundColor": "#ffffff"
+        }, 1500 );
+       
+        $('.gifloader').remove();
                        
     });
 
@@ -291,69 +302,69 @@ function updateAttribute(option_id) {
 
 function addAttributetoProduct(product_id) {
 
-          var option_category = $('#autocompleteoptions').val(),
-          option = $('#option').val(),
-          stock_level = $('#stock_level').val(),
-          loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var option_category = $('#autocompleteoptions').val(),
+    option = $('#option').val(),
+    stock_level = $('#stock_level').val(),
+    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
           
-          $('#attributes').append(loadergif);
+    $('#attributes').append(loadergif);
           
-          $.post('/admin/add_attribute', {
-                  product_id: product_id,
-                  option_category: option_category,
-                  option: option,
-                  stock_level: stock_level
+    $.post('/admin/add_attribute', {
+        product_id: product_id,
+        option_category: option_category,
+        option: option,
+        stock_level: stock_level
           
-          }, function(data) {
+    }, function(data) {
                
                  
-              if(data > 0) {   
-              var newspec = "<tr id='row_" + data + "'><td><input name='option_category' value='"+ option_category +"'/></td><td><input name='option' value='"+ option +"'/></td><td><input name='stock_level' value='"+ stock_level +"'/></td><td><span  style='width:18px; float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteAttribute(" + data + ")' ></span></td></tr>";
+        if(data > 0) {   
+            var newspec = "<tr id='row_" + data + "'><td><input name='option_category' value='"+ option_category +"'/></td><td><input name='option' value='"+ option +"'/></td><td><input name='stock_level' value='"+ stock_level +"'/></td><td><span  style='width:18px; float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteAttribute(" + data + ")' ></span></td></tr>";
                
-               $('#attributes tr:last').after(newspec);  
+            $('#attributes tr:last').after(newspec);  
                  
-                 $('.gifloader').remove();
-                  $('#autocompleteoptions').val('');
-                $('#option').val('');
-                $('#stock_level').val('');
-           }
-           else
-           {
-             $('.gifloader').remove();
-             alert('Nothing added');
-           }      
+            $('.gifloader').remove();
+            $('#autocompleteoptions').val('');
+            $('#option').val('');
+            $('#stock_level').val('');
+        }
+        else
+        {
+            $('.gifloader').remove();
+            alert('Nothing added');
+        }      
           
-          });
+    });
      
 }
 
 function addSpectoProduct(product_id) {
-          var product_spec = $('#autocompletespecs').val(),
-          spec_value = $('#spec_value').val(),
+    var product_spec = $('#autocompletespecs').val(),
+    spec_value = $('#spec_value').val(),
         
-          loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
           
-           $('#specs').append(loadergif);
+    $('#specs').append(loadergif);
            
-             $.post('/admin/add_product_spec', {
-                  product_id: product_id,
-                  product_spec: product_spec,
-                  spec_value: spec_value
+    $.post('/admin/add_product_spec', {
+        product_id: product_id,
+        product_spec: product_spec,
+        spec_value: spec_value
           
-          }, function(data) {
-          alert(data + product_spec + spec_value + product_id);
-          var newspec = "<li id='spec_" + data + "' class='cattable'><div style='float:left;' class='ui-icon ui-icon-arrowthick-2-n-s'></div><strong>" + product_spec + ":</strong> " + spec_value + "<div style='float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteSpecfromProduct(" + product_id + ")'>x</div></li>";
-            $('.gifloader').remove();
-            $('#specorder li:last').after(newspec);  
-          });
+    }, function(data) {
+        
+        var newspec = "<li id='spec_" + data + "' class='cattable'><div style='float:left;' class='ui-icon ui-icon-arrowthick-2-n-s'></div><strong>" + product_spec + ":</strong> " + spec_value + "<div style='float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteSpecfromProduct(" + product_id + ")'>x</div></li>";
+        $('.gifloader').remove();
+        $('#specorder li:last').after(newspec);  
+    });
 
 }
 
 function deleteSpecfromProduct(spec_id) {
 
- var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
  
-   $.post('/admin/remove_spec/', {
+    $.post('/admin/remove_spec/', {
        
         spec_link_id: spec_id
        
@@ -364,6 +375,99 @@ function deleteSpecfromProduct(spec_id) {
     });
 
 }
+
+function raisestock(user_id, option_id) {
+
+    var current_stock = $('#stock_' + option_id).html(),
+    cart_quantity = $('#cart_' + option_id).html();
+
+    if(current_stock > 0) {
+    
+        var updated_stock =  parseInt(current_stock) - 1;
+        var updated_cart = parseInt(cart_quantity) + 1;
+        $('#stock_' + option_id).html(updated_stock);
+        $('#cart_' + option_id).html(updated_cart);
+        
+        $.post('/usercart/change_stock_level/', {
+       
+            option_id: option_id,
+            stock_value: updated_stock
+       
+        }, function(data) {
+   
+              
+            });
+        
+        $.post('/usercart/change_cart_quantity/', {
+            user_id: user_id,
+            option_id: option_id,
+            cart_value: updated_cart
+       
+        }, function(data) {
+
+              
+            });
+    
+    }
+
+
+
+
+}
+
+function lowerstock(user_id, option_id) {
+
+    var current_stock = $('#stock_' + option_id).html(),
+    cart_quantity = $('#cart_' + option_id).html();
+
+    if(cart_quantity > 0) {
+    
+        var updated_stock =  parseInt(current_stock) + 1;
+        var updated_cart = parseInt(cart_quantity) - 1;
+        $('#stock_' + option_id).html(updated_stock);
+        $('#cart_' + option_id).html(updated_cart);
+        
+              $.post('/usercart/change_stock_level/', {
+       
+            option_id: option_id,
+            stock_value: updated_stock
+       
+        }, function(data) {
+   
+              
+            });
+        
+        $.post('/usercart/change_cart_quantity/', {
+            user_id: user_id,
+            option_id: option_id,
+            cart_value: updated_cart
+       
+        }, function(data) {
+
+              
+            });
+    
+    }
+}
+
+$(function() {
+    $('input').each(function() {
+        $.data(this, 'default', this.value);
+    }).css("color","gray")
+    .focus(function() {
+        if (!$.data(this, 'edited')) {
+          
+            $(this).css("color","black");
+        }
+    }).change(function() {
+        $.data(this, 'edited', this.value != "");
+    }).blur(function() {
+        if (!$.data(this, 'edited')) {
+            this.value = $.data(this, 'default');
+            $(this).css("color","gray");
+        }
+    });
+});
 
 
 

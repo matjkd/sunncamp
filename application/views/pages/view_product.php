@@ -13,8 +13,7 @@
         </div>
     </div>
     <div class="grid_8">
-        <!--login to be added here-->
-        &nbsp;
+        <?=$this->load->view('cart/frontcart')?>
     </div>
 
     <div class="clearfix" >    </div>
@@ -121,6 +120,9 @@
             
         </div>
         <?php } ?>
+        
+        
+        <?=$this->load->view('cart/product_stock')?>
     </div>
 
 </div>

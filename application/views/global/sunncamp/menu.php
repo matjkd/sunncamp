@@ -15,7 +15,7 @@
 		{
 		
                     echo "<li>".anchor('/admin/list_products', 'Admin')."</li>";
-                       echo "<li>".anchor('https://www.pivotaltracker.com/projects/446901', 'Support')."</li>";
+                       echo "<li>".anchor('https://www.pivotaltracker.com/projects/446901', 'Support', 'target=_blank')."</li>";
                        
 		}
                 

@@ -9,6 +9,7 @@ class Products extends MY_Controller {
         parent::__construct();
         $this->load->model('captcha_model');
         $this->load->model('products_model');
+        $this->load->model('cart_model');
     }
 
     function index() {
@@ -30,7 +31,7 @@ class Products extends MY_Controller {
     }
 
     function show($product_id) {
-
+        $user_id = $this->session->userdata('user_id');
         $segment_active = $this->uri->segment(3);
         if ($segment_active != NULL) {
             $data['menu'] = $this->uri->segment(3);
@@ -47,7 +48,7 @@ class Products extends MY_Controller {
             $data['product_name'] = $row->product_name;
             $data['product_desc'] = $row->product_desc;
             $data['product_ref'] = $row->product_ref;
-            
+
         endforeach;
 
         $data['category_parents'] = $this->products_model->get_all_product_parents();
@@ -55,6 +56,7 @@ class Products extends MY_Controller {
         $data['attributes'] = $this->products_model->get_attributes($product_id);
         $data['features'] = $this->products_model->get_product_features($product_id);
         $data['specs'] = $this->products_model->get_product_specs($product_id);
+        $data['cart'] = $this->cart_model->get_my_cart($user_id);
 
         $data['imagezoom'] = TRUE;
         $data['content'] = $this->content_model->get_content($data['menu']);
@@ -83,10 +85,11 @@ class Products extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/main');
     }
-/**
- *
- * @param type $category_name safe name
- */
+
+    /**
+     *
+     * @param type $category_name safe name
+     */
     function category($category_name) {
 
         $data['title'] = $category_name;

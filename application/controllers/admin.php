@@ -75,31 +75,27 @@ class Admin extends MY_Controller {
         $product_id = $this->input->post('product_id');
         $stock_level = $this->input->post('stock_level');
 
-      //  if ($submitted == 'Update') {
-            $this->form_validation->set_rules('option_category', 'Option Category', 'trim');
-            $this->form_validation->set_rules('option', 'Option', 'trim');
-            $this->form_validation->set_rules('stock_level', 'Stock Level', 'trim|required');
+        //  if ($submitted == 'Update') {
+        $this->form_validation->set_rules('option_category', 'Option Category', 'trim');
+        $this->form_validation->set_rules('option', 'Option', 'trim');
+        $this->form_validation->set_rules('stock_level', 'Stock Level', 'trim|required');
 
-            $this->products_model->update_option($option_id);
-    //    }
-
-     //   if ($submitted == 'X') {
-
-
-     //       $this->products_model->delete_option($option_id);
-     //   }
+        $this->products_model->update_option($option_id);
+        //    }
+        //   if ($submitted == 'X') {
+        //       $this->products_model->delete_option($option_id);
+        //   }
         echo "Attribute changed";
     }
-    
+
     function delete_attribute() {
-    
+
         $option_id = $this->input->post('option_id');
         $product_id = $this->input->post('product_id');
-        
+
         $this->products_model->delete_option($option_id);
-        
+
         echo "Attribute deleted";
-    
     }
 
     /**
@@ -201,12 +197,12 @@ class Admin extends MY_Controller {
             foreach ($catdata as $row):
                 $cat_id = $row['product_category_id'];
             endforeach;
-            
+
             //add a check that the category hasn't already been added
             $this->products_model->add_to_category_link($cat_id, $id);
 
 
-            $return =$cat_id;
+            $return = $cat_id;
         } else {
 
             // The cat isn't in the database
@@ -228,9 +224,9 @@ class Admin extends MY_Controller {
     function add_product_feature() {
 
         $feature_id = $this->input->post('product_feature');
-$id = $this->input->post('product_id');
+        $id = $this->input->post('product_id');
         $this->products_model->add_to_feature_link($feature_id, $id);
-$feature_id = $this->db->insert_id();
+        $feature_id = $this->db->insert_id();
 
         echo $feature_id;
     }
@@ -244,7 +240,7 @@ $feature_id = $this->db->insert_id();
     }
 
     function remove_feature() {
-    $product_id = $this->input->post('product_id');
+        $product_id = $this->input->post('product_id');
         $feature_link_id = $this->input->post('feature_link_id');
         $this->products_model->delete_product_feature($feature_link_id);
 
@@ -252,7 +248,7 @@ $feature_id = $this->db->insert_id();
     }
 
     function remove_spec() {
-   
+
         $spec_link_id = $this->input->post('spec_link_id');
         $this->products_model->delete_product_spec($spec_link_id);
 
@@ -274,14 +270,14 @@ $feature_id = $this->db->insert_id();
         //$this->db->update('practice_area_links', $pro_update);
         endforeach;
     }
-    
-     /**
+
+    /**
      * sort the images for a product
      */
     function ajaxsort() {
         $pages = $this->input->post('pages');
 
-       
+
         parse_str($pages, $pageOrder);
 
         foreach ($pageOrder['pageorder'] as $key => $value):
@@ -298,7 +294,7 @@ $feature_id = $this->db->insert_id();
      * @param type $id 
      */
     function add_product_spec() {
-$id = $this->input->post('product_id');
+        $id = $this->input->post('product_id');
         $spec = $this->input->post('product_spec');
         $spec_value = $this->input->post('spec_value');
         //check if category name is in database already
@@ -313,8 +309,7 @@ $id = $this->input->post('product_id');
             endforeach;
             $this->products_model->add_to_spec_link($spec_id, $spec_value, $id);
 
-$link_id = $this->db->insert_id();
-           
+            $link_id = $this->db->insert_id();
         } else {
 
             // The specisn't in the database
@@ -323,10 +318,9 @@ $link_id = $this->db->insert_id();
             $this->products_model->create_new_spec($spec);
             $spec_id = $this->db->insert_id();
             $this->products_model->add_to_spec_link($spec_id, $spec_value, $id);
-           $link_id = $this->db->insert_id();
+            $link_id = $this->db->insert_id();
         }
-echo $link_id;
-      
+        echo $link_id;
     }
 
     /**
@@ -410,7 +404,7 @@ echo $link_id;
      * 
      */
     function add_attribute() {
-    $id =$this->input->post('product_id');
+        $id = $this->input->post('product_id');
         $this->form_validation->set_rules('option_category', 'option category', 'trim|max_length[255]');
         $this->form_validation->set_rules('option', 'option', 'trim');
         $this->form_validation->set_rules('stock_level', 'stock level', 'trim|required');
@@ -418,16 +412,14 @@ echo $link_id;
             echo "stock level required";
         } else { // passed validation proceed to post success logic
             if ($this->products_model->add_attribute()) { // the information has therefore been successfully saved in the db
-               $attribute_id = $this->db->insert_id();
-               echo $attribute_id;   // or whatever logic needs to occur
+                $attribute_id = $this->db->insert_id();
+                echo $attribute_id;   // or whatever logic needs to occur
             } else {
                 echo 'An error occurred saving your information. Please try again later';
                 // Or whatever error handling is necessary
             }
         }
     }
-
-   
 
     function add_menu() {
         $data['main_content'] = "admin/add_menu";

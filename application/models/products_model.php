@@ -193,11 +193,12 @@ class Products_model extends CI_Model {
 
         return FALSE;
     }
-/**
- *
- * @param type $category_name safe name
- * @return type 
- */
+
+    /**
+     *
+     * @param type $category_name safe name
+     * @return type 
+     */
     function get_products_by_cat($category_name) {
 
 
@@ -255,12 +256,13 @@ class Products_model extends CI_Model {
 
         return FALSE;
     }
+
     /**
      *
      * @return type 
      */
-     function get_all_product_features() {
-      
+    function get_all_product_features() {
+
         $query = $this->db->get('product_features');
 
         if ($query->num_rows > 0) {
