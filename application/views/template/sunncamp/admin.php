@@ -57,11 +57,11 @@
                     if (isset($sidebox) && $sidebox != NULL) {
                         $mainsize = "grid_12";
                     } else {
-                        $mainsize = "grid_18";
+                        $mainsize = "grid_17";
                     }
                     ?>
 
-                    <div class="grid_6">
+                    <div class="grid_7">
 
                         <?php
                         if (isset($leftside) && $leftside != NULL) {
@@ -87,7 +87,7 @@
                     </div>
 
                     <?php if (isset($sidebox) && $sidebox != NULL) { ?>
-                        <div class="grid_6">
+                        <div class="grid_7">
 
                             <?= $this->load->view($sidebox) ?>
 

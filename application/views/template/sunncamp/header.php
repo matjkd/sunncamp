@@ -24,10 +24,10 @@
 <link rel="stylesheet" href="<?= base_url() ?>css/demo_table.css">
 <link rel="stylesheet" href="<?= base_url() ?>css/demo_table_jui.css">
 
-<link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/template.css">
+
 <link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/scrollable.css">
 <link rel="stylesheet" href="<?= base_url() ?>css/redmond/jquery-ui-1.8.17.custom.css">
-
+<link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/template.css">
 
 
 <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->

@@ -38,56 +38,7 @@ jQuery(function() {
 
 
 
-function addCategorytoProduct(product_id) {
-      
-      
-    var category = $('#autocompletecategories').val(),
-    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
-    
-    
-    if ( category ) {
-        $('#categories').append(loadergif);
-        $.post('/admin/add_product_category/', {
-            product_id: product_id,
-            product_category: category
-        }, function(data) {
-            
-            var newcat = "<div class='cattable' id='categorylink_" + data + "'>" + category + " <span style='width:18px; float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteCategoryfromProduct(" + product_id +"," +data +")'>X</span></div>";
-            $('#autocompletecategories').val('')
-            $('.gifloader').remove();
-            $('#categories').append(newcat);
-                        
-        });
-    }
-    else
-    {
-        alert('no category entered');
-    }
-   
-        
-}
 
-
-function deleteCategoryfromProduct(product_id, link_id) {
-      
-      
-     var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
-    
-
-                $('#categories').append(loadergif);
-    $.post('/admin/remove_category/', {
-        product_id: product_id,
-        category_link_id: link_id
-    }, function(data) {
-       
-        $('#categorylink_'+link_id).remove();
-        $('.gifloader').remove();
-                       
-    });
-            
-   
-        
-}
 
 
 /**

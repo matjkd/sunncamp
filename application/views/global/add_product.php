@@ -17,7 +17,10 @@
                         </a>
 
 
-                        <div style="clear:both; float:left;">Order:</div> 	<div  style="float:left;" class="image_order" id="<?= $image->product_image_id ?>" style="width:150px; float:left;"><?= $image->order ?></div>
+                     <!--   <div style="clear:both; float:left;">Order:</div> 	
+                        <div  style="float:left;" class="image_order" id="<?= $image->product_image_id ?>" style="width:150px; float:left;">
+                        <?= $image->order ?>
+                        </div> -->
                         <div style="clear:both; float:left; padding-top:10px;">
 
                             <?= form_open('admin/delete_image') ?>
@@ -55,7 +58,7 @@ foreach ($product as $row):
 
 
 
-    echo form_open('a630dmin/update_product/' . $row->product_id);
+    echo form_open('admin/update_product/' . $row->product_id);
     ?>
 
 
@@ -95,38 +98,32 @@ endforeach;
 <!--set product specs-->
 
 <hr/>
-<?= form_open('admin/add_product_spec/' . $product_id) ?>
+
 <div class="ui-widget">
 
     <div class="label">Product Specifications</div>
 
     <input  id="autocompletespecs" name="product_spec" value=""/>
     <input  id="spec_value" name="spec_value" value=""/>
-    <input type="submit" />  
-
+  
+ <span style="width:18px; float:right;" class="ui-icon ui-icon-circle-plus spanlink" onclick="addSpectoProduct(<?= $product_id ?>)" ></span> 
 </div>  
 <input  type="hidden" name="product_id" value="<?= $product_id ?>"/>
 
-<?= form_close() ?>
 <style>
-	#specorder { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-	#specorder li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.0em; height: 18px; }
+	#specorder { list-style-type: none; margin: 0; padding: 10px 0 0 0; }
+	#specorder li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 0px; font-size: 1.0em; height: 18px; }
 	#specorder li span { position: absolute; margin-left: -1.3em; }
 	</style>
-<div id="attributes">   <ul id="specorder">   
+<div id="specs">   
+<ul id="specorder" width="100%">   
     <?php if ($specs != NULL) {
         foreach ($specs as $row): ?>
-        <li id="page_<?= $row->spec_link_id ?>" class="cattable">
-            <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
-                <?= form_open('admin/remove_spec/' . $product_id) ?>
-
-                <input type="hidden"  disabled="disabled" value="<?= $row->spec_desc ?>"/>
-                <input type="hidden"  disabled="disabled" value="<?= $row->spec_value ?>"/>
-                <input  type="hidden" name="spec_link_id" value="<?= $row->spec_link_id ?>"/>
-<?= $row->spec_desc ?>: <?= $row->spec_value ?>
-                <input style="width:18px; float:right;" class="ui-icon ui-icon-circle-close" type="submit" value="X" />
+        <li id="spec_<?= $row->spec_link_id ?>" class="cattable">
+            <div style="float:left;" class="ui-icon ui-icon-arrowthick-2-n-s"></div><strong><?= $row->spec_desc ?>:</strong> <?= $row->spec_value ?>
+                <div style="float:right;" class="ui-icon ui-icon-circle-close spanlink" onclick="deleteSpecfromProduct(<?= $row->spec_link_id ?>)">x</div>
         </li>
-                <?= form_close() ?>
+               
            
         <?php endforeach;
     } ?> </ul>

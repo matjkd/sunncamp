@@ -96,6 +96,7 @@ class Products_model extends CI_Model {
 
     function get_product_images($id) {
         $this->db->where('product_id', $id);
+        $this->db->order_by('order');
         $query = $this->db->get('product_images');
         if ($query->num_rows > 0) {
             return $query->result();
@@ -170,7 +171,7 @@ class Products_model extends CI_Model {
         }
 
         //TODO check if attribute is already part of product, and instead of adding again,
-        // add onto/or replace (need to check which is best, maybe bring up an option
+        // add onto/or replace (need to check which is best, maybe bring up an option)
 
         $form_data = array(
             'product_id' => $this->input->post('product_id'),

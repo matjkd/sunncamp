@@ -58,6 +58,19 @@ h2 {
     line-height: 1.2;
     margin-bottom:10px;
 }
+
+h3 {
+  font-size: 16px;
+   font-style: normal; 
+    font-weight: 700;
+    text-shadow: none;
+    text-decoration: none;
+    color: #00358e;
+    letter-spacing: 0em;
+    word-spacing: 0em;
+    line-height: 1.2;
+    margin-bottom:10px;
+}
 #header_container{
     background:url('/images/template/sunncamp/headerback.jpg') repeat-x top center ;
     height:162px;
@@ -133,7 +146,8 @@ cursor: pointer;
     margin:3px 0 ;
     padding:2px 2px 2px 6px;
     background: #ddd;
-  border:solid 1px #5b6b8a;
+  border:solid 0px #5b6b8a;
+ 
 -moz-border-radius: 5px;
 -webkit-border-radius: 5px;
 border-radius: 5px;
@@ -496,6 +510,13 @@ ul.lof-navigator li{
     width:318px;
     padding:5px;
     border:1px solid #ababab;
+    -moz-box-shadow:inset 2px 0px 38px #dddddd;
+-webkit-box-shadow:inset 2px 0px 38px #dddddd;
+box-shadow:inset 2px 0px 38px #dddddd;
+
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
 }
 .product_input_r {
     float:left;
@@ -503,6 +524,13 @@ ul.lof-navigator li{
     width:318px;
     padding:5px;
     border:1px solid #ababab;
+     -moz-box-shadow:inset 2px 0px 38px #dddddd;
+-webkit-box-shadow:inset 2px 0px 38px #dddddd;
+box-shadow:inset 2px 0px 38px #dddddd;
+
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
 }
 .editarea {
     float:left;
@@ -510,17 +538,34 @@ ul.lof-navigator li{
 }
 
 #gallery, #upload {
-    border: 1px solid #ccc; margin: 10px auto; padding: 10px 0px 10px 10px;
+    border: 1px solid #ccc; 
+    margin: 10px auto;
+     padding: 10px 0px 10px 10px;
+    -moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
 }
 #blank_gallery {
     font-family: Arial; font-size: 18px; font-weight: bold;
     text-align: center;
+    
 }
 .thumb {
-    float: left; width: 135px; height: 160px; padding: 10px; margin: 0px; background-color: #ddd;
+    float: left; width: 135px; height: 140px; padding: 10px; margin: 0px; background-color: #ddd;
+    border:solid 1px #000000;
+    cursor:move;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+    -moz-box-shadow:inset 2px 0px 38px #aaa;
+-webkit-box-shadow:inset 2px 0px 38px #aaa;
+box-shadow:inset 2px 0px 38px #aaa;
 }
 .thumb:hover {
-    outline: 1px solid #999;
+     background-color: #fff;
+      -moz-box-shadow:inset 2px 0px 38px #91c0ee;
+-webkit-box-shadow:inset 2px 0px 38px #91c0ee;
+box-shadow:inset 2px 0px 38px #91c0ee;
 }
 
 
@@ -537,12 +582,27 @@ img {
     content: "."; visibility: hidden; display: block; clear: both; height: 0; font-size: 0;
 }
 
+.product_input_l select {
+ font-size:12px;
+ width:100px;
 
-#attributes input {
-    border:1px solid #dddddd;
-    width:50px;
-    font-size:12px;
 }
+#attributes input {
+    border:1px solid #aaaaaa;
+    width:100%;
+    font-size:12px;
+    background:transparent;
+    margin: 3px 0;
+    
+      -moz-box-shadow:inset 2px 0px 4px #ddd;
+-webkit-box-shadow:inset 2px 0px 4px #ddd;
+box-shadow:inset 2px 0px 4px #ddd;
+}
+#attributes tr {
+margin:4px;
+}
+
+
 
 #label_attribute {
     float:left;
@@ -585,7 +645,7 @@ img {
     /* required settings */
     position:relative;
     overflow:hidden;
-    width: 660px;
+    width: 520px;
     height:90px;
 }
 
@@ -648,7 +708,9 @@ ul.catmenu li ul li a:hover {
     padding-left: 15px;
 }
 
-
+#specorder {
+width:100%;
+}
 
 #keyFeatures {
     background:#d9eeff;
