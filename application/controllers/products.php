@@ -22,9 +22,9 @@ class Products extends MY_Controller {
     function main() {
         $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
-        $data['sidebox'] = "sidebox/product_cats";
+        //$data['sidebox'] = "sidebox/product_cats";
         $data['content'] = $this->content_model->get_content('products');
-        $data['main_content'] = "global/sunncamp/content";
+        $data['main_content'] = "global/sunncamp/products";
 
         $this->load->vars($data);
         $this->load->view('template/main');

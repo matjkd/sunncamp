@@ -29,6 +29,6 @@
 <link rel="stylesheet" href="<?= base_url() ?>css/redmond/jquery-ui-1.8.17.custom.css">
 <link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/template.css">
 
-
+<link href='http://fonts.googleapis.com/css?family=Michroma' rel='stylesheet' type='text/css'>
 <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
 <script src="<?= base_url() ?>js/libs/modernizr-1.6.min.js"></script>

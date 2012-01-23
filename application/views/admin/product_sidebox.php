@@ -1,4 +1,4 @@
-
+<?= $this->load->view('admin/dashboard') ?>
 <!--add attributes/options and stock level-->
 
 
@@ -143,4 +143,4 @@
 
 
 
-<?= $this->load->view('admin/dashboard') ?>
+

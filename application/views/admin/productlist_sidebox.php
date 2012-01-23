@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 ?>
-<h2>Select Cateogry</h2>
+<h3>Select Category</h3>
 <?=form_open('/admin/list_products')?>
 
 <?php $cat[0] = 'All'; ?>

@@ -377,36 +377,34 @@ function deleteSpecfromProduct(spec_id) {
 }
 
 function raisestock(user_id, option_id) {
-
+ 
     var current_stock = $('#stock_' + option_id).html(),
-    cart_quantity = $('#cart_' + option_id).html();
+    cart_quantity = $('#cart_' + option_id).html(),
+     loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+
+     
 
     if(current_stock > 0) {
     
+        $('#stock_' + option_id).append(loadergif);
         var updated_stock =  parseInt(current_stock) - 1;
         var updated_cart = parseInt(cart_quantity) + 1;
-        $('#stock_' + option_id).html(updated_stock);
-        $('#cart_' + option_id).html(updated_cart);
+      
         
         $.post('/usercart/change_stock_level/', {
-       
+          user_id: user_id,
             option_id: option_id,
-            stock_value: updated_stock
-       
-        }, function(data) {
-   
-              
-            });
-        
-        $.post('/usercart/change_cart_quantity/', {
-            user_id: user_id,
-            option_id: option_id,
-            cart_value: updated_cart
+            sum: "minus"
        
         }, function(data) {
 
+     $('.gifloader').remove();
+     $('#stock_' + option_id).html(updated_stock);
+        $('#cart_' + option_id).html(updated_cart);
               
             });
+        
+      
     
     }
 
@@ -418,34 +416,30 @@ function raisestock(user_id, option_id) {
 function lowerstock(user_id, option_id) {
 
     var current_stock = $('#stock_' + option_id).html(),
-    cart_quantity = $('#cart_' + option_id).html();
-
+    cart_quantity = $('#cart_' + option_id).html(),
+ loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+  
     if(cart_quantity > 0) {
-    
+     $('#stock_' + option_id).append(loadergif);
         var updated_stock =  parseInt(current_stock) + 1;
         var updated_cart = parseInt(cart_quantity) - 1;
-        $('#stock_' + option_id).html(updated_stock);
-        $('#cart_' + option_id).html(updated_cart);
+       
         
               $.post('/usercart/change_stock_level/', {
-       
+        user_id: user_id,
             option_id: option_id,
-            stock_value: updated_stock
+            sum: "plus"
        
         }, function(data) {
-   
+  
+   $('.gifloader').remove();
+    $('#stock_' + option_id).html(updated_stock);
+     $('#cart_' + option_id).html(updated_cart);
+       
               
             });
         
-        $.post('/usercart/change_cart_quantity/', {
-            user_id: user_id,
-            option_id: option_id,
-            cart_value: updated_cart
-       
-        }, function(data) {
-
-              
-            });
+      
     
     }
 }

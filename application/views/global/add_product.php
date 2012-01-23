@@ -117,6 +117,7 @@ endforeach;
 </style>
 <div id="specs">   
     <ul id="specorder" width="100%">   
+    <li>Specs</li>
         <?php if ($specs != NULL) {
             foreach ($specs as $row): ?>
                 <li id="spec_<?= $row->spec_link_id ?>" class="cattable">

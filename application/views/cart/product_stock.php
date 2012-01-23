@@ -11,7 +11,7 @@ if ($is_logged_in != NULL && $role < 5) {
                 <td>Option</td>
                 <td>Stock</td>
                 <td>Action</td>
-            <td>in cart</td>
+            <td>in Cart</td>
             </tr>
 
         </thead>
@@ -29,17 +29,30 @@ if ($is_logged_in != NULL && $role < 5) {
       
       <td id="cart_<?=$row->option_id?>">
       
-      <?php foreach($cart as $row2):?>
+      <?php
+      $cart_value = 0;
+       if($cart != NULL) { foreach($cart as $row2):
       
-          <?php if($row2->cart_option_id == $row->option_id) { ?>
+          if($row2->cart_option_id == $row->option_id) { 
           
-          <?=$row2->quantity?>
+                
+                
+                $cart_value = $row2->quantity; 
+               
           
-          <?php } else { ?>
-          0
-          <?php } ?>
+           } 
+           
+         
+           
+           ?>
           
-      <?php endforeach; ?>
+      <?php endforeach; }
+     
+        
+      echo $cart_value;
+        
+      
+       ?>
       
       
       

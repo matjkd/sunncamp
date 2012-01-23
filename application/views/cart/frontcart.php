@@ -5,7 +5,7 @@ if ($is_logged_in != NULL && $role < 5) {
     ?>
 
     Your cart
-
+<a href="<?=base_url()?>usercart/view_cart">View Cart</a>
     
 <?php } else { ?>
 

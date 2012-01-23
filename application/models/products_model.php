@@ -107,6 +107,7 @@ class Products_model extends CI_Model {
 
     function get_default_image($id) {
         $this->db->where('product_id', $id);
+          $this->db->order_by('order');
         $this->db->limit(1);
         $query = $this->db->get('product_images');
         if ($query->num_rows > 0) {
