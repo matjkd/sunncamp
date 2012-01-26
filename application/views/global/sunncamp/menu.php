@@ -1,25 +1,62 @@
 
     		<ul>
-    		<li><?=anchor('/', 'home')?></li>
-                <li><?=anchor('/products', 'products')?></li>
-                  <li><?=anchor('/about', 'about us')?></li>
+    		<li><?=anchor('/', 'Home')?></li>
+    		<li><?=anchor('/', 'News')?></li>
+                <li id="down_products">
+                <a  href="<?=base_url()?>products">Products</a>
+                  		
+    
+               
+                </li >
+                  <li class="menu_list_item"><?=anchor('/about', 'Why Choose Sunncamp')?></li>
                 <li><?=anchor('/stockists', 'stockists')?></li>
-                  <li><?=anchor('/instruction_manuals', 'Instruction Manuals')?></li>
-                    <li><?=anchor('/faq', 'faq')?></li>
-                  <li><?=anchor('/contact', 'contact')?></li>
-                  
-            
-                  <?php $is_logged_in = $this->session->userdata('is_logged_in');
-		$role = $this->session->userdata('role');
-		if($is_logged_in != 0 || $role == 1)
-		{
-		
-                    echo "<li>".anchor('/admin/list_products', 'Admin')."</li>";
-                       echo "<li>".anchor('https://www.pivotaltracker.com/projects/446901', 'Support', 'target=_blank')."</li>";
-                       
-		}
-                
-                ?>
-                   
-    		</ul>
+                  <li><?=anchor('/instruction_manuals', 'Instructions')?></li>
+                  <li><?=anchor('/testimonials', 'Testimonials')?></li>
+                  <li><?=anchor('/trade_reviews', 'Trade Reviews')?></li>
+                  <li><?=anchor('/faq', 'faq')?></li>
+                  <li><?=anchor('/contact', 'Contact')?></li>
+              </ul>
+              
+               
+   <div id="products_mega" style="display: none;">
+    		
+    		<?php
+    		 $countrow = 0;
+    		 $megawidth = 0;
+    		
+    		 ?>
+    		
+        <?php foreach ($category_parents as $parentrow): ?>
+       
+           <?php if($countrow == 0) { ?> <div style="float:left; width:190px;"> <?php } ?>
+            <div class="mega_container">
+               <h4> <?= $parentrow->parent_name ?></h4>
+               
+               <div class="mega_cats">
+                    <?php
+                     $countrow = $countrow + 1;
+                    foreach ($categories as $row2):
 
+                        if ($row2->parent == $parentrow->parent_id) {
+                        $countrow = $countrow + 1;
+                            ?>
+
+                           <div class="mega_item"> <a href="<?= base_url() ?>products/category/<?= $row2->category_safename ?>"><?= $row2->product_category_name ?></a></div>
+                        <?php }
+                    endforeach; ?>
+                    </div>
+                    </div>
+            <?php if($countrow > 8) {
+            $countrow = 0; 
+            $megawidth = $megawidth + 190;
+            echo "</div>";
+            }
+            ?>
+        
+        <?php endforeach; ?>
+
+    		
+    		
+    		</div>	
+    		<span class="megawidth" id="<?=$megawidth?>px"></span> 	
+    		

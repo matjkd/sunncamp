@@ -25,7 +25,7 @@ class Gallery_model extends CI_Model {
         $config = array(
             'allowed_types' => 'jpg|jpeg|gif|png',
             'upload_path' => $this->gallery_path . '/' . $id . '',
-            'max_size' => 2000
+            'max_size' => 10000
         );
 
         $this->load->library('upload', $config);
@@ -58,8 +58,8 @@ class Gallery_model extends CI_Model {
             'source_image' => $image_data['full_path'],
             'new_image' => $this->gallery_path . '/' . $id . '/medium',
             'maintain_ratio' => true,
-            'width' => 580,
-            'height' => 400
+            'width' => 630,
+            'height' => 480
         );
 
         $this->image_lib->initialize($config2);

@@ -25,10 +25,12 @@ class Category_admin extends MY_Controller {
         $cat = $this->input->post('cats');
         $data['products'] = $this->content_model->get_all_products($cat);
 
+ $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
 
 
-        $data['categories'] = $this->products_model->get_all_product_cats();
-        $data['category_parents'] = $this->products_model->get_all_product_parents(0);
+        $data['allcategories'] = $this->products_model->get_all_product_cats();
+        $data['allcategory_parents'] = $this->products_model->get_all_product_parents(0);
 
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');

@@ -1,14 +1,14 @@
 <!--Main content page for sunncamp site-->
 
 <?php foreach($content as $row):?>
-<div style="padding:0px;">
+<div style="padding:25px;">
   <div class="clearfix" >    </div>
     <div class="grid_16">
-        <div style="padding:10px;">
+        <div style="padding:0px;">
            <h1><?=$row->title?></h1>
         </div>
     </div>
-    <div class="grid_8">
+    <div class="right_column">
         <?=$this->load->view('cart/frontcart')?>
     </div>
 
@@ -48,7 +48,7 @@ else {
 			<?php }?>
 	<?php endforeach;?>
 </div>
-<div class="grid_8">
+<div class="right_column">
 <?=$this->load->view('sidebox/product_cats')?>
 </div>
 </div>

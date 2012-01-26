@@ -82,8 +82,8 @@
 
 
     <div id="categories">      
-        <?php if ($categories != NULL) {
-            foreach ($categories as $row): ?>
+        <?php if ($product_categories != NULL) {
+            foreach ($product_categories as $row): ?>
 
 
                 <div class="cattable" id="categorylink_<?= $row->category_link_id ?>"><?= $row->product_category_name ?>

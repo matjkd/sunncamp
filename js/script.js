@@ -17,7 +17,26 @@ window.log = function(){
     }
 };
 
-
+// inline input titles
+$(function()  {
+    $('input[title]').each(function() {
+        if($(this).val() === '') {
+            $(this).val($(this).attr('title')); 
+        }
+  
+        $(this).focus(function() {
+            if($(this).val() === $(this).attr('title')) {
+                $(this).val('').addClass('focused'); 
+            }
+        });
+  
+        $(this).blur(function() {
+            if($(this).val() === '') {
+                $(this).val($(this).attr('title')).removeClass('focused'); 
+            }
+        });
+    });
+});
 
 // catch all document.write() calls
 (function(doc){
@@ -28,7 +47,70 @@ window.log = function(){
     };
 })(document);
 
+$(document).ready(function(){
+ 
+       $('#down_products').mouseenter(function() {
+            var submenu = $('#products_mega');
+         
+                submenu.show('fast');
+               var submenu_active = true;
+           
+        });
+        var submenu_active = false;
+         
+        $('#products_mega').mouseenter(function() {
+            submenu_active = true;
+        });
+         
+          $('#down_products').mouseenter(function() {
+            submenu_active = true;
+        });
+        
+          $('#down_products').mouseleave(function() {
+          
+            submenu_active = false;
+            
+             setTimeout(function() { if (submenu_active === false) $('#products_mega').hide('slow'); }, 400);
+        });
+         
+        $('#products_mega').mouseleave(function() {
+          submenu_active = false;
+         
+             setTimeout(function() { if (submenu_active === false) $('#products_mega').hide('slow'); }, 400);       
+             
+        });
+     
+});
 
+
+
+
+$(document).ready(function(){
+var megawidth = $('.megawidth').attr('id');
+ $('#products_mega').css('width', megawidth);
+$('.mega_item').hover(function() {
+$(this).css('background', '#abbdfe');
+});
+
+$('.mega_item').mouseleave(function() {
+$(this).css('background', 'transparent');
+});
+
+});
+
+
+$(document).ready(function(){
+
+
+$('.menu_list_item').hover(function() {
+$(this).find('li').css('background', '#abbdfe');
+});
+
+$('.menu_list_item').mouseleave(function() {
+$(this).css('background', 'transparent');
+});
+
+});
 
 
 //wymeditor

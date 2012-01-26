@@ -101,7 +101,7 @@ class Products extends MY_Controller {
         endforeach;
         $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
-        $data['sidebox'] = "sidebox/product_cats";
+        //$data['sidebox'] = "sidebox/product_cats";
         $data['content'] = $this->content_model->get_content('product_category');
         $data['main_content'] = "pages/product_category";
 

@@ -1,10 +1,10 @@
 <!--Main content page for sunncamp site-->
-<div style="padding:10px;">
+<div style="padding:25px;">
 
 
 <?php foreach($content as $row):?>
 <?php if(isset($row->image_strip)) { ?>
-<img src="<?=base_url()?>images/titles/<?=$row->image_strip?>"/>
+<img height="209px" width="910px" alt="<?=$row->title?>" src="<?=base_url()?>images/titles/<?=$row->image_strip?>"/>
 <?php } else { ?>
 <h1><?=$row->title?></h1>
 <?php } ?>

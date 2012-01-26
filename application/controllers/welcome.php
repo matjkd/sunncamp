@@ -8,6 +8,7 @@ class Welcome extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('captcha_model');
+         $this->load->model('products_model');
     }
 
     /**
@@ -24,6 +25,8 @@ class Welcome extends MY_Controller {
         $data['content'] = $this->content_model->get_content($data['menu']);
         $data['captcha'] = $this->captcha_model->initiate_captcha();
         $data['seo_links'] = $this->content_model->get_seo_links();
+          $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
         foreach ($data['content'] as $row):
 
             $data['title'] = $row->title;
@@ -69,6 +72,8 @@ class Welcome extends MY_Controller {
 
         endforeach;
         $data['sidebar'] = "sidebox/side";
+           $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['main_content'] = "global/" . $this->config_theme . "/content";
 
         $data['section2'] = 'global/links';
@@ -88,6 +93,8 @@ class Welcome extends MY_Controller {
         }
         $id = 'login';
         $data['content'] = $this->content_model->get_content($id);
+           $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['main_content'] = "user/login_form";
         $data['title'] = "Login to SunnCamp";
 

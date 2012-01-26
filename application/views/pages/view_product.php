@@ -1,4 +1,4 @@
-<div class="clearfix" id="content" style="margin-top:0px;margin-left:0px;" >
+<div class="clearfix" id="content" style="padding:25px" >
 
 
 
@@ -7,13 +7,13 @@
 
     <div class="clearfix" >    </div>
     <div class="grid_16">
-        <div style="padding:10px;">
+        <div style="padding:0px;">
             <h1><?= $product_name ?></h1>
-            Product Code: <?= $product_ref ?>
+            Product Code:: <?= $product_ref ?>
         </div>
     </div>
-    <div class="grid_8">
-        <?=$this->load->view('cart/frontcart')?>
+    <div class="right_column">
+        <?= $this->load->view('cart/frontcart') ?>
     </div>
 
     <div class="clearfix" >    </div>
@@ -85,44 +85,50 @@
         <!-- "next page" action -->
         <a class="next browse right"></a>
         <br clear="all" />
-        <div style="padding:10px;">
+        <div style="padding:0px;">
 
 
             <h2>Description</h2>
             <?= $product_desc ?>
-    <?php if($specs != NULL) { ?>
-            <h2>Specifications</h2>
-             <div style="width:100%; border-bottom:solid 2px #000080; height:0px; padding:4px 0 2px; clear:both;">  </div>
-            <?php foreach ($specs as $row): ?>
-                <div style="width:100%; border-bottom:solid 2px #000080; height:23px; padding:4px 0 2px; clear:both;">  
-                    <div style="width:200px; float:left;  ">
-                        <strong><?= $row->spec_desc ?> </strong>
+            <?php if ($specs != NULL) { ?>
+                <h2>Specifications</h2>
+                <div style="width:100%; border-bottom:solid 2px #000080; height:0px; padding:4px 0 2px; clear:both;">  </div>
+                <?php foreach ($specs as $row): ?>
+                    <div style="width:100%; border-bottom:solid 2px #000080; height:23px; padding:4px 0 2px; clear:both;">  
+                        <div style="width:200px; float:left;  ">
+                            <strong><?= $row->spec_desc ?> </strong>
+                        </div>
+                        <div style="width:300px; float:left;">
+                            <?= $row->spec_value ?>
+                        </div>
                     </div>
-                    <div style="width:300px; float:left;">
-                        <?= $row->spec_value ?>
-                    </div>
-                </div>
 
-            <?php endforeach; ?>
-              <?php } ?>
+                <?php endforeach; ?>
+            <?php } ?>
+            <?= $this->load->view('global/sunncamp/disclaimer') ?>
         </div>
+
     </div>
 
-    <div class="grid_8" >
-        
-        <?php if($features != NULL) { ?>
-        <div id="keyFeatures" >
-            <h2>Key Features</h2>
-             <?php foreach ($features as $row): ?>
-            <img src="<?=base_url()?>images/icons/features/<?=$row->feature_image?>"/>
-            
-           <?php endforeach; ?>
-            
-        </div>
+
+    <div class="right_column" >
+
+        <?php if ($features != NULL) { ?>
+            <div id="keyFeatures" >
+                <h2>Key Features</h2>
+                <?php foreach ($features as $row): ?>
+                    <img style="float:left; margin:0px; width:81px;" src="<?= base_url() ?>images/icons/features/<?= $row->feature_image ?>"/>
+
+                <?php endforeach; ?>
+                <div style="clear:both;"></div>
+            </div>
+
         <?php } ?>
-        
-        
-        <?=$this->load->view('cart/product_stock')?>
+
+
+        <?= $this->load->view('cart/product_stock') ?>
+
+        <?= $this->load->view('sidebox/product_cats') ?>
     </div>
 
 </div>

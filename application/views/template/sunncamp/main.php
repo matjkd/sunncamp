@@ -13,7 +13,19 @@
     </head>
 
     <body>
+      <?php $is_logged_in = $this->session->userdata('is_logged_in');
+		$role = $this->session->userdata('role');
+		if($is_logged_in != NULL && $role < 2)
+		{
+		echo "<div class='admin_menu_container'><div class='admin_menu'>";
+                    echo anchor('/admin/list_products', 'Admin');
+                       echo anchor('https://www.pivotaltracker.com/projects/446901', 'Support', 'target=_blank');
+                       echo "</div></div>";
+		}
+                
+                ?>
         <div id="header_container">
+       
             <div id="header">
 
                 <div  class="container_24" style="height:100px;">
@@ -71,6 +83,8 @@
                         <div style="padding:0px;">
                         <?= $this->load->view('global/alert') ?>
                         <?= $this->load->view($main_content) ?>
+                           
+                           
                         </div>
 
                     </div>
@@ -89,17 +103,9 @@
                 <div class="clear"></div>
             </div>
 
-            <div class="container_24" id="footer">
-                 <div class="grid_6">
-                    <?= $this->load->view('global/sunncamp/login') ?>
-                </div>
-                 <div class="grid_6">
-                    &nbsp;
-                </div>
-                <div class="grid_6">
-                    <?= $this->load->view('global/sunncamp/links') ?>
-                </div>
-                <div class="grid_6">
+            <div class="container_24" >
+                 <div id="footer">
+                
                     <?= $this->load->view('global/sunncamp/social_icons') ?>
                 </div>
             </div>

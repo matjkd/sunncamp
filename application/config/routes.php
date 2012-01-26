@@ -41,7 +41,7 @@
 $route['default_controller'] = "welcome";
 $route['about'] = '/welcome/home';
 $route['menu'] = 'menus/list_menus';
-$route['gallery'] = '/welcome/home';
+$route['testimonials'] = '/welcome/home';
 $route['events'] = '/welcome/home';
 $route['contact'] = '/welcome/home';
 $route['social'] = '/welcome/home';
@@ -50,7 +50,7 @@ $route['login'] = '/welcome/login';
 $route['stockists'] = '/welcome/home';
 $route['instruction_manuals'] = '/welcome/home';
 $route['services'] = '/welcome/home';
-$route['design'] = '/welcome/home';
+$route['trade_reviews'] = '/welcome/home';
 $route['faq'] = '/welcome/home';
 $route['404_override'] = '';
 

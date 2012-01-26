@@ -45,8 +45,8 @@
 	display:inline;
 	float: left;
 	position: relative;
-	margin-left: 5px;
-	margin-right: 5px;
+	margin-left: 0px;
+	margin-right: 10px;
 }
 
 /* Grid >> Children (Alpha ~ First, Omega ~ Last)

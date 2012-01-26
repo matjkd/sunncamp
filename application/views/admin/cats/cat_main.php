@@ -1,3 +1,4 @@
+<div style="float:left;">
 <?php
 if (isset($cat_id)) {
     $cat_parent = $cat_id;
@@ -7,10 +8,10 @@ if (isset($cat_id)) {
 ?>
 
 <style>
-    .sorting ul{ list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 10px; }
-    .sorting li { margin: 0 5px 5px 5px; padding: 5px; font-size: 1.0em; width: 190px; }
+    .sorting ul{ list-style-type: none; margin: 0; padding: 0; float: left; margin-right: 5px; min-height:50px; }
+    .sorting li { margin: 0 3px 3px 3px; padding: 5px; font-size: 0.9em; line-height:10px; width: 132px;  }
 </style>
-<div style="clear:both; width:700px;">
+<div >
     <h2>Create New Category Parent</h2>
 
     <?= form_open('backend/category_admin/add_category_parent/') ?>
@@ -29,20 +30,24 @@ if (isset($cat_id)) {
 </div>
 
 <h2> Organise Categories</h2>
-<div style="clear:both; width:700px;" class="sorting">
+<div  class="sorting">
 
 
 
 
 
 
-
-    <?php foreach ($category_parents as $row): ?>
+<?php $catcount = 1; ?>
+    <?php foreach ($allcategory_parents as $row): ?>
+    <?php if($catcount == 1) { 
+        $div = "open";?>
+    <div style="clear:both;" id="catdivider" >
+    <?php } ?>
         <ul id="<?= $row->parent_id ?>"  class="connectedSortable " name="<?= $row->parent_name ?>">
             <li id ="<?= $row->parent_id ?>" class="ui-state-default"><?= $row->parent_name ?></li>
 
             <?php
-            foreach ($categories as $row2):
+            foreach ($allcategories as $row2):
 
                 if ($row2->parent == $row->parent_id) {
                     ?>
@@ -52,7 +57,16 @@ if (isset($cat_id)) {
             endforeach; ?>
 
         </ul>
+        <?php 
+        $catcount = $catcount + 1; 
+        if($catcount == 5 ) { 
+         $catcount = 1;
+         $div = "closed";?>
+    </div>
+        <?php } ?>
     <?php endforeach; ?>
-
+<?php if($div = "open") { ?>
 </div>
-
+    <?php } ?>
+</div>
+</div>

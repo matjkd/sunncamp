@@ -1,11 +1,18 @@
-<?php
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
-<h1><?= $title ?></h1>
 
+<div style="padding:25px;">
+  <div class="clearfix" >    </div>
+    <div class="grid_16">
+       <div style="padding:0px;">
+           <h1><?=$title?></h1>
+        </div>
+    </div>
+    <div class="right_column">
+        <?=$this->load->view('cart/frontcart')?>
+    </div>
+
+    <div class="clearfix" >    </div>
+    <hr/>
+ <div class="grid_16">
 <?php foreach ($products as $row): ?>
 
     <div id="productview" >
@@ -17,3 +24,8 @@
     </div>
 <?php endforeach; ?>
 
+</div>
+<div class="right_column">
+<?=$this->load->view('sidebox/product_cats')?>
+</div>
+</div>

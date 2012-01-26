@@ -29,7 +29,7 @@ class Datasource extends CI_Controller {
         $term = $this->input->post('term');
         $data['source'] = $this->products_model->autocomplete_product_features($term);
         $this->load->vars($data);
-        $this->load->view('template/json_features');
+        $this->load->view('template/json');
     }
     
     
@@ -37,14 +37,14 @@ class Datasource extends CI_Controller {
         $term = $this->input->post('term');
         $data['source'] = $this->products_model->autocomplete_product_specs($term);
         $this->load->vars($data);
-        $this->load->view('template/json_specs');
+        $this->load->view('template/json');
     }
     
         public function json_options() {
         $term = $this->input->post('term');
         $data['source'] = $this->products_model->autocomplete_product_options($term);
         $this->load->vars($data);
-        $this->load->view('template/json_options');
+        $this->load->view('template/json');
     }
 
     function is_logged_in() {

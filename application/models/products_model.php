@@ -119,7 +119,7 @@ class Products_model extends CI_Model {
 
     function get_all_product_cats() {
 
-        $this->db->order_by('product_category_parents.parent_name');
+        $this->db->order_by('product_category_parents.parent_order');
 
         // this limits it to cats with products in
         $this->db->join('product_category_link', 'product_category_link.product_category_id = product_categories.product_category_id');
@@ -133,7 +133,7 @@ class Products_model extends CI_Model {
 
     function get_all_product_parents($populated = 1) {
 
-        $this->db->order_by('product_category_parents.parent_name');
+        $this->db->order_by('product_category_parents.parent_order');
         if ($populated == 1) {
             $this->db->join('product_categories', 'product_categories.parent = product_category_parents.parent_id');
 
@@ -450,9 +450,11 @@ class Products_model extends CI_Model {
      */
     function create_new_cat($category) {
 
-
+ $pagelink = trim(str_replace(" ","_", $category));
+       
         $new_cat_entry = array(
             'product_category_name' => ucfirst(strtolower($category)),
+             'category_safename' => $pagelink
         );
 
         $insert = $this->db->insert('product_categories', $new_cat_entry);

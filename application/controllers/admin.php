@@ -152,7 +152,10 @@ class Admin extends MY_Controller {
         $data['leftside'] = "admin/product_sidebox";
         $data['images'] = $this->products_model->get_product_images($data['product_id']);
         $data['product'] = $this->products_model->get_product($data['product_id']);
-        $data['categories'] = $this->products_model->get_product_categories($data['product_id']);
+        $data['product_categories'] = $this->products_model->get_product_categories($data['product_id']);
+        
+            $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['features'] = $this->products_model->get_product_features($data['product_id']);
         $data['allfeatures'] = $this->products_model->get_all_product_features();
         $data['specs'] = $this->products_model->get_product_specs($data['product_id']);
@@ -263,7 +266,7 @@ class Admin extends MY_Controller {
         parse_str($pages, $pageOrder);
 
         // list id is retrieved from the ID on the sortable list
-        foreach ($pageOrder['page'] as $key => $value):
+        foreach ($pageOrder['spec'] as $key => $value):
             mysql_query("UPDATE ignite_product_spec_link SET `spec_order` = '$key' WHERE `spec_link_id` = '$value'") or die(mysql_error());
 
 
@@ -514,7 +517,8 @@ class Admin extends MY_Controller {
 
         $cat = $this->input->post('cats');
         $data['products'] = $this->content_model->get_all_products($cat);
-
+ 
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
 
         $data['categories'] = $this->products_model->get_all_product_cats();
 

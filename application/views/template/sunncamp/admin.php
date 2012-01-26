@@ -13,6 +13,17 @@
     </head>
 
     <body>
+    <?php $is_logged_in = $this->session->userdata('is_logged_in');
+		$role = $this->session->userdata('role');
+		if($is_logged_in != NULL && $role < 2)
+		{
+		echo "<div class='admin_menu_container'><div class='admin_menu'>";
+                    echo anchor('/admin/list_products', 'Admin');
+                       echo anchor('https://www.pivotaltracker.com/projects/446901', 'Support', 'target=_blank');
+                       echo "</div></div>";
+		}
+                
+                ?>
         <div id="header_container">
             <div id="header">
 
@@ -52,16 +63,28 @@
 
                 <div class="clear"></div>
 
-                <div id="textcontainer">
+                <div style="padding:25px;">
                     <?php
                     if (isset($sidebox) && $sidebox != NULL) {
                         $mainsize = "grid_12";
                     } else {
-                        $mainsize = "grid_17";
+                        $mainsize = "grid_16";
                     }
                     ?>
 
-                    <div class="grid_7">
+                   
+
+
+
+
+                    <div class="<?= $mainsize ?>">
+                        <?= $this->load->view('global/alert') ?>
+                        <?= $this->load->view($main_content) ?>
+
+
+                    </div>
+                    
+                     <div class="right_column">
 
                         <?php
                         if (isset($leftside) && $leftside != NULL) {
@@ -75,16 +98,6 @@
 
                     </div >
 
-
-
-
-
-                    <div class="<?= $mainsize ?>">
-                        <?= $this->load->view('global/alert') ?>
-                        <?= $this->load->view($main_content) ?>
-
-
-                    </div>
 
                     <?php if (isset($sidebox) && $sidebox != NULL) { ?>
                         <div class="grid_7">
