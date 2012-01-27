@@ -154,7 +154,7 @@ h3 {
 }
 #footer {
 padding:25px;
-    height:165px;
+    height:115px;
    
     background: url('/images/backgrounds/footerbackground.jpg') repeat-x;
     display:block;
@@ -735,4 +735,15 @@ ul.catmenu li ul li a:hover {
     line-height:15px;
     color:#ffffff;
     text-decoration:none;
+}
+#generic_form {
+    
+    padding:5px;
+    background:#B9C9FE;
+    margin-bottom:10px;
+}
+
+#generic_form input {
+    
+    border:0px;
 }

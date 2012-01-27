@@ -25,7 +25,7 @@ class Category_admin extends MY_Controller {
         $cat = $this->input->post('cats');
         $data['products'] = $this->content_model->get_all_products($cat);
 
- $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
 
 
@@ -41,13 +41,13 @@ class Category_admin extends MY_Controller {
         $this->cat_model->create_parent();
         redirect('/backend/category_admin');
     }
-    
+
     function change_parent() {
-        $drag= $this->input->post('drag');
-        
-       $drop= $this->input->post('drop');
-      
-         
+        $drag = $this->input->post('drag');
+
+        $drop = $this->input->post('drop');
+
+
         $this->cat_model->change_parent($drag, $drop);
         return;
     }

@@ -18,8 +18,10 @@
         <li ><a href="<?= base_url() ?>admin/add_product">Add New Product</a></li>
         <li >  <a href="<?= base_url() ?>admin/add_content">Add Content</a></li>
         <li > <a href="<?= base_url() ?>backend/category_admin">Category Admin</a></li>
-           <li > <a href="<?= base_url() ?>backend/manuals_admin">Manuals Admin</a></li>
-        
+           <li > <a href="<?= base_url() ?>backend/manuals_admin">Instruction Manuals Admin</a></li>
+             <li > <a href="<?= base_url() ?>backend/tradereviews_admin">Trade Reviews Admin</a></li>
+           <li > <a href="<?= base_url() ?>backend/cart_admin">Manage Shopping Carts</a></li>
+           
         
 
     </ul>

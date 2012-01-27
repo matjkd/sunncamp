@@ -70,4 +70,4 @@ if (isset($cat_id)) {
     <?php } ?>
     <div style="clear:both;"></div>
 </div>
-</div>
+

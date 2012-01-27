@@ -214,6 +214,27 @@ function deleteManual(id, filename) {
     }
 }
 
+function deleteTradeReview(id, filename) {
+
+ var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+  var answer = confirm("Are you sure you want to delete this Trade Review?");
+    if(answer) {  
+ $('#row_' + id).append(loadergif);
+ $.post('/backend/tradereviews_admin/delete_trade_review/', {
+        filename: filename,
+       trade_review_id: id
+    }, function(data) {
+        $('.gifloader').remove();
+        $('#row_' + id).remove();
+       
+                       
+    });
+    
+    } else {
+    return false;
+    }
+}
+
 
 function addCategorytoProduct(product_id) {
       

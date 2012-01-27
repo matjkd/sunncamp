@@ -1,18 +1,20 @@
 
 <h2>Add Manual</h2>
+<div id="generic_form">
+    Enter a Name, select a category then choose the file from your hard drive. If you don't specifiy a name it will be populated by the filename.<br/>
 <?php echo form_open_multipart('backend/manuals_admin/do_upload');?>
 
 
 <input type="text" name="catname" title="Name"/><br /><br />
 
 
-Category:<select name="man_cat">
+<select name="man_cat"> 
 <?php foreach($manuals_cats as $row):?>
 
 
 <option value="<?=$row->manual_cat_id?>"><?=$row->manual_cat?></option>
 <?php endforeach; ?>
-</select>
+</select> Category
 <br /><br/>
 <input type="file" name="userfile" size="20" /><br/>
 <br />
@@ -20,7 +22,7 @@ Category:<select name="man_cat">
 <input type="submit" value="upload" />
 
 </form>
-
+</div>
 <table id="box-table-a">
 
 <?php foreach($manuals_cats as $row):?>

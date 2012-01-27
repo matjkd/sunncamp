@@ -48,9 +48,9 @@ $route['social'] = '/welcome/home';
 $route['jobs'] = '/welcome/home';
 $route['login'] = '/welcome/login';
 $route['stockists'] = '/welcome/home';
-$route['instruction_manuals'] = '/welcome/home';
+$route['instruction_manuals'] = '/welcome/instruction_manuals';
 $route['services'] = '/welcome/home';
-$route['trade_reviews'] = '/welcome/home';
+$route['trade_reviews'] = '/welcome/trade_reviews';
 $route['faq'] = '/welcome/home';
 $route['404_override'] = '';
 

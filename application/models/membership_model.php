@@ -14,6 +14,17 @@ class Membership_model extends CI_Model {
 		}
 		
 	}
+        
+        
+        function get_all_users() {
+            
+            $query = $this->db->get('users');
+		
+		if($query->num_rows > 0)
+		{
+			return true;
+		}
+        }
 		
 
 }
