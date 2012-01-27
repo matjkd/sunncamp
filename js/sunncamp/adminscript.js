@@ -28,7 +28,7 @@ $(function() {
     .focus(function() {
         if (!$.data(this, 'edited')) {
           
-            $(this).css("color","black");
+            $(this).css("color","red");
         }
     }).change(function() {
         $.data(this, 'edited', this.value != "");

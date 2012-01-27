@@ -193,6 +193,27 @@ function deleteFeaturefromProduct(product_id, feature_id){
 
 }
 
+function deleteManual(id, filename) {
+
+ var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+  var answer = confirm("Are you sure you want to delete this manual?");
+    if(answer) {  
+ $('#row_' + id).append(loadergif);
+ $.post('/backend/manuals_admin/delete_manual/', {
+        filename: filename,
+       manual_id: id
+    }, function(data) {
+        $('.gifloader').remove();
+        $('#row_' + id).remove();
+       
+                       
+    });
+    
+    } else {
+    return false;
+    }
+}
+
 
 function addCategorytoProduct(product_id) {
       

@@ -1,4 +1,4 @@
-<div style="float:left;">
+<div style="float:left; clear:both;">
 <?php
 if (isset($cat_id)) {
     $cat_parent = $cat_id;
@@ -30,7 +30,7 @@ if (isset($cat_id)) {
 </div>
 
 <h2> Organise Categories</h2>
-<div  class="sorting">
+<div  class="sorting" style="clear:both;">
 
 
 
@@ -68,5 +68,6 @@ if (isset($cat_id)) {
 <?php if($div = "open") { ?>
 </div>
     <?php } ?>
+    <div style="clear:both;"></div>
 </div>
 </div>

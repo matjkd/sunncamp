@@ -78,7 +78,7 @@
 
 
                     <div class="<?= $mainsize ?>">
-                        <?= $this->load->view('global/alert') ?>
+                         <?= $this->load->view('global/alert') ?>
                         <?= $this->load->view($main_content) ?>
 
 
@@ -113,11 +113,9 @@
                 <div class="clear"></div>
             </div>
 
-            <div class="container_24" id="footer">
-                <div class="grid_18">
-                    <?= $this->load->view('global/sunncamp/links') ?>
-                </div>
-                <div class="grid_6">
+            <div class="container_24" >
+                 <div id="footer">
+                
                     <?= $this->load->view('global/sunncamp/social_icons') ?>
                 </div>
             </div>
