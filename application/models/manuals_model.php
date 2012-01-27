@@ -29,7 +29,7 @@ class Manuals_model extends CI_Model {
     
     function add_manual($filename) {
     $name = $this->input->post('catname');
-    if($name = 'Name') {
+    if($name == 'Name') {
     $name = $filename;
     }
     $category = $this->input->post('man_cat');

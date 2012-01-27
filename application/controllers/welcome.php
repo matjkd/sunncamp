@@ -8,7 +8,7 @@ class Welcome extends MY_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('captcha_model');
-         $this->load->model('products_model');
+        $this->load->model('products_model');
     }
 
     /**
@@ -25,7 +25,7 @@ class Welcome extends MY_Controller {
         $data['content'] = $this->content_model->get_content($data['menu']);
         $data['captcha'] = $this->captcha_model->initiate_captcha();
         $data['seo_links'] = $this->content_model->get_seo_links();
-          $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
         foreach ($data['content'] as $row):
 
@@ -60,6 +60,17 @@ class Welcome extends MY_Controller {
             $data['menu'] = $this->uri->segment(1);
         }
 
+        if (isset($this->extra)) {
+            $data['extra'] = $this->extra;
+        } else {
+            
+        }
+  if (isset($this->extra2)) {
+            $data['extra2'] = $this->extra2;
+        } else {
+            
+        }
+
         $data['content'] = $this->content_model->get_content($data['menu']);
         $data['captcha'] = $this->captcha_model->initiate_captcha();
         foreach ($data['content'] as $row):
@@ -72,7 +83,7 @@ class Welcome extends MY_Controller {
 
         endforeach;
         $data['sidebar'] = "sidebox/side";
-           $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['main_content'] = "global/" . $this->config_theme . "/content";
 
@@ -87,13 +98,30 @@ class Welcome extends MY_Controller {
         $this->load->view('template/main');
     }
 
+    function instruction_manuals() {
+        
+        $this->load->model('manuals_model');
+        $this->extra = $this->manuals_model->get_manuals();
+        $this->extra2 = $this->manuals_model->get_manual_cats();
+        
+        $this->home();
+    }
+    
+     function trade_reviews() {
+        
+        $this->load->model('tradereviews_model');
+        $this->extra = $this->tradereviews_model->get_trade_reviews();
+               
+        $this->home();
+    }
+
     function login() {
         if ($this->session->flashdata('message')) {
             $data['message'] = $this->session->flashdata('message');
         }
         $id = 'login';
         $data['content'] = $this->content_model->get_content($id);
-           $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['main_content'] = "user/login_form";
         $data['title'] = "Login to SunnCamp";
