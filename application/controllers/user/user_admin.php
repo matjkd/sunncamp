@@ -21,6 +21,7 @@ class User_admin extends MY_Controller {
         $data['main_content'] = "admin/users/main";
         $data['leftside'] = "admin/dashboard";
 
+        $data['companies'] = $this->company_model->get_companies();
     
 
         $data['categories'] = $this->products_model->get_all_product_cats();
