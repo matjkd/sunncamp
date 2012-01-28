@@ -16,7 +16,7 @@ class Company_model extends CI_Model {
         $company_phone = $this->input->post('phone');
         $company_web = $this->input->post('webaddress');
         $new_company = array(
-            'company_name' => $company_type,
+            'company_name' => $company_name,
             'company_type' => $company_type,
             'company_phone' => $company_phone,
             'company_web' => $company_web,
@@ -42,5 +42,15 @@ class Company_model extends CI_Model {
         $insert = $this->db->insert('company_address', $new_company_address);
         return $insert;
     }
+    
+    function get_companies() {
+    $this->db->join('company_types', 'company_types.company_type_id = companies.company_type');
+            $query = $this->db->get('companies');
+            
+            
+            return $query->result();
+            
+    }
+    
 
 }

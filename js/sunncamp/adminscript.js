@@ -5,6 +5,13 @@ $(document).ready(function() {
     });
 } );
 
+$(document).ready(function() {
+    oTable = $('#company_table').dataTable({
+        "bJQueryUI": true,
+        "sPaginationType": "full_numbers"
+    });
+} );
+
 $(function() {
     $( ".sorting ul" ).sortable({
         items: "li:not(.ui-state-default)",

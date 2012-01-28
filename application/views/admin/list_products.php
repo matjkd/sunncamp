@@ -4,9 +4,17 @@
         var answer = confirm("Are you sure you want to delete this product (including all variations)?")
         if (answer){
 		
-        
-            $.post("/admin/delete_product/", { product_id: id } );
-            window.location = "/admin/list_products/";
+        alert(id);
+          
+            
+            
+             $.post('/admin/delete_product/', {
+           product_id: id 
+        }, function(data) {
+      
+                    
+        });
+           
         }
         else{
             alert("nothing deleted!")
