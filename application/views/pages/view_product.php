@@ -88,7 +88,12 @@
         <div style="padding:0px;">
 
 
-            <h2>Description</h2>
+            <div style="float:left;"?><h2>Description</h2></div>
+            <div style="float:right;">
+           <g:plusone size="medium"></g:plusone>
+            <div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="true" data-font="arial"></div>
+            </div>
+            <div style="clear:both;"></div>
             <?= $product_desc ?>
             <?php if ($specs != NULL) { ?>
                 <h2>Specifications</h2>

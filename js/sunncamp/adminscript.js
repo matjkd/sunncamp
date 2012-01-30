@@ -46,3 +46,24 @@ $(function() {
         }
     });
 });
+
+function deleteCompany(company_id) {
+
+ var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+  var answer = confirm("Are you sure you want to delete this Company (and all its users)?");
+    if(answer) {  
+ $('#row_' + company_id).append(loadergif);
+ $.post('/user/user_admin/delete_company/', {
+        company_id: company_id
+     
+    }, function(data) {
+        $('.gifloader').remove();
+        $('#row_' + company_id).remove();
+       alert(data);
+                       
+    });
+    
+    } else {
+    return false;
+    }
+}

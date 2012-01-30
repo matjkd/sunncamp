@@ -13,23 +13,34 @@ class User_admin extends MY_Controller {
         $this->load->model('menu_model');
     }
 
-    function index() {
+    function index($company = 0) {
+
+redirect('user/user_admin/list_companies');
 
 
-
-
-        $data['main_content'] = "admin/users/main";
+       
+    }
+    
+    function list_companies($company = 0) {
+    
+     $data['main_content'] = "admin/users/main";
         $data['leftside'] = "admin/dashboard";
 
         $data['companies'] = $this->company_model->get_companies();
     
+    
+    $data['company'] = $this->company_model->get_company($company);
+    $data['users'] = $this->company_model->get_users($company);
 
         $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
-
+ if ($this->session->flashdata('message')) {
+            $data['message'] = $this->session->flashdata('message');
+        }
 
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
+    
     }
 
     function create_company() {
@@ -50,12 +61,39 @@ class User_admin extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
     }
+    
+    function update_company() {
+    
+      $this->form_validation->set_rules('company_name', 'Company Name', 'trim|required');
+         $this->form_validation->set_rules('phone', 'Phone', 'trim');
+        
+        if ($this->form_validation->run() == FALSE) {
+            //$this->session->set_flashdata('message', validation_errors());
+            $this->alertmessage = "Error ".validation_errors();
+            $this->create_company();
+        } else {
+            
+            // add company
+            $company_id = $this->input->post('company_id');
+            $this->company_model->update_company($company_id);
+           
+            //add company addresss
+            $address_id = $this->input->post('address_id');
+            $this->company_model->update_address($address_id);
+           
+            $this->session->set_flashdata('message','company updated');
+            redirect('user/user_admin/list_companies/'.$company_id, 'refresh');
+        }
+        
+    }
 
     function add_company() {
         //Validate Form here
         $this->form_validation->set_rules('company_name', 'Company Name', 'trim|required');
+         $this->form_validation->set_rules('phone', 'Phone', 'trim');
+        
         if ($this->form_validation->run() == FALSE) {
-            $this->session->set_flashdata('message', validation_errors());
+            //$this->session->set_flashdata('message', validation_errors());
             $this->alertmessage = "Error ".validation_errors();
             $this->create_company();
         } else {
@@ -65,13 +103,32 @@ class User_admin extends MY_Controller {
             $company_id = $this->db->insert_id(); 
             //add company addresss
             $this->company_model->add_address($company_id);
-            
-            echo "success";
+           
+            $this->session->set_flashdata('message','company added');
+            redirect('user/user_admin/list_companies/'.$company_id, 'refresh');
         }
     }
 
         function create_user() {
             
+        }
+        
+        function delete_company() {
+        //get company id
+        $company_id = $this->input->post('company_id');
+        if($company_id == 0) {
+        
+        echo "This Company is protected";
+        }
+        else
+        {
+        $this->company_model->deactivate_users($company_id);
+        $this->company_model->remove_addresses($company_id);
+        $this->company_model->delete_company($company_id);
+        
+        echo "Company Deleted";
+        }
+        
         }
 
         function is_logged_in() {

@@ -16,6 +16,7 @@
         
         <li > <a href="<?= base_url() ?>admin/list_products">List Products</a></li>
         <li ><a href="<?= base_url() ?>admin/add_product">Add New Product</a></li>
+          <li ><a href="<?= base_url() ?>user/user_admin">Manage Companies/Users</a></li>
         <li >  <a href="<?= base_url() ?>admin/add_content">Add Content</a></li>
         <li > <a href="<?= base_url() ?>backend/category_admin">Category Admin</a></li>
            <li > <a href="<?= base_url() ?>backend/manuals_admin">Instruction Manuals Admin</a></li>
