@@ -11,16 +11,16 @@
     <ul id="catmenu" class="catmenu noaccordion expandfirst">
                 <?php foreach ($category_parents as $row): ?>
             <li style="position:static;">
-
-                <a href="#"><?= $row->parent_name ?></a>
+<?php $parent_name = str_replace('and', '&amp;', $row->parent_name); ?>
+                <a href="#"><?= $parent_name ?></a>
                 <ul style="display:block;" <?php if ($cat_parent == $row->parent_id) { ?>class="current"<?php } ?>>
                     <?php
                     foreach ($categories as $row2):
 
                         if ($row2->parent == $row->parent_id) {
                             ?>
-
-                            <li><a href="<?= base_url() ?>products/category/<?= $row2->category_safename ?>"><?= $row2->product_category_name ?></a></li>
+<?php $cat_name = str_replace('and', '&amp;', $row2->product_category_name); ?>
+                            <li><a href="<?= base_url() ?>products/category/<?= $row2->category_safename ?>"><?= $cat_name ?></a></li>
                 <?php }
             endforeach; ?>
                 </ul>

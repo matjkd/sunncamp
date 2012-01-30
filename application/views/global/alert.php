@@ -9,9 +9,10 @@ if (isset($message))
 					<p>
 					<span class='ui-icon ui-icon-alert' style='float:left; margin-top:0px; margin-right:.3em;'></span>
 						
-						<?=$this->session->flashdata('message')?>
+						
+						<?=$message?>
 										
-					<a href='#' onclick='javascript:this.parentNode.parentNode.parentNode.style.display="none"; return false;'>
+					<a href='#' onclick='javascript:this.parentNode.parentNode.style.display="none"; return false;'>
 					<span class='ui-icon ui-icon-circle-close' style='float:right; margin-top:0px; margin-right:.3em;'></span>
 					</a>
 					</p>
