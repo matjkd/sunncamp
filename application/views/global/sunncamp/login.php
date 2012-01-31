@@ -14,7 +14,7 @@
 
             <input id="inputs" type="password" id="password" name="password" title="Password" />
       
-      <input id="submitbutton" type="submit" name="login"  border="0" />
+      <input id="submitbutton" type="submit" name="login" value="Login"  border="0" />
          </div>
      
         <?php

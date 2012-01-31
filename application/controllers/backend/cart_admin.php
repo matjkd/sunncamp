@@ -47,6 +47,23 @@ class Cart_admin extends MY_Controller {
         $this->load->view('template/sunncamp/admin');
     }
 
+    function view_orders($id) {
+        $data['user_id'] = $id;
+
+        //get user details
+
+
+        $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
+
+// $data['sidebox'] = "sidebox/product_cats";
+        $data['cart'] = $this->cart_model->list_cart_contents($data['user_id'], 1);
+        $data['main_content'] = "admin/carts/admin_view_orders";
+        $data['leftside'] = "admin/dashboard";
+        $this->load->vars($data);
+        $this->load->view('template/sunncamp/admin');
+    }
+
     function mark_as_ordered() {
         
     }

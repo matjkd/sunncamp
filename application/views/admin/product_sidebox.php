@@ -13,6 +13,10 @@
     <div class="label">Attribute (eg. red)</div>
 
     <input id="option"  name="option" value=""/>
+    
+     <div class="label">Price (&pound; ex VAT)</div>
+
+    <input id="price"  name="price" value=""/>
 
     <div class="label">Stock Level</div>
 
@@ -30,6 +34,7 @@
                 <td>Cat</td>
                 <td>Option</td>
                 <td>Stock</td>
+                   <td>Price</td>
                 <td>Action</td>
             </tr>
 
@@ -44,6 +49,7 @@
                         <td> <input class="option_input" id="option_category_<?= $row->option_id ?>" name="option_category" value="<?= $row->option_category ?>"/></td>
                         <td> <input class="option_input" id="option_<?= $row->option_id ?>" name="option" value="<?= $row->option ?>"/></td>
                         <td> <input class="option_input" id="stock_level_<?= $row->option_id ?>" name="stock_level" value="<?= $row->stock_level ?>"/></td>
+                          <td> <input class="option_input" id="price_<?= $row->option_id ?>" name="price" value="<?= $row->price ?>"/></td>
 
                         <td> <input  type="hidden" name="option_id" value="<?= $row->option_id ?>"/>
                             <input  type="hidden" name="product_id" value="<?= $row->product_id ?>"/>

@@ -46,6 +46,7 @@ $route['events'] = '/welcome/home';
 $route['contact'] = '/welcome/home';
 $route['social'] = '/welcome/home';
 $route['jobs'] = '/welcome/home';
+$route['news'] = '/welcome/home';
 $route['login'] = '/welcome/login';
 $route['stockists'] = '/welcome/home';
 $route['instruction_manuals'] = '/welcome/instruction_manuals';

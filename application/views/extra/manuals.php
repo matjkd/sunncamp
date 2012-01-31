@@ -1,3 +1,7 @@
+<div id="sidecats">
+    <div style="padding:0 5px;">
+        <h3>Please Choose from the products below</h3> 
+    </div>
 <ul id="catmenu" class="catmenu noaccordion expandfirst">
     <?php foreach ($extra2 as $row): ?>
 
@@ -18,3 +22,4 @@
 
     <?php endforeach; ?>
 </ul>
+</div>
