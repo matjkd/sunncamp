@@ -77,7 +77,13 @@
         </table>
         <?php if ($cart == NULL) { ?>
             <p>Your Cart is empty</p>
+        <?php } else { ?>
+        
+        <a href="<?=base_url()?>usercart/make_order">Place Order</a>
+        
         <?php } ?>
+        
+        <?=$this->load->view('cart/view_orders')?>
     </div>
     <div class="right_column">
 <?= $this->load->view('sidebox/product_cats') ?>

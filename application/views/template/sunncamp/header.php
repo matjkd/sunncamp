@@ -4,7 +4,7 @@
      Remove this if you use the .htaccess -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-<title><?= $title ?></title>
+<title><?php if(isset($title)) { echo $title; } else { echo "Welcome to SunnCamp";} ?></title>
 <meta name="description" content="">
 <meta name="author" content="">
 
@@ -26,7 +26,7 @@
 
 
 <link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/scrollable.css">
-<link rel="stylesheet" href="<?= base_url() ?>css/redmond/jquery-ui-1.8.17.custom.css">
+<link rel="stylesheet" href="<?= base_url() ?>css/custom-theme/jquery-ui-1.8.17.custom.css">
 <link rel="stylesheet" href="<?= base_url() ?>css/sunncamp/template.css">
 
 <link href='http://fonts.googleapis.com/css?family=Michroma' rel='stylesheet' type='text/css'>

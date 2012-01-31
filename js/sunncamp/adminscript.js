@@ -13,6 +13,12 @@ $(document).ready(function() {
 } );
 
 $(function() {
+    $( "input:submit,  button", ".demo" ).button();
+		
+});
+
+
+$(function() {
     $( ".sorting ul" ).sortable({
         items: "li:not(.ui-state-default)",
         connectWith: ".connectedSortable"
@@ -22,7 +28,10 @@ $(function() {
         drop: function(ev, ui) {
             var $drop = $(this).attr('id');
             var $drag = ui.draggable.attr("id");
-         $.post("/backend/category_admin/change_parent", { drag: $drag, drop: $drop } );
+            $.post("/backend/category_admin/change_parent", {
+                drag: $drag, 
+                drop: $drop
+            } );
        
         }
     });
@@ -49,21 +58,69 @@ $(function() {
 
 function deleteCompany(company_id) {
 
- var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
-  var answer = confirm("Are you sure you want to delete this Company (and all its users)?");
+    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var answer = confirm("Are you sure you want to delete this Company (and all its users)?");
     if(answer) {  
- $('#row_' + company_id).append(loadergif);
- $.post('/user/user_admin/delete_company/', {
-        company_id: company_id
+        $('#row_' + company_id).append(loadergif);
+        $.post('/user/user_admin/delete_company/', {
+            company_id: company_id
      
-    }, function(data) {
-        $('.gifloader').remove();
-        $('#row_' + company_id).remove();
-       alert(data);
+        }, function(data) {
+            $('.gifloader').remove();
+            $('#row_' + company_id).remove();
+            alert(data);
                        
-    });
+        });
     
     } else {
-    return false;
+        return false;
     }
 }
+
+
+function deleteUser(user_id) {
+
+    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var answer = confirm("Are you sure you want to delete this User?");
+    if(answer) {
+        
+        $('#row_' + user_id).append(loadergif);
+         $.post('/user/user_admin/deactivate_user/', {
+            user_id: user_id
+     
+        }, function(data) {
+           
+       
+         
+                       
+        });
+        
+          $.post('/backend/cart_admin/reset_cart/', {
+            user_id: user_id
+     
+        }, function(data) {
+           
+            $('#row_' + user_id).remove();
+         
+                       
+        });
+    
+    }
+
+}
+
+$(function() {
+    $( "#dialog-form" ).dialog({
+        autoOpen: false,
+        height: 320,
+        width: 350,
+        modal: true 
+    })
+
+    $( "#create-user" )
+    .button()
+    .click(function() {
+        $( "#dialog-form" ).dialog( "open" );
+    });
+
+});

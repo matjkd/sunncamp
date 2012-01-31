@@ -146,6 +146,17 @@ class Products_model extends CI_Model {
         return $query->result();
     }
 
+    
+    function get_product_by_option($option_id) {
+         $this->db->where('option_id', $option_id);
+         $query = $this->db->get('product_options');
+              if ($query->num_rows == 1) {
+            return $query->result();
+        }
+
+        return FALSE;
+    }
+    
     function get_attributes($id) {
         $this->db->where('product_id', $id);
         $this->db->order_by('option_category');

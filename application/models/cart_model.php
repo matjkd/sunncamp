@@ -90,6 +90,20 @@ class Cart_model extends CI_Model {
         }
     }
 
+    /*
+     * 
+     */
+    function set_stock($option_id, $value) {
+
+        $content_update = array(
+            'stock_level' => $value
+        );
+
+        $this->db->where('option_id', $option_id);
+        $update = $this->db->update('product_options', $content_update);
+        return;
+    }
+
     /**
      *
      * @param type $option_id
@@ -193,7 +207,7 @@ class Cart_model extends CI_Model {
      * @return type 
      */
     function check_cart($user_id, $option_id) {
-
+        $this->db->where('cart_status', 0);
         $this->db->where('cart_user_id', $user_id);
         $this->db->where('cart_option_id', $option_id);
         $query = $this->db->get('cart');
@@ -209,7 +223,7 @@ class Cart_model extends CI_Model {
      * @return type 
      */
     function get_my_cart($user_id) {
-
+        $this->db->where('cart_status', 0);
         $this->db->where('cart_user_id', $user_id);
         $query = $this->db->get('cart');
         if ($query->num_rows > 0) {
@@ -219,7 +233,7 @@ class Cart_model extends CI_Model {
         return FALSE;
     }
 
-    function list_cart_contents($user_id, $status=0) {
+    function list_cart_contents($user_id, $status = 0) {
 
 
         $this->db->join('cart', 'cart.cart_option_id = product_options.option_id');
@@ -235,15 +249,50 @@ class Cart_model extends CI_Model {
     }
 
     function list_all_carts() {
-        
+
         $this->db->join('users', 'users.user_id = cart.cart_user_id');
         $this->db->group_by('cart.cart_user_id');
         $this->db->where('cart.quantity !=', 0);
         $query = $this->db->get('cart');
-         if ($query->num_rows > 0) {
+        if ($query->num_rows > 0) {
             return $query->result();
         }
         return FALSE;
+    }
+    
+    function create_order($user_id) {
+    
+         
+         $new_cat_parent = array(
+            'user_id' => $user_id,
+            'date_created' => time() 
+        );
+
+        $insert = $this->db->insert('order', $new_cat_parent);
+        return $insert;
+    
+    }
+    
+    function convert_cart_to_order($user_id, $order_id) {
+    
+     $update_cart = array(
+            'order_id' => $order_id,
+            'cart_status' => 1
+            
+        );
+        $this->db->where('cart_user_id', $user_id);
+        $this->db->where('cart_status', 0);
+        $update = $this->db->update('cart', $update_cart);
+        return $update;
+    
+    }
+    
+    function delete_cart($user_id) {
+           $this->db->where('cart_status', 0);
+        $this->db->where('cart_user_id', $user_id);
+        $query = $this->db->delete('cart');
+       
+        return;
         
     }
 
