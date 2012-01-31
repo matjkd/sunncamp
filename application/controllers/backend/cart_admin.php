@@ -46,22 +46,49 @@ class Cart_admin extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
     }
-    
+
     function mark_as_ordered() {
-        
-        
-    }
-    
-     function mark_as_acknowledged() {
-        
         
     }
 
-     function mark_as_dispatched() {
-        
+    function mark_as_acknowledged() {
         
     }
-    
+
+    function mark_as_dispatched() {
+        
+    }
+
+    function reset_cart() {
+
+        $user_id = $this->input->post('user_id');
+        $cart = $this->cart_model->list_cart_contents($user_id);
+        foreach ($cart as $row):
+            //update the stock for each cart item
+            $productoption = $row->cart_option_id;
+            $cart_quantity = $row->quantity;
+
+            $stockitem = $this->products_model->get_product_by_option($productoption);
+            foreach ($stockitem as $row2):
+                //add the quantity to the stock
+                $old_stock_level = $row2->stock_level;
+
+
+            endforeach;
+
+            $new_stock_level = $old_stock_level + $cart_quantity;
+            echo "item $productoption has $cart_quantity in the cart and $old_stock_level in stock. when cart deleted stock will be $new_stock_level <br/> ";
+
+
+            //update $productoption stock level to $new_stock_level
+            $this->cart_model->set_stock($productoption, $new_stock_level);
+
+        endforeach;
+
+        //set cart values to 0
+        $reset = $this->cart_model->delete_cart($user_id);
+    }
+
     function is_logged_in() {
         $is_logged_in = $this->session->userdata('is_logged_in');
         $role = $this->session->userdata('role');

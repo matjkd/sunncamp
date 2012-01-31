@@ -15,33 +15,46 @@ class User_admin extends MY_Controller {
 
     function index($company = 0) {
 
-redirect('user/user_admin/list_companies');
-
-
-       
+        redirect('user/user_admin/list_companies');
     }
-    
+
+    function _prep_password($password) {
+        return sha1($password . $this->config->item('encryption_key'));
+    }
+
     function list_companies($company = 0) {
-    
-     $data['main_content'] = "admin/users/main";
+
+        $data['main_content'] = "admin/users/main";
         $data['leftside'] = "admin/dashboard";
-
         $data['companies'] = $this->company_model->get_companies();
-    
-    
-    $data['company'] = $this->company_model->get_company($company);
-    $data['users'] = $this->company_model->get_users($company);
-
+        $data['company'] = $this->company_model->get_company($company);
+        $data['users'] = $this->company_model->get_users($company);
         $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
- if ($this->session->flashdata('message')) {
+        if ($this->session->flashdata('message')) {
             $data['message'] = $this->session->flashdata('message');
         }
 
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
-    
     }
+    
+    function view_user($user_id) {
+        $data['main_content'] = "admin/users/view_user";
+        $data['leftside'] = "admin/dashboard";
+       
+        $data['user'] = $this->company_model->get_user($user_id);
+        $data['categories'] = $this->products_model->get_all_product_cats();
+        $data['category_parents'] = $this->products_model->get_all_product_parents();
+        if ($this->session->flashdata('message')) {
+            $data['message'] = $this->session->flashdata('message');
+        }
+
+        $this->load->vars($data);
+        $this->load->view('template/sunncamp/admin');
+    }
+        
+    
 
     function create_company() {
 
@@ -61,85 +74,81 @@ redirect('user/user_admin/list_companies');
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
     }
-    
+
     function update_company() {
-    
-      $this->form_validation->set_rules('company_name', 'Company Name', 'trim|required');
-         $this->form_validation->set_rules('phone', 'Phone', 'trim');
-        
+
+        $this->form_validation->set_rules('company_name', 'Company Name', 'trim|required');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim');
+
         if ($this->form_validation->run() == FALSE) {
             //$this->session->set_flashdata('message', validation_errors());
-            $this->alertmessage = "Error ".validation_errors();
+            $this->alertmessage = "Error " . validation_errors();
             $this->create_company();
         } else {
-            
+
             // add company
             $company_id = $this->input->post('company_id');
             $this->company_model->update_company($company_id);
-           
+
             //add company addresss
             $address_id = $this->input->post('address_id');
             $this->company_model->update_address($address_id);
-           
-            $this->session->set_flashdata('message','company updated');
-            redirect('user/user_admin/list_companies/'.$company_id, 'refresh');
+
+            $this->session->set_flashdata('message', 'company updated');
+            redirect('user/user_admin/list_companies/' . $company_id, 'refresh');
         }
-        
     }
 
     function add_company() {
         //Validate Form here
         $this->form_validation->set_rules('company_name', 'Company Name', 'trim|required');
-         $this->form_validation->set_rules('phone', 'Phone', 'trim');
-        
+        $this->form_validation->set_rules('phone', 'Phone', 'trim');
+
         if ($this->form_validation->run() == FALSE) {
             //$this->session->set_flashdata('message', validation_errors());
-            $this->alertmessage = "Error ".validation_errors();
+            $this->alertmessage = "Error " . validation_errors();
             $this->create_company();
         } else {
-            
+
             // add company
             $this->company_model->add_company();
-            $company_id = $this->db->insert_id(); 
+            $company_id = $this->db->insert_id();
             //add company addresss
             $this->company_model->add_address($company_id);
-           
-            $this->session->set_flashdata('message','company added');
-            redirect('user/user_admin/list_companies/'.$company_id, 'refresh');
+
+            $this->session->set_flashdata('message', 'company added');
+            redirect('user/user_admin/list_companies/' . $company_id, 'refresh');
         }
     }
 
-        function create_user() {
-            
-        }
-        
-        function delete_company() {
+    function deactivate_user() {
+        $user_id = $this->input->post('user_id');
+        $this->company_model->deactivate_user($user_id);
+    }
+
+    function delete_company() {
         //get company id
         $company_id = $this->input->post('company_id');
-        if($company_id == 0) {
-        
-        echo "This Company is protected";
-        }
-        else
-        {
-        $this->company_model->deactivate_users($company_id);
-        $this->company_model->remove_addresses($company_id);
-        $this->company_model->delete_company($company_id);
-        
-        echo "Company Deleted";
-        }
-        
-        }
+        if ($company_id == 0) {
 
-        function is_logged_in() {
-            $is_logged_in = $this->session->userdata('is_logged_in');
-            $role = $this->session->userdata('role');
-            if (!isset($is_logged_in) || $role != 1) {
-                $data['message'] = "You don't have permission";
-                redirect('welcome/login', 'refresh');
-            }
-        }
+            echo "This Company is protected";
+        } else {
+            $this->company_model->deactivate_users($company_id);
+            $this->company_model->remove_addresses($company_id);
+            $this->company_model->delete_company($company_id);
 
+            echo "Company Deleted";
+        }
     }
 
-    
+    function is_logged_in() {
+        $is_logged_in = $this->session->userdata('is_logged_in');
+        $role = $this->session->userdata('role');
+        if (!isset($is_logged_in) || $role != 1) {
+            $data['message'] = "You don't have permission";
+            redirect('welcome/login', 'refresh');
+        }
+    }
+
+}
+
