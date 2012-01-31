@@ -17,7 +17,9 @@
 
     <div id="productview" >
         <a href="<?=base_url()?>products/show/<?= $row->product_id ?>">
-        <div style="border:1px solid #333333; background:url('/images/products/<?= $row->product_id ?>/thumbs/<?= $row->filename ?>'); height:100px; width:100px;"></div>
+        <div style="border:1px solid #333333; height:106px;" >
+            <img  style="vertical-align: middle;" src="<?=base_url()?>/images/products/<?= $row->product_id ?>/thumbs/<?= $row->filename ?>" width="134px"/>
+        </div>
     
         <?= $row->product_name ?>
         </a>

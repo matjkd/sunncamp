@@ -103,6 +103,15 @@ h3 {
     color:#fff;
 
 }
+.slideshow_text a {
+    text-decoration:none;
+ color:#fff;
+}
+
+.slideshow_text a:hover {
+    text-decoration:none;
+    color:#fff;
+}
 .slideshow_text h2{
 
 
@@ -121,9 +130,9 @@ h3 {
 
 }
 .corner_cart {
-  background-color: #B9C9FE;
-  color:#fff;
-  padding:5px;
+    background-color: #B9C9FE;
+    color:#fff;
+    padding:5px;
     height:40px;
 }
 #header {
@@ -147,15 +156,15 @@ h3 {
     color:#fff;
 }
 #inputs  {
-    
-   
+
+
     width:95px;
     margin-right:3px;
 }
 #footer {
-padding:25px;
+    padding:30px 25px 25px 25px;
     height:115px;
-   
+
     background: url('/images/backgrounds/footerbackground.jpg') repeat-x;
     display:block;
     position:relative;
@@ -265,7 +274,7 @@ padding:25px;
 
 .socialicons {
 
-    float:right; position:relative; 
+    float:left; position:relative; 
 }
 .linkicons {
     padding-top:20px;
@@ -591,7 +600,7 @@ ul.catmenu li ul li a:hover {
     width:100%;
 }
 #disclaimer {
-    
+
     padding:10px 0px;
     font-size: 0.8em;
 }
@@ -601,13 +610,13 @@ ul.catmenu li ul li a:hover {
     padding:10px;
     margin-right:0px;
     margin-bottom:10px;
-   border-top: 4px solid #aabcfe;
+    border-top: 4px solid #aabcfe;
     background: #b9c9fe;
 }
 
 #box-table-a
 {
-   
+
     font-size: 12px;
     margin:0 0px 0px 0px;
     width: 100%;
@@ -681,14 +690,14 @@ ul.catmenu li ul li a:hover {
     width:960px;
     margin:0 auto;
     padding:3px 0;
-   font-size: 11px;
+    font-size: 11px;
     text-transform: uppercase;
 
 }
 .admin_menu a {
     padding:9px 10px 9px 0;
     color: #eee;
-     text-decoration: none;
+    text-decoration: none;
 }
 
 #products_mega {
@@ -737,13 +746,13 @@ ul.catmenu li ul li a:hover {
     text-decoration:none;
 }
 #generic_form {
-    
+
     padding:5px;
     background:#B9C9FE;
     margin-bottom:10px;
 }
 
 #generic_form input {
-    
+
     border:0px;
 }

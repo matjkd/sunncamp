@@ -23,20 +23,33 @@
         }
         ?>
 
+        <div class="grid_16">
 
-        <?php $body = str_replace("sunncamp", "<strong>SunnCamp</strong>", "$body"); ?>
+            <?php $body = str_replace("sunncamp", "<strong>SunnCamp</strong>", "$body"); ?>
 
-        <?= $body ?>
+            <?= $body ?>
 
-<?php endforeach; ?>
+        <?php endforeach; ?>
 
 
-    <?php foreach ($content as $row): ?>
-        <?php if ($row->extra != NULL) { ?>
-            <?= $this->load->view('extra/' . $row->extra) ?>
-        <?php } ?>
-<?php endforeach; ?>
+        <?php foreach ($content as $row): ?>
+            <?php if ($row->extra != NULL) { ?>
+                <?= $this->load->view('extra/' . $row->extra) ?>
+            <?php } ?>
+        <?php endforeach; ?>
+    </div>
 
+
+
+    <?php if (isset($sidebox) && $sidebox != NULL) { ?>
+        <div class="right_column" >
+
+            <?= $this->load->view($sidebox) ?>
+
+
+        </div>
+    <?php } ?>
 </div>
+
 
 

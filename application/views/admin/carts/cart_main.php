@@ -11,6 +11,10 @@
              <td>
               <a href="<?=base_url()?>backend/cart_admin/view_cart/<?= $row->cart_user_id ?>"> View Cart</a>
             </td>
+            
+             <td>
+              <a href="<?=base_url()?>backend/cart_admin/view_orders/<?= $row->cart_user_id ?>"> View Orders</a>
+            </td>
         </tr>
 
     <?php endforeach; ?>

@@ -22,7 +22,7 @@ class Usercart extends MY_Controller {
         $data['category_parents'] = $this->products_model->get_all_product_parents();
        // $data['sidebox'] = "sidebox/product_cats";
       $data['cart'] = $this->cart_model->list_cart_contents($data['user_id'], 0);
-         $data['order'] = $this->cart_model->list_cart_contents($data['user_id'], 1);
+         $data['order'] = $this->cart_model->list_order_contents($data['user_id'], 1);
         $data['main_content'] = "cart/view_cart";
 
         $this->load->vars($data);
