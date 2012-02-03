@@ -20,7 +20,7 @@
 
                     <?=$this->load->view('admin/users/list_company_users')?>
 
-
+  <?=$this->load->view('admin/users/add_category_to_company')?>
 
             </div>
 
@@ -33,7 +33,7 @@
 </div>
 
 <div>
-    <a href="<?= base_url() ?>user/user_admin/create_company">Create Company</a>
+   <a href="<?= base_url() ?>user/user_admin/create_company"> <button> Create Company</button></a>
 </div>
 <table id="company_table" width=100%>
     <thead>
