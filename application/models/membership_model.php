@@ -42,7 +42,7 @@ class Membership_model extends CI_Model {
             'active' => $this->input->post('active'),
             'email' => $this->input->post('email_address'),
             'phone' => $this->input->post('phone'),
-            'role' => 4,
+           
             'company' => $this->input->post('company_id')
         );
         $this->db->where('user_id', $this->input->post('user_id'));
