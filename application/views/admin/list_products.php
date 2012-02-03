@@ -1,26 +1,4 @@
-<script type="text/javascript">
 
-    function confirmation(id) {
-        var answer = confirm("Are you sure you want to delete this product (including all variations)?")
-        if (answer){
-		
-        alert(id);
-          
-            
-            
-             $.post('/admin/delete_product/', {
-           product_id: id 
-        }, function(data) {
-      
-                    
-        });
-           
-        }
-        else{
-            alert("nothing deleted!")
-        }
-    }
-</script>
 <table id="product_table" width="100%">
     <thead>
         <tr>
@@ -47,7 +25,7 @@
                 <td><?= $row->option_category ?></td>
                 <td><?= $row->option ?></td>
                 <td><?= $row->stock_level ?></td>
-                <td><a href='#' onclick='confirmation(<?= $row->product_id ?>)'>DELETE</a> </td>
+                <td><a href='#' onclick='deleteProduct(<?= $row->product_id ?>)'>DELETE</a> </td>
             </tr>
 
 
