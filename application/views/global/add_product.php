@@ -93,15 +93,42 @@ foreach ($product as $row):
 endforeach;
 ?>
 <!--end of product details-->
+<hr/>
+<!--other features-->
+    <h3>Other Features</h3>
+   <input  id="autocompleteotherfeatures" name="other_feature" value=""/>
+    <span style="width:18px; float:right;" class="ui-icon ui-icon-circle-plus spanlink" onclick="addOtherFeaturetoProduct(<?= $product_id ?>)" ></span> 
 
+    
+    <style>
+    #other_feature_order { list-style-type: none; margin: 0; padding: 10px 0 0 0; }
+    #other_feature_order li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 0px; font-size: 1.0em; height: 18px; }
+    #other_feature_order li span { position: absolute; margin-left: -1.3em; }
+</style>
+<div id="other_features">   
+    <ul id="other_feature_order" width="100%">   
+    <li>Other Features</li>
+        <?php if ($other_features != NULL) {
+            foreach ($other_features as $row): ?>
+                <li id="other_feature__<?= $row->other_feature_link_id ?>" class="cattable">
+                    <div style="float:left;" class="ui-icon ui-icon-arrowthick-2-n-s"></div><strong><?= $row->other_feature_name ?></strong> 
+                    <div style="float:right;" class="ui-icon ui-icon-circle-close spanlink" onclick="deleteOtherFeaturefromProduct(<?= $row->other_feature_link_id ?>)">x</div>
+                </li>
+
+
+            <?php endforeach;
+        } ?> </ul>
+</div>
+<!--end of other features-->
+<hr/>
 
 <!--set product specs-->
 
-<hr/>
+
 
 <div class="ui-widget">
 
-    <div class="label">Product Specifications</div>
+    <h3>Product Specifications</h3>
 
     <input  id="autocompletespecs" name="product_spec" value=""/>
     <input  id="spec_value" name="spec_value" value=""/>

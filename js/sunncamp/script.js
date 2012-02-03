@@ -1,8 +1,8 @@
 $(document).ready(function() {
     $('.frontpage_slideshow').cycle({
-		fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-                cleartypeNoBg: 'TRUE'
-	});
+        fx: 'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+        cleartypeNoBg: 'TRUE'
+    });
 });      
         
 //autocomplete categories
@@ -195,43 +195,43 @@ function deleteFeaturefromProduct(product_id, feature_id){
 
 function deleteManual(id, filename) {
 
- var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
-  var answer = confirm("Are you sure you want to delete this manual?");
+    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var answer = confirm("Are you sure you want to delete this manual?");
     if(answer) {  
- $('#row_' + id).append(loadergif);
- $.post('/backend/manuals_admin/delete_manual/', {
-        filename: filename,
-       manual_id: id
-    }, function(data) {
-        $('.gifloader').remove();
-        $('#row_' + id).remove();
+        $('#row_' + id).append(loadergif);
+        $.post('/backend/manuals_admin/delete_manual/', {
+            filename: filename,
+            manual_id: id
+        }, function(data) {
+            $('.gifloader').remove();
+            $('#row_' + id).remove();
        
                        
-    });
+        });
     
     } else {
-    return false;
+        return false;
     }
 }
 
 function deleteTradeReview(id, filename) {
 
- var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
-  var answer = confirm("Are you sure you want to delete this Trade Review?");
+    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var answer = confirm("Are you sure you want to delete this Trade Review?");
     if(answer) {  
- $('#row_' + id).append(loadergif);
- $.post('/backend/tradereviews_admin/delete_trade_review/', {
-        filename: filename,
-       trade_review_id: id
-    }, function(data) {
-        $('.gifloader').remove();
-        $('#row_' + id).remove();
+        $('#row_' + id).append(loadergif);
+        $.post('/backend/tradereviews_admin/delete_trade_review/', {
+            filename: filename,
+            trade_review_id: id
+        }, function(data) {
+            $('.gifloader').remove();
+            $('#row_' + id).remove();
        
                        
-    });
+        });
     
     } else {
-    return false;
+        return false;
     }
 }
 
@@ -317,6 +317,7 @@ function updateAttribute(option_id) {
     var option_category = $('#option_category_' + option_id + '').val(),
     option = $('#option_' + option_id + '').val(),
     stock_level = $('#stock_level_' + option_id + '').val(),
+     price = $('#price_' + option_id + '').val(),
     loadergif = $('<img class="gifloader" src="/images/load.gif" />');
         
        
@@ -324,6 +325,7 @@ function updateAttribute(option_id) {
         option_id: option_id,
         stock_level: stock_level,
         option: option,
+        price: price,
         option_category: option_category
     }, function(data) {
        
@@ -352,6 +354,7 @@ function addAttributetoProduct(product_id) {
     var option_category = $('#autocompleteoptions').val(),
     option = $('#option').val(),
     stock_level = $('#stock_level').val(),
+    price = $('#price').val(),
     loadergif = $('<img class="gifloader" src="/images/load.gif" />');
           
     $('#attributes').append(loadergif);
@@ -360,20 +363,22 @@ function addAttributetoProduct(product_id) {
         product_id: product_id,
         option_category: option_category,
         option: option,
-        stock_level: stock_level
+        stock_level: stock_level,
+        price: price
           
     }, function(data) {
                
                  
         if(data > 0) {   
-            var newspec = "<tr id='row_" + data + "'><td><input name='option_category' value='"+ option_category +"'/></td><td><input name='option' value='"+ option +"'/></td><td><input name='stock_level' value='"+ stock_level +"'/></td><td><span  style='width:18px; float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteAttribute(" + data + ")' ></span></td></tr>";
+            var newspec = "<tr id='row_" + data + "'><td><input name='option_category' value='"+ option_category +"'/></td><td><input name='option' value='"+ option +"'/></td><td><input name='stock_level' value='"+ stock_level +"'/></td><td><input name='price' value='"+ price +"'/></td><td><span  style='width:18px; float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteAttribute(" + data + ")' ></span></td></tr>";
                
             $('#attributes tr:last').after(newspec);  
-                 
+          
             $('.gifloader').remove();
             $('#autocompleteoptions').val('');
             $('#option').val('');
             $('#stock_level').val('');
+            $('#price').val('');
         }
         else
         {
@@ -383,6 +388,28 @@ function addAttributetoProduct(product_id) {
           
     });
      
+}
+
+function addOtherFeaturetoProduct(product_id) {
+    var other_feature = $('#autocompleteotherfeatures').val()
+   
+        
+    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+          
+    $('#other_features').append(loadergif);
+           
+    $.post('/admin/add_other_feature', {
+        product_id: product_id,
+        other_feature: other_feature
+  
+          
+    }, function(data) {
+        
+        var newotherfeature = "<li id='other_feature_" + data + "' class='cattable'><div style='float:left;' class='ui-icon ui-icon-arrowthick-2-n-s'></div><strong>" + other_feature + ":</strong><div style='float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteOtherFeaturefromProduct(" + product_id + ")'>x</div></li>";
+        $('.gifloader').remove();
+        $('#other_feature_order li:last').after(newotherfeature);  
+    });
+
 }
 
 function addSpectoProduct(product_id) {
@@ -427,7 +454,7 @@ function raisestock(user_id, option_id) {
  
     var current_stock = $('#stock_' + option_id).html(),
     cart_quantity = $('#cart_' + option_id).html(),
-     loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
 
      
 
@@ -439,17 +466,17 @@ function raisestock(user_id, option_id) {
       
         
         $.post('/usercart/change_stock_level/', {
-          user_id: user_id,
+            user_id: user_id,
             option_id: option_id,
             sum: "minus"
        
         }, function(data) {
 
-     $('.gifloader').remove();
-     $('#stock_' + option_id).html(updated_stock);
-        $('#cart_' + option_id).html(updated_cart);
+            $('.gifloader').remove();
+            $('#stock_' + option_id).html(updated_stock);
+            $('#cart_' + option_id).html(updated_cart);
               
-            });
+        });
         
       
     
@@ -464,27 +491,27 @@ function lowerstock(user_id, option_id) {
 
     var current_stock = $('#stock_' + option_id).html(),
     cart_quantity = $('#cart_' + option_id).html(),
- loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
   
     if(cart_quantity > 0) {
-     $('#stock_' + option_id).append(loadergif);
+        $('#stock_' + option_id).append(loadergif);
         var updated_stock =  parseInt(current_stock) + 1;
         var updated_cart = parseInt(cart_quantity) - 1;
        
         
-              $.post('/usercart/change_stock_level/', {
-        user_id: user_id,
+        $.post('/usercart/change_stock_level/', {
+            user_id: user_id,
             option_id: option_id,
             sum: "plus"
        
         }, function(data) {
   
-   $('.gifloader').remove();
-    $('#stock_' + option_id).html(updated_stock);
-     $('#cart_' + option_id).html(updated_cart);
+            $('.gifloader').remove();
+            $('#stock_' + option_id).html(updated_stock);
+            $('#cart_' + option_id).html(updated_cart);
        
               
-            });
+        });
         
       
     
