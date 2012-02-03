@@ -58,6 +58,24 @@ class Products_model extends CI_Model {
         $insert = $this->db->insert('product_feature_link', $new_list_entry);
         return $insert;
     }
+    
+    /**
+     *
+     * @param type $other_feature_id
+     * @param type $product_id
+     * @return type 
+     */
+      function add_to_other_feature_link($other_feature_id, $product_id) {
+        //check cat isn't already in links table
+        //if not add to list
+        $new_list_entry = array(
+            'other_feature_id' => $other_feature_id,
+            'product_id' =>  $product_id
+        );
+
+        $insert = $this->db->insert('other_feature_link', $new_list_entry);
+        return $insert;
+    }
 
     /**
      *
@@ -107,7 +125,7 @@ class Products_model extends CI_Model {
 
     function get_default_image($id) {
         $this->db->where('product_id', $id);
-          $this->db->order_by('order');
+        $this->db->order_by('order');
         $this->db->limit(1);
         $query = $this->db->get('product_images');
         if ($query->num_rows > 0) {
@@ -146,17 +164,16 @@ class Products_model extends CI_Model {
         return $query->result();
     }
 
-    
     function get_product_by_option($option_id) {
-         $this->db->where('option_id', $option_id);
-         $query = $this->db->get('product_options');
-              if ($query->num_rows == 1) {
+        $this->db->where('option_id', $option_id);
+        $query = $this->db->get('product_options');
+        if ($query->num_rows == 1) {
             return $query->result();
         }
 
         return FALSE;
     }
-    
+
     function get_attributes($id) {
         $this->db->where('product_id', $id);
         $this->db->order_by('option_category');
@@ -268,6 +285,22 @@ class Products_model extends CI_Model {
 
         return FALSE;
     }
+    /**
+     *
+     * @param type $product_id
+     * @return type 
+     */
+        function get_other_features($product_id) {
+        $this->db->where('other_feature_link.product_id', $product_id);
+        $this->db->join('other_features', 'other_feature_link.other_feature_id = other_features.other_feature_id', 'left');
+        $query = $this->db->get('other_feature_link');
+
+        if ($query->num_rows > 0) {
+            return $query->result();
+        }
+
+        return FALSE;
+    }
 
     /**
      *
@@ -276,6 +309,21 @@ class Products_model extends CI_Model {
     function get_all_product_features() {
 
         $query = $this->db->get('product_features');
+
+        if ($query->num_rows > 0) {
+            return $query->result();
+        }
+
+        return FALSE;
+    }
+    
+    /**
+     *
+     * @return type 
+     */
+     function get_all_other_features() {
+
+        $query = $this->db->get('other_features');
 
         if ($query->num_rows > 0) {
             return $query->result();
@@ -343,6 +391,29 @@ class Products_model extends CI_Model {
 
 
         $query = $this->db->get('product_features');
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row)
+                $data[] = $row;
+            $query->free_result();
+
+            return $data;
+        } else {
+            return FALSE;
+        }
+    }
+    
+    
+      function autocomplete_other_features($param) {
+        $data = array();
+
+
+
+        $where = "other_feature_name REGEXP '^$param'";
+        $this->db->where($where);
+
+
+        $query = $this->db->get('other_features');
 
         if ($query->num_rows() > 0) {
             foreach ($query->result_array() as $row)
@@ -461,11 +532,11 @@ class Products_model extends CI_Model {
      */
     function create_new_cat($category) {
 
- $pagelink = trim(str_replace(" ","_", $category));
-       
+        $pagelink = trim(str_replace(" ", "_", $category));
+
         $new_cat_entry = array(
             'product_category_name' => ucfirst(strtolower($category)),
-             'category_safename' => $pagelink
+            'category_safename' => $pagelink
         );
 
         $insert = $this->db->insert('product_categories', $new_cat_entry);
@@ -482,6 +553,17 @@ class Products_model extends CI_Model {
         $insert = $this->db->insert('product_specifications', $new_spec_entry);
         return $insert;
     }
+    
+     function create_other_feature($feature) {
+
+
+        $new_other_feature_entry = array(
+            'other_feature_name' => ucfirst(strtolower($feature)),
+        );
+
+        $insert = $this->db->insert('other_features',  $new_other_feature_entry);
+        return $insert;
+    }
 
     function delete_product_category($category_link_id) {
 
@@ -496,7 +578,24 @@ class Products_model extends CI_Model {
         $update = $this->db->delete('product_feature_link');
         return $update;
     }
+    
+/**
+ *
+ * @param type $other_feature_link_id
+ * @return type 
+ */
+    function delete_other_feature($other_feature_link_id) {
 
+        $this->db->where('other_feature_link_id', $other_feature_link_id);
+        $update = $this->db->delete('other_feature_link');
+        return $update;
+    }
+
+    /**
+     *
+     * @param type $spec_link_id
+     * @return type 
+     */
     function delete_product_spec($spec_link_id) {
 
         $this->db->where('spec_link_id', $spec_link_id);
@@ -504,6 +603,10 @@ class Products_model extends CI_Model {
         return $update;
     }
 
+    /**
+     *
+     * @return type 
+     */
     function create_product() {
         $form_data = array(
             'active' => 0,
@@ -513,6 +616,11 @@ class Products_model extends CI_Model {
         return $insert;
     }
 
+    /**
+     *
+     * @param type $product_id
+     * @return type 
+     */
     function delete_product($product_id) {
         $this->db->where('product_id', $product_id);
 
@@ -520,6 +628,11 @@ class Products_model extends CI_Model {
         return $delete;
     }
 
+    /**
+     *
+     * @param type $product_id
+     * @return type 
+     */
     function delete_product_options($product_id) {
         $this->db->where('product_id', $product_id);
 
@@ -527,6 +640,11 @@ class Products_model extends CI_Model {
         return $delete;
     }
 
+    /**
+     *
+     * @param type $product_id
+     * @return type 
+     */
     function delete_product_category_link($product_id) {
         $this->db->where('product_id', $product_id);
 

@@ -157,6 +157,7 @@ class Admin extends MY_Controller {
             $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['features'] = $this->products_model->get_product_features($data['product_id']);
+        $data['other_features'] = $this->products_model->get_other_features($data['product_id']);
         $data['allfeatures'] = $this->products_model->get_all_product_features();
         $data['specs'] = $this->products_model->get_product_specs($data['product_id']);
 
@@ -233,6 +234,36 @@ class Admin extends MY_Controller {
 
         echo $feature_id;
     }
+    
+      function add_other_feature() {
+        $id = $this->input->post('product_id');
+        $other_feature = $this->input->post('other_feature');
+       
+        //check if feature name is in database already
+        $otherfeature = $this->products_model->autocomplete_other_features($other_feature);
+
+        if ($otherfeature) {
+
+            // The feature is in the database already
+            // now add to the feature list
+            foreach ($otherfeature as $row):
+                $other_feature_id = $row['other_feature_id'];
+            endforeach;
+            $this->products_model->add_to_other_feature_link($other_feature_id, $id);
+
+            $link_id = $this->db->insert_id();
+        } else {
+
+            // The feature isn't in the database
+            // TODO check for similar names
+            // add to database, then add to users list
+            $this->products_model->create_other_feature($other_feature);
+            $other_feature_id = $this->db->insert_id();
+             $this->products_model->add_to_other_feature_link($other_feature_id, $id);
+            $link_id = $this->db->insert_id();
+        }
+        echo $link_id;
+    }
 
     function remove_category() {
         $id = $this->input->post('product_id');
@@ -246,6 +277,14 @@ class Admin extends MY_Controller {
         $product_id = $this->input->post('product_id');
         $feature_link_id = $this->input->post('feature_link_id');
         $this->products_model->delete_product_feature($feature_link_id);
+
+        echo "feature removed";
+    }
+    
+       function remove_other_feature() {
+        $product_id = $this->input->post('product_id');
+        $other_feature_link_id = $this->input->post('other_feature_link_id');
+        $this->products_model->delete_other_feature($other_feature_link_id);
 
         echo "feature removed";
     }
