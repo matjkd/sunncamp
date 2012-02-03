@@ -13,6 +13,7 @@
     </head>
 
     <body>
+          <input type="hidden" id="baseurl" value="<?=base_url()?>"/>
     <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -35,7 +36,7 @@
                 
                 ?>
         <div id="header_container">
-       
+     
             <div id="header">
 
                 <div  class="container_24" style="height:100px;">

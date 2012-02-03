@@ -13,6 +13,7 @@
     </head>
 
     <body>
+        <input type="hidden" id="baseurl" value="<?=base_url()?>"/>
     <?php $is_logged_in = $this->session->userdata('is_logged_in');
 		$role = $this->session->userdata('role');
 		if($is_logged_in != NULL && $role < 2)
@@ -25,6 +26,7 @@
                 
                 ?>
         <div id="header_container">
+            
             <div id="header">
 
                 <div  class="container_24" style="height:100px;">
