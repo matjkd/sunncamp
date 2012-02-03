@@ -397,9 +397,11 @@ class Admin extends MY_Controller {
 
         if ($this->input->post('upload')) {
             $this->gallery_model->do_upload($id);
+           redirect("admin/add_product/$id");
+        
         }
 
-        redirect("admin/add_product/$id");
+        
     }
 
     /**
