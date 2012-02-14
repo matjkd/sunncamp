@@ -20,6 +20,9 @@ class Admin extends MY_Controller {
         $this->load->view('template/sunncamp/admin');
     }
 
+    /**
+     * 
+     */
     function content() {
         if (($this->uri->segment(3)) < 1) {
             $id = 1;
@@ -33,6 +36,9 @@ class Admin extends MY_Controller {
         $this->load->view('template/sunncamp/admin');
     }
 
+    /**
+     * 
+     */
     function edit() {
 
 
@@ -49,6 +55,9 @@ class Admin extends MY_Controller {
         $this->load->view('template/sunncamp/admin');
     }
 
+    /**
+     * 
+     */
     function edit_product() {
 
 
@@ -89,6 +98,9 @@ class Admin extends MY_Controller {
         echo "Attribute changed";
     }
 
+    /**
+     * 
+     */
     function delete_attribute() {
 
         $option_id = $this->input->post('option_id');
@@ -154,8 +166,8 @@ class Admin extends MY_Controller {
         $data['images'] = $this->products_model->get_product_images($data['product_id']);
         $data['product'] = $this->products_model->get_product($data['product_id']);
         $data['product_categories'] = $this->products_model->get_product_categories($data['product_id']);
-        
-            $data['categories'] = $this->products_model->get_all_product_cats();
+
+        $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
         $data['features'] = $this->products_model->get_product_features($data['product_id']);
         $data['other_features'] = $this->products_model->get_other_features($data['product_id']);
@@ -235,11 +247,14 @@ class Admin extends MY_Controller {
 
         echo $feature_id;
     }
-    
-      function add_other_feature() {
+
+    /**
+     * 
+     */
+    function add_other_feature() {
         $id = $this->input->post('product_id');
         $other_feature = $this->input->post('other_feature');
-       
+
         //check if feature name is in database already
         $otherfeature = $this->products_model->autocomplete_other_features($other_feature);
 
@@ -260,12 +275,15 @@ class Admin extends MY_Controller {
             // add to database, then add to users list
             $this->products_model->create_other_feature($other_feature);
             $other_feature_id = $this->db->insert_id();
-             $this->products_model->add_to_other_feature_link($other_feature_id, $id);
+            $this->products_model->add_to_other_feature_link($other_feature_id, $id);
             $link_id = $this->db->insert_id();
         }
         echo $link_id;
     }
 
+    /**
+     * 
+     */
     function remove_category() {
         $id = $this->input->post('product_id');
         $category_link_id = $this->input->post('category_link_id');
@@ -274,6 +292,9 @@ class Admin extends MY_Controller {
         echo "category removed";
     }
 
+    /**
+     * 
+     */
     function remove_feature() {
         $product_id = $this->input->post('product_id');
         $feature_link_id = $this->input->post('feature_link_id');
@@ -281,8 +302,13 @@ class Admin extends MY_Controller {
 
         echo "feature removed";
     }
-    
-       function remove_other_feature() {
+
+    /*
+     * 
+     * 
+     */
+
+    function remove_other_feature() {
         $product_id = $this->input->post('product_id');
         $other_feature_link_id = $this->input->post('other_feature_link_id');
         $this->products_model->delete_other_feature($other_feature_link_id);
@@ -290,6 +316,9 @@ class Admin extends MY_Controller {
         echo "feature removed";
     }
 
+    /**
+     * 
+     */
     function remove_spec() {
 
         $spec_link_id = $this->input->post('spec_link_id');
@@ -397,9 +426,8 @@ class Admin extends MY_Controller {
 
         if ($this->input->post('upload')) {
             $this->gallery_model->do_upload($id);
+            redirect("admin/add_product/$id");
         }
-
-        redirect("admin/add_product/$id");
     }
 
     /**
@@ -464,6 +492,9 @@ class Admin extends MY_Controller {
         }
     }
 
+    /**
+     * 
+     */
     function add_menu() {
         $data['main_content'] = "admin/add_menu";
         $data['cats'] = $this->products_model->get_cats();
@@ -478,6 +509,10 @@ class Admin extends MY_Controller {
         $this->load->view('template/main');
     }
 
+    /*
+     * 
+     */
+
     function view_menus() {
         $data['main_content'] = "admin/view_menus";
         $data['page'] = 'practices';
@@ -488,16 +523,28 @@ class Admin extends MY_Controller {
         $this->load->view('template/sunncamp/admin');
     }
 
+    /*
+     * 
+     */
+
     function add_new_menu() {
         $this->menu_model->add_menu();
         return;
     }
+
+    /*
+     * 
+     */
 
     function update_menu() {
         echo $this->input->post('published');
         $this->menu_model->update_menu();
         //  return;
     }
+
+    /*
+     * 
+     */
 
     function edit_menu($id) {
         $data['main_content'] = "admin/edit_menu";
@@ -513,6 +560,10 @@ class Admin extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
     }
+
+    /*
+     * 
+     */
 
     function do_upload() {
         if (isset($_FILES['file'])) {
@@ -530,6 +581,10 @@ class Admin extends MY_Controller {
             $this->load->view('upload');
     }
 
+    /*
+     * 
+     */
+
     function add_content() {
         $data['main_content'] = "admin/add_content";
         $data['pages'] = $this->content_model->get_all_content();
@@ -537,6 +592,10 @@ class Admin extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
     }
+
+    /*
+     * 
+     */
 
     function add_seo_content() {
         $data['main_content'] = "admin/add_content";
@@ -546,6 +605,10 @@ class Admin extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
     }
+
+    /*
+     * 
+     */
 
     function list_products($cat = NULL) {
 
@@ -557,7 +620,7 @@ class Admin extends MY_Controller {
 
         $cat = $this->input->post('cats');
         $data['products'] = $this->content_model->get_all_products($cat);
- 
+
         $data['category_parents'] = $this->products_model->get_all_product_parents();
 
         $data['categories'] = $this->products_model->get_all_product_cats();
@@ -565,6 +628,10 @@ class Admin extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
     }
+
+    /*
+     * 
+     */
 
     function delete_product() {
 
@@ -582,6 +649,12 @@ class Admin extends MY_Controller {
         //delete product
         $this->products_model->delete_product($product_id);
     }
+
+    /*
+     * 
+     * 
+     * 
+     */
 
     function is_logged_in() {
         $is_logged_in = $this->session->userdata('is_logged_in');

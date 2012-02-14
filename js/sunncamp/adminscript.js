@@ -1,3 +1,5 @@
+ var base_url = $('#baseurl').val();
+ 
 $(document).ready(function() {
     oTable = $('#product_table').dataTable({
         "bJQueryUI": true,
@@ -28,7 +30,7 @@ $(function() {
         drop: function(ev, ui) {
             var $drop = $(this).attr('id');
             var $drag = ui.draggable.attr("id");
-            $.post("/backend/category_admin/change_parent", {
+            $.post(base_url +"backend/category_admin/change_parent", {
                 drag: $drag, 
                 drop: $drop
             } );
@@ -58,11 +60,11 @@ $(function() {
 
 function deleteCompany(company_id) {
 
-    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var loadergif = $('<img class="gifloader" src="' + base_url + 'images/load.gif" />');
     var answer = confirm("Are you sure you want to delete this Company (and all its users)?");
     if(answer) {  
         $('#row_' + company_id).append(loadergif);
-        $.post('/user/user_admin/delete_company/', {
+        $.post(base_url +'user/user_admin/delete_company/', {
             company_id: company_id
      
         }, function(data) {
@@ -80,12 +82,12 @@ function deleteCompany(company_id) {
 
 function deleteUser(user_id) {
 
-    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var loadergif = $('<img class="gifloader" src="' + base_url + 'images/load.gif" />');
     var answer = confirm("Are you sure you want to delete this User?");
     if(answer) {
         
         $('#row_' + user_id).append(loadergif);
-         $.post('/user/user_admin/deactivate_user/', {
+         $.post(base_url + 'user/user_admin/deactivate_user/', {
             user_id: user_id
      
         }, function(data) {
@@ -95,7 +97,7 @@ function deleteUser(user_id) {
                        
         });
         
-          $.post('/backend/cart_admin/reset_cart/', {
+          $.post(base_url + 'backend/cart_admin/reset_cart/', {
             user_id: user_id
      
         }, function(data) {
@@ -124,3 +126,24 @@ $(function() {
     });
 
 });
+
+ function deleteProduct(id) {
+        var answer = confirm("Are you sure you want to delete this product (including all variations..)?")
+        if (answer){
+		
+        
+          
+            
+            
+             $.post(base_url + 'admin/delete_product/', {
+           product_id: id 
+        }, function(data) {
+      
+                    
+        });
+           
+        }
+        else{
+            alert("nothing deleted!")
+        }
+    }

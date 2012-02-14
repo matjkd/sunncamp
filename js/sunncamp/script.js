@@ -295,10 +295,10 @@ function deleteAttribute(option_id) {
         var option_category = $('#option_category_' + option_id + '').val(),
         option = $('#option_' + option_id + '').val(),
         stock_level = $('#stock_level_' + option_id + '').val(),
-        loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+        loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
        
        
-        $.post('/admin/delete_attribute/', {
+        $.post(base_url + 'admin/delete_attribute/', {
             option_id: option_id,
             stock_level: stock_level,
             option: option,
