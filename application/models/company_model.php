@@ -158,6 +158,21 @@ class Company_model extends CI_Model {
         return $insert;
     }
 
+    /**
+     *
+     * @param type $company_id
+     * @return type 
+     */
+    function get_company_cats($company_id) {
+        $this->db->where('company_cats.company_id', $company_id);
+        $this->db->join('product_categories', 'product_categories.product_category_id = company_cats.company_cat', 'left');
+
+        $query = $this->db->get('company_cats');
+
+
+        return $query->result();
+    }
+
     function get_company($company_id) {
 
         $this->db->where('companies.company_id', $company_id);

@@ -762,3 +762,12 @@ ul.catmenu li ul li a:hover {
     text-decoration: none;
     
 }
+
+.product_cat_list {
+    
+    padding:3px;
+    margin:2px;
+    color:#fff;
+    background:#2c66b0;
+    float:left;
+}

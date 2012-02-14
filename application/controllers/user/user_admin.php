@@ -31,6 +31,7 @@ class User_admin extends MY_Controller {
         $data['users'] = $this->company_model->get_users($company);
         $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
+        $data['company_categories'] = $this->company_model->get_company_cats($company);
         if ($this->session->flashdata('message')) {
             $data['message'] = $this->session->flashdata('message');
         }

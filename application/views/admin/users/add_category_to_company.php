@@ -20,3 +20,12 @@
         <input class="button" type="submit" value="Add Category" />
     <?= form_close() ?>
 </div>
+
+
+<?php foreach($company_categories as $row):?>
+
+<div class="product_cat_list">
+<?=$row->product_category_name?>
+</div>
+
+<?php endforeach; ?>
