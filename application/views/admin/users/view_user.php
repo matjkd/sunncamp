@@ -10,6 +10,9 @@
 
 
         <?php endforeach; ?>
+            <p>
+                Username: <?=$row->username?>
+            </p>
         <p>
             <input type="text" name="firstname" value="<?= set_value('firstname', $row->firstname) ?>"/> <label>Firstname</label>
         </p>
