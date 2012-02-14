@@ -1,9 +1,16 @@
 <div class="socialicons">
-    <a href="http://www.facebook.com/pages/SunnCamp/265168500198954?sk=wall
-"/><img width="50px"  src="<?= base_url() ?>images/icons/facebook_50.png" /></a><br/>
+    <a href="http://www.facebook.com/pages/SunnCamp/265168500198954?sk=wall" target="_blank"/>
+    <img width="50px"  src="<?= base_url() ?>images/icons/facebook_50.png" />
+</a>
 
+<a href="https://twitter.com/#!/SunnCamping"/><img width="50px"  src="<?= base_url() ?>images/icons/twitter_50.png" target="_blank"/></a>
+<br/>
 
-<a href="https://twitter.com/#!/SunnCamping"/><img width="50px"  src="<?= base_url() ?>images/icons/twitter_50.png" /></a>
+<a href="https://plus.google.com/112637443545980083262/posts" target="_blank"/>
+    <img width="50px"  src="<?= base_url() ?>images/icons/google+50.png" />
+</a>
+
+<a href="http://www.youtube.com/user/SunnCamping/feed"/><img width="50px"  src="<?= base_url() ?>images/icons/Youtube50.png" target="_blank" /></a>
 
 </div>
 
