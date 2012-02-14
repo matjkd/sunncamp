@@ -38,11 +38,11 @@ class User_admin extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
     }
-    
+
     function view_user($user_id) {
         $data['main_content'] = "admin/users/view_user";
         $data['leftside'] = "admin/dashboard";
-       
+
         $data['user'] = $this->company_model->get_user($user_id);
         $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
@@ -53,8 +53,6 @@ class User_admin extends MY_Controller {
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
     }
-        
-    
 
     function create_company() {
 
@@ -139,6 +137,21 @@ class User_admin extends MY_Controller {
 
             echo "Company Deleted";
         }
+    }
+
+    /**
+     * 
+     */
+    function add_cat_to_company() {
+        $company_id = $this->input->post('company_id');
+        $category_id = $this->input->post('category_id');
+
+        if ($this->company_model->add_cat_to_company($company_id, $category_id)) {
+            echo "success";
+        } else {
+            echo "failed";
+        }
+        redirect('/user/user_admin/list_companies/'.$company_id);
     }
 
     function is_logged_in() {

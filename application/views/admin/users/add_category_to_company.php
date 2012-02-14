@@ -1,9 +1,22 @@
 <h2>Categories</h2>
 <p>If this company is a stockist, add the categories of products they stock here:</p>
 
+<div id="generic_form">
+    <?= form_open('user/user_admin/add_cat_to_company') ?>
+    <div class="ui-widget">
+        <label>Category: </label>
+        <select name="category_id" id="combobox">
+            <option value="">Select one...</option>
+            <?php foreach ($categories as $row): ?>
 
-<?=form_open()?>
+                <option value="<?= $row->product_category_id ?>"><?= $row->product_category_name ?></option>
 
-
-
-<?=form_close()?>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <?php foreach ($company as $row): ?>  
+        <input type='hidden' value='<?= $row->company_id ?>' name="company_id"/>
+    <?php endforeach; ?>
+        <input class="button" type="submit" value="Add Category" />
+    <?= form_close() ?>
+</div>
