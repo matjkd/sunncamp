@@ -15,7 +15,7 @@ $(document).ready(function() {
 } );
 
 $(function() {
-    $( "input:submit,  button", ".demo" ).button();
+    $( "input:submit,  button", ".button" ).button();
 		
 });
 

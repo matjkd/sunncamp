@@ -86,7 +86,7 @@ class Company_model extends CI_Model {
         return $query->result();
     }
 
-      function get_user($user_id) {
+    function get_user($user_id) {
         $this->db->where('active', 1);
         $this->db->where('user_id', $user_id);
         $query = $this->db->get('users');
@@ -94,7 +94,7 @@ class Company_model extends CI_Model {
 
         return $query->result();
     }
-    
+
     function get_users($company_id) {
         $this->db->where('active', 1);
         $this->db->where('company', $company_id);
@@ -145,6 +145,17 @@ class Company_model extends CI_Model {
         $this->db->where('company_id', $company_id);
         $query = $this->db->delete('companies');
         return $query;
+    }
+
+    function add_cat_to_company($company_id, $category_id) {
+        $new_company_cat = array(
+            'company_cat' => $category_id,
+            'company_id' => $company_id
+        );
+
+
+        $insert = $this->db->insert('company_cats', $new_company_cat);
+        return $insert;
     }
 
     function get_company($company_id) {
