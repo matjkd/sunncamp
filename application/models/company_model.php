@@ -172,6 +172,13 @@ class Company_model extends CI_Model {
 
         return $query->result();
     }
+    
+    function delete_company_cat_id($company_cat_id) {
+         $this->db->where('company_cat_id', $company_cat_id);
+        $query = $this->db->delete('company_cats');
+        return $query;
+        
+    }
 
     function get_company($company_id) {
 

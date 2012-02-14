@@ -24,8 +24,9 @@
 
 <?php foreach($company_categories as $row):?>
 
-<div class="product_cat_list">
-<?=$row->product_category_name?>
+<div id="cat_<?=$row->company_cat_id?>" class="product_cat_list">
+<span style="float:left;"><?=$row->product_category_name?></span>
+      <span  style="width:18px; float:right;" class="ui-icon ui-icon-circle-close  spanlink" onclick="deleteCompanyCat('<?= $row->company_cat_id ?>')" ></span>
 </div>
 
 <?php endforeach; ?>
