@@ -28,13 +28,13 @@
         </div>
         
         <div class="slideshow_text">
-              <a href="<?=base_url()?>products/show/80"> <h2>Tepee 300DL</h2>
-            <p>New three berth version of the cool and innovative tepee style tent. Ideal as a touring tent, quick and easy to erect with loads of space.</p></a>
+              <a href="<?=base_url()?>products/show/80"> <h2>Triumph 800</h2>
+            <p>A durable unique steel framed family tent with en suite facilities to both bedrooms and the option to increase sleeping capacity to ten people.</p></a>
         </div>
         
         <div class="slideshow_text">
-           <h2>Quantum 800</h2>
-            <p>This new family eight berth vis a vis style tent raises the bar by using a high quality 150D polyester material. This tent has secondary mesh to both doors and covered porch access.</p></a>
+           <h2>Shadow 800DL</h2>
+            <p>Our fantastic and extremely popular eight berth Shadow family tent with versatile bedroom arrangements, a porch covered front door, rear canopy door and a large front vented window.</p></a>
         </div>
     </div>
 
