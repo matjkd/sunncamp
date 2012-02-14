@@ -1,4 +1,4 @@
- var base_url = $('#baseurl').val();
+var base_url = $('#baseurl').val();
  
 $(document).ready(function() {
     oTable = $('#product_table').dataTable({
@@ -87,7 +87,7 @@ function deleteUser(user_id) {
     if(answer) {
         
         $('#row_' + user_id).append(loadergif);
-         $.post(base_url + 'user/user_admin/deactivate_user/', {
+        $.post(base_url + 'user/user_admin/deactivate_user/', {
             user_id: user_id
      
         }, function(data) {
@@ -95,9 +95,9 @@ function deleteUser(user_id) {
        
          
                        
-        });
+            });
         
-          $.post(base_url + 'backend/cart_admin/reset_cart/', {
+        $.post(base_url + 'backend/cart_admin/reset_cart/', {
             user_id: user_id
      
         }, function(data) {
@@ -109,6 +109,22 @@ function deleteUser(user_id) {
     
     }
 
+}
+
+function deleteCompanyCat(company_cat_id) {
+    var loadergif = $('<img class="gifloader" src="' + base_url + 'images/ajax-loader-blue.gif" />');
+  $('#cat_' + company_cat_id).append(loadergif);
+  
+   $.post(base_url + 'user/user_admin/remove_company_cat/', {
+            company_cat_id: company_cat_id
+     
+        }, function(data) {
+           
+       
+         $('#cat_' + company_cat_id).remove();
+                       
+            });
+  
 }
 
 $(function() {
@@ -127,23 +143,23 @@ $(function() {
 
 });
 
- function deleteProduct(id) {
-        var answer = confirm("Are you sure you want to delete this product (including all variations..)?")
-        if (answer){
+function deleteProduct(id) {
+    var answer = confirm("Are you sure you want to delete this product (including all variations..)?")
+    if (answer){
 		
         
           
             
             
-             $.post(base_url + 'admin/delete_product/', {
-           product_id: id 
+        $.post(base_url + 'admin/delete_product/', {
+            product_id: id 
         }, function(data) {
       
                     
-        });
+            });
            
-        }
-        else{
-            alert("nothing deleted!")
-        }
     }
+    else{
+        alert("nothing deleted!")
+    }
+}

@@ -154,6 +154,17 @@ class User_admin extends MY_Controller {
         }
         redirect('/user/user_admin/list_companies/'.$company_id);
     }
+    
+    function remove_company_cat() {
+        
+        $company_cat_id = $this->input->post('company_cat_id');
+         if ($this->company_model->delete_company_cat_id($company_cat_id)) {
+            echo "success";
+        } else {
+            echo "failed";
+        }
+        
+    }
 
     function is_logged_in() {
         $is_logged_in = $this->session->userdata('is_logged_in');
