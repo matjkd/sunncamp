@@ -58,19 +58,19 @@ class Products_model extends CI_Model {
         $insert = $this->db->insert('product_feature_link', $new_list_entry);
         return $insert;
     }
-    
+
     /**
      *
      * @param type $other_feature_id
      * @param type $product_id
      * @return type 
      */
-      function add_to_other_feature_link($other_feature_id, $product_id) {
+    function add_to_other_feature_link($other_feature_id, $product_id) {
         //check cat isn't already in links table
         //if not add to list
         $new_list_entry = array(
             'other_feature_id' => $other_feature_id,
-            'product_id' =>  $product_id
+            'product_id' => $product_id
         );
 
         $insert = $this->db->insert('other_feature_link', $new_list_entry);
@@ -285,12 +285,13 @@ class Products_model extends CI_Model {
 
         return FALSE;
     }
+
     /**
      *
      * @param type $product_id
      * @return type 
      */
-        function get_other_features($product_id) {
+    function get_other_features($product_id) {
         $this->db->where('other_feature_link.product_id', $product_id);
         $this->db->join('other_features', 'other_feature_link.other_feature_id = other_features.other_feature_id', 'left');
         $query = $this->db->get('other_feature_link');
@@ -316,12 +317,12 @@ class Products_model extends CI_Model {
 
         return FALSE;
     }
-    
+
     /**
      *
      * @return type 
      */
-     function get_all_other_features() {
+    function get_all_other_features() {
 
         $query = $this->db->get('other_features');
 
@@ -402,9 +403,8 @@ class Products_model extends CI_Model {
             return FALSE;
         }
     }
-    
-    
-      function autocomplete_other_features($param) {
+
+    function autocomplete_other_features($param) {
         $data = array();
 
 
@@ -554,15 +554,15 @@ class Products_model extends CI_Model {
         $insert = $this->db->insert('product_specifications', $new_spec_entry);
         return $insert;
     }
-    
-     function create_other_feature($feature) {
+
+    function create_other_feature($feature) {
 
 
         $new_other_feature_entry = array(
             'other_feature_name' => ucfirst(strtolower($feature)),
         );
 
-        $insert = $this->db->insert('other_features',  $new_other_feature_entry);
+        $insert = $this->db->insert('other_features', $new_other_feature_entry);
         return $insert;
     }
 
@@ -579,12 +579,12 @@ class Products_model extends CI_Model {
         $update = $this->db->delete('product_feature_link');
         return $update;
     }
-    
-/**
- *
- * @param type $other_feature_link_id
- * @return type 
- */
+
+    /**
+     *
+     * @param type $other_feature_link_id
+     * @return type 
+     */
     function delete_other_feature($other_feature_link_id) {
 
         $this->db->where('other_feature_link_id', $other_feature_link_id);
@@ -663,47 +663,56 @@ class Products_model extends CI_Model {
         $id = $product_id;
         //delete Large files
         $mydir = './images/products/' . $id . '/large/';
-        $d = dir($mydir);
-        while ($entry = $d->read()) {
-            if ($entry != "." && $entry != "..") {
-                unlink($mydir . $entry);
+        if (file_exists($mydir)) {
+            $d = dir($mydir);
+
+            while ($entry = $d->read()) {
+                if ($entry != "." && $entry != "..") {
+                    unlink($mydir . $entry);
+                }
             }
+            $d->close();
+            rmdir($mydir);
         }
-        $d->close();
-        rmdir($mydir);
 
         //delete Medium files
         $mydir = './images/products/' . $id . '/medium/';
-        $d = dir($mydir);
-        while ($entry = $d->read()) {
-            if ($entry != "." && $entry != "..") {
-                unlink($mydir . $entry);
+        if (file_exists($mydir)) {
+            $d = dir($mydir);
+            while ($entry = $d->read()) {
+                if ($entry != "." && $entry != "..") {
+                    unlink($mydir . $entry);
+                }
             }
+            $d->close();
+            rmdir($mydir);
         }
-        $d->close();
-        rmdir($mydir);
 
         //delete thumbs files
         $mydir = './images/products/' . $id . '/thumbs/';
-        $d = dir($mydir);
-        while ($entry = $d->read()) {
-            if ($entry != "." && $entry != "..") {
-                unlink($mydir . $entry);
+        if (file_exists($mydir)) {
+            $d = dir($mydir);
+            while ($entry = $d->read()) {
+                if ($entry != "." && $entry != "..") {
+                    unlink($mydir . $entry);
+                }
             }
+            $d->close();
+            rmdir($mydir);
         }
-        $d->close();
-        rmdir($mydir);
 
         //delete root files
         $mydir = './images/products/' . $id . '/';
-        $d = dir($mydir);
-        while ($entry = $d->read()) {
-            if ($entry != "." && $entry != "..") {
-                unlink($mydir . $entry);
+        if (file_exists($mydir)) {
+            $d = dir($mydir);
+            while ($entry = $d->read()) {
+                if ($entry != "." && $entry != "..") {
+                    unlink($mydir . $entry);
+                }
             }
+            $d->close();
+            rmdir($mydir);
         }
-        $d->close();
-        rmdir($mydir);
 
         //delete database entries
         $this->db->where('product_id', $product_id);
