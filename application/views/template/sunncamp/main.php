@@ -41,7 +41,7 @@
 
                 <div  class="container_24" style="height:100px;">
                     <div class="grid_17" style="margin-left:0;">
-                        <img style="margin-top:75px;" src="<?= base_url() ?>images/template/sunncamp/tagline.png"/>
+                        <img style="margin-top:45px;" src="<?= base_url() ?>images/template/sunncamp/tagline.png"/>
                     </div>
 
                     <div id="logo" class="grid_7">
