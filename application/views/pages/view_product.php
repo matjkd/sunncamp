@@ -20,12 +20,12 @@
     <hr/>
     <div class="grid_16">
 
-        <?php foreach ($defaultimage as $row): ?>
+        <?php if($defaultimage != NULL) { foreach ($defaultimage as $row): ?>
             <a href='<?= base_url() ?>images/products/<?= $row->product_id ?>/<?= $row->filename ?>' class = 'cloud-zoom' id='zoom1'
                rel="adjustX: 0, adjustY:0, position: 'inside', ">
                 <img src="<?= base_url() ?>images/products/<?= $row->product_id ?>/medium/<?= $row->filename ?>" alt='' />
             </a>
-        <?php endforeach; ?>
+        <?php endforeach;  ?>
 
 
 
@@ -43,6 +43,7 @@
                 <?php
                 $x = 0;
                 $y = 0;
+              
                 foreach ($images as $row):
 
                     if ($x == 0) {
@@ -73,9 +74,12 @@
 
 
                 endforeach;
+              
                 if ($y == 0) {
                     echo "</div>";
                 }
+                
+       
                 ?>
 
                 <!-- end of root element for items -->
@@ -84,6 +88,10 @@
 
         <!-- "next page" action -->
         <a class="next browse right"></a>
+        <?php  }
+        else {
+            echo "No Images";
+        }?>
         <br clear="all" />
         <div style="padding:0px;">
 
