@@ -12,7 +12,7 @@ $(function() {
     $( "#autocompletecategories" ).autocomplete({
         source: function(request, response) {
             $.ajax({
-                url: "/datasource/json_categories",
+                url: base_url + "/datasource/json_categories",
                 data: {
                     term: $("#autocompletecategories").val()
                 },
@@ -42,7 +42,7 @@ $(function() {
     $( "#autocompletefeatures" ).autocomplete({
         source: function(request, response) {
             $.ajax({
-                url: "/datasource/json_features",
+                url: base_url + "/datasource/json_features",
                 data: {
                     term: $("#autocompletefeatures").val()
                 },
@@ -69,7 +69,7 @@ $(function() {
     $( "#autocompletespecs" ).autocomplete({
         source: function(request, response) {
             $.ajax({
-                url: "/datasource/json_specs",
+                url: base_url + "/datasource/json_specs",
                 data: {
                     term: $("#autocompletespecs").val()
                 },
@@ -99,7 +99,7 @@ $(function() {
     $( "#autocompleteoptions" ).autocomplete({
         source: function(request, response) {
             $.ajax({
-                url: "/datasource/json_options",
+                url: base_url +  "/datasource/json_options",
                 data: {
                     term: $("#autocompleteoptions").val()
                 },
@@ -128,7 +128,7 @@ $(function() {
     $("#specorder").sortable({
         update: function(event,ui)
         {
-            $.post("/admin/sortspecs", {
+            $.post(base_url + "/admin/sortspecs", {
                 pages: $('#specorder').sortable('serialize')
             } );
         }
@@ -144,7 +144,7 @@ $(function() {
     $("#sortablethumb").sortable({
         update: function(event,ui)
         {
-            $.post("/admin/ajaxsort", {
+            $.post(base_url + "/admin/ajaxsort", {
                 pages: $('#sortablethumb').sortable('serialize')
             } );
         }
@@ -157,12 +157,12 @@ $(function() {
 function addFeaturetoProduct(product_id) {
 
     var feature = $('#feature_select').val();
-    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
   
     if (feature) {
   
         $('#features').append(loadergif);
-        $.post('/admin/add_product_feature/', {
+        $.post(base_url + '/admin/add_product_feature/', {
             product_id: product_id,
             product_feature: feature
         }, function(data) {
@@ -179,11 +179,11 @@ function addFeaturetoProduct(product_id) {
 
 function deleteFeaturefromProduct(product_id, feature_id){
 
-    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var  loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
     
 
     $('#features').append(loadergif);
-    $.post('/admin/remove_feature/', {
+    $.post(base_url + '/admin/remove_feature/', {
         product_id: product_id,
         feature_link_id: feature_id
     }, function(data) {
@@ -197,11 +197,11 @@ function deleteFeaturefromProduct(product_id, feature_id){
 
 function deleteManual(id, filename) {
 
-    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var  loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
     var answer = confirm("Are you sure you want to delete this manual?");
     if(answer) {  
         $('#row_' + id).append(loadergif);
-        $.post('/backend/manuals_admin/delete_manual/', {
+        $.post(base_url + '/backend/manuals_admin/delete_manual/', {
             filename: filename,
             manual_id: id
         }, function(data) {
@@ -218,11 +218,11 @@ function deleteManual(id, filename) {
 
 function deleteTradeReview(id, filename) {
 
-    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var  loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
     var answer = confirm("Are you sure you want to delete this Trade Review?");
     if(answer) {  
         $('#row_' + id).append(loadergif);
-        $.post('/backend/tradereviews_admin/delete_trade_review/', {
+        $.post(base_url + '/backend/tradereviews_admin/delete_trade_review/', {
             filename: filename,
             trade_review_id: id
         }, function(data) {
@@ -242,12 +242,12 @@ function addCategorytoProduct(product_id) {
       
       
     var category = $('#autocompletecategories').val(),
-    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+     loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
     
     
     if ( category ) {
         $('#categories').append(loadergif);
-        $.post('/admin/add_product_category/', {
+        $.post(base_url + '/admin/add_product_category/', {
             product_id: product_id,
             product_category: category
         }, function(data) {
@@ -271,11 +271,11 @@ function addCategorytoProduct(product_id) {
 function deleteCategoryfromProduct(product_id, link_id) {
       
       
-    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+   var loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
     
 
     $('#categories').append(loadergif);
-    $.post('/admin/remove_category/', {
+    $.post(base_url + '/admin/remove_category/', {
         product_id: product_id,
         category_link_id: link_id
     }, function(data) {
@@ -359,7 +359,7 @@ function addAttributetoProduct(product_id) {
     option = $('#option').val(),
     stock_level = $('#stock_level').val(),
     price = $('#price').val(),
-    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
           
     $('#attributes').append(loadergif);
           
@@ -398,7 +398,7 @@ function addOtherFeaturetoProduct(product_id) {
     var other_feature = $('#autocompleteotherfeatures').val()
    
         
-    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
           
     $('#other_features').append(loadergif);
            
@@ -420,7 +420,7 @@ function addSpectoProduct(product_id) {
     var product_spec = $('#autocompletespecs').val(),
     spec_value = $('#spec_value').val(),
         
-    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
           
     $('#specs').append(loadergif);
            
@@ -440,7 +440,7 @@ function addSpectoProduct(product_id) {
 
 function deleteSpecfromProduct(spec_id) {
 
-    var loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    var  loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
  
     $.post('/admin/remove_spec/', {
        
@@ -458,7 +458,7 @@ function raisestock(user_id, option_id) {
  
     var current_stock = $('#stock_' + option_id).html(),
     cart_quantity = $('#cart_' + option_id).html(),
-    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
 
      
 
@@ -495,7 +495,7 @@ function lowerstock(user_id, option_id) {
 
     var current_stock = $('#stock_' + option_id).html(),
     cart_quantity = $('#cart_' + option_id).html(),
-    loadergif = $('<img class="gifloader" src="/images/load.gif" />');
+   loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
   
     if(cart_quantity > 0) {
         $('#stock_' + option_id).append(loadergif);

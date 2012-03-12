@@ -1,3 +1,5 @@
+var base_url = $('#baseurl').val();
+
 // remap jQuery to $
 (function($){
 

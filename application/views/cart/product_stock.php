@@ -9,7 +9,7 @@ if ($is_logged_in != NULL && $role < 5) {
             <thead>
                 <tr>
                     <th>Type</th>
-                  
+
                     <th>Stock</th>
                     <th>Action</th>
                     <th>in Cart</th>
@@ -17,10 +17,10 @@ if ($is_logged_in != NULL && $role < 5) {
 
             </thead>
             <tbody>
-                <?php foreach ($attributes as $row): ?>
+                <?php if($attributes != NULL) { foreach ($attributes as $row): ?>
                     <tr>
                         <td> <?= $row->option_category ?>: <?= $row->option ?></td>
-                
+
                         <td id="stock_<?= $row->option_id ?>"><?= $row->stock_level ?>   </td>
                         <td>   
                             <span  style="width:18px; float:left;" class="ui-icon ui-icon-circle-minus spanlink" onclick="lowerstock('<?= $user_id ?>', '<?= $row->option_id ?>')" ></span>  
@@ -43,7 +43,7 @@ if ($is_logged_in != NULL && $role < 5) {
                                     }
                                     ?>
 
-                                <?php
+                                    <?php
                                 endforeach;
                             }
 
@@ -55,7 +55,8 @@ if ($is_logged_in != NULL && $role < 5) {
 
                         </td>
                     </tr>
-    <?php endforeach; ?>
+                <?php endforeach; } ?>
+            </tbody>
         </table>
     </div>
-            <?php } ?>
+<?php } ?>
