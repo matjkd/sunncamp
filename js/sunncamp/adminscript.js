@@ -155,6 +155,7 @@ function deleteProduct(id) {
             product_id: id 
         }, function(data) {
       
+       location.reload();
                     
             });
            
