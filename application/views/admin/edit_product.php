@@ -9,6 +9,7 @@ Title: <?=form_input('title', $row->product_name)?>
 <br/>
 <textarea cols=65 rows=20 name="content" id="content" class='wymeditor'><?=$row->product_desc?></textarea>
 <br/>
+
 <?=form_hidden('menu', $row->menu)?>
 
 Extra: <?=form_input('extra', $row->extra)?><br/>
