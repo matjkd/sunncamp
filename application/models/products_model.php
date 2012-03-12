@@ -728,6 +728,7 @@ class Products_model extends CI_Model {
             'product_desc' => $this->input->post('product_desc'),
             'product_name' => $this->input->post('product_name'),
             'product_ref' => $this->input->post('product_ref'),
+            'active' => $this->input->post('active'),
             'notnull' => 1
         );
 

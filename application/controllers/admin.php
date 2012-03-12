@@ -203,7 +203,7 @@ class Admin extends MY_Controller {
      */
     function add_product_category() {
 
-        $category = $this->input->post('product_category');
+        $category = trim($this->input->post('product_category'));
         $id = $this->input->post('product_id');
         //check if category name is in database already
         $catdata = $this->products_model->autocomplete_product_categories($category);

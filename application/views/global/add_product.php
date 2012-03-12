@@ -83,7 +83,7 @@ foreach ($product as $row):
             <textarea name="product_desc" id="product_desc"  class="wymeditor" style="width:100%;"><?= $row->product_desc ?></textarea>
         </div>
     </div>
-
+  Active on Site: <?=form_checkbox('active', '1', $row->active)?><br/>
     <br/>
     <input type="submit" class="wymupdate" />
 
