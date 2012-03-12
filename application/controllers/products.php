@@ -94,11 +94,13 @@ class Products extends MY_Controller {
 
         $data['title'] = $category_name;
         $data['products'] = $this->products_model->get_products_by_cat($category_name);
-        foreach ($data['products'] as $row):
-            $data['title'] = $row->product_category_name;
-            $data['cat_id'] = $row->parent;
+        if ($data['products'] != NULL) {
+            foreach ($data['products'] as $row):
+                $data['title'] = $row->product_category_name;
+                $data['cat_id'] = $row->parent;
 
-        endforeach;
+            endforeach;
+        }
         $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
         //$data['sidebox'] = "sidebox/product_cats";

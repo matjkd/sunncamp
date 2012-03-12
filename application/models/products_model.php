@@ -148,6 +148,8 @@ class Products_model extends CI_Model {
 
         return $query->result();
     }
+    
+       
 
     function get_all_product_parents($populated = 1) {
 
@@ -241,6 +243,8 @@ class Products_model extends CI_Model {
 
 
         $this->db->where('product_categories.category_safename', $category_name);
+        
+          $this->db->where('products.active', 1);
 
         $this->db->group_by('products.product_name');
 
