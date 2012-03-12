@@ -252,7 +252,7 @@ function addCategorytoProduct(product_id) {
             product_category: category
         }, function(data) {
             
-            var newcat = "<div class='cattable' id='categorylink_" + data + "'>" + category + " <span style='width:18px; float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteCategoryfromProduct(" + product_id +"," +data +")'>X</span></div>";
+            var newcat = "<div class='cattable' id='categorylink_" + data + "'>" + category + "</div>";
             $('#autocompletecategories').val('')
             $('.gifloader').remove();
             $('#categories').append(newcat);
@@ -402,7 +402,7 @@ function addOtherFeaturetoProduct(product_id) {
           
     $('#other_features').append(loadergif);
            
-    $.post('/admin/add_other_feature', {
+    $.post( base_url + '/admin/add_other_feature', {
         product_id: product_id,
         other_feature: other_feature
   

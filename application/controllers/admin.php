@@ -176,6 +176,9 @@ class Admin extends MY_Controller {
 
         $data['attributes'] = $this->products_model->get_attributes($data['product_id']);
         $data['main_content'] = "global/add_product";
+        if($data['product_categories'] == NULL) {
+        $data['message'] ="NOTE: For a product to display on the front end of the site it must be in a Product Category, and the 'active on site' checkbox must be checked.";
+        }
 
         $this->load->vars($data);
         $this->load->view('template/sunncamp/admin');
