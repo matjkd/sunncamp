@@ -55,6 +55,7 @@ class Products extends MY_Controller {
         $data['categories'] = $this->products_model->get_product_categories($product_id);
         $data['attributes'] = $this->products_model->get_attributes($product_id);
         $data['features'] = $this->products_model->get_product_features($product_id);
+        $data['other_features'] = $this->products_model->get_other_features($product_id);
         $data['specs'] = $this->products_model->get_product_specs($product_id);
         $data['cart'] = $this->cart_model->get_my_cart($user_id);
 

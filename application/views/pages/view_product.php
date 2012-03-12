@@ -103,7 +103,27 @@
             </div>
             <div style="clear:both;"></div>
             <?= $product_desc ?>
+            
+             <?php if ($other_features != NULL) { ?>
+              <div style="width:100%; border-bottom:solid 0px #000080; height:10px; padding:4px 0 2px; clear:both;">  </div>
+                <h2>Features</h2>
+               
+                <ul><?php foreach ($other_features as $row): ?>
+                
+                     
+                    <li>  <strong><?= $row->other_feature_name ?> </strong></li>
+                
+                    
+
+                <?php endforeach; ?>
+                            </ul>
+                
+               
+            <?php } ?>
+            
+            
             <?php if ($specs != NULL) { ?>
+                  <div style="width:100%; border-bottom:solid 0px #000080; height:10px; padding:4px 0 2px; clear:both;">  </div>
                 <h2>Specifications</h2>
                 <div style="width:100%; border-bottom:solid 2px #000080; height:0px; padding:4px 0 2px; clear:both;">  </div>
                 <?php foreach ($specs as $row): ?>
