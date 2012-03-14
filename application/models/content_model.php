@@ -47,6 +47,9 @@ class Content_model extends CI_Model {
             'menu' => $this->input->post('menu'),
             'title' => $this->input->post('title'),
             'extra' => $this->input->post('extra'),
+            'meta_desc' => $this->input->post('meta_desc'),
+            'meta_keywords' => $this->input->post('meta_keywords'),
+            'meta_title' => $this->input->post('meta_title'),
             'sidebox' => $this->input->post('sidebox')
         );
 
@@ -64,20 +67,19 @@ class Content_model extends CI_Model {
             return $query->result();
         }
     }
-    
-    
-/**
- *
- * @param type $cat
- * @return type 
- */
+
+    /**
+     *
+     * @param type $cat
+     * @return type 
+     */
     function get_all_products($cat = NULL) {
 
 
         $this->db->join('products', 'product_options.product_id = products.product_id', 'right');
 
 //Filter by category
-        if ($cat != NULL && $cat !=0) {
+        if ($cat != NULL && $cat != 0) {
             $this->db->join('product_category_link', 'products.product_id = product_category_link.product_id', 'left');
             $this->db->where('product_category_link.product_category_id', $cat);
         }

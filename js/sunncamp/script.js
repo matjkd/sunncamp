@@ -228,7 +228,7 @@ function deleteTradeReview(id, filename) {
         }, function(data) {
             $('.gifloader').remove();
             $('#row_' + id).remove();
-       
+     
                        
         });
     

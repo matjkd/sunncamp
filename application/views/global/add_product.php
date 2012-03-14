@@ -86,7 +86,7 @@ foreach ($product as $row):
     </div>
   Active on Site: <?=form_checkbox('active', '1', $row->active)?><br/>
     <br/>
-    <input type="submit" class="wymupdate" />
+    <input name="Submit" type="submit" class="wymupdate" />
 
 
     <?php
