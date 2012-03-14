@@ -21,6 +21,8 @@ class Cat_model extends CI_Model {
         return $insert;
     }
     
+    
+    
     function change_parent($drag, $drop) {
         
         

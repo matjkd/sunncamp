@@ -102,6 +102,13 @@ class Products extends MY_Controller {
                 $data['cat_id'] = $row->parent;
 
             endforeach;
+        } else {
+            $category_info = $this->products_model->get_product_cat($category_name);
+              foreach ($category_info as $row):
+                $data['title'] = $row->product_category_name;
+               
+
+            endforeach;
         }
         $data['categories'] = $this->products_model->get_all_product_cats();
           
