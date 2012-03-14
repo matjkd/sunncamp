@@ -6,14 +6,9 @@
         <?php if (isset($row->image_strip)) { ?>
             <img height="209px" width="910px" alt="<?= $row->title ?>" src="<?= base_url() ?>images/titles/<?= $row->image_strip ?>"/>
         <?php } else { ?>
-            <h1><?= $row->title ?></h1>
+
         <?php } ?>
-        <?php
-        $is_logged_in = $this->session->userdata('is_logged_in');
-        if (!isset($is_logged_in) || $is_logged_in == true) {
-            echo "<a href='" . base_url() . "admin/edit/" . $row->content_id . "'>edit this page</a><br/>";
-        }
-        ?>
+
 
         <?php
         if (isset($age)) {
@@ -24,6 +19,15 @@
         ?>
 
         <div class="grid_16">
+            <?php if (!isset($row->image_strip)) { echo "<h1>".$row->title."</h1>"; } ?>
+
+            <?php
+            $is_logged_in = $this->session->userdata('is_logged_in');
+            if (!isset($is_logged_in) || $is_logged_in == true) {
+                echo "<a href='" . base_url() . "admin/edit/" . $row->content_id . "'>edit this page</a><br/>";
+            }
+            ?>
+
 
             <?php $body = str_replace("sunncamp", "<strong>SunnCamp</strong>", "$body"); ?>
 
