@@ -304,6 +304,7 @@ class Products_model extends CI_Model {
      */
     function get_other_features($product_id) {
         $this->db->where('other_feature_link.product_id', $product_id);
+        $this->db->order_by('other_feature_link.other_feature_order', 'ASC');
         $this->db->join('other_features', 'other_feature_link.other_feature_id = other_features.other_feature_id', 'left');
         $query = $this->db->get('other_feature_link');
 

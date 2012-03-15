@@ -138,6 +138,21 @@ $(function() {
   	
 });
 
+$(function() {
+ 	
+    $("#other_feature_order").sortable({
+        update: function(event,ui)
+        {
+            $.post(base_url + "/admin/sortotherfeatures", {
+                pages: $('#other_feature_order').sortable('serialize')
+            } );
+        }
+    });
+    $("#other_feature_order").disableSelection();
+	 	
+  	
+});
+
 
 $(function() {
  	
@@ -189,6 +204,24 @@ function deleteFeaturefromProduct(product_id, feature_id){
     }, function(data) {
        
         $('#featurelink_'+feature_id).remove();
+        $('.gifloader').remove();
+                       
+    });
+
+}
+
+function deleteOtherFeaturefromProduct(other_feature_id){
+
+    var  loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
+    
+
+    $('#other_features').append(loadergif);
+    $.post(base_url + 'admin/remove_other_feature/', {
+       
+        other_feature_link_id: other_feature_id
+    }, function(data) {
+       
+        $('#other_feature_'+other_feature_id).remove();
         $('.gifloader').remove();
                        
     });
@@ -363,7 +396,7 @@ function addAttributetoProduct(product_id) {
           
     $('#attributes').append(loadergif);
           
-    $.post('/admin/add_attribute', {
+    $.post(base_url + 'admin/add_attribute', {
         product_id: product_id,
         option_category: option_category,
         option: option,
@@ -402,14 +435,14 @@ function addOtherFeaturetoProduct(product_id) {
           
     $('#other_features').append(loadergif);
            
-    $.post( base_url + '/admin/add_other_feature', {
+    $.post( base_url + 'admin/add_other_feature', {
         product_id: product_id,
         other_feature: other_feature
   
           
     }, function(data) {
         
-        var newotherfeature = "<li id='other_feature_" + data + "' class='cattable'><div style='float:left;' class='ui-icon ui-icon-arrowthick-2-n-s'></div><strong>" + other_feature + ":</strong><div style='float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteOtherFeaturefromProduct(" + product_id + ")'>x</div></li>";
+        var newotherfeature = "<li id='other_feature_" + data + "' class='cattable'><div style='float:left;' class='ui-icon ui-icon-arrowthick-2-n-s'></div><strong>" + other_feature + "</strong></li>";
         $('.gifloader').remove();
         $('#other_feature_order li:last').after(newotherfeature);  
     });
@@ -424,14 +457,14 @@ function addSpectoProduct(product_id) {
           
     $('#specs').append(loadergif);
            
-    $.post('/admin/add_product_spec', {
+    $.post(base_url + 'admin/add_product_spec', {
         product_id: product_id,
         product_spec: product_spec,
         spec_value: spec_value
           
     }, function(data) {
         
-        var newspec = "<li id='spec_" + data + "' class='cattable'><div style='float:left;' class='ui-icon ui-icon-arrowthick-2-n-s'></div><strong>" + product_spec + ":</strong> " + spec_value + "<div style='float:right;' class='ui-icon ui-icon-circle-close spanlink' onclick='deleteSpecfromProduct(" + product_id + ")'>x</div></li>";
+        var newspec = "<li id='spec_" + data + "' class='cattable'><div style='float:left;' class='ui-icon ui-icon-arrowthick-2-n-s'></div><strong>" + product_spec + ":</strong> " + spec_value + "</li>";
         $('.gifloader').remove();
         $('#specorder li:last').after(newspec);  
     });
@@ -442,7 +475,7 @@ function deleteSpecfromProduct(spec_id) {
 
     var  loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
  
-    $.post('/admin/remove_spec/', {
+    $.post(base_url + 'admin/remove_spec/', {
        
         spec_link_id: spec_id
        
@@ -469,7 +502,7 @@ function raisestock(user_id, option_id) {
         var updated_cart = parseInt(cart_quantity) + 1;
       
         
-        $.post('/usercart/change_stock_level/', {
+        $.post(base_url + 'usercart/change_stock_level/', {
             user_id: user_id,
             option_id: option_id,
             sum: "minus"
@@ -503,7 +536,7 @@ function lowerstock(user_id, option_id) {
         var updated_cart = parseInt(cart_quantity) - 1;
        
         
-        $.post('/usercart/change_stock_level/', {
+        $.post(base_url + 'usercart/change_stock_level/', {
             user_id: user_id,
             option_id: option_id,
             sum: "plus"

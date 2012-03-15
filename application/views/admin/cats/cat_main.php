@@ -52,7 +52,7 @@ if (isset($cat_id)) {
                 if ($row2->parent == $row->parent_id) {
                     ?>
 
-                    <li id="<?= $row2->product_category_name ?>"  class="ui-state-highlight"><a href="<?= base_url() ?>products/category/<?= $row2->product_category_name ?>"><?= $row2->product_category_name ?></a></li>
+                    <li id="<?= $row2->product_category_name ?>"  class="ui-state-highlight"><a href="<?= base_url() ?>products/category/<?= $row2->category_safename ?>"><?= $row2->product_category_name ?></a></li>
                 <?php }
             endforeach; ?>
 
