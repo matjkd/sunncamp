@@ -312,7 +312,7 @@ class Admin extends MY_Controller {
      */
 
     function remove_other_feature() {
-        $product_id = $this->input->post('product_id');
+        
         $other_feature_link_id = $this->input->post('other_feature_link_id');
         $this->products_model->delete_other_feature($other_feature_link_id);
 
@@ -340,6 +340,20 @@ class Admin extends MY_Controller {
         // list id is retrieved from the ID on the sortable list
         foreach ($pageOrder['spec'] as $key => $value):
             mysql_query("UPDATE ignite_product_spec_link SET `spec_order` = '$key' WHERE `spec_link_id` = '$value'") or die(mysql_error());
+
+
+        //$this->db->update('practice_area_links', $pro_update);
+        endforeach;
+    }
+    
+    
+     function sortotherfeatures() {
+        $pages = $this->input->post('pages');
+        parse_str($pages, $pageOrder);
+
+        // list id is retrieved from the ID on the sortable list
+        foreach ($pageOrder['other_feature'] as $key => $value):
+            mysql_query("UPDATE ignite_other_feature_link SET `other_feature_order` = '$key' WHERE `other_feature_link_id` = '$value'") or die(mysql_error());
 
 
         //$this->db->update('practice_area_links', $pro_update);
