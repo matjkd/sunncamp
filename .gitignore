@@ -1,6 +1,8 @@
 application/config/database.php
 application/config/config.php
 images/captcha/*
+images/manuals/*
+images/trade_reviews/*
 images/products/*
 nbproject/*
 stats/*
