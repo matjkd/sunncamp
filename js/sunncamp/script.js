@@ -94,6 +94,33 @@ $(function() {
 });
 
 
+//autocomplete other features
+$(function() {
+    $( "#autocompleteotherfeatures" ).autocomplete({
+        source: function(request, response) {
+            $.ajax({
+                url: base_url + "/datasource/json_otherfeatures",
+                data: {
+                    term: $("#autocompleteotherfeatures").val()
+                },
+                dataType: "json",
+                type: "POST",
+                success: function(data){
+                    response($.map(data, function(item){
+                        return {
+                            label: item.other_feature_name,
+                            value: item.other_feature_name
+                        } 
+                        
+                    }));
+                }
+            });
+        },
+        minLength: 1
+        
+    });
+});
+
       
         
 //autocomplete options
