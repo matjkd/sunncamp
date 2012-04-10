@@ -253,7 +253,7 @@ class Products_model extends CI_Model {
 
         $this->db->where('products.active', 1);
 
-        $this->db->group_by('products.product_name');
+        //$this->db->group_by('products.product_name');
 
         $query = $this->db->get('products');
 

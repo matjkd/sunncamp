@@ -364,10 +364,12 @@ class Admin extends MY_Controller {
      * sort the images for a product
      */
     function ajaxsort() {
+        
         $pages = $this->input->post('pages');
 
 
         parse_str($pages, $pageOrder);
+        print_r($pageOrder);
 
         foreach ($pageOrder['pageorder'] as $key => $value):
             echo $key;
