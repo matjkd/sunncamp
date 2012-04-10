@@ -447,6 +447,9 @@ function addOtherFeaturetoProduct(product_id) {
         var newotherfeature = "<li id='other_feature_" + data + "' class='cattable'><div style='float:left;' class='ui-icon ui-icon-arrowthick-2-n-s'></div><strong>" + other_feature + "</strong></li>";
         $('.gifloader').remove();
         $('#other_feature_order li:last').after(newotherfeature);  
+        
+       
+        
     });
 
 }

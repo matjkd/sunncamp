@@ -79,7 +79,8 @@ class Products_model extends CI_Model {
         //if not add to list
         $new_list_entry = array(
             'other_feature_id' => $other_feature_id,
-            'product_id' => $product_id
+            'product_id' => $product_id,
+            'other_feature_order' => 99
         );
 
         $insert = $this->db->insert('other_feature_link', $new_list_entry);
