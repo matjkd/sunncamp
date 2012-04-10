@@ -26,7 +26,7 @@
         <?php if($row->order == 0 ) { ?>
         <div id="productview" >
             <a href="<?= base_url() ?>products/show/<?= $row->product_id ?>">
-                <div style="border:1px solid #333333; height:106px;" >
+                <div style="border:1px solid #333333; height:106px; width:134px; overflow:hidden;" >
                     <img  style="vertical-align: middle;" src="<?= base_url() ?>/images/products/<?= $row->product_id ?>/thumbs/<?= $row->filename ?>" width="134px"/>
                 </div>
 
