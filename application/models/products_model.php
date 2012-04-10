@@ -420,7 +420,7 @@ class Products_model extends CI_Model {
     function autocomplete_other_features($param) {
         $data = array();
 
-
+$param = str_replace("'", "", $param);
 
         $where = "other_feature_name REGEXP '^$param'";
         $this->db->where($where);
@@ -447,7 +447,7 @@ class Products_model extends CI_Model {
     function autocomplete_product_specs($param) {
         $data = array();
 
-
+$param = str_replace("'", "", $param);
 
         $where = "spec_desc REGEXP '^$param'";
         $this->db->where($where);
@@ -549,7 +549,7 @@ class Products_model extends CI_Model {
         $pagelink = trim(str_replace(" ", "_", $category));
 
         $new_cat_entry = array(
-            'product_category_name' => ucfirst(strtolower($category)),
+            'product_category_name' => trim($category),
             'category_safename' => $pagelink
         );
 
@@ -561,7 +561,7 @@ class Products_model extends CI_Model {
 
 
         $new_spec_entry = array(
-            'spec_desc' => ucfirst(strtolower($spec)),
+            'spec_desc' => trim($spec),
         );
 
         $insert = $this->db->insert('product_specifications', $new_spec_entry);
@@ -572,7 +572,7 @@ class Products_model extends CI_Model {
 
 
         $new_other_feature_entry = array(
-            'other_feature_name' => ucfirst(strtolower($feature)),
+            'other_feature_name' => trim($feature),
         );
 
         $insert = $this->db->insert('other_features', $new_other_feature_entry);
