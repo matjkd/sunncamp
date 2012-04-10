@@ -1,4 +1,4 @@
- var base_url = $('#baseurl').val();
+var base_url = $('#baseurl').val();
 
 $(document).ready(function() {
     $('.frontpage_slideshow').cycle({
@@ -6,6 +6,8 @@ $(document).ready(function() {
         cleartypeNoBg: 'TRUE'
     });
 });      
+
+
         
 //autocomplete categories
 $(function() {
@@ -275,7 +277,7 @@ function addCategorytoProduct(product_id) {
       
       
     var category = $('#autocompletecategories').val(),
-     loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
     
     
     if ( category ) {
@@ -304,7 +306,7 @@ function addCategorytoProduct(product_id) {
 function deleteCategoryfromProduct(product_id, link_id) {
       
       
-   var loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
+    var loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
     
 
     $('#categories').append(loadergif);
@@ -528,7 +530,7 @@ function lowerstock(user_id, option_id) {
 
     var current_stock = $('#stock_' + option_id).html(),
     cart_quantity = $('#cart_' + option_id).html(),
-   loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
+    loadergif = $('<img class="gifloader" src="' + base_url +'images/load.gif" />');
   
     if(cart_quantity > 0) {
         $('#stock_' + option_id).append(loadergif);
