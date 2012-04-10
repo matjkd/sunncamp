@@ -420,7 +420,7 @@ class Products_model extends CI_Model {
     function autocomplete_other_features($param) {
         $data = array();
 
-$param = str_replace("'", "", $param);
+$param = str_replace("'", "\'", $param);
 
         $where = "other_feature_name REGEXP '^$param'";
         $this->db->where($where);
