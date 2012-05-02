@@ -27,7 +27,10 @@ class Category_admin extends MY_Controller {
 
         $data['categories'] = $this->products_model->get_all_product_cats();
         $data['category_parents'] = $this->products_model->get_all_product_parents();
-
+        
+        if ($this->session->flashdata('message')) {
+            $data['message'] = $this->session->flashdata('message');
+        }
 
         $data['allcategories'] = $this->products_model->get_all_product_cats();
         $data['allcategory_parents'] = $this->products_model->get_all_product_parents(0);
@@ -37,9 +40,14 @@ class Category_admin extends MY_Controller {
     }
 
     function add_category_parent() {
-
-        $this->cat_model->create_parent();
-        redirect('/backend/category_admin');
+        $this->form_validation->set_rules('category_parent', 'Parent Category', 'trim|required');
+        if ($this->form_validation->run() == FALSE) { // validation hasn'\t been passed
+            $this->session->set_flashdata('message', "Field must not be blank");
+            redirect('/backend/category_admin');
+        } else { // passed validation proceed to post success logic
+            $this->cat_model->create_parent();
+            redirect('/backend/category_admin');
+        }
     }
 
     function change_parent() {
