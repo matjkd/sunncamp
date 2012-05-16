@@ -20,6 +20,16 @@ $(function() {
 });
 
 
+//sort images on page load
+$(document).ready(function() {
+   if ($("#sortablethumb").length > 0){
+    $.post(base_url + "/admin/ajaxsort", {
+        pages: $('#sortablethumb').sortable('serialize')
+    } );
+   }
+}); 
+
+
 $(function() {
     $( ".sorting ul" ).sortable({
         items: "li:not(.ui-state-default)",
@@ -113,17 +123,17 @@ function deleteUser(user_id) {
 
 function deleteCompanyCat(company_cat_id) {
     var loadergif = $('<img class="gifloader" src="' + base_url + 'images/ajax-loader-blue.gif" />');
-  $('#cat_' + company_cat_id).append(loadergif);
+    $('#cat_' + company_cat_id).append(loadergif);
   
-   $.post(base_url + 'user/user_admin/remove_company_cat/', {
-            company_cat_id: company_cat_id
+    $.post(base_url + 'user/user_admin/remove_company_cat/', {
+        company_cat_id: company_cat_id
      
-        }, function(data) {
+    }, function(data) {
            
        
-         $('#cat_' + company_cat_id).remove();
+        $('#cat_' + company_cat_id).remove();
                        
-            });
+    });
   
 }
 
@@ -155,9 +165,9 @@ function deleteProduct(id) {
             product_id: id 
         }, function(data) {
       
-       location.reload();
+            location.reload();
                     
-            });
+        });
            
     }
     else{
