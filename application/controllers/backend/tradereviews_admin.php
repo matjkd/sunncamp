@@ -11,6 +11,7 @@ class Tradereviews_admin extends MY_Controller {
         $this->load->model('gallery_model');
         $this->load->model('tradereviews_model');
         $this->load->model('menu_model');
+        $this->load->library('s3');
     }
 
     function index() {
@@ -59,6 +60,14 @@ class Tradereviews_admin extends MY_Controller {
 
             $this->tradereviews_model->add_trade_review($filename);
             $this->session->set_flashdata('message', "File added.");
+            
+            //upload trade review to s3
+            $filelocation = "trade_reviews/".$filename;
+            $thefile = file_get_contents($this->config_base_path."images/trade_reviews/".$filename, true);
+            
+            $this->s3->putObject($thefile, $this->bucket, $filelocation, S3:: ACL_PUBLIC_READ);
+            
+            
             redirect('backend/tradereviews_admin', 'refresh');
         }
     }

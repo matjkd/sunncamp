@@ -41,6 +41,7 @@ class Gallery_model extends CI_Model {
 
 
         //resize the images
+        //create thumb
         $config = array(
             'source_image' => $image_data['full_path'],
             'new_image' => $this->gallery_path . '/' . $id . '/thumbs',
@@ -53,7 +54,7 @@ class Gallery_model extends CI_Model {
         $this->image_lib->resize();
         $this->image_lib->clear();
 
-
+        //create medium
         $config2 = array(
             'source_image' => $image_data['full_path'],
             'new_image' => $this->gallery_path . '/' . $id . '/medium',
@@ -64,7 +65,22 @@ class Gallery_model extends CI_Model {
 
         $this->image_lib->initialize($config2);
         $this->image_lib->resize();
+         $this->image_lib->clear();
 
+         
+         //create large
+          $config3 = array(
+            'source_image' => $image_data['full_path'],
+            'new_image' => $this->gallery_path . '/' . $id . '/large',
+            'maintain_ratio' => true,
+            'width' => 1200,
+            'height' => 900
+        );
+
+        $this->image_lib->initialize($config3);
+        $this->image_lib->resize();
+         $this->image_lib->clear();
+         
         $upload_data = array($this->upload->data());
 
         foreach ($upload_data as $row):
@@ -75,12 +91,15 @@ class Gallery_model extends CI_Model {
                 'product_id' => $id,
                 'order' => 5
             );
-
+$filename = $row['file_name'];
         if($row['file_name']!=NULL){
             $this->db->insert('product_images', $new_image_data);
+            
         }
 
         endforeach;
+        return $filename;
     }
+   
 
 }

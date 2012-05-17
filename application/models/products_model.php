@@ -132,6 +132,18 @@ class Products_model extends CI_Model {
 
         return FALSE;
     }
+    
+    function get_all_product_images() {
+    	
+    	$this->db->order_by('order');
+    	$query = $this->db->get('product_images');
+    	if ($query->num_rows > 0) {
+    		return $query->result();
+    	}
+    	
+    	return FALSE;
+    	 
+    }
 
     function get_default_image($id) {
         $this->db->where('product_id', $id);
