@@ -21,9 +21,9 @@
     <div class="grid_16">
 
         <?php if($defaultimage != NULL) { foreach ($defaultimage as $row): ?>
-            <a href='<?= base_url() ?>images/products/<?= $row->product_id ?>/<?= $row->filename ?>' class = 'cloud-zoom' id='zoom1'
+            <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/<?= $row->filename ?>' class = 'cloud-zoom' id='zoom1'
                rel="adjustX: 0, adjustY:0, position: 'inside', ">
-                <img src="<?= base_url() ?>images/products/<?= $row->product_id ?>/medium/<?= $row->filename ?>" alt='' />
+                <img src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/medium/<?= $row->filename ?>" alt='' />
             </a>
         <?php endforeach;  ?>
 
@@ -58,9 +58,9 @@
 
 
 
-                    <a href='<?= base_url() ?>images/products/<?= $row->product_id ?>/<?= $row->filename ?>' class='cloud-zoom-gallery' title='Thumbnail 1'
-                       rel="useZoom: 'zoom1', smallImage: '<?= base_url() ?>images/products/<?= $row->product_id ?>/medium/<?= $row->filename ?>' ">
-                        <img src="<?= base_url() ?>images/products/<?= $row->product_id ?>/thumbs/<?= $row->filename ?>" alt = "Thumbnail 1"/></a>
+                    <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/<?= $row->filename ?>' class='cloud-zoom-gallery' title='Thumbnail 1'
+                       rel="useZoom: 'zoom1', smallImage: 'https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/medium/<?= $row->filename ?>' ">
+                        <img src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/thumbs/<?= $row->filename ?>" alt = "Thumbnail 1"/></a>
 
 
 

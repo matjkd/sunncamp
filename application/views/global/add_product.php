@@ -14,7 +14,7 @@
                 <li id="pageorder_<?= $image->product_image_id ?>">
                     <div class="thumb" >
                         <a href="#">
-                            <img height="100px" width="135px" src="<?= base_url() ?>images/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>" />
+                            <img height="100px" width="135px" src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>" />
                         </a>
 
 
