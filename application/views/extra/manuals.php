@@ -15,7 +15,7 @@
                     if ($row2->manual_category == $row->manual_cat_id) {
                         ?>
 
-                        <li><a target="_blank" href="<?= base_url() ?>images/manuals/<?= $row2->manual_filename ?>"><?= $row2->manual_title ?></a></li>
+                        <li><a target="_blank" href="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/manuals/<?= $row2->manual_filename ?>"><?= $row2->manual_title ?></a></li>
                     <?php } endforeach; ?>
             </ul>
         </li>
