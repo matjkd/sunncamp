@@ -11,6 +11,7 @@ class Manuals_admin extends MY_Controller {
         $this->load->model('gallery_model');
         $this->load->model('manuals_model');
         $this->load->model('menu_model');
+        $this->load->library('s3');
     }
 
     function index() {
@@ -59,6 +60,14 @@ class Manuals_admin extends MY_Controller {
 
             $this->manuals_model->add_manual($filename);
             $this->session->set_flashdata('message', "File added.");
+            
+            
+            //upload manual to s3
+            $filelocation = "manuals/".$filename;
+            $thefile = file_get_contents($this->config_base_path."images/manuals/".$filename, true);
+            
+            $this->s3->putObject($thefile, $this->bucket, $filelocation, S3:: ACL_PUBLIC_READ);
+            
             redirect('backend/manuals_admin', 'refresh');
         }
     }

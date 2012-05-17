@@ -91,12 +91,15 @@ class Gallery_model extends CI_Model {
                 'product_id' => $id,
                 'order' => 5
             );
-
+$filename = $row['file_name'];
         if($row['file_name']!=NULL){
             $this->db->insert('product_images', $new_image_data);
+            
         }
 
         endforeach;
+        return $filename;
     }
+   
 
 }
