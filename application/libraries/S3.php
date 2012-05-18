@@ -53,6 +53,11 @@ class S3 {
 	function __construct($config = array())
 	{
 		
+		
+		/**
+		 * Addition that retreives access codes from database rather than storing them in 
+		 * config files
+		 */
 		if ( ! empty($config))
 		{
 			$CI =& get_instance();
