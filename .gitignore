@@ -1,5 +1,7 @@
 application/config/database.php
 application/config/config.php
+application/config/postmark.php
+application/logs/*
 images/captcha/*
 images/manuals/*
 images/trade_reviews/*
