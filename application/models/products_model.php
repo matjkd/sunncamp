@@ -401,6 +401,33 @@ class Products_model extends CI_Model {
             return FALSE;
         }
     }
+    
+    /**
+     *
+     * @param type $param
+     * @return type
+     */
+    function check_product_categories($param) {
+    	$data = array();
+    
+    
+    
+    	
+    	$this->db->where('product_category_name', $param);
+    
+    
+    	$query = $this->db->get('product_categories');
+    
+    	if ($query->num_rows() > 0) {
+    		foreach ($query->result_array() as $row)
+    			$data[] = $row;
+    		$query->free_result();
+    
+    		return $data;
+    	} else {
+    		return FALSE;
+    	}
+    }
 
     /**
      *
@@ -449,6 +476,28 @@ $param = str_replace("'", "\'", $param);
         } else {
             return FALSE;
         }
+    }
+    
+    function check_other_feature($param) {
+    	$data = array();
+    	
+    	$param = str_replace("'", "\'", $param);
+    	
+    	
+    	$this->db->where('other_feature_name', $param);
+    	
+    	
+    	$query = $this->db->get('other_features');
+    	
+    	if ($query->num_rows() > 0) {
+    		foreach ($query->result_array() as $row)
+    			$data[] = $row;
+    		$query->free_result();
+    	
+    		return $data;
+    	} else {
+    		return FALSE;
+    	}
     }
 
     /**
