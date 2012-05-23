@@ -210,7 +210,7 @@ class Admin extends MY_Controller {
 		$category = trim($this->input->post('product_category'));
 		$id = $this->input->post('product_id');
 		//check if category name is in database already
-		$catdata = $this->products_model->autocomplete_product_categories($category);
+		$catdata = $this->products_model->check_product_categories($category);
 		if ($catdata) {
 
 			// The cat is in the database already
@@ -260,7 +260,7 @@ class Admin extends MY_Controller {
 		$other_feature = $this->input->post('other_feature');
 
 		//check if feature name is in database already
-		$otherfeature = $this->products_model->autocomplete_other_features($other_feature);
+		$otherfeature = $this->products_model->check_other_feature($other_feature);
 
 		if ($otherfeature) {
 

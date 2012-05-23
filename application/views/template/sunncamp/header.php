@@ -10,7 +10,7 @@
 
 
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-<!-- <link rel="shortcut icon" href="<?= base_url() ?>favicon.ico"> -->
+<link rel="shortcut icon" href="<?= base_url() ?>favicon.ico"> 
 <link rel="apple-touch-icon" href="<?= base_url() ?>apple-touch-icon.png">
 
 
