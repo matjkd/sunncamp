@@ -10,7 +10,7 @@ class Admin extends MY_Controller {
 		$this->load->model('products_model');
 		$this->load->model('gallery_model');
 		$this->load->model('menu_model');
-	
+
 	}
 
 	function index() {
@@ -123,6 +123,9 @@ class Admin extends MY_Controller {
 			$id = $this->uri->segment(3);
 			$this->content_model->edit_content($id);
 
+			$this->upload_news_image($id);
+			
+			
 			redirect("admin/edit/$id");
 		}
 	}
@@ -133,7 +136,7 @@ class Admin extends MY_Controller {
 	function submit_content() {
 		$this->form_validation->set_rules('title', 'Title', 'trim|max_length[255]');
 		$this->form_validation->set_rules('content', 'Content', 'trim');
-		$this->form_validation->set_rules('menu', 'menu', 'trim|required');
+		//$this->form_validation->set_rules('menu', 'menu', 'trim|required');
 		$this->form_validation->set_rules('category', 'Page Type', 'trim|max_length[11]');
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
@@ -141,6 +144,14 @@ class Admin extends MY_Controller {
 			echo "validation error";
 		} else { // passed validation proceed to post success logic
 			if ($this->content_model->add_content()) { // the information has therefore been successfully saved in the db
+				
+				
+				//now process the image
+				// run insert model to write data to db
+				//upload file
+				//retrieve uploaded file
+				$this->upload_news_image();
+				
 				redirect('/admin');   // or whatever logic needs to occur
 			} else {
 				echo 'An error occurred saving your information. Please try again later';
@@ -148,6 +159,64 @@ class Admin extends MY_Controller {
 			}
 		}
 	}
+	
+	function upload_news_image($id = 0) {
+	
+		$this->gallery_model->do_news_upload();
+	
+	
+		if (!empty($_FILES) && $_FILES['file']['error'] != 4) {
+	
+			$fileName = $_FILES['file']['name'];
+			$tmpName = $_FILES['file']['tmp_name'];
+			$fileName = str_replace(" ", "_", $fileName);
+			$filelocation = "news/".$fileName;
+	
+			$thefile = file_get_contents($tmpName, true);
+	
+			//add filename into database
+			//get blog id
+			if ($id == 0) {
+				$blog_id = mysql_insert_id();
+			} else {
+				$blog_id = $id;
+			}
+			$this->content_model->add_file($fileName, $blog_id);
+			//move the file
+	
+			if ($this->s3->putObject($thefile, $this->bucket, $filelocation, S3:: ACL_PUBLIC_READ)) {
+				//echo "We successfully uploaded your file.";
+				$this->session->set_flashdata('message', 'News Added and file uploaded successfully');
+			} else {
+				//echo "Something went wrong while uploading your file... sorry.";
+				$this->session->set_flashdata('message', 'News Added, but your file did not upload');
+			}
+	
+			//uploadthumb
+			$thumblocation = base_url() . 'images/temp/thumbs/' . $fileName;
+			$newfilename = "news/thumb_" .  $fileName;
+	
+	
+			$newfile = file_get_contents($thumblocation, true);
+	
+			if ($this->s3->putObject($newfile, $this->bucket, $newfilename, S3:: ACL_PUBLIC_READ)) {
+				//echo "We successfully uploaded your file.";
+				$this->session->set_flashdata('message', 'News Added and file uploaded successfully');
+			} else {
+				//echo "Something went wrong while uploading your file... sorry.";
+				$this->session->set_flashdata('message', 'News Added, but your file did not upload');
+			}
+			//delete files from server
+			$this->gallery_path = "./images/temp";
+			unlink($this->gallery_path . '/' . $fileName . '');
+			unlink($this->gallery_path . '/thumbs/' . $fileName . '');
+		} else {
+	
+			$this->session->set_flashdata('message', 'News Added');
+		}
+	}
+	
+	
 
 	/**
 	 *
@@ -178,7 +247,8 @@ class Admin extends MY_Controller {
 		$data['attributes'] = $this->products_model->get_attributes($data['product_id']);
 		$data['main_content'] = "global/add_product";
 		if($data['product_categories'] == NULL) {
-			$data['message'] ="NOTE: For a product to display on the front end of the site it must be in a Product Category, and the 'active on site' checkbox must be checked.";
+			$data['message'] = "NOTE: For a product to display on the front end of the site it must be in a Product Category,
+			and the 'active on site' checkbox must be checked.";
 		}
 
 		$this->load->vars($data);
@@ -480,12 +550,12 @@ class Admin extends MY_Controller {
 	}
 
 	function convert_images_to_s3() {
-		 
+			
 		//get all products
 		$allImages =$this->products_model->get_all_product_images();
-		 
+			
 		foreach($allImages as $row):
-		 
+			
 		$id = $row->product_id;
 		$filename = $row->filename;
 		$this->gallery_path = "images/products";
@@ -495,12 +565,12 @@ class Admin extends MY_Controller {
 		$thumbFile =$this->config_base_path . $this->gallery_path . '/' . $id . '/thumbs/' ;
 		$mediumFile =$this->config_base_path . $this->gallery_path . '/' . $id . '/medium/';
 		$largeFile =$this->config_base_path . $this->gallery_path . '/' . $id . '/large/';
-		 
+			
 		$regularfilelocation =  'products/' . $id . '/'.$filename;
 		$thumbfilelocation =  'products/' . $id . '/thumbs/'.$filename;
 		$mediumfilelocation =  'products/' . $id . '/medium/'.$filename;
 		$largefilelocation = 'products/' . $id . '/large/'.$filename;
-		 
+			
 		if(file_exists($base_path.$regularfilelocation)){
 			$regular = file_get_contents($base_path.$regularfilelocation, true);
 			echo "putObject(". $this->bucket." ".$regularfilelocation."<br/>";
@@ -508,7 +578,7 @@ class Admin extends MY_Controller {
 		} else {
 			echo "no regular file<br/>";
 		}
-		 
+			
 		if(file_exists($base_path.$thumbfilelocation)){
 			$thumb = file_get_contents($base_path.$thumbfilelocation, true);
 			echo "putObject(". $this->bucket." ".$thumbfilelocation."<br/>";
@@ -516,25 +586,25 @@ class Admin extends MY_Controller {
 		} else {
 			echo "no thumb file<br/>";
 		}
-		 
-		if(file_exists($base_path.$mediumfilelocation)){ 
-		$medium = file_get_contents($base_path.$mediumfilelocation, true);
-		echo "putObject(". $this->bucket." ".$mediumfilelocation."<br/>";
-		$this->s3->putObject($medium, $this->bucket, $mediumfilelocation, S3:: ACL_PUBLIC_READ);
+			
+		if(file_exists($base_path.$mediumfilelocation)){
+			$medium = file_get_contents($base_path.$mediumfilelocation, true);
+			echo "putObject(". $this->bucket." ".$mediumfilelocation."<br/>";
+			$this->s3->putObject($medium, $this->bucket, $mediumfilelocation, S3:: ACL_PUBLIC_READ);
 		} else {
 			echo "no medium file<br/>";
 		}
-		
+
 		if(file_exists($base_path.$largefilelocation)){
-		$large = file_get_contents($base_path.$largefilelocation, true);
-		echo "putObject(". $this->bucket." ".$largefilelocation."<br/>";
-		$this->s3->putObject($large, $this->bucket, $largefilelocation, S3:: ACL_PUBLIC_READ);
+			$large = file_get_contents($base_path.$largefilelocation, true);
+			echo "putObject(". $this->bucket." ".$largefilelocation."<br/>";
+			$this->s3->putObject($large, $this->bucket, $largefilelocation, S3:: ACL_PUBLIC_READ);
 		} else {
 			echo "no large file<br/>";
-		} 
-		
-		 
-		 
+		}
+
+			
+			
 		endforeach;
 	}
 
@@ -701,15 +771,15 @@ class Admin extends MY_Controller {
 		$this->load->view('template/sunncamp/admin');
 	}
 
+	
 	/*
 	 *
 	*/
 
-	function add_seo_content() {
+	function add_news_content() {
 		$data['main_content'] = "admin/add_content";
-		$data['seo_links'] = $this->content_model->get_seo_links();
 		$data['pages'] = $this->content_model->get_all_content();
-		$data['category'] = "seo";
+		$data['category'] = "news";
 		$this->load->vars($data);
 		$this->load->view('template/sunncamp/admin');
 	}
