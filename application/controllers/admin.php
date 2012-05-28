@@ -460,7 +460,7 @@ class Admin extends MY_Controller {
 		$spec = $this->input->post('product_spec');
 		$spec_value = $this->input->post('spec_value');
 		//check if category name is in database already
-		$specdata = $this->products_model->autocomplete_product_specs($spec);
+		$specdata = $this->products_model->check_product_spec($spec);
 
 		if ($specdata) {
 
