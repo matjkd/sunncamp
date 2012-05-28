@@ -526,6 +526,33 @@ $param = str_replace("'", "", $param);
             return FALSE;
         }
     }
+    
+    /**
+     *
+     * @param type $param
+     * @return type
+     */
+    function check_product_spec($param) {
+    	$data = array();
+    
+    	$param = str_replace("'", "", $param);
+    
+    	
+    	$this->db->where('spec_desc', $param);
+    
+    
+    	$query = $this->db->get('product_specifications');
+    
+    	if ($query->num_rows() > 0) {
+    		foreach ($query->result_array() as $row)
+    			$data[] = $row;
+    		$query->free_result();
+    
+    		return $data;
+    	} else {
+    		return FALSE;
+    	}
+    }
 
     /**
      *
