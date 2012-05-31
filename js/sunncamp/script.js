@@ -550,6 +550,9 @@ function raisestock(user_id, option_id) {
       
     
     }
+    
+    
+    
 
 
 
@@ -588,7 +591,40 @@ function lowerstock(user_id, option_id) {
 }
 
 
+$(document).ready(function() {
+	
+	 $('.stockistButton').hover(function(){
+		 $(this).stop().animate({
+             opacity:0.8
+         });
+		 
+	 },
+	  function() {
+         $(this).stop().animate({
+             opacity:1.0
+         }, 
+         500
+         );
+	 });
+	 
+	 
 
+	
+	
+    $('.stockistButton').click(function(){
+    	$(".stockist" ).stop().fadeOut(200);
+    	
+    	var parentId = $(this).attr('id');
+    	
+    	
+    	$("." + parentId ).delay(200).fadeIn().animate({
+            opacity:1.0
+        }, 
+        500
+        );;
+    	
+    });
+});     
 
 
 
