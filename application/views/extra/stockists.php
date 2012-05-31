@@ -40,7 +40,7 @@
 <?php } ?>
 
 <?php if($row->company_web != NULL){?>
-<a href="<?=$row->company_web?>"><?=$row->company_web?></a>
+<a href="http://<?=$row->company_web?>"><?=$row->company_web?></a>
 <?php } ?>
 </div>
 <?php endforeach;?>
