@@ -28,6 +28,21 @@ class Content_model extends CI_Model {
             return $query->result();
         }
     }
+    
+    function get_stockists() {
+    	$this->db->join('companies', 'company_cats.company_id = companies.company_id');
+    	$this->db->join('company_address', 'company_cats.company_id = company_address.company_id');
+    	$this->db->join('product_categories', 'company_cats.company_cat = product_categories.product_category_id');
+    	$this->db->group_by(array('product_categories.parent', 'companies.company_id'));
+    	$this->db->where('companies.company_type', 1);
+    	$this->db->where('companies.visible_on_site', 1);
+    	
+    	$query = $this->db->get('company_cats');
+    	if ($query->num_rows > 0)
+    		; {
+    		return $query->result();
+    	}
+    }
 
     function get_content_id($id) {
 
