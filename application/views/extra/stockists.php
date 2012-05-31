@@ -31,6 +31,10 @@
 <?=$row->address5?> <br/>
 <?php } ?>
 
+<?php if($row->company_phone != NULL){?>
+<?=$row->company_phone?> <br/>
+<?php } ?>
+
 <?php if($row->postcode != NULL){?>
 <?=$row->postcode?> <br/>
 <?php } ?>
