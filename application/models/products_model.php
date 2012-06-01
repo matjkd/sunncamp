@@ -634,9 +634,10 @@ $param = str_replace("'", "", $param);
      */
     function create_new_cat($category) {
 
-    	$badcharacters = array(" ", "&", "&amp;");
+    	$badcharacters = array(" ", "&", "&amp;", "/");
         $pagelink = trim(str_replace($badcharacters, "_", $category));
         $category = trim(str_replace("&", "and", $category));
+        
         
         $new_cat_entry = array(
             'product_category_name' => trim($category),
