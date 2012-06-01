@@ -634,8 +634,10 @@ $param = str_replace("'", "", $param);
      */
     function create_new_cat($category) {
 
-    	$badcharacters = array(" ", "&", "&amp;", "/");
+    	$badcharacters = array(" ", "&amp;", "/");
+    	$nospace = array("\"", "'", "&");
         $pagelink = trim(str_replace($badcharacters, "_", $category));
+        $pagelink = trim(str_replace($nospace, "", $pagelink));
         $category = trim(str_replace("&", "and", $category));
         
         
