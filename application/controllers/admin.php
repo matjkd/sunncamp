@@ -598,7 +598,7 @@ $product_image_id =  $row->product_image_id;
 		$this->put_converted_file($id, $filename);
 		endforeach;
 		
-		redirect('/admin/create_large_image');
+	//	redirect('/admin/create_large_image');
 		
 	}
 	
