@@ -12,9 +12,40 @@ class Gallery_model extends CI_Model {
     function Gallery_model() {
 
         parent::Model();
-
+       
         $this->gallery_path = './images/products';
         $this->gallery_path_url = base_url() . 'images/products/';
+    }
+    
+    function make_large_file($id, $filename) {
+    	
+    	$this->gallery_path1 = 'images/products';
+    
+    
+    	mkdir('' . $this->config_base_path . $this->gallery_path1 . '/' . $id . '/');
+    	mkdir('' . $this->config_base_path . $this->gallery_path1 . '/' . $id . '/large/');
+    	 
+    	echo $this->config_base_path . $this->gallery_path1 . '/' . $id . '/'.$filename;
+    	$image = file_get_contents("https://s3-eu-west-1.amazonaws.com/".$this->bucket."/products/".$id."/".$filename);
+    	
+    	file_put_contents("images/products/".$id."/large/temp_".$filename, $image);
+    	
+    	
+    	$config = array(
+    			'source_image' => "images/products/".$id."/large/temp_".$filename,
+    			'new_image' => "images/products/".$id."/large/".$filename,
+    			'maintain_ratio' => true,
+    			'width' => 1200,
+    			'height' => 900
+    	);
+    	
+    	$this->load->library('image_lib', $config);
+    	
+    	$this->image_lib->resize();
+    	
+    	$this->image_lib->clear();
+    	return TRUE;
+    	
     }
 
     function do_upload($id) {

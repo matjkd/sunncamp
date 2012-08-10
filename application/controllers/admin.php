@@ -124,8 +124,8 @@ class Admin extends MY_Controller {
 			$this->content_model->edit_content($id);
 
 			$this->upload_news_image($id);
-			
-			
+
+
 			redirect("admin/edit/$id");
 		}
 	}
@@ -144,14 +144,14 @@ class Admin extends MY_Controller {
 			echo "validation error";
 		} else { // passed validation proceed to post success logic
 			if ($this->content_model->add_content()) { // the information has therefore been successfully saved in the db
-				
-				
+
+
 				//now process the image
 				// run insert model to write data to db
 				//upload file
 				//retrieve uploaded file
 				$this->upload_news_image();
-				
+
 				redirect('/admin');   // or whatever logic needs to occur
 			} else {
 				echo 'An error occurred saving your information. Please try again later';
@@ -159,21 +159,21 @@ class Admin extends MY_Controller {
 			}
 		}
 	}
-	
+
 	function upload_news_image($id = 0) {
-	
+
 		$this->gallery_model->do_news_upload();
-	
-	
+
+
 		if (!empty($_FILES) && $_FILES['file']['error'] != 4) {
-	
+
 			$fileName = $_FILES['file']['name'];
 			$tmpName = $_FILES['file']['tmp_name'];
 			$fileName = str_replace(" ", "_", $fileName);
 			$filelocation = "news/".$fileName;
-	
+
 			$thefile = file_get_contents($tmpName, true);
-	
+
 			//add filename into database
 			//get blog id
 			if ($id == 0) {
@@ -183,7 +183,7 @@ class Admin extends MY_Controller {
 			}
 			$this->content_model->add_file($fileName, $blog_id);
 			//move the file
-	
+
 			if ($this->s3->putObject($thefile, $this->bucket, $filelocation, S3:: ACL_PUBLIC_READ)) {
 				//echo "We successfully uploaded your file.";
 				$this->session->set_flashdata('message', 'News Added and file uploaded successfully');
@@ -191,14 +191,14 @@ class Admin extends MY_Controller {
 				//echo "Something went wrong while uploading your file... sorry.";
 				$this->session->set_flashdata('message', 'News Added, but your file did not upload');
 			}
-	
+
 			//uploadthumb
 			$thumblocation = base_url() . 'images/temp/thumbs/' . $fileName;
 			$newfilename = "news/thumb_" .  $fileName;
-	
-	
+
+
 			$newfile = file_get_contents($thumblocation, true);
-	
+
 			if ($this->s3->putObject($newfile, $this->bucket, $newfilename, S3:: ACL_PUBLIC_READ)) {
 				//echo "We successfully uploaded your file.";
 				$this->session->set_flashdata('message', 'News Added and file uploaded successfully');
@@ -211,12 +211,12 @@ class Admin extends MY_Controller {
 			unlink($this->gallery_path . '/' . $fileName . '');
 			unlink($this->gallery_path . '/thumbs/' . $fileName . '');
 		} else {
-	
+
 			$this->session->set_flashdata('message', 'News Added');
 		}
 	}
-	
-	
+
+
 
 	/**
 	 *
@@ -549,6 +549,78 @@ class Admin extends MY_Controller {
 		}
 	}
 
+	function create_large_image() {
+		//get all products images
+		$allImages =$this->products_model->get_all_product_images();
+		foreach($allImages as $row):
+		$id = $row->product_id;
+		$filename = $row->filename;
+$product_image_id =  $row->product_image_id;
+		$url = "https://s3-eu-west-1.amazonaws.com/".$this->bucket."/products/".$id."/".$filename;
+		$largeurl = "https://s3-eu-west-1.amazonaws.com/".$this->bucket."/products/".$id."/large/".$filename;
+		// Check to see if the file exists by trying to open it for read only
+
+
+		if (fopen($url, "r")) {
+
+			
+				
+			if (fopen($largeurl, "r")) {
+				//echo " - large in place <br/>";
+			} else {
+				echo $id." ".$filename. " - File Exists";
+				echo " - <a href='".base_url()."admin/test/".$product_image_id."'> need to convert</a><br/>";
+			}
+
+		} else {
+
+			//echo " - Can't Connect to File <br/> ";
+
+		}
+
+		endforeach;
+
+		//
+	}
+	
+	function test() {
+		$imageid = $this->uri->segment(3);
+		$imagedata =$this->products_model->get_product_image_id($imageid);
+		
+		foreach($imagedata as $row):
+		
+		$filename =  $row->filename;
+		$id = $row->product_id;
+		if($this->gallery_model->make_large_file($id, $filename)) {
+			echo " - complete <br/>";
+		}
+		
+		$this->put_converted_file($id, $filename);
+		endforeach;
+		
+		redirect('/admin/create_large_image');
+		
+	}
+	
+	function convert_now($id, $filename) {
+		$id = $this->uri->segment(3);
+		$filename =  $this->uri->segment(4);
+		if($this->gallery_model->make_large_file($id, $filename)) {
+			echo " - complete <br/>";
+		}
+	}
+
+	function put_converted_file($id, $filename) {
+
+		$this->gallery_path = "images/products";
+		$base_path = $this->config_base_path."images/";
+		$largeFile =$this->config_base_path . $this->gallery_path . '/' . $id . '/large/';
+		$largefilelocation = 'products/' . $id . '/large/'.$filename;
+		$large = file_get_contents($base_path.$largefilelocation, true);
+		
+		$this->s3->putObject($large, $this->bucket, $largefilelocation, S3:: ACL_PUBLIC_READ);
+	}
+
 	function convert_images_to_s3() {
 			
 		//get all products
@@ -771,7 +843,7 @@ class Admin extends MY_Controller {
 		$this->load->view('template/sunncamp/admin');
 	}
 
-	
+
 	/*
 	 *
 	*/
