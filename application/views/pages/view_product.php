@@ -58,7 +58,7 @@
 
 
 
-                    <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/<?= $row->filename ?>' class='cloud-zoom-gallery' title='Thumbnail 1'
+                    <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/large/<?= $row->filename ?>' class='cloud-zoom-gallery' title='Thumbnail 1'
                        rel="useZoom: 'zoom1', smallImage: 'https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/medium/<?= $row->filename ?>' ">
                         <img src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/thumbs/<?= $row->filename ?>" alt = "Thumbnail 1"/></a>
 
