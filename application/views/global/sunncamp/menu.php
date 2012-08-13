@@ -40,7 +40,7 @@
                         if ($row2->parent == $parentrow->parent_id) {
                             $countrow = $countrow + 1;
                             ?>
-                            <?php $cat_name = str_replace('and', '&amp;', $row2->product_category_name); ?>
+                            <?php $cat_name = str_replace(' and ', ' &amp; ', $row2->product_category_name); ?>
                             <div class="mega_item"> <a href="<?= base_url() ?>products/category/<?= $row2->category_safename ?>">
                                     <?= $cat_name ?></a></div>
                                 <?php }
