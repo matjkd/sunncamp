@@ -43,6 +43,7 @@ $route['about'] = '/welcome/home';
 $route['menu'] = 'menus/list_menus';
 $route['testimonials'] = '/welcome/home';
 $route['events'] = '/welcome/home';
+$route['brochures'] = '/welcome/home';
 $route['contact'] = '/welcome/home';
 $route['social'] = '/welcome/home';
 $route['terms'] = '/welcome/home';
