@@ -9,7 +9,8 @@
 </div>
 <div style="clear:both">
 <?php foreach($stockists as $row):?>
-<div class="stockist <?=$row->parent?>" style="display: none;">
+
+<div class="stockist <?=$row->parent_id?>" style="display: none;">
 	<strong><?=$row->company_name?> </strong> <br />
 
 	<?php if($row->address1 != NULL) {?>
