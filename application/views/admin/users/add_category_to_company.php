@@ -7,9 +7,9 @@
         <label>Category: </label>
         <select name="category_id" id="combobox">
             <option value="">Select one...</option>
-            <?php foreach ($categories as $row): ?>
+            <?php foreach ($category_parents as $row): ?>
 
-                <option value="<?= $row->product_category_id ?>"><?= $row->product_category_name ?></option>
+                <option value="<?= $row->parent_id ?>"><?= $row->parent_name ?></option>
 
             <?php endforeach; ?>
         </select>
@@ -25,7 +25,7 @@
 <?php foreach($company_categories as $row):?>
 
 <div id="cat_<?=$row->company_cat_id?>" class="product_cat_list">
-<span style="float:left;"><?=$row->product_category_name?></span>
+<span style="float:left;"><?=$row->parent_name?></span>
       <span  style="width:18px; float:right;" class="ui-icon ui-icon-circle-close  spanlink" onclick="deleteCompanyCat('<?= $row->company_cat_id ?>')" ></span>
 </div>
 
