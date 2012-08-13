@@ -31,17 +31,17 @@
                 <p>
 
                     <input type="text" name="address3" value="<?= set_value('address3', $row->address3) ?>"/>
-                    <label>Address 3</label>
+                    <label>Town</label>
                 </p>
                 <p>
 
                     <input type="text" name="address4" value="<?= set_value('address4', $row->address4) ?>"/>
-                    <label>Address 4</label>
+                    <label>County</label>
                 </p>
                 <p>
 
                     <input type="text" name="address5" value="<?= set_value('address5', $row->address5) ?>"/>
-                    <label>Address 5</label>
+                    <label>Country</label>
                 </p>
                 <p>
 

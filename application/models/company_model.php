@@ -80,6 +80,9 @@ class Company_model extends CI_Model {
 
     function get_companies() {
         $this->db->join('company_types', 'company_types.company_type_id = companies.company_type');
+        
+        $this->db->join('company_address', 'company_address.company_id = companies.company_id');
+        
         $query = $this->db->get('companies');
 
 

@@ -45,6 +45,9 @@
                 Company Type
             </td>
 
+             <td>
+               Town
+            </td>
             <td>
                 Visible on site
             </td>
@@ -66,6 +69,10 @@
                     <?= $row->company_type_name ?>
                 </td>
 
+                
+                <td>
+                    <?= $row->address3 ?>
+                </td>
                 <td>
                     <?= $row->visible_on_site ?>
                 </td>
