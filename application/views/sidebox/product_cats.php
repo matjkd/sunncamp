@@ -10,6 +10,7 @@
     </div>
     <ul id="catmenu" class="catmenu noaccordion expandfirst">
                 <?php foreach ($category_parents as $row): ?>
+                 <?php if($row->parent_id > 0) {?>
             <li style="position:static;">
 <?php $parent_name = str_replace('and', '&amp;', $row->parent_name); ?>
                 <a href="#"><?= $parent_name ?></a>
@@ -25,6 +26,7 @@
             endforeach; ?>
                 </ul>
             </li>
+            <?php }?>
 <?php endforeach; ?>
     </ul>
 </div>
