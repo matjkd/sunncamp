@@ -31,7 +31,7 @@ class Cat_model extends CI_Model {
         );
          $this->db->where('product_category_name', $drag);
          $update = $this->db->update('product_categories', $new_cat_parent);
-        return $insert;
+        return $update;
     }
     
 }
