@@ -23,12 +23,7 @@
 
 
 		<?php foreach ($products as $row): ?>
-		<?php
-
-		list($width, $height, $type, $attr) = getimagesize("https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/thumbs/<?= $row->filename ?>");
-
-		echo $width;
-		?>
+		
 
 		<?php if($row->order == 0 ) { ?>
 		<div id="productview">
