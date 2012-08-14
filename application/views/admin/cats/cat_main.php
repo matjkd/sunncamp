@@ -44,6 +44,7 @@ if (isset($cat_id)) {
     <div style="clear:both;" id="catdivider" >
     <?php } ?>
         <ul id="<?= $row->parent_id ?>"  class="connectedSortable " name="<?= $row->parent_name ?>">
+        
             <li id ="<?= $row->parent_id ?>" class="ui-state-default"><?= $row->parent_name ?></li>
 
             <?php
@@ -54,6 +55,8 @@ if (isset($cat_id)) {
 
                     <li id="<?= $row2->product_category_name ?>"  class="ui-state-highlight"><a href="<?= base_url() ?>products/category/<?= $row2->category_safename ?>"><?= $row2->product_category_name ?></a></li>
                 <?php }
+                
+                
             endforeach; ?>
 
         </ul>
@@ -62,9 +65,12 @@ if (isset($cat_id)) {
         if($catcount == 5 ) { 
          $catcount = 1;
          $div = "closed";?>
+         
+       
     </div>
         <?php } ?>
     <?php endforeach; ?>
+    
 <?php if($div = "open") { ?>
 </div>
     <?php } ?>

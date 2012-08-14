@@ -27,9 +27,10 @@
     ?>
 
     <?php foreach ($category_parents as $parentrow): ?>
-
+ <?php if($parentrow->parent_id > 0) {?>
         <?php if ($countrow == 0) { ?> <div style="float:left; width:190px;"> <?php } ?>
             <div class="mega_container">
+           
                 <h4> <?= $parentrow->parent_name ?></h4>
 
                 <div class="mega_cats">
@@ -46,7 +47,9 @@
                                 <?php }
                             endforeach; ?>
                 </div>
+              
             </div>
+              <?php }?>
             <?php
             if ($countrow > 10) {
                 $countrow = 0;
