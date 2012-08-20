@@ -185,7 +185,7 @@ class Products_model extends CI_Model {
 
        // $this->db->order_by('product_category_parents.parent_order');
         
-        $this->db->order_by('product_category_name');
+        $this->db->order_by('product_category_order');
 
         // this limits it to cats with products in
         $this->db->join('product_category_link', 'product_category_link.product_category_id = product_categories.product_category_id');
