@@ -57,7 +57,28 @@ class Category_admin extends MY_Controller {
 
 
         $this->cat_model->change_parent($drag, $drop);
+      
+        
+   
+        
         return;
+    }
+    
+    function change_cat_order() {
+    	
+    	$pages = $this->input->post('pages');
+    	parse_str($pages, $pageOrder);
+    	
+    	// list id is retrieved from the ID on the sortable list
+    	foreach ($pageOrder['pageorder'] as $key => $value):
+    	
+    	mysql_query("UPDATE ignite_product_categories SET `product_category_order` = '$key' WHERE `product_category_id` = '$value'") or die(mysql_error());
+    	
+    	
+    	
+    	//$this->db->update('practice_area_links', $pro_update);
+    	endforeach;
+    	
     }
 
     function is_logged_in() {

@@ -43,9 +43,9 @@ if (isset($cat_id)) {
         $div = "open";?>
     <div style="clear:both;" id="catdivider" >
     <?php } ?>
-        <ul id="<?= $row->parent_id ?>"  class="connectedSortable " name="<?= $row->parent_name ?>">
+        <ul id="sortable_<?= $row->parent_id ?>" name="<?= $row->parent_id ?>"  class="connectedSortable " name="<?= $row->parent_name ?>">
         
-            <li id ="<?= $row->parent_id ?>" class="ui-state-default"><?= $row->parent_name ?></li>
+            <li name ="<?= $row->parent_id ?>" class="ui-state-default"><?= $row->parent_name ?></li>
 
             <?php
             foreach ($allcategories as $row2):
@@ -53,7 +53,7 @@ if (isset($cat_id)) {
                 if ($row2->parent == $row->parent_id) {
                     ?>
 
-                    <li id="<?= $row2->product_category_name ?>"  class="ui-state-highlight"><a href="<?= base_url() ?>products/category/<?= $row2->category_safename ?>"><?= $row2->product_category_name ?></a></li>
+                    <li name="<?= $row2->product_category_name ?>" id="pageorder_<?= $row2->product_category_id ?>"  class="ui-state-highlight"><a href="<?= base_url() ?>products/category/<?= $row2->category_safename ?>"><?= $row2->product_category_name ?></a></li>
                 <?php }
                 
                 

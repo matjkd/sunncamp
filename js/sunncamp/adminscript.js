@@ -32,17 +32,30 @@ $(document).ready(function() {
 
 $(function() {
     $( ".sorting ul" ).sortable({
+    	
+    	
         items: "li:not(.ui-state-default)",
-        connectWith: ".connectedSortable"
+        connectWith: ".connectedSortable",
+        update: function(event,ui)
+        {
+        	 var dropid = $(this).attr('name');
+            $.post(base_url + "backend/category_admin/change_cat_order", {
+            	   pages: $('#sortable_' + dropid).sortable('serialize')
+            } );
+        }
+        	
+        	
     }).disableSelection();
     
     $(".sorting ul").droppable({
         drop: function(ev, ui) {
-            var $drop = $(this).attr('id');
-            var $drag = ui.draggable.attr("id");
+            var drop = $(this).attr('name');
+            var drag = ui.draggable.attr("name");
             $.post(base_url +"backend/category_admin/change_parent", {
-                drag: $drag, 
-                drop: $drop
+                drag: drag, 
+                drop: drop
+             
+               
             } );
        
         }
