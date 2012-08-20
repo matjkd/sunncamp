@@ -25,6 +25,7 @@ class Products_model extends CI_Model {
 
     function get_product_cat($cat_safe_name) {
       
+    	
         $this->db->where('category_safename', $cat_safe_name);
         $query = $this->db->get('product_categories');
 
@@ -182,7 +183,9 @@ class Products_model extends CI_Model {
 
     function get_all_product_cats() {
 
-        $this->db->order_by('product_category_parents.parent_order');
+       // $this->db->order_by('product_category_parents.parent_order');
+        
+        $this->db->order_by('product_category_name');
 
         // this limits it to cats with products in
         $this->db->join('product_category_link', 'product_category_link.product_category_id = product_categories.product_category_id');
