@@ -528,11 +528,11 @@ img {
 }
 
 #productview {
-
+font-size:0.8em;
     float:left;
     padding:10px;
     width: 134px;
-    height: 129px;
+    height: 135px;
 
 
 }
