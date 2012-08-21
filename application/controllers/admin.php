@@ -14,6 +14,10 @@ class Admin extends MY_Controller {
 	}
 
 	function index() {
+		
+		
+		
+		
 		$data['main_content'] = "admin/dashboard";
 		$data['pages'] = $this->content_model->get_all_content();
 		$data['seo_links'] = $this->content_model->get_seo_links();
@@ -25,6 +29,8 @@ class Admin extends MY_Controller {
 	 *
 	 */
 	function content() {
+		
+		
 		if (($this->uri->segment(3)) < 1) {
 			$id = 1;
 		} else {
@@ -35,6 +41,100 @@ class Admin extends MY_Controller {
 		$data['edit'] = "admin/edit/$id";
 		$this->load->vars($data);
 		$this->load->view('template/sunncamp/admin');
+	}
+	
+	function backup() {
+		// Load the DB utility class
+		$this->load->dbutil();
+	
+		$prefs = array(
+				'ignore' => array(), // List of tables to omit from the backup
+				'format' => 'gzip', // gzip, zip, txt
+				'filename' => 'backup.sql', // File name - NEEDED ONLY WITH ZIP FILES
+				'add_drop' => TRUE, // Whether to add DROP TABLE statements to backup file
+				'add_insert' => TRUE, // Whether to add INSERT data to backup file
+				'newline' => "\n"               // Newline character used in backup file
+		);
+	
+	
+		$this->dbutil->backup($prefs);
+		$now = time();
+		$date = unix_to_human($now, TRUE, 'eu');
+	
+		// Backup your entire database and assign it to a variable
+		$backup = & $this->dbutil->backup();
+	
+		// Load the file helper and write the file to your server
+		$this->load->helper('file');
+		write_file('/images/backup/Backup_' . $date . '.gz', $backup);
+	
+		// Load the download helper and send the file to your desktop
+		$this->load->helper('download');
+		force_download('Backup_' . $date . '.gz', $backup);
+		return TRUE;
+	}
+	
+	function s3backup() {
+		// Load the DB utility class
+		$this->load->dbutil();
+	
+		$prefs = array(
+				'ignore' => array(), // List of tables to omit from the backup
+				'format' => 'gzip', // gzip, zip, txt
+				'filename' => 'backup.sql', // File name - NEEDED ONLY WITH ZIP FILES
+				'add_drop' => TRUE, // Whether to add DROP TABLE statements to backup file
+				'add_insert' => TRUE, // Whether to add INSERT data to backup file
+				'newline' => "\n"               // Newline character used in backup file
+		);
+	
+	
+		$this->dbutil->backup($prefs);
+		$now = time();
+		$date = unix_to_human($now, TRUE, 'eu');
+	
+		
+	
+		// Backup your entire database and assign it to a variable
+		$backup = & $this->dbutil->backup();
+		
+	
+		// Load the file helper and write the file to your server
+		$this->load->helper('file');
+		write_file('/images/backup/Backup_' . $date . '.gz', $backup);
+	
+		echo "....";
+	
+		$target = 'Backup_' . $date . '.gz';
+		//connect to amazon s3 and copy the file there
+		//get folder info
+	
+		$bucket = $this->bucket . "backup";
+	
+		echo $bucket;
+	
+		$this->s3->putBucket($bucket, S3::ACL_PUBLIC_READ);
+		if ($this->s3->putObject($backup, $bucket, $target)) {
+	
+			echo "backup complete";
+		} else {
+	
+			echo "backup failed " . $this->doc_root;
+			echo "<br/>";
+			echo $bucket . " " . $target;
+			echo "<br/>";
+		}
+		echo $target;
+		
+		//set last backup time
+		$current_time = now();
+		$backuptime = array(
+				'last_update' => $current_time
+		);
+		
+		$this->db->where('admin_id', 1);
+		$update = $this->db->update('admin', $backuptime);
+	
+		redirect('admin/list_products');
 	}
 
 	/**
@@ -861,7 +961,16 @@ $product_image_id =  $row->product_image_id;
 	*/
 
 	function list_products($cat = NULL) {
-
+	
+		$timeago = now() - 3600;
+		if($timeago > $this->last_update) {
+			
+			echo "Backing Up Database";
+			redirect('admin/s3backup');
+		} else {
+			//echo "don't backup";
+		}
+		
 		//trim products with no data
 		$this->products_model->trim_products();
 
@@ -877,6 +986,7 @@ $product_image_id =  $row->product_image_id;
 
 		$this->load->vars($data);
 		$this->load->view('template/sunncamp/admin');
+		
 	}
 
 	/*
@@ -912,6 +1022,8 @@ $product_image_id =  $row->product_image_id;
 		if (!isset($is_logged_in) || $role != 1) {
 			$data['message'] = "You don't have permission";
 			redirect('welcome/login', 'refresh');
+		} else {
+			
 		}
 	}
 

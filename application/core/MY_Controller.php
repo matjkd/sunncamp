@@ -38,6 +38,7 @@ class MY_Controller extends CI_Controller {
             $config_data['age'] = $age;
             $this->config_theme = $row->company_theme;
             $this->bucket = $row->bucket;
+            $this->last_update = $row->last_update;
             $this->config_email = $row->main_email;
             $this->config_base_path = $row->doc_root;
             $this->config_company_name = $row->company_name;
