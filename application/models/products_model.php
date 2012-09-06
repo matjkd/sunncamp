@@ -25,6 +25,7 @@ class Products_model extends CI_Model {
 
     function get_product_cat($cat_safe_name) {
       
+    	
         $this->db->where('category_safename', $cat_safe_name);
         $query = $this->db->get('product_categories');
 
@@ -133,6 +134,16 @@ class Products_model extends CI_Model {
         return FALSE;
     }
     
+    function get_product_image_id($id) {
+    	$this->db->where('product_image_id', $id);
+    	
+    	$query = $this->db->get('product_images');
+    	if ($query->num_rows > 0) {
+    		return $query->result();
+    	}
+    
+    	return FALSE;
+    }
     function get_all_product_images() {
     	
     	$this->db->order_by('order');
@@ -143,6 +154,19 @@ class Products_model extends CI_Model {
     	
     	return FALSE;
     	 
+    }
+    
+    function get_limit_product_images($limit = 10) {
+    	 
+    	$this->db->order_by('order');
+    	$this->db->limit($limit);
+    	$query = $this->db->get('product_images');
+    	if ($query->num_rows > 0) {
+    		return $query->result();
+    	}
+    	 
+    	return FALSE;
+    
     }
 
     function get_default_image($id) {
@@ -159,7 +183,9 @@ class Products_model extends CI_Model {
 
     function get_all_product_cats() {
 
-        $this->db->order_by('product_category_parents.parent_order');
+       // $this->db->order_by('product_category_parents.parent_order');
+        
+        $this->db->order_by('product_category_order');
 
         // this limits it to cats with products in
         $this->db->join('product_category_link', 'product_category_link.product_category_id = product_categories.product_category_id');
@@ -401,6 +427,33 @@ class Products_model extends CI_Model {
             return FALSE;
         }
     }
+    
+    /**
+     *
+     * @param type $param
+     * @return type
+     */
+    function check_product_categories($param) {
+    	$data = array();
+    
+    
+    
+    	
+    	$this->db->where('product_category_name', $param);
+    
+    
+    	$query = $this->db->get('product_categories');
+    
+    	if ($query->num_rows() > 0) {
+    		foreach ($query->result_array() as $row)
+    			$data[] = $row;
+    		$query->free_result();
+    
+    		return $data;
+    	} else {
+    		return FALSE;
+    	}
+    }
 
     /**
      *
@@ -450,6 +503,28 @@ $param = str_replace("'", "\'", $param);
             return FALSE;
         }
     }
+    
+    function check_other_feature($param) {
+    	$data = array();
+    	
+    	$param = str_replace("'", "\'", $param);
+    	
+    	
+    	$this->db->where('other_feature_name', $param);
+    	
+    	
+    	$query = $this->db->get('other_features');
+    	
+    	if ($query->num_rows() > 0) {
+    		foreach ($query->result_array() as $row)
+    			$data[] = $row;
+    		$query->free_result();
+    	
+    		return $data;
+    	} else {
+    		return FALSE;
+    	}
+    }
 
     /**
      *
@@ -476,6 +551,33 @@ $param = str_replace("'", "", $param);
         } else {
             return FALSE;
         }
+    }
+    
+    /**
+     *
+     * @param type $param
+     * @return type
+     */
+    function check_product_spec($param) {
+    	$data = array();
+    
+    	$param = str_replace("'", "", $param);
+    
+    	
+    	$this->db->where('spec_desc', $param);
+    
+    
+    	$query = $this->db->get('product_specifications');
+    
+    	if ($query->num_rows() > 0) {
+    		foreach ($query->result_array() as $row)
+    			$data[] = $row;
+    		$query->free_result();
+    
+    		return $data;
+    	} else {
+    		return FALSE;
+    	}
     }
 
     /**
@@ -558,8 +660,13 @@ $param = str_replace("'", "", $param);
      */
     function create_new_cat($category) {
 
-        $pagelink = trim(str_replace(" ", "_", $category));
-
+    	$badcharacters = array(" ", "&amp;", "/");
+    	$nospace = array("\"", "'", "&");
+        $pagelink = trim(str_replace($badcharacters, "_", $category));
+        $pagelink = trim(str_replace($nospace, "", $pagelink));
+        $category = trim(str_replace("&", "and", $category));
+        
+        
         $new_cat_entry = array(
             'product_category_name' => trim($category),
             'category_safename' => $pagelink

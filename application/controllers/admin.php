@@ -10,10 +10,14 @@ class Admin extends MY_Controller {
 		$this->load->model('products_model');
 		$this->load->model('gallery_model');
 		$this->load->model('menu_model');
-	
+
 	}
 
 	function index() {
+		
+		
+		
+		
 		$data['main_content'] = "admin/dashboard";
 		$data['pages'] = $this->content_model->get_all_content();
 		$data['seo_links'] = $this->content_model->get_seo_links();
@@ -25,6 +29,8 @@ class Admin extends MY_Controller {
 	 *
 	 */
 	function content() {
+		
+		
 		if (($this->uri->segment(3)) < 1) {
 			$id = 1;
 		} else {
@@ -35,6 +41,100 @@ class Admin extends MY_Controller {
 		$data['edit'] = "admin/edit/$id";
 		$this->load->vars($data);
 		$this->load->view('template/sunncamp/admin');
+	}
+	
+	function backup() {
+		// Load the DB utility class
+		$this->load->dbutil();
+	
+		$prefs = array(
+				'ignore' => array(), // List of tables to omit from the backup
+				'format' => 'gzip', // gzip, zip, txt
+				'filename' => 'backup.sql', // File name - NEEDED ONLY WITH ZIP FILES
+				'add_drop' => TRUE, // Whether to add DROP TABLE statements to backup file
+				'add_insert' => TRUE, // Whether to add INSERT data to backup file
+				'newline' => "\n"               // Newline character used in backup file
+		);
+	
+	
+		$this->dbutil->backup($prefs);
+		$now = time();
+		$date = unix_to_human($now, TRUE, 'eu');
+	
+		// Backup your entire database and assign it to a variable
+		$backup = & $this->dbutil->backup();
+	
+		// Load the file helper and write the file to your server
+		$this->load->helper('file');
+		write_file('/images/backup/Backup_' . $date . '.gz', $backup);
+	
+		// Load the download helper and send the file to your desktop
+		$this->load->helper('download');
+		force_download('Backup_' . $date . '.gz', $backup);
+		return TRUE;
+	}
+	
+	function s3backup() {
+		// Load the DB utility class
+		$this->load->dbutil();
+	
+		$prefs = array(
+				'ignore' => array(), // List of tables to omit from the backup
+				'format' => 'gzip', // gzip, zip, txt
+				'filename' => 'backup.sql', // File name - NEEDED ONLY WITH ZIP FILES
+				'add_drop' => TRUE, // Whether to add DROP TABLE statements to backup file
+				'add_insert' => TRUE, // Whether to add INSERT data to backup file
+				'newline' => "\n"               // Newline character used in backup file
+		);
+	
+	
+		$this->dbutil->backup($prefs);
+		$now = time();
+		$date = unix_to_human($now, TRUE, 'eu');
+	
+		
+	
+		// Backup your entire database and assign it to a variable
+		$backup = & $this->dbutil->backup();
+		
+	
+		// Load the file helper and write the file to your server
+		$this->load->helper('file');
+		write_file('/images/backup/Backup_' . $date . '.gz', $backup);
+	
+		echo "....";
+	
+		$target = 'Backup_' . $date . '.gz';
+		//connect to amazon s3 and copy the file there
+		//get folder info
+	
+		$bucket = $this->bucket . "backup";
+	
+		echo $bucket;
+	
+		$this->s3->putBucket($bucket, S3::ACL_PUBLIC_READ);
+		if ($this->s3->putObject($backup, $bucket, $target)) {
+	
+			echo "backup complete";
+		} else {
+	
+			echo "backup failed " . $this->doc_root;
+			echo "<br/>";
+			echo $bucket . " " . $target;
+			echo "<br/>";
+		}
+		echo $target;
+		
+		//set last backup time
+		$current_time = now();
+		$backuptime = array(
+				'last_update' => $current_time
+		);
+		
+		$this->db->where('admin_id', 1);
+		$update = $this->db->update('admin', $backuptime);
+	
+		redirect('admin/list_products');
 	}
 
 	/**
@@ -123,6 +223,9 @@ class Admin extends MY_Controller {
 			$id = $this->uri->segment(3);
 			$this->content_model->edit_content($id);
 
+			$this->upload_news_image($id);
+
+
 			redirect("admin/edit/$id");
 		}
 	}
@@ -133,7 +236,7 @@ class Admin extends MY_Controller {
 	function submit_content() {
 		$this->form_validation->set_rules('title', 'Title', 'trim|max_length[255]');
 		$this->form_validation->set_rules('content', 'Content', 'trim');
-		$this->form_validation->set_rules('menu', 'menu', 'trim|required');
+		//$this->form_validation->set_rules('menu', 'menu', 'trim|required');
 		$this->form_validation->set_rules('category', 'Page Type', 'trim|max_length[11]');
 		$this->form_validation->set_error_delimiters('<br /><span class="error">', '</span>');
 
@@ -141,6 +244,14 @@ class Admin extends MY_Controller {
 			echo "validation error";
 		} else { // passed validation proceed to post success logic
 			if ($this->content_model->add_content()) { // the information has therefore been successfully saved in the db
+
+
+				//now process the image
+				// run insert model to write data to db
+				//upload file
+				//retrieve uploaded file
+				$this->upload_news_image();
+
 				redirect('/admin');   // or whatever logic needs to occur
 			} else {
 				echo 'An error occurred saving your information. Please try again later';
@@ -148,6 +259,64 @@ class Admin extends MY_Controller {
 			}
 		}
 	}
+
+	function upload_news_image($id = 0) {
+
+		$this->gallery_model->do_news_upload();
+
+
+		if (!empty($_FILES) && $_FILES['file']['error'] != 4) {
+
+			$fileName = $_FILES['file']['name'];
+			$tmpName = $_FILES['file']['tmp_name'];
+			$fileName = str_replace(" ", "_", $fileName);
+			$filelocation = "news/".$fileName;
+
+			$thefile = file_get_contents($tmpName, true);
+
+			//add filename into database
+			//get blog id
+			if ($id == 0) {
+				$blog_id = mysql_insert_id();
+			} else {
+				$blog_id = $id;
+			}
+			$this->content_model->add_file($fileName, $blog_id);
+			//move the file
+
+			if ($this->s3->putObject($thefile, $this->bucket, $filelocation, S3:: ACL_PUBLIC_READ)) {
+				//echo "We successfully uploaded your file.";
+				$this->session->set_flashdata('message', 'News Added and file uploaded successfully');
+			} else {
+				//echo "Something went wrong while uploading your file... sorry.";
+				$this->session->set_flashdata('message', 'News Added, but your file did not upload');
+			}
+
+			//uploadthumb
+			$thumblocation = base_url() . 'images/temp/thumbs/' . $fileName;
+			$newfilename = "news/thumb_" .  $fileName;
+
+
+			$newfile = file_get_contents($thumblocation, true);
+
+			if ($this->s3->putObject($newfile, $this->bucket, $newfilename, S3:: ACL_PUBLIC_READ)) {
+				//echo "We successfully uploaded your file.";
+				$this->session->set_flashdata('message', 'News Added and file uploaded successfully');
+			} else {
+				//echo "Something went wrong while uploading your file... sorry.";
+				$this->session->set_flashdata('message', 'News Added, but your file did not upload');
+			}
+			//delete files from server
+			$this->gallery_path = "./images/temp";
+			unlink($this->gallery_path . '/' . $fileName . '');
+			unlink($this->gallery_path . '/thumbs/' . $fileName . '');
+		} else {
+
+			$this->session->set_flashdata('message', 'News Added');
+		}
+	}
+
+
 
 	/**
 	 *
@@ -178,7 +347,8 @@ class Admin extends MY_Controller {
 		$data['attributes'] = $this->products_model->get_attributes($data['product_id']);
 		$data['main_content'] = "global/add_product";
 		if($data['product_categories'] == NULL) {
-			$data['message'] ="NOTE: For a product to display on the front end of the site it must be in a Product Category, and the 'active on site' checkbox must be checked.";
+			$data['message'] = "NOTE: For a product to display on the front end of the site it must be in a Product Category,
+			and the 'active on site' checkbox must be checked.";
 		}
 
 		$this->load->vars($data);
@@ -210,7 +380,7 @@ class Admin extends MY_Controller {
 		$category = trim($this->input->post('product_category'));
 		$id = $this->input->post('product_id');
 		//check if category name is in database already
-		$catdata = $this->products_model->autocomplete_product_categories($category);
+		$catdata = $this->products_model->check_product_categories($category);
 		if ($catdata) {
 
 			// The cat is in the database already
@@ -260,7 +430,7 @@ class Admin extends MY_Controller {
 		$other_feature = $this->input->post('other_feature');
 
 		//check if feature name is in database already
-		$otherfeature = $this->products_model->autocomplete_other_features($other_feature);
+		$otherfeature = $this->products_model->check_other_feature($other_feature);
 
 		if ($otherfeature) {
 
@@ -390,7 +560,7 @@ class Admin extends MY_Controller {
 		$spec = $this->input->post('product_spec');
 		$spec_value = $this->input->post('spec_value');
 		//check if category name is in database already
-		$specdata = $this->products_model->autocomplete_product_specs($spec);
+		$specdata = $this->products_model->check_product_spec($spec);
 
 		if ($specdata) {
 
@@ -479,13 +649,85 @@ class Admin extends MY_Controller {
 		}
 	}
 
+	function create_large_image() {
+		//get all products images
+		$allImages =$this->products_model->get_all_product_images();
+		foreach($allImages as $row):
+		$id = $row->product_id;
+		$filename = $row->filename;
+$product_image_id =  $row->product_image_id;
+		$url = "https://s3-eu-west-1.amazonaws.com/".$this->bucket."/products/".$id."/".$filename;
+		$largeurl = "https://s3-eu-west-1.amazonaws.com/".$this->bucket."/products/".$id."/large/".$filename;
+		// Check to see if the file exists by trying to open it for read only
+
+
+		if (fopen($url, "r")) {
+
+			
+				
+			if (fopen($largeurl, "r")) {
+				//echo " - large in place <br/>";
+			} else {
+				echo $id." ".$filename. " - File Exists";
+				echo " - <a href='".base_url()."admin/test/".$product_image_id."'> need to convert</a><br/>";
+			}
+
+		} else {
+
+			//echo " - Can't Connect to File <br/> ";
+
+		}
+
+		endforeach;
+
+		//
+	}
+	
+	function test() {
+		$imageid = $this->uri->segment(3);
+		$imagedata =$this->products_model->get_product_image_id($imageid);
+		
+		foreach($imagedata as $row):
+		
+		$filename =  $row->filename;
+		$id = $row->product_id;
+		if($this->gallery_model->make_large_file($id, $filename)) {
+			echo " - complete <br/>";
+		}
+		
+		$this->put_converted_file($id, $filename);
+		endforeach;
+		
+	//	redirect('/admin/create_large_image');
+		
+	}
+	
+	function convert_now($id, $filename) {
+		$id = $this->uri->segment(3);
+		$filename =  $this->uri->segment(4);
+		if($this->gallery_model->make_large_file($id, $filename)) {
+			echo " - complete <br/>";
+		}
+	}
+
+	function put_converted_file($id, $filename) {
+
+		$this->gallery_path = "images/products";
+		$base_path = $this->config_base_path."images/";
+		$largeFile =$this->config_base_path . $this->gallery_path . '/' . $id . '/large/';
+		$largefilelocation = 'products/' . $id . '/large/'.$filename;
+		$large = file_get_contents($base_path.$largefilelocation, true);
+		
+		$this->s3->putObject($large, $this->bucket, $largefilelocation, S3:: ACL_PUBLIC_READ);
+	}
+
 	function convert_images_to_s3() {
-		 
+			
 		//get all products
 		$allImages =$this->products_model->get_all_product_images();
-		 
+			
 		foreach($allImages as $row):
-		 
+			
 		$id = $row->product_id;
 		$filename = $row->filename;
 		$this->gallery_path = "images/products";
@@ -495,12 +737,12 @@ class Admin extends MY_Controller {
 		$thumbFile =$this->config_base_path . $this->gallery_path . '/' . $id . '/thumbs/' ;
 		$mediumFile =$this->config_base_path . $this->gallery_path . '/' . $id . '/medium/';
 		$largeFile =$this->config_base_path . $this->gallery_path . '/' . $id . '/large/';
-		 
+			
 		$regularfilelocation =  'products/' . $id . '/'.$filename;
 		$thumbfilelocation =  'products/' . $id . '/thumbs/'.$filename;
 		$mediumfilelocation =  'products/' . $id . '/medium/'.$filename;
 		$largefilelocation = 'products/' . $id . '/large/'.$filename;
-		 
+			
 		if(file_exists($base_path.$regularfilelocation)){
 			$regular = file_get_contents($base_path.$regularfilelocation, true);
 			echo "putObject(". $this->bucket." ".$regularfilelocation."<br/>";
@@ -508,7 +750,7 @@ class Admin extends MY_Controller {
 		} else {
 			echo "no regular file<br/>";
 		}
-		 
+			
 		if(file_exists($base_path.$thumbfilelocation)){
 			$thumb = file_get_contents($base_path.$thumbfilelocation, true);
 			echo "putObject(". $this->bucket." ".$thumbfilelocation."<br/>";
@@ -516,25 +758,25 @@ class Admin extends MY_Controller {
 		} else {
 			echo "no thumb file<br/>";
 		}
-		 
-		if(file_exists($base_path.$mediumfilelocation)){ 
-		$medium = file_get_contents($base_path.$mediumfilelocation, true);
-		echo "putObject(". $this->bucket." ".$mediumfilelocation."<br/>";
-		$this->s3->putObject($medium, $this->bucket, $mediumfilelocation, S3:: ACL_PUBLIC_READ);
+			
+		if(file_exists($base_path.$mediumfilelocation)){
+			$medium = file_get_contents($base_path.$mediumfilelocation, true);
+			echo "putObject(". $this->bucket." ".$mediumfilelocation."<br/>";
+			$this->s3->putObject($medium, $this->bucket, $mediumfilelocation, S3:: ACL_PUBLIC_READ);
 		} else {
 			echo "no medium file<br/>";
 		}
-		
+
 		if(file_exists($base_path.$largefilelocation)){
-		$large = file_get_contents($base_path.$largefilelocation, true);
-		echo "putObject(". $this->bucket." ".$largefilelocation."<br/>";
-		$this->s3->putObject($large, $this->bucket, $largefilelocation, S3:: ACL_PUBLIC_READ);
+			$large = file_get_contents($base_path.$largefilelocation, true);
+			echo "putObject(". $this->bucket." ".$largefilelocation."<br/>";
+			$this->s3->putObject($large, $this->bucket, $largefilelocation, S3:: ACL_PUBLIC_READ);
 		} else {
 			echo "no large file<br/>";
-		} 
-		
-		 
-		 
+		}
+
+			
+			
 		endforeach;
 	}
 
@@ -701,15 +943,15 @@ class Admin extends MY_Controller {
 		$this->load->view('template/sunncamp/admin');
 	}
 
+
 	/*
 	 *
 	*/
 
-	function add_seo_content() {
+	function add_news_content() {
 		$data['main_content'] = "admin/add_content";
-		$data['seo_links'] = $this->content_model->get_seo_links();
 		$data['pages'] = $this->content_model->get_all_content();
-		$data['category'] = "seo";
+		$data['category'] = "news";
 		$this->load->vars($data);
 		$this->load->view('template/sunncamp/admin');
 	}
@@ -719,7 +961,16 @@ class Admin extends MY_Controller {
 	*/
 
 	function list_products($cat = NULL) {
-
+	
+		$timeago = now() - 3600;
+		if($timeago > $this->last_update) {
+			
+			echo "Backing Up Database";
+			redirect('admin/s3backup');
+		} else {
+			//echo "don't backup";
+		}
+		
 		//trim products with no data
 		$this->products_model->trim_products();
 
@@ -735,6 +986,7 @@ class Admin extends MY_Controller {
 
 		$this->load->vars($data);
 		$this->load->view('template/sunncamp/admin');
+		
 	}
 
 	/*
@@ -770,6 +1022,8 @@ class Admin extends MY_Controller {
 		if (!isset($is_logged_in) || $role != 1) {
 			$data['message'] = "You don't have permission";
 			redirect('welcome/login', 'refresh');
+		} else {
+			
 		}
 	}
 

@@ -72,6 +72,13 @@ class Welcome extends MY_Controller {
             
         }
 
+        
+        if ($data['menu'] == 'news') {
+        	$data['news'] = $this->content_model->get_content_cat('news');
+        }
+        if ($data['menu'] == 'stockists') {
+        	$data['stockists'] = $this->content_model->get_stockists();
+        }
         $data['content'] = $this->content_model->get_content($data['menu']);
         $data['captcha'] = $this->captcha_model->initiate_captcha();
         foreach ($data['content'] as $row):
