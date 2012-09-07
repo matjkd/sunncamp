@@ -21,6 +21,7 @@
 			<li><a href="<?= base_url() ?>user/user_admin">Manage Companies/Users</a>
 			</li>
 			<li><a href="<?= base_url() ?>admin/add_content">Add Content</a></li>
+			<li><a href="<?= base_url() ?>admin/add_testimonial_content">Add Testimonial</a></li>
 			<li><a href="<?= base_url() ?>admin/add_news_content">Add News</a></li>
 			<li><a href="<?= base_url() ?>backend/category_admin">Category Admin</a>
 			</li>

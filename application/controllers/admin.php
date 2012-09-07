@@ -955,6 +955,15 @@ $product_image_id =  $row->product_image_id;
 		$this->load->vars($data);
 		$this->load->view('template/sunncamp/admin');
 	}
+	
+	
+	function add_testimonial_content() {
+		$data['main_content'] = "admin/add_testimonial";
+		$data['pages'] = $this->content_model->get_all_content();
+		$data['category'] = "testimonial";
+		$this->load->vars($data);
+		$this->load->view('template/sunncamp/admin');
+	}
 
 	/*
 	 *

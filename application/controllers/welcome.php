@@ -76,6 +76,9 @@ class Welcome extends MY_Controller {
         if ($data['menu'] == 'news') {
         	$data['news'] = $this->content_model->get_content_cat('news');
         }
+        if ($data['menu'] == 'testimonials') {
+        	$data['testimonial'] = $this->content_model->get_content_cat('testimonial');
+        }
         if ($data['menu'] == 'stockists') {
         	$data['stockists'] = $this->content_model->get_stockists();
         }

@@ -11,6 +11,10 @@ Title* <br/><?=form_input('title', $row->title)?><br/>
 <p>
 Menu <br/><?=form_input('menu', $row->menu)?><br/>
 </p>
+
+<p>
+Added By <br/><?=form_input('added_by', $row->added_by)?><br/>
+</p>
 <textarea cols=65 rows=20 name="content" id="content" class='wymeditor'><?=$row->content?></textarea>
 <br/>
 <?php if($row->news_image != NULL) { ?>

@@ -60,6 +60,7 @@ class Content_model extends CI_Model {
         $content_update = array(
             'content' => $this->input->post('content'),
             'menu' => $this->input->post('menu'),
+        		'added_by' => $this->input->post('added_by'),
             'title' => $this->input->post('title'),
             'extra' => $this->input->post('extra'),
             'meta_desc' => $this->input->post('meta_desc'),
