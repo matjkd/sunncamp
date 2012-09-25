@@ -29,6 +29,16 @@ class Content_model extends CI_Model {
         }
     }
     
+	function get_categories_with_stockists() {
+		$this->db->distinct('company_cat');
+		$this->db->join('product_category_parents', 'company_cats.company_cat = product_category_parents.parent_id');
+		$query = $this->db->get('company_cats');
+		if ($query->num_rows > 0)
+    		 {
+    		return $query->result();
+    	}
+	}
+	
     function get_stockists() {
     	$this->db->join('companies', 'company_cats.company_id = companies.company_id');
     	$this->db->join('company_address', 'company_cats.company_id = company_address.company_id');
@@ -39,7 +49,7 @@ class Content_model extends CI_Model {
     	
     	$query = $this->db->get('company_cats');
     	if ($query->num_rows > 0)
-    		; {
+    		 {
     		return $query->result();
     	}
     }
@@ -49,7 +59,7 @@ class Content_model extends CI_Model {
         $this->db->where('content_id', $id);
         $query = $this->db->get('content');
         if ($query->num_rows == 1)
-            ; {
+             {
             return $query->result();
         }
     }

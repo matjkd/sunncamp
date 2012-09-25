@@ -1,6 +1,6 @@
 <div class="stockistMenu">
-	<?php foreach($category_parents as $row):?>
-	<div class="stockistButton" id="<?=$row->parent?>">
+	<?php foreach($stockist_cats as $row):?>
+	<div class="stockistButton" id="<?=$row->parent_id?>">
 		<?=$row->parent_name?>
 		<br />
 	</div>
