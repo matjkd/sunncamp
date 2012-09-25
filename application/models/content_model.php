@@ -30,9 +30,14 @@ class Content_model extends CI_Model {
     }
     
 	function get_categories_with_stockists() {
-		$this->db->distinct('company_cat');
+		$this->db->group_by('company_cats.company_cat');
 		$this->db->join('product_category_parents', 'company_cats.company_cat = product_category_parents.parent_id');
+		$this->db->join('companies', 'company_cats.company_id = companies.company_id');
+		$this->db->where('companies.visible_on_site', 1);
+    	
+		
 		$query = $this->db->get('company_cats');
+		
 		if ($query->num_rows > 0)
     		 {
     		return $query->result();
