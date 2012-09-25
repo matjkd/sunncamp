@@ -81,6 +81,8 @@ class Welcome extends MY_Controller {
         }
         if ($data['menu'] == 'stockists') {
         	$data['stockists'] = $this->content_model->get_stockists();
+			
+			$data['stockist_cats'] = $this->content_model->get_categories_with_stockists();
         }
         $data['content'] = $this->content_model->get_content($data['menu']);
         $data['captcha'] = $this->captcha_model->initiate_captcha();
