@@ -79,7 +79,7 @@ class Email extends My_Controller {
             $this->postmark->send();
 
             $this->session->set_flashdata('message', 'Your message has been sent. Thank you.');
-            redirect('welcome/main/contact', 'refresh');
+            redirect('contact', 'refresh');
         }
     }
 
