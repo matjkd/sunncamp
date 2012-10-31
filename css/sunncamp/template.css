@@ -789,18 +789,16 @@ ul.catmenu li ul li a:hover {
 }
 
 .stockistButton {
-	float:left;
+	
 	cursor:pointer;
-	padding:10px;
-	margin:1px;
-	color:#fff;
-	background:#2c66b0;
+	
 }
 .stockist {
 	float:left;
 	width:293px;
 	height:170px;
-	background:#B9C9FE;
+	
+border-bottom:solid 1px #ccc;
 	padding:5px;
 	margin:3px;
 }

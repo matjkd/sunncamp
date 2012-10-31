@@ -1,12 +1,44 @@
-<div class="stockistMenu">
-	<?php foreach($stockist_cats as $row):?>
-	<div class="stockistButton" id="<?=$row->parent_id?>">
-		<?=$row->parent_name?>
-		<br />
+<style type="text/css">
+	.brochureLinks {
+		float: left;
+		width:120px;
+		text-align: center;
+		padding: 10px 35px 10px 0px;
+	}
+	.brochureLinks img {
+		width: 120px;
+		height: 120px;
+		-moz-box-shadow: 10px 6px 29px #ddd;
+-webkit-box-shadow: 10px 6px 29px #ddd;
+box-shadow: 10px 6px 29px #ddd;
+	}
+</style>
+
+<div class="brochureLinks stockistButton" id="9">
+	<img src="https://s3-eu-west-1.amazonaws.com/sunncamp/images/trailerTents.jpg"/>
+	<br/>
+	
 	</div>
-	<?php endforeach;?>
-	<div style="clear: both"></div>
+<div class="brochureLinks  stockistButton" id="10">
+	<img src="https://s3-eu-west-1.amazonaws.com/sunncamp/images/awnings.jpg"/>
+	<br/>
+	
 </div>
+<div class="brochureLinks  stockistButton" id="15">
+	<img src="https://s3-eu-west-1.amazonaws.com/sunncamp/images/accessories.jpg"/>
+	<br/>
+	
+</div>
+<div class="brochureLinks  stockistButton" id="21">
+	<img src="https://s3-eu-west-1.amazonaws.com/sunncamp/images/tents.jpg"/>
+	<br/>
+	
+</div>
+
+
+
+
+
 <div style="clear:both">
 <?php foreach($stockists as $row):?>
 
