@@ -2,6 +2,8 @@
 
     <div class="frontpage_slideshow">
 
+		 <img src="<?= base_url() ?>images/slides/AirVolution_Awnings.jpg"/>
+        <img src="<?= base_url() ?>images/slides/AirVolution_Tents.jpg"/>
         <img src="<?= base_url() ?>images/slides/HomeSlide_1.jpg"/>
         <img src="<?= base_url() ?>images/slides/HomeSlide_2.jpg"/>
         <img src="<?= base_url() ?>images/slides/HomeSlide_3.jpg"/>
@@ -11,6 +13,17 @@
     </div>
 
     <div class="frontpage_slideshow" id="frontpage_slideshow_footer">
+    	
+    	 <div class="slideshow_text">
+            <a href="<?=base_url()?>products/show/82"><h2>Air Volution Inflatable Tents – The Pole-Less System – From SunnCamp</h2>
+           </a>
+        </div>
+
+           <div class="slideshow_text">
+              <a href="<?=base_url()?>products/show/81"> <h2>Air Volution Inflatable Awnings – The Pole-Less System – From SunnCamp</h2>
+           </a>
+        </div>
+    	
 
         <div class="slideshow_text">
             <a href="<?=base_url()?>products/show/82"><h2>Shadow 800DL</h2>

@@ -603,6 +603,7 @@ class Admin extends MY_Controller {
 		if (file_exists($path)) {
 
 			// folder exists
+			
 		} else {
 
 			//create folders
@@ -644,6 +645,7 @@ class Admin extends MY_Controller {
 			$this->s3->putObject($large, $this->bucket, $largefilelocation, S3:: ACL_PUBLIC_READ);
 
 
+//TODO need to remove old folders
 
 			redirect("admin/add_product/$id");
 		}
