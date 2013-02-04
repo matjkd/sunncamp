@@ -2,8 +2,8 @@
 
     <div class="frontpage_slideshow">
 
-		 <img src="<?= base_url() ?>images/slides/AirVolution_Awnings.jpg"/>
-        <img src="<?= base_url() ?>images/slides/AirVolution_Tents.jpg"/>
+		 <img src="<?= base_url() ?>images/slides/AirVolution_Tents.jpg"/>
+        <img src="<?= base_url() ?>images/slides/AirVolution_Awnings.jpg"/>
         <img src="<?= base_url() ?>images/slides/HomeSlide_1.jpg"/>
         <img src="<?= base_url() ?>images/slides/HomeSlide_2.jpg"/>
         <img src="<?= base_url() ?>images/slides/HomeSlide_3.jpg"/>
