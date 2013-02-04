@@ -15,12 +15,13 @@
     <div class="frontpage_slideshow" id="frontpage_slideshow_footer">
     	
     	 <div class="slideshow_text">
-            <a href="<?=base_url()?>products/show/82"><h2>Air Volution Inflatable Tents – The Pole-Less System – From SunnCamp</h2>
+    	 
+            <a href="<?=base_url()?>products/category/Air_Volution_Inflatable_Tents"><h2>Air Volution Inflatable Tents – The Pole-Less System – From SunnCamp</h2>
            </a>
         </div>
 
            <div class="slideshow_text">
-              <a href="<?=base_url()?>products/show/81"> <h2>Air Volution Inflatable Awnings – The Pole-Less System – From SunnCamp</h2>
+              <a href="<?=base_url()?>products/category/Air_Volution_Inflatable_Awnings"> <h2>Air Volution Inflatable Awnings – The Pole-Less System – From SunnCamp</h2>
            </a>
         </div>
     	
