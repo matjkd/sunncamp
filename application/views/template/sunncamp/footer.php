@@ -19,7 +19,7 @@
 <script src="<?= base_url() ?>js/tooltipster.js"></script>
 <script src="<?= base_url() ?>js/sunncamp/plugins.js"></script>
 <script src="<?= base_url() ?>js/jeditable.js"></script>
-
+<script src="<?= base_url() ?>js/youtubepopup.js"></script>
 <script src="<?= base_url() ?>js/script.js"></script>
 <script src="<?= base_url() ?>js/sunncamp/script.js"></script>
 

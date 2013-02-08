@@ -282,6 +282,11 @@ $(document).ready(function() {
 				
 				fixedWidth: 200
 			});
+			
+			
+		
+    $("a[rel^='prettyPhoto']").prettyPhoto();
+
    
 
 });

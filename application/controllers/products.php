@@ -48,6 +48,7 @@ class Products extends MY_Controller {
             $data['product_name'] = $row->product_name;
             $data['product_desc'] = $row->product_desc;
             $data['product_ref'] = $row->product_ref;
+			 $data['video'] = $row->video;
 
         endforeach;
 

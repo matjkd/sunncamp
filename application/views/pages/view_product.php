@@ -39,7 +39,11 @@
 
             <!-- root element for the items -->
             <div class="items">
-
+            	<?php if($video != NULL) { ?>}
+							<a class="youtube" rel="prettyPhoto" href="http://www.youtube.com/watch?v=<?=$video?>">
+								<img src="<?=base_url()?>images/youtube_icon.png" alt = "Thumbnail 1"/>
+								</a>
+								<?php } ?>
                 <?php
                 $x = 0;
                 $y = 0;
@@ -156,7 +160,7 @@
                 <h2>Key Features</h2>
                 <?php foreach ($features as $row): ?>
                 	
-                    <img  <?php if($row->feature_description == NULL) { } else { ?>class="tooltip" <?php }?> title="<?=$row->feature_description?>" style="float:left; margin:0px; width:81px;" src="<?= base_url() ?>images/icons/features/<?= $row -> feature_image ?>"/>
+                    <img  <?php if($row->feature_description == NULL) { } else { ?>class="tooltip" <?php }?> title="<?=$row->feature_description?>" style="float:left; margin:0px; height:81px; width:81px;" src="<?= base_url() ?>images/icons/features/<?= $row -> feature_image ?>"/>
 					
                 <?php endforeach; ?>
                 <div style="clear:both;"></div>
