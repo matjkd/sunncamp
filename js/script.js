@@ -280,14 +280,7 @@ $(document).ready(function() {
     
     $('.tooltip').tooltipster({
 				
-				functionBefore: function(origin, continueTooltip) {
-					continueTooltip();
-					if (origin.data('ajax') !== 'cached') {
-						setTimeout(function() {
-							
-						}, 1000);
-					}
-				}
+				fixedWidth: 200
 			});
    
 
