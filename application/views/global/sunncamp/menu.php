@@ -51,7 +51,7 @@
             </div>
               <?php }?>
             <?php
-            if ($countrow > 10) {
+            if ($countrow > 11) {
                 $countrow = 0;
                 $megawidth = $megawidth + 190;
                 echo "</div>";

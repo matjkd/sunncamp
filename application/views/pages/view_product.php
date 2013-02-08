@@ -155,9 +155,9 @@
             <div id="keyFeatures"  >
                 <h2>Key Features</h2>
                 <?php foreach ($features as $row): ?>
-                	<a href="#" >
+                	
                     <img  <?php if($row->feature_description == NULL) { } else { ?>class="tooltip" <?php }?> title="<?=$row->feature_description?>" style="float:left; margin:0px; width:81px;" src="<?= base_url() ?>images/icons/features/<?= $row -> feature_image ?>"/>
-					</a>
+					
                 <?php endforeach; ?>
                 <div style="clear:both;"></div>
             </div>
