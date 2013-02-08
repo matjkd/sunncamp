@@ -277,6 +277,21 @@ function initMenus() {
 }
 $(document).ready(function() {
     initMenus();
+    
+    $('.tooltip').tooltipster({
+				
+				functionBefore: function(origin, continueTooltip) {
+					continueTooltip();
+					if (origin.data('ajax') !== 'cached') {
+						setTimeout(function() {
+							
+						}, 1000);
+					}
+				}
+			});
+   
+
 });
+
 
 

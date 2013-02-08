@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="right_column">
-        <?= $this->load->view('cart/frontcart') ?>
+        <?= $this -> load -> view('cart/frontcart') ?>
     </div>
 
     <div class="clearfix" >    </div>
@@ -21,11 +21,11 @@
     <div class="grid_16">
 
         <?php if($defaultimage != NULL) { foreach ($defaultimage as $row): ?>
-            <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/large/<?= $row->filename ?>' class = 'cloud-zoom' id='zoom1'
+            <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/large/<?= $row -> filename ?>' class = 'cloud-zoom' id='zoom1'
                rel="adjustX: 0, adjustY:0, position: 'inside', ">
-                <img src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/medium/<?= $row->filename ?>" alt='' />
+                <img src="https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/medium/<?= $row -> filename ?>" alt='' />
             </a>
-        <?php endforeach;  ?>
+        <?php endforeach; ?>
 
 
 
@@ -58,28 +58,26 @@
 
 
 
-                    <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/large/<?= $row->filename ?>' class='cloud-zoom-gallery' title='Thumbnail 1'
-                       rel="useZoom: 'zoom1', smallImage: 'https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/medium/<?= $row->filename ?>' ">
-                        <img src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/thumbs/<?= $row->filename ?>" alt = "Thumbnail 1"/></a>
+                    <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/large/<?= $row -> filename ?>' class='cloud-zoom-gallery' title='Thumbnail 1'
+                       rel="useZoom: 'zoom1', smallImage: 'https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/medium/<?= $row -> filename ?>' ">
+                        <img src="https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/thumbs/<?= $row -> filename ?>" alt = "Thumbnail 1"/></a>
 
 
 
 
                     <?php
-                    if ($x == 4) {
-                        echo "</div>";
-                        $y = 1;
-                        $x = 0;
-                    }
+						if ($x == 4)
+						{
+							echo "</div>";
+							$y = 1;
+							$x = 0;
+						}
 
+						endforeach;
 
-                endforeach;
-              
-                if ($y == 0) {
-                    echo "</div>";
-                }
-                
-       
+						if ($y == 0) {
+						echo "</div>";
+						}
                 ?>
 
                 <!-- end of root element for items -->
@@ -89,9 +87,10 @@
         <!-- "next page" action -->
         <a class="next browse right"></a>
         <?php  }
-        else {
-            echo "No Images";
-        }?>
+			else {
+			echo "No Images";
+			}
+		?>
         <br clear="all" />
         <div style="padding:0px;">
 
@@ -111,7 +110,7 @@
                 <ul><?php foreach ($other_features as $row): ?>
                 
                      
-                    <li>  <strong><?= $row->other_feature_name ?> </strong></li>
+                    <li>  <strong><?= $row -> other_feature_name ?> </strong></li>
                 
                     
 
@@ -129,30 +128,36 @@
                 <?php foreach ($specs as $row): ?>
                     <div style="width:100%; border-bottom:solid 2px #000080; height:23px; padding:4px 0 2px; clear:both;">  
                         <div style="width:200px; float:left;  ">
-                            <strong><?= $row->spec_desc ?> </strong>
+                            <strong><?= $row -> spec_desc ?> </strong>
                         </div>
                         <div style="width:300px; float:left;">
-                            <?= $row->spec_value ?>
+                            <?= $row -> spec_value ?>
                         </div>
                     </div>
 
                 <?php endforeach; ?>
             <?php } ?>
-            <?= $this->load->view('global/sunncamp/disclaimer') ?>
+            <?= $this -> load -> view('global/sunncamp/disclaimer') ?>
         </div>
 
     </div>
     
-
+ <style>
+  label {
+    display: inline-block;
+    width: 5em;
+  }
+  </style>
 
     <div class="right_column" >
 
         <?php if ($features != NULL) { ?>
-            <div id="keyFeatures" >
+            <div id="keyFeatures"  >
                 <h2>Key Features</h2>
                 <?php foreach ($features as $row): ?>
-                    <img style="float:left; margin:0px; width:81px;" src="<?= base_url() ?>images/icons/features/<?= $row->feature_image ?>"/>
-
+                	<a href="#" >
+                    <img  <?php if($row->feature_description == NULL) { } else { ?>class="tooltip" <?php }?> title="<?=$row->feature_description?>" style="float:left; margin:0px; width:81px;" src="<?= base_url() ?>images/icons/features/<?= $row -> feature_image ?>"/>
+					</a>
                 <?php endforeach; ?>
                 <div style="clear:both;"></div>
             </div>
@@ -160,9 +165,9 @@
         <?php } ?>
 
 
-        <?= $this->load->view('cart/product_stock') ?>
+        <?= $this -> load -> view('cart/product_stock') ?>
 
-        <?= $this->load->view('sidebox/product_cats') ?>
+        <?= $this -> load -> view('sidebox/product_cats') ?>
     </div>
 
 </div>
