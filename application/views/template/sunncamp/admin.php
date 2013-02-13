@@ -135,7 +135,7 @@
 		<script src="<?= base_url() ?>js/wymeditor/jquery.wymeditor.min.js"></script>
 
 		<script src="<?= base_url() ?>js/plugins.js"></script>
-		<script src="<?= base_url() ?>js/bootstrap-tooltip.js"></script>
+		
 		<script src="<?= base_url() ?>js/jeditable.js"></script>
 
 		<script src="<?= base_url() ?>js/libs/jquery.dataTables.min.js"></script>

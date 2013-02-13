@@ -70,13 +70,15 @@ box-shadow: 10px 6px 29px #ddd;
 	<br />
 	<?php } ?>
 
-	<?php if($row->company_phone != NULL){?>
-	<?=$row->company_phone?>
-	<br />
-	<?php } ?>
+	
 
 	<?php if($row->postcode != NULL){?>
 	<?=$row->postcode?>
+	<br />
+	<?php } ?>
+	
+	<?php if($row->company_phone != NULL){?>
+	<span class="highlight"><?=$row->company_phone?></span>
 	<br />
 	<?php } ?>
 
