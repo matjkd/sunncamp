@@ -1,1 +1,0 @@
-<img src="<?=base_url()?>images/icons/brochure_button.jpg"/>
