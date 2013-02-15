@@ -14,4 +14,4 @@ nbproject/*
 stats/*
 .htaccess
 *.*~
-
+.DS_Store
