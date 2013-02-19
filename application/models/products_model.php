@@ -27,6 +27,7 @@ class Products_model extends CI_Model {
       
     	
         $this->db->where('category_safename', $cat_safe_name);
+		
         $query = $this->db->get('product_categories');
 
 
@@ -286,7 +287,7 @@ class Products_model extends CI_Model {
 
         $this->db->join('product_categories', 'product_categories.product_category_id=product_category_link.product_category_id');
 
-
+		$this->db->order_by('products.product_name');
 
         $this->db->where('product_categories.category_safename', $category_name);
 
