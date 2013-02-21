@@ -66,5 +66,5 @@
 
 </div>
 
-<div style="text-align:right; float:right; width:200px; color:#ffffff; padding-left:20px;">&copy; 2012 SunnCamp</div>
+<div style="text-align:right; float:right; width:200px; color:#ffffff; padding-left:20px;">&copy; <?=date('Y')?> SunnCamp</div>
 
