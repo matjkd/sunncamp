@@ -7,7 +7,7 @@
 <title><?php if(isset($title)) { echo $title; } else { echo "Welcome to SunnCamp";} ?></title>
 <meta name="description" content="">
 <meta name="author" content="">
-
+<meta name="google-translate-customization" content="5f67df9d519d3b9d-2ba6e30f77d0c0c3-g537f36b06880951b-13"></meta>
 
 <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 

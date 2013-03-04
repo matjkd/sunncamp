@@ -51,8 +51,7 @@ class Gallery_model extends CI_Model {
     function do_upload($id) {
 
     
-
-
+		
         $config = array(
             'allowed_types' => 'jpg|jpeg|gif|png',
             'upload_path' => $this->gallery_path . '/' . $id . '',
@@ -62,7 +61,9 @@ class Gallery_model extends CI_Model {
         $this->load->library('upload', $config);
         if( ! $this->upload->do_upload()){
             $error = array('error' => $this->upload->display_errors());
-            echo $error;
+			
+          print_r($config);
+    		print_r($error);
         }
         else
         {

@@ -603,8 +603,11 @@ class Admin extends MY_Controller {
 		if (file_exists($path)) {
 
 			// folder exists
+			echo $path." folder exists<br/>";
 			
 		} else {
+				
+		
 
 			//create folders
 			mkdir('' . $this->config_base_path . $this->gallery_path . '/' . $id . '/');
@@ -618,8 +621,9 @@ class Admin extends MY_Controller {
 
 
 		if ($this->input->post('upload')) {
+			echo "doing upload...";
 			$filename = $this->gallery_model->do_upload($id);
-
+echo "...upload done";
 
 			//upload images to s3
 			$base_path = $this->config_base_path."/images/";
@@ -646,8 +650,10 @@ class Admin extends MY_Controller {
 
 
 //TODO need to remove old folders
-
-			redirect("admin/add_product/$id");
+	$delpath = $this->config_base_path . $this->gallery_path;
+	echo "delete ".$delpath;
+	delete_files($delpath, true);
+		//	redirect("admin/add_product/$id");
 		}
 	}
 

@@ -62,6 +62,15 @@
     </p>
 </div>
 
+<div style="float:left; width:100px; color:#ffffff; padding-left:0px; padding-top:31px;">
+
+<div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'en,nl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-19623681-18'}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</div>
+
 <div style="clear:both">
 
 </div>
