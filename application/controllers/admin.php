@@ -653,7 +653,7 @@ echo "...upload done";
 	$delpath = $this->config_base_path . $this->gallery_path;
 	echo "delete ".$delpath;
 	delete_files($delpath, true);
-		//	redirect("admin/add_product/$id");
+		redirect("admin/add_product/$id");
 		}
 	}
 
