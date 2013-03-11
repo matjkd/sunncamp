@@ -95,7 +95,14 @@ class Products extends MY_Controller {
     function category($category_name) {
 
         $data['title'] = $category_name;
-        $data['products'] = $this->products_model->get_products_by_cat($category_name);
+		
+		//get cat order
+		$catorder = $this->products_model->get_product_cat($category_name);
+		foreach($catorder as $row):
+			$orderby = $row->order_cat_by;
+		endforeach;
+		
+        $data['products'] = $this->products_model->get_products_by_cat($category_name, $orderby);
         
         if ($data['products'] != NULL) {
             foreach ($data['products'] as $row):
