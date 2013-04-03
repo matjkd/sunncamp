@@ -21,3 +21,41 @@ if (isset($message))
 	
 <?php } ?>
 
+<?php
+if (isset($notice))
+{
+?>
+		
+			<div class="ui-widget" id="notice" style="padding-bottom:10px; margin-top:-30px;">
+				<div class='ui-state-highlight ui-corner-all' style='padding: .7em;'>
+					<div style="float:left; width:90%;">
+					
+						
+						<?=$notice?>
+					</div>	
+					<div style="float:right;">				
+					<a href='#' onclick='closeNotice()'>
+					<span class='ui-icon ui-icon-circle-close' style='float:right; margin-top:0px; margin-right:.3em;'></span>
+					</a>
+					</div>
+					<div style="clear:both;"></div>
+				</div>
+			</div>
+		
+	
+<?php } ?>
+<script type="text/javascript">
+	
+	function closeNotice() {
+		
+		$('#notice').fadeOut();
+		$.ajax({url:"<?=base_url()?>welcome/hidenotice"});
+		
+	}
+	
+	
+	
+	
+</script>
+
+

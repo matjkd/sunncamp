@@ -64,7 +64,7 @@
             </div>
         </div>   
         <div id="container">
-
+<?= $this->load->view('global/alert') ?>
             <?php if (isset($slideshow) && $slideshow != NULL) { ?>
                 <div id="slideshow_container" class="container_24">
                     <?= $this->load->view($slideshow) ?>
@@ -92,7 +92,7 @@
 
                     <div class="<?= $mainsize ?>" >
                         <div style="padding:0px;">
-                        <?= $this->load->view('global/alert') ?>
+                        
                         <?= $this->load->view($main_content) ?>
                            
                            
