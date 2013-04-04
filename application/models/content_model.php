@@ -51,7 +51,7 @@ class Content_model extends CI_Model {
     	$this->db->group_by(array('product_category_parents.parent_id', 'companies.company_id'));
     	$this->db->where('companies.company_type', 1);
     	$this->db->where('companies.visible_on_site', 1);
-    	
+    	$this->db->order_by('companies.company_name');
     	$query = $this->db->get('company_cats');
     	if ($query->num_rows > 0)
     		 {
