@@ -249,11 +249,12 @@ class Products_model extends CI_Model {
             $optionname = "None";
         }
 
-        //TODO check if attribute is already part of product, and instead of adding again,
+        // TODO check if attribute is already part of product, and instead of adding again,
         // add onto/or replace (need to check which is best, maybe bring up an option)
 
         $form_data = array(
             'product_id' => $this->input->post('product_id'),
+            'price' => $this->input->post('price'),
             'option_category' => $option_category,
             'option' => $optionname,
             'stock_level' => $this->input->post('stock_level'),
