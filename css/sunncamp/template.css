@@ -779,7 +779,19 @@ ul.catmenu li ul li a:hover {
 
     border:0px;
 }
-
+#generic_form hr{
+	border-top: 1px solid #010750;
+	
+}
+.catlabel {
+	background:#2c66b0;
+	color:#fff;
+	display:block;
+	padding:3px 3px 3px 5px;
+	margin:3px;
+	width:150px;
+	float:left;
+}
 .socialicons a {
 
     text-decoration: none;
