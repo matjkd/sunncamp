@@ -37,8 +37,19 @@
                 <?php if($row2->manual_category == $row->manual_cat_id) { ?>
                 <tr>
                 <td id="row_<?=$row2->manual_id?>">
-                 <?=$row2->manual_title?> | <?=$row2->manual_filename?>
-                 <div style="float:right;" class="ui-icon ui-icon-circle-close spanlink" onclick="deleteManual(<?= $row2->manual_id ?>, '<?= $row2->manual_filename ?>')">x</div>
+                <div style="float:left;"> <?=$row2->manual_title?> | <?=$row2->manual_filename?></div>
+                <div style="float:right;">
+                 <form>
+                 	<select>
+                 		<?php foreach($manuals_cats as $cats):?>
+                 			<?php if($cats->manual_cat == $row->manual_cat) {$selected = "selected";} else { $selected = ""; }?>
+                 		<option value="<?=$cats->manual_cat_id?>" <?=$selected?>><?=$cats->manual_cat?></option>
+                 		<?php endforeach; ?>
+                 	</select>
+                 	<button>Move</button>
+                 </form>
+                 </div>
+                 <div style="float:right; margin-right:10px;" class="ui-icon ui-icon-circle-close spanlink" onclick="deleteManual(<?= $row2->manual_id ?>, '<?= $row2->manual_filename ?>')">x</div>
                 </td>
                 </tr>
                 <?php } ?>
