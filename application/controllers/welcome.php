@@ -55,12 +55,7 @@
 			$old_visitor = $this -> session -> userdata('visitor');
 			if ($old_visitor == NULL)
 			{
-				$data['notice'] = "<strong>IMPORTANT NOTICE DUE TO THE EXTREME UNSEASONAL COLD WEATHER CONDITIONS</strong>
- 
-<p>Modern lightweight materials such as window plastic are not designed to withstand extreme cold temperatures.
-If equipment has been stored in a very cold environment, folded in its bag, it may require warming up before it is unpacked and erected.
-This will prevent windows from cracking or shattering when they are unfolded, where material has been creased.
-This is not a manufacturing fault. Damage caused by this is not deemed a warranty claim.</p>";
+				$data['notice'] = NULL;
 				
 				
 			}
