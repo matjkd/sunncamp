@@ -22,14 +22,16 @@
                     <th>Product Ref</th>
 
                     <th>Type</th>
-                    <th>In Stock</th>
-                    <th>Quantity</th>
+                   <th>Item Cost</th>
+                    <th>Total Cost</th>
+                    
                     <th>In Cart</th>
                 </tr>
             </thead>
             <tbody>
 
                 <?php if ($cart != NULL) {
+                	$totalcost = NULL;
                     foreach ($cart as $row): ?>
                         <tr>
                             <td>
@@ -37,7 +39,7 @@
                             </td>
 
                             <td>
-                                [<?= $row->product_ref ?>]
+                                [<?= $row->product_ref ?>] <?= $row -> cart_id ?>
                             </td>
 
                             <td>
@@ -46,18 +48,15 @@
 
 
 
-                            <td>
-                                <span style="color:#555555;" id="stock_<?= $row->option_id ?>"><?= $row->stock_level ?>   </span>
-                            </td>
+      <td>
+	<?=$row->price?>
+</td>                 
 
+<td>
+	<?php $thisprice = $row->quantity*$row->price; echo $thisprice;?>
+</td>
 
-
-                            <td>
-                                <span  style="width:18px; float:left;" class="ui-icon ui-icon-circle-minus spanlink" onclick="lowerstock('<?= $user_id ?>', '<?= $row->option_id ?>')" ></span>  
-
-                                <span  style="width:18px; float:left;" class="ui-icon ui-icon-circle-plus spanlink" onclick="raisestock('<?= $user_id ?>', '<?= $row->option_id ?>')" ></span> 
-
-                            </td> 
+                            
 
                             <td>
                                 <span id="cart_<?= $row->option_id ?>"><?= $row->quantity ?></span>
@@ -71,7 +70,9 @@
 
 
                         </tr>
-    <?php endforeach;
+    <?php 
+    $totalcost = $totalcost + $thisprice;
+    endforeach;
 } ?>
             </tbody>
         </table>
@@ -79,8 +80,12 @@
             <p>Your Cart is empty</p>
         <?php } else { ?>
         
-        <a href="<?=base_url()?>usercart/make_order">Place Order</a>
+       
+        <?=form_open(base_url().'usercart/process_payment')?>
+        <?=form_hidden('cost', $totalcost)?>
+        <?=form_submit('mysubmit', 'pay with paypal')?>
         
+        <?=form_close()?>
         <?php } ?>
         
         <?=$this->load->view('cart/view_orders')?>

@@ -1,5 +1,5 @@
 <div class="corner_cart" >
-    <strong>Dealer Login</strong>
+    <strong>Login</strong>
     <?php
     $is_logged_in = $this->session->userdata('is_logged_in');
     if (!isset($is_logged_in) || $is_logged_in == true) {
@@ -22,6 +22,12 @@
         echo form_close();
     }
     ?>
+    
+   <?php if($this->sitelanguage == "dutch") { ?>
+        	<hr>
+   <strong>Register</strong><br/>
+   Click here to Register     	
+   <?php } ?>
 
 </div>
 

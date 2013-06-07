@@ -7,6 +7,14 @@ class MY_Controller extends CI_Controller {
 
         $this->load->model('admin_model');
         $this->load->library('postmark');
+		$this->merchant->load('paypal_express');
+		$settings = array(
+	    'username' => 'test_api1.redstudio.co.uk',
+	    'password' => '1370523366',
+	    'signature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31A9Ou9oM.UDtyg0GhmUkB36eGYYtn',
+	    'test_mode' => true);
+
+		$this->merchant->initialize($settings);
 
         $admindata = $this->admin_model->get_admin(1);
         foreach ($admindata as $row):
@@ -43,8 +51,16 @@ class MY_Controller extends CI_Controller {
             $this->config_base_path = $row->doc_root;
             $this->config_company_name = $row->company_name;
             $this->load->vars($config_data);
+			
+			
 
         endforeach;
+		
+		if (strpos(base_url(),'dutch') !== false) {
+   			  $this->sitelanguage = "dutch";
+			} else {
+				$this->sitelanguage = "english";
+			}
     }
 
 }

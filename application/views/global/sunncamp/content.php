@@ -47,6 +47,10 @@
 
     <?php if (isset($sidebox) && $sidebox != NULL) { ?>
         <div class="right_column" >
+        	<?php if($this->sitelanguage == "dutch") { ?>
+        	<?= $this->load->view('cart/frontcart') ?>
+        	<hr>
+        	<?php } ?>
 
             <?= $this->load->view($sidebox) ?>
 

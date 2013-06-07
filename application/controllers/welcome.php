@@ -18,6 +18,9 @@
 		 */
 		public function index()
 		{
+			
+			
+			 
 			$segment_active = $this -> uri -> segment(2);
 			if ($segment_active != NULL)
 			{
