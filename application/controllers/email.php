@@ -36,14 +36,14 @@ class Email extends My_Controller {
 
 
             $this->session->set_flashdata('message', validation_errors());
-            redirect('welcome/main/contact', 'refresh');
+            redirect('contact', 'refresh');
         } else {
 
             // check captcha
             // if it returns true the captcha has failed
             if ($this->captcha_model->check($word, $ip_address, $time)) {
                 $this->session->set_flashdata('message', 'The captcha was wrong');
-                redirect('welcome/main/contact', 'refresh');
+                redirect('contact', 'refresh');
             }
 
             // end check captcha	
@@ -81,6 +81,7 @@ class Email extends My_Controller {
 			//send email to client
 			$this->postmark->clear();
 			 $this->postmark->from($config_email, $config_company_name);
+			 $this->postmark->subject('' . $config_company_name . 'Contact Form');
 			  $this->postmark->to($data['email']);
 			$this->postmark->message_html("
 			Thank you for contacting SunnCamp.
@@ -89,10 +90,8 @@ Please note we will review your enquiry and reply to you within 10 working days.
  
 King Regards
  
-SunnCamp 
-    			
-					");
-			
+SunnCamp ");
+			 $this->postmark->send();
 			
 
             $this->session->set_flashdata('message', 'Thank you for contacting SunnCamp, Please note we will review your enquiry and reply to you within 10 working days.');
