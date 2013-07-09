@@ -56,10 +56,27 @@ class MY_Controller extends CI_Controller {
 
         endforeach;
 		
-		if (strpos(base_url(),'dutch') !== false) {
+		if (strpos(base_url(),'dutch') !== false || strpos(base_url(),'.nl') !== false) {
+			
+			$url = "http://rate-exchange.appspot.com/currency?from=GBP&to=EUR";
+			$json = file_get_contents($url);
+			$data = json_decode($json, TRUE);
+			
+			$rate = ceil($data['rate']*10)/10;
+			//echo $rate;
    			  $this->sitelanguage = "dutch";
+			  $this->currency = "";
+			   $this->currencybefore = "";
+				 $this->currencyafter = "&euro;";
+			   $this->convert = $rate;
+			   $this->currencyval  = 'EUR';
 			} else {
 				$this->sitelanguage = "english";
+				
+				 $this->currencybefore = "&pound;";
+				 $this->currencyafter = "";
+				 $this->convert = "1";
+				$this->currencyval = 'GBP';
 			}
     }
 

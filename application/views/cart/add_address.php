@@ -1,7 +1,7 @@
-<h2>Create Company</h2>
+<h2>Add an Address</h2>
 <div id="generic_form">
 
-    <?php echo form_open('user/user_admin/add_company'); ?>
+    <?php echo form_open('user/customers_admin/add_address'); ?>
 
     <p>
 
@@ -10,8 +10,8 @@
     </p>
     <p>
 
-        <input type="text" name="phone"  value="<?=set_value('phone', '')?>"/>
-        <label>Phone</label>
+        <input type="text" name="phone"  value="<?=$user_data[0]->phone?>"/>
+        <label>Phone* </label>
     </p>
     <p>
 
@@ -21,7 +21,7 @@
     <p>
 
         <input type="text" name="address1" value="<?=set_value('address1', '')?>"/>
-        <label>Address 1</label>
+        <label>Address 1*</label>
     </p>
     <p>
 
@@ -46,29 +46,12 @@
     <p>
 
         <input type="text" name="postcode" value="<?=set_value('postcode', '')?>" />
-        <label>Postcode</label>
+        <label>Postcode*</label>
     </p>
-
-    <p>
-
-        <select name="company_type">
-            <option value="1">Stockist</option>
-            <option value="2">Supplier</option>
-            <option value="3">Customer</option>
-            <option value="10">Other</option>
-        </select>
-        <label>Company Type</label>
-    </p>
-    <p>
-
-        <select name="visible">
-            <option value="0">No</option>
-            <option value="1">Yes</option>
-          
-        </select>
-        <label>Visible on site (under stockists, if stockist)</label>
-    </p>
-    <input type="submit" value="submit" />
+    * required<br/>
+<?=form_hidden('company_type', 3)?>
+<?=form_hidden('visible', 0)?>
+      <input type="submit" value="submit" />
 
 </form>
 </div>

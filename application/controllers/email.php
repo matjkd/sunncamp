@@ -77,8 +77,25 @@ class Email extends My_Controller {
     			
 					");
             $this->postmark->send();
+			
+			//send email to client
+			$this->postmark->clear();
+			 $this->postmark->from($config_email, $config_company_name);
+			  $this->postmark->to($data['email']);
+			$this->postmark->message_html("
+			Thank you for contacting SunnCamp.
+ 
+Please note we will review your enquiry and reply to you within 10 working days.
+ 
+King Regards
+ 
+SunnCamp 
+    			
+					");
+			
+			
 
-            $this->session->set_flashdata('message', 'Your message has been sent. Thank you.');
+            $this->session->set_flashdata('message', 'Thank you for contacting SunnCamp, Please note we will review your enquiry and reply to you within 10 working days.');
             redirect('contact', 'refresh');
         }
     }

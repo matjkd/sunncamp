@@ -1,4 +1,5 @@
 
+
 <div style="padding:25px;">
     <div class="clearfix" >    </div>
     <div class="grid_16">
@@ -25,16 +26,18 @@
        
        
       <?php foreach($user_data as $row): ?>
-      <h4>Shipping Address</h4>	
-      	<?=$row->address1?>
+      <h4>Shipping</h4>	
+      	First Class
       	<?php endforeach; ?>
       	<br/>
-      	<a href="">Change Address</a>
       	
-      	<hr>
-      	<a href="<?=base_url()?>usercart/view_cart"><- Cart</a> | <a href="<?=base_url()?>usercart/choose_shipping">Shipping -></a>
+      	
+      	
+<hr>
+      	<a href="<?=base_url()?>usercart/shipping_address"><- Address</a> | <a href="<?=base_url()?>usercart/checkout">Checkout -></a>
     </div>
     <div class="right_column">
 <?= $this->load->view('sidebox/product_cats') ?>
     </div>
+
 

@@ -289,6 +289,7 @@
 			$this->db->join('order_status', 'order_status.status_id = order.orderstatus');
 			$this->db->join('product_options', 'product_options.option_id = cart.cart_option_id');
 			$this -> db -> join('products', 'products.product_id = product_options.product_id');
+			
 			$this->db->where('cart.order_id >', 0);
 			$this -> db -> where('order.user_id', $user_id);
 			$query = $this -> db -> get('cart');
@@ -299,6 +300,17 @@
 			return FALSE;
 			
 		}
+
+function order_ids($user_id) {
+	$this->db->join('order_status', 'order_status.status_id = order.orderstatus');
+			$this -> db -> where('user_id', $user_id);
+			$query = $this -> db -> get('order');
+			if ($query -> num_rows > 0)
+			{
+				return $query -> result();
+			}
+			return FALSE;
+}
 
 		function list_all_carts()
 		{
@@ -314,12 +326,14 @@
 			return FALSE;
 		}
 
-		function create_order($user_id)
+		function create_order($user_id, $ref, $status)
 		{
 
 			$new_cat_parent = array(
 				'user_id' => $user_id,
-				'date_created' => time()
+				'date_created' => time(),
+				'paypalref' => $ref,
+				'orderstatus' => $status
 			);
 
 			$insert = $this -> db -> insert('order', $new_cat_parent);
@@ -328,6 +342,9 @@
 
 		function convert_cart_to_order($user_id, $order_id)
 		{
+				
+				
+			$this->freeze_prices($user_id);
 
 			$update_cart = array(
 				'order_id' => $order_id,
@@ -337,6 +354,26 @@
 			$this -> db -> where('cart_status', 0);
 			$update = $this -> db -> update('cart', $update_cart);
 			return $update;
+		}
+		
+		
+		private function freeze_prices($user_id) {
+			
+			$cart = $this->list_cart_contents($user_id);
+			foreach($cart as $row):
+				
+				$update_cart = array(
+				'orderedprice' => $row->price
+			);
+			$this->db->where('cart_id', $row->cart_id);
+			$this -> db -> where('cart_user_id', $user_id);
+			$this -> db -> where('cart_status', 0);
+			$update = $this -> db -> update('cart', $update_cart);
+				
+			endforeach;
+			
+			return TRUE;
+			
 		}
 
 		function delete_cart($user_id)

@@ -1,7 +1,7 @@
 
 <?php if ($order != NULL) { ?>
     <h3>Previous Orders</h3>
-     <?php foreach ($order as $row2): ?>
+     <?php foreach ($order_ids as $row2): ?>
      	
      	Order ID:<?= $row2 -> order_id ?>. 
      	
@@ -81,7 +81,7 @@
         </tbody>
     </table>
     
-     Order Status: <?= $row2 -> status_of_order ?>
+     Order Status: <?= $row2 -> status_of_order ?> (Paypal Ref:<?= $row2 -> paypalref ?>)
     <hr>
 <?php endforeach; ?>
 <?php } ?>

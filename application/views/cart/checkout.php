@@ -3,7 +3,7 @@
     <div class="clearfix" >    </div>
     <div class="grid_16">
         <div style="padding:0px;">
-            <h1>Your Cart</h1>
+            <h1>Checkout</h1>
         </div>
     </div>
     <div class="right_column">
@@ -49,11 +49,11 @@
 
 
       <td>
-	<?=$row->price?>
+	<?=$this->currencybefore?><?=round($row->price*$this->convert, 2)?><?=$this->currencyafter?>
 </td>                 
 
 <td>
-	<?php $thisprice = $row->quantity*$row->price; echo $thisprice;?>
+	<?=$this->currencybefore?><?php $thisprice = $row->quantity*$row->price; echo round($thisprice*$this->convert, 2);?><?=$this->currencyafter?>
 </td>
 
                             
@@ -72,20 +72,53 @@
                         </tr>
     <?php 
     $totalcost = $totalcost + $thisprice;
+	
     endforeach;
+	$tax = $totalcost*0.2;
+	$shipping = 10*$this->convert;
+	$totalfinal = $shipping+$tax+$totalcost;
 } ?>
+<tr>
+	<td></td>
+<td></td>
+<td></td>
+<td>Tax (20%)</td>
+<td><?=$this->currencybefore?><?=round($tax,2)?><?=$this->currencyafter?></td>
+<td></td>
+</tr>
+<tr>
+<tr>
+	<td></td>
+<td></td>
+<td></td>
+<td>Shipping</td>
+<td><?=$this->currencybefore?><?=round($shipping, 2)?><?=$this->currencyafter?></td>
+<td></td>
+</tr>
+<tr>
+	<td></td>
+<td></td>
+<td></td>
+<td>Total</td>
+<td><?=$this->currencybefore?><?=round($totalfinal, 2)?><?=$this->currencyafter?></td>
+<td></td>
+</tr>
             </tbody>
         </table>
         <?php if ($cart == NULL) { ?>
             <p>Your Cart is empty</p>
-        <?php } else {  ?>
+        <?php } else { ?>
         
        
-       <a href="<?=base_url()?>usercart/shipping_address">Shipping Address -></a>
+        <?=form_open(base_url().'usercart/process_payment')?>
+        <?=form_hidden('cost', $totalfinal)?>
+        <?=form_submit('mysubmit', 'pay with paypal')?>
         
-        <?=$this->load->view('cart/view_orders')?>
+        <?=form_close()?>
+        <?php } ?>
         
-        <? } ?>
+        <hr>
+       	<a href="<?=base_url()?>usercart/choose_shipping"><- Shipping</a>
     </div>
     <div class="right_column">
 <?= $this->load->view('sidebox/product_cats') ?>
