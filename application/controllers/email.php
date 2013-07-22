@@ -84,11 +84,11 @@ class Email extends My_Controller {
 			 $this->postmark->subject('' . $config_company_name . 'Contact Form');
 			  $this->postmark->to($data['email']);
 			$this->postmark->message_html("
-			Thank you for contacting SunnCamp.
+			Thank you for contacting SunnCamp.<br/><br/>
  
-Please note we will review your enquiry and reply to you within 10 working days.
+Please note we will review your enquiry and reply to you within 10 working days.<br/><br/>
  
-King Regards
+King Regards<br/><br/>
  
 SunnCamp ");
 			 $this->postmark->send();
