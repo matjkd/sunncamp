@@ -28,6 +28,6 @@
    <strong>Register</strong><br/>
    Click here to Register     	
    <?php } ?>
-
+<div style="clear:both"></div>
 </div>
 

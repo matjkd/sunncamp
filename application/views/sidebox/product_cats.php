@@ -4,6 +4,9 @@
     $cat_parent = 0;
 } ?>
 
+
+<?=$this->load->view('sidebox/search')?>
+
 <div id="sidecats">
     <div style="padding:0 5px;">
         <h3>Categories</h3> 
