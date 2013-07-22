@@ -331,6 +331,7 @@
 
 			$this -> db -> join('product_images', 'product_images.product_id=products.product_id', 'left');
 			$this -> db -> order_by('products.product_name');
+			$this -> db -> where('products.active', 1);
 			$query = $this -> db -> get('products');
 			if ($query -> num_rows > 0)
 			{
