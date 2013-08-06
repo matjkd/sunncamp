@@ -21,7 +21,7 @@ class Email extends My_Controller {
         $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email');
         $this->form_validation->set_rules('subject', 'subject', 'trim');
         $this->form_validation->set_rules('message', 'message', 'trim');
-        $this->form_validation->set_rules('captcha', 'captcha', 'trim|required');
+       // $this->form_validation->set_rules('captcha', 'captcha', 'trim|required');
 
         $data['name'] = $this->input->post('name');
         $data['phone'] = $this->input->post('phone');
@@ -41,10 +41,11 @@ class Email extends My_Controller {
 
             // check captcha
             // if it returns true the captcha has failed
-            if ($this->captcha_model->check($word, $ip_address, $time)) {
-                $this->session->set_flashdata('message', 'The captcha was wrong');
-                redirect('contact', 'refresh');
-            }
+           
+           // if ($this->captcha_model->check($word, $ip_address, $time)) {
+           //     $this->session->set_flashdata('message', 'The captcha was wrong');
+           //     redirect('contact', 'refresh');
+           //  }
 
             // end check captcha	
 
