@@ -15,9 +15,9 @@
                 echo " - <a href='" . base_url() . "admin/edit/" . $row->content_id . "'>edit</a><br/>";
             }
             ?></h1>
-               <div class="newsImage">
-            <img  src="https://s3-eu-west-1.amazonaws.com/<?= $this->bucket ?>/news/thumb_<?= $row->news_image ?>"/>
-        </div>
+              
+            <img  class="newsImage" src="https://s3-eu-west-1.amazonaws.com/<?= $this->bucket ?>/news/thumb_<?= $row->news_image ?>"/>
+        
             <?= $row->content ?>
         </div>
         <div style="clear:both">
