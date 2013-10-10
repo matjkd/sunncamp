@@ -55,7 +55,8 @@ p {
 
 .newsDiv {
 	border-bottom:1px solid #ddd;
-	margin-bottom:15px;
+	margin-bottom:20px;
+	padding-bottom:20px;
 }
 h1 {
     font-family: 'Michroma', sans-serif;
