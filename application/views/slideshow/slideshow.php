@@ -6,7 +6,7 @@
 		 <!-- <img src="<?= base_url() ?>images/slides/AirVolution_Tents.jpg"/> -->
 		 <img src="<?= base_url() ?>images/slides/Slide_3.jpg"/>
         <img src="<?= base_url() ?>images/slides/Slide_4.jpg"/>
-      <img src="<?= base_url() ?>images/slides/Slide_5.jpg"/>
+      <img src="<?= base_url() ?>images/slides/Slide_5b.jpg"/>
       <img src="<?= base_url() ?>images/slides/AirVolution_Awnings.jpg"/>
         
 
