@@ -17,7 +17,7 @@ box-shadow: 10px 6px 29px #ddd;
 
 <div class="brochureLinks">
 	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SunnCamp_Accessory_Brochure_2014+FINAL+email.pdf">
-		<img src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/DSC01239.jpg"/></a>
+		<img src="https://s3-eu-west-1.amazonaws.com/sunncamp/images/acc_brochure.jpg"/></a>
 	<br/>
 	Sunncamp Accessories 2014
 </div>
