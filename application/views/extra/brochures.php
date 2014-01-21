@@ -30,8 +30,8 @@ box-shadow: 10px 6px 29px #ddd;
 </div>
 
 <div class="brochureLinks">
-	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SC_BRO_2013_12+print.pdf">
-		<img src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/DSC01243.jpg"/></a>
+	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/2014scbrochure.pdf">
+		<img src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/2014brochure.jpg"/></a>
 	<br/>
-	Tent, Awning, Motor Awning &amp; Trailer Tent Collection 2013
+	Tent, Awning, Motor Awning &amp; Trailer Tent Collection 2014
 </div>
