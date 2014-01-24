@@ -13,9 +13,10 @@
     <li><?= anchor('/instruction_manuals', 'Instructions') ?></li>
      <li><?= anchor('/brochures', 'Brochures') ?></li>
     <li><?= anchor('/testimonials', 'Testimonials') ?></li>
-    <li><?= anchor('/trade_reviews', 'Trade Reviews') ?></li>
+    <li><?= anchor('/trade_reviews', 'Reviews') ?></li>
     <li><?= anchor('/faq', 'faq') ?></li>
     <li><?= anchor('/contact', 'Contact') ?></li>
+    <li><?= anchor('/warranty', 'Warranty Registration') ?></li>
 </ul>
 
 

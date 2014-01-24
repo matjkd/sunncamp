@@ -253,7 +253,7 @@ h3 {
     font-family: sans-serif;
     text-transform: uppercase;
     background:url('template/menuback.jpg') repeat-x;
-    font-size: 11px;
+    font-size: 10px;
     padding-top: 0px;
     border-bottom: solid 1px #9fceee;
     line-height:38px;;
@@ -267,7 +267,7 @@ h3 {
     height:41px;
 
     margin: 0px;
-    padding:0px 0px 0px 20px;
+    padding:0px 0px 0px 0px;
     list-style-type: none;
     text-align: center;
 }
@@ -283,7 +283,7 @@ h3 {
 
     display:block;
     line-height:41px;
-    padding:0 8px;
+    padding:0 6px;
     text-decoration:none;
     background: none;
     color: #fff;
