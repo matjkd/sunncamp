@@ -109,7 +109,7 @@
             
              <?php if ($other_features != NULL) { ?>
               <div style="width:100%; border-bottom:solid 0px #000080; height:10px; padding:4px 0 2px; clear:both;">  </div>
-                <h2>Features</h2>
+               <!-- <h2>Features</h2>
                
                 <ul><?php foreach ($other_features as $row): ?>
                 
@@ -119,7 +119,7 @@
                     
 
                 <?php endforeach; ?>
-                            </ul>
+                            </ul> -->
                 
                
             <?php } ?>
