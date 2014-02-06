@@ -128,13 +128,13 @@
             <?php if ($specs != NULL) { ?>
                   <div style="width:100%; border-bottom:solid 0px #000080; height:10px; padding:4px 0 2px; clear:both;">  </div>
                 <h2>Specifications</h2>
-                <div style="width:100%; border-bottom:solid 2px #000080; height:0px; padding:4px 0 2px; clear:both;">  </div>
+               
                 <?php foreach ($specs as $row): ?>
-                    <div style="width:100%; border-bottom:solid 2px #000080; height:23px; padding:4px 0 2px; clear:both;">  
-                        <div style="width:200px; float:left;  ">
+                    <div style="width:100%; border-bottom:solid 2px #000080;  padding:4px 0 2px; clear:both;">  
+                        <div style="width:200px; float:left; padding-top:5px;  ">
                             <strong><?= $row -> spec_desc ?> </strong>
                         </div>
-                        <div style="width:300px; float:left;">
+                        <div style="width:300px; float:left;  padding-top:5px;">
                             <?= $row -> spec_value ?>
                         </div>
                     </div>
