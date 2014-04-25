@@ -22,12 +22,7 @@ box-shadow: 10px 6px 29px #ddd;
 	Sunncamp Accessories 2014
 </div>
 
-<div class="brochureLinks">
-	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SC+small+bro+email.pdf">
-		<img src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/awningpreview.jpg"/></a>
-	<br/>
-	2014 Caravan and Motorhome Awning Preview
-</div>
+
 
 <div class="brochureLinks">
 	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/2014scbrochure.pdf">
