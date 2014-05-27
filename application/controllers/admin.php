@@ -981,9 +981,9 @@ $product_image_id =  $row->product_image_id;
 	
 		$timeago = now() - 3600;
 		if($timeago > $this->last_update) {
-			
-			echo "Backing Up Database";
-			redirect('admin/s3backup');
+			// this may be broken
+			//echo "Backing Up Database";
+			//redirect('admin/s3backup');
 		} else {
 			//echo "don't backup";
 		}
