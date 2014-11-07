@@ -17,7 +17,7 @@ box-shadow: 10px 6px 29px #ddd;
 
 <div class="brochureLinks">
 	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/NEC+Oct+2014+Brochure.pdf">
-		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/DSC04524cut.jpg"/></a>
+		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/DSC04525+cut.jpg"/></a>
 	<br/>
 	NEC Brochure 2014
 </div>
