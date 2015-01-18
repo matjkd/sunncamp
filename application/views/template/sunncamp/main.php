@@ -64,6 +64,7 @@
             </div>
         </div>   
         <div id="container">
+        
 <?= $this->load->view('global/alert') ?>
             <?php if (isset($slideshow) && $slideshow != NULL) { ?>
                 <div id="slideshow_container" class="container_24">

@@ -1,4 +1,5 @@
 <!------------------------------------- THE CONTENT ------------------------------------------------->
+
 <div id="lofslidecontent45" class="lof-slidecontent">
     <div class="preload"><div></div></div>
     <!-- MAIN CONTENT --> 
