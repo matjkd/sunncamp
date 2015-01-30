@@ -413,6 +413,7 @@
 		function get_product_features($product_id)
 		{
 			$this -> db -> where('product_feature_link.product_id', $product_id);
+			$this->db->order_by('product_feature_link.feature_link_id', 'desc');
 			$this -> db -> join('product_features', 'product_feature_link.feature_id = product_features.feature_id', 'left');
 			$query = $this -> db -> get('product_feature_link');
 
@@ -432,7 +433,7 @@
 		function get_other_features($product_id)
 		{
 			$this -> db -> where('other_feature_link.product_id', $product_id);
-			$this -> db -> order_by('other_feature_link.other_feature_order', 'ASC');
+			$this -> db -> order_by('other_feature_link.other_feature_order', 'desc');
 			$this -> db -> join('other_features', 'other_feature_link.other_feature_id = other_features.other_feature_id', 'left');
 			$query = $this -> db -> get('other_feature_link');
 
