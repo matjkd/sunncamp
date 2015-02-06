@@ -37,5 +37,5 @@ box-shadow: 10px 6px 29px #ddd;
 	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/TENTBROCHURE2015download.pdf">
 		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/brochure2015.jpg"/></a>
 	<br/>
-	Tent Brochure 2015
+	2015 Tent, Awning, Motor Annexe & Utility Tent Brochure
 </div>
