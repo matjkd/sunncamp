@@ -1,6 +1,6 @@
 <?php
 
-$notice = "Please Note: Our website is currently being updated with our new range for 2015, check back soon.";
+$notice = "";
 if (isset($message))
 {
 ?>
