@@ -1,6 +1,6 @@
 <?php
 
-$notice = "";
+$notice = NULL;
 if (isset($message))
 {
 ?>
