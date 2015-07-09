@@ -7,7 +7,7 @@
 		 <img src="<?= base_url() ?>images/slides/Slide_3June2015b.jpg"/>
         <img src="<?= base_url() ?>images/slides/Slide_4.jpg"/>
       <img src="<?= base_url() ?>images/slides/Slide_5b.jpg"/>
-      <img src="<?= base_url() ?>images/slides/AirVolution_AwningsJune2015b.jpg"/>
+      <img src="<?= base_url() ?>images/slides/AirVolution_AwningsJune2015c.jpg"/>
         
 
     </div>
