@@ -60,7 +60,7 @@ class Email extends My_Controller {
 
 
 
-            $this->postmark->cc('');
+            $this->postmark->cc('mat@redstudio.co.uk');
 
 
             $this->postmark->subject('' . $config_company_name . 'Contact Form');
@@ -144,7 +144,7 @@ SunnCamp ");
 
 
 
-            $this->postmark->cc('');
+            $this->postmark->cc('mat@redstudio.co.uk');
 
 
             $this->postmark->subject('' . $config_company_name . 'Quote Form');
