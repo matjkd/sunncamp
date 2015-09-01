@@ -10,7 +10,7 @@
     </li >
     <li class="menu_list_item"><?= anchor('/about', 'Why Choose Sunncamp') ?></li>
     <li><?= anchor('/stockists', 'stockists') ?></li>
-    <li><?= anchor('/instruction_manuals', 'Instructions') ?></li>
+    
      <li><?= anchor('/brochures', 'Brochures') ?></li>
     <li><?= anchor('/testimonials', 'Testimonials') ?></li>
     <li><?= anchor('/trade_reviews', 'Reviews') ?></li>
