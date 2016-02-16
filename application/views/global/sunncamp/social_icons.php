@@ -46,7 +46,7 @@
     <p>
         <a href="<?=base_url()?>">Home</a><br/>
         <a href="<?=base_url()?>news">News</a><br/>
-        <a href="<?=base_url()?>about">Why Choose Suncamp</a><br/>
+        <a href="<?=base_url()?>about">Why Choose Sunncamp</a><br/>
         <a href="<?=base_url()?>stockists">Stockists</a><br/>
     </p>
 </div>
