@@ -28,7 +28,7 @@
 		<?php if($row->order == 0 ) { ?>
 		<div id="productview">
 			<a href="<?= base_url() ?>products/show/<?= $row->product_id ?>">
-				<div style="border: 1px solid #999999; height: 106px; width: 134px; overflow: hidden; display:table; ">
+				<div style="border: 0px solid #999999; height: 106px; width: 134px; overflow: hidden; display:table; ">
 					<div style="display:table-cell; vertical-align:middle; text-align: center;">
 					<img  src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $row->product_id ?>/thumbs/<?= $row->filename ?>" />
 					
