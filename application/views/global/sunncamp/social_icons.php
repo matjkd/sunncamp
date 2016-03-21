@@ -55,7 +55,7 @@
 
 
     <p>
-        <a href="<?=base_url()?>instruction_manuals">Instructions</a><br/>
+        <!-- <a href="<?=base_url()?>instruction_manuals">Instructions</a><br/> -->
         <a href="<?=base_url()?>testimonials">Testimonials</a><br/>
         <a href="<?=base_url()?>trade_reviews">Trade Reviews</a><br/>
         <a href="<?=base_url()?>faq">FAQ</a><br/>
