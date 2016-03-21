@@ -46,7 +46,7 @@ box-shadow: 10px 6px 29px #ddd;
 
 <div class="brochureLinks">
 	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/Trailer+Tent+bro+2016+v7+low+res.pdf">
-		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/sunncamp2016.png"/></a>
+		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/trailertent2016.png"/></a>
 	<br/>
 	Trailer Tent brochure 2016
 </div>
