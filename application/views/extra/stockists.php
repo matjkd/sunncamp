@@ -35,6 +35,12 @@ box-shadow: 10px 6px 29px #ddd;
 	
 </div>
 
+<div class="brochureLinks  stockistButton" id="34">
+	<img src="/images/partytents.jpg"/>
+	<br/>
+	
+</div>
+
 
 
 
