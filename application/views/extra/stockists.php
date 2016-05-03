@@ -3,11 +3,11 @@
 		float: left;
 		width:120px;
 		text-align: center;
-		padding: 10px 35px 10px 0px;
+		padding: 10px 0px 10px 0px;
 	}
 	.brochureLinks img {
-		width: 120px;
-		height: 120px;
+		width: 100px;
+		height: 100px;
 		-moz-box-shadow: 10px 6px 29px #ddd;
 -webkit-box-shadow: 10px 6px 29px #ddd;
 box-shadow: 10px 6px 29px #ddd;
@@ -36,7 +36,7 @@ box-shadow: 10px 6px 29px #ddd;
 </div>
 
 <div class="brochureLinks  stockistButton" id="34">
-	<img src="/images/partytents.jpg"/>
+	<img src="/images/icons/partytents.jpg"/>
 	<br/>
 	
 </div>
