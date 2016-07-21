@@ -151,7 +151,7 @@ function hideNotice() {
 
 		function instruction_manuals()
 		{
-
+            redirect('/', 'refresh');
 			$this -> load -> model('manuals_model');
 			$this -> extra = $this -> manuals_model -> get_manuals();
 			$this -> extra2 = $this -> manuals_model -> get_manual_cats();
