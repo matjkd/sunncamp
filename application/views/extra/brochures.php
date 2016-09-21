@@ -17,13 +17,18 @@ box-shadow: 10px 6px 29px #ddd;
 
 
 
-
+<div class="brochureLinks">
+	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/Preview_brochure_2017.pdf">
+		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/sunncamp-preview-2017.png"/></a>
+	<br/>
+	Preview Brochure 2017
+</div>
 
 <div class="brochureLinks">
-	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/Accessory_Brochure_2016.pdf">
-		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/2016accessory.jpg"/></a>
+	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/Accessory_Brochure_2017.pdf">
+		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/sunncamp-accessories-2017.png"/></a>
 	<br/>
-	Accessory Brochure 2016
+	Accessory Brochure 2017
 </div>
 
 
