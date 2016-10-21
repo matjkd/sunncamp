@@ -18,10 +18,10 @@ box-shadow: 10px 6px 29px #ddd;
 
 
 <div class="brochureLinks">
-	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/Preview_brochure_2017.pdf">
-		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/sunncamp-preview-2017.png"/></a>
+	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/Encompass+Sunncamp+Trade+Show+Brochure_LO.pdf">
+		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/coverencompass2017.png"/></a>
 	<br/>
-	Preview Brochure 2017
+	Oct 2016 NEC Brochure
 </div>
 
 <div class="brochureLinks">
