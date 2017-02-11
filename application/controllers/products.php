@@ -64,7 +64,7 @@
             
             //redirect if null
             if($data['active'] == 0) {
-             echo "product not active null";   
+             redirect('/', 'refresh');   
             }
             
 
