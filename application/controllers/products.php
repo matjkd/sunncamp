@@ -58,8 +58,15 @@
 				$data['product_desc'] = $row -> product_desc;
 				$data['product_ref'] = $row -> product_ref;
 				$data['video'] = $row -> video;
+                $data['active'] = $row -> active;
 
 			endforeach;
+            
+            //redirect if null
+            if($data['active'] == 0) {
+             echo "product not active null";   
+            }
+            
 
 			$data['category_parents'] = $this -> products_model -> get_all_product_parents();
 			$data['categories'] = $this -> products_model -> get_product_categories($product_id);
