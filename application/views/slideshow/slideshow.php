@@ -3,7 +3,7 @@
     <div class="frontpage_slideshow">
   		<img src="<?= base_url() ?>images/slides/Slide_1.jpg"/>
          <img src="<?= base_url() ?>images/slides/Slide_2b.jpg"/>
-		 <img src="<?= base_url() ?>images/slides/Slide_2.jpg"/>
+		
 		 <!-- <img src="<?= base_url() ?>images/slides/AirVolution_Tents.jpg"/> -->
 		 
 
