@@ -15,12 +15,7 @@ box-shadow: 10px 6px 29px #ddd;
 </style>
 
 
-<div class="brochureLinks">
-	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SunnCampIconAir2017.pdf">
-		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/brochureIconAir2017.png"/></a>
-	<br/>
-	Icon Air
-</div>
+
 
 <div class="brochureLinks">
 	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/sunncamp2018brochure.pdf">
