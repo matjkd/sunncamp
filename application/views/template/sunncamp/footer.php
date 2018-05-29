@@ -25,6 +25,8 @@
 <script src="<?= base_url() ?>js/sunncamp/frontend.js"></script>
 <?php if (isset($imagezoom) && $imagezoom == TRUE) { ?>
 <script src="http://cdn.jquerytools.org/1.2.6/tiny/jquery.tools.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-tools/1.2.6/jquery.tools.min.js"></script>
+
 <script src="<?= base_url() ?>js/cloud-zoom.1.0.2.min.js"></script>
 <script>
 	// execute your scripts when the DOM is ready. this is mostly a good habit
