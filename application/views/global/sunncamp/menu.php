@@ -16,7 +16,7 @@
     <li><?= anchor('/trade_reviews', 'Reviews') ?></li>
     <li><?= anchor('/faq', 'faq') ?></li>
     <li><?= anchor('/contact', 'Contact') ?></li>
-    <li><?= anchor('/warranty', 'Warranty Registration') ?></li>
+   
 </ul>
 
 
