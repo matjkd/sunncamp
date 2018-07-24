@@ -22,7 +22,7 @@
     <p class="form_message">
         <?= form_textarea('message') ?>
     </p>
-<div class="g-recaptcha" data-sitekey="6LdsD2YUAAAAACECQ2_K2nPfioNHDKm1w4Ua5J96"></div>
+    <p><div class="g-recaptcha" data-sitekey="6LdsD2YUAAAAACECQ2_K2nPfioNHDKm1w4Ua5J96"></div></p>
 
   </div>
 <?= form_hidden('ip_address', $this->input->ip_address()) ?>
