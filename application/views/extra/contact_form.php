@@ -22,13 +22,9 @@
     <p class="form_message">
         <?= form_textarea('message') ?>
     </p>
+<div class="g-recaptcha" data-sitekey="6LdsD2YUAAAAACECQ2_K2nPfioNHDKm1w4Ua5J96"></div>
 
-   <!--  Enter the word you see below<br/>
-
-
-
-    <input type="text" name="captcha" value="" /><br/><br/><?= form_label($captcha['image']) ?> -->
-</div>
+  </div>
 <?= form_hidden('ip_address', $this->input->ip_address()) ?>
 <?= form_hidden('time', $captcha['time']) ?>
 <div id="contact_submit"><?= form_submit('submit', 'Submit') ?></div><br/>
