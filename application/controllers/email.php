@@ -19,7 +19,7 @@ class Email extends My_Controller {
         $this->form_validation->set_rules('name', 'name', 'trim|required');
         $this->form_validation->set_rules('phone', 'phone', 'trim|required');
         $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email');
-        $this->firm_validation->set_rules('address', 'address', 'trim|required');
+        $this->form_validation->set_rules('address', 'address', 'trim|required');
 	$this->form_validation->set_rules('subject', 'subject', 'trim');
         $this->form_validation->set_rules('message', 'message', 'trim');
        // $this->form_validation->set_rules('captcha', 'captcha', 'trim|required');
