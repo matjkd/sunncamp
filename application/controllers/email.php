@@ -19,7 +19,8 @@ class Email extends My_Controller {
         $this->form_validation->set_rules('name', 'name', 'trim|required');
         $this->form_validation->set_rules('phone', 'phone', 'trim|required');
         $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('subject', 'subject', 'trim');
+        $this->firm_validation->set_rules('address', 'address', 'trim|required');
+	$this->form_validation->set_rules('subject', 'subject', 'trim');
         $this->form_validation->set_rules('message', 'message', 'trim');
        // $this->form_validation->set_rules('captcha', 'captcha', 'trim|required');
 
@@ -27,6 +28,7 @@ class Email extends My_Controller {
         $data['phone'] = $this->input->post('phone');
         $data['email'] = $this->input->post('email');
         $data['subject'] = $this->input->post('subject');
+	$data['address'] = $this->input->post('address');
         $data['message'] = $this->input->post('message');
         $word = $this->input->post('captcha');
         $time = $this->input->post('time');
@@ -71,6 +73,8 @@ class Email extends My_Controller {
 					Phone: " . $data['phone'] . "
 					<br/>
 					email: " . $data['email'] . "
+					<br/>
+					address: " . $data['address'] . "
 					<br/>
 					subject: " . $data['subject'] . "
 				    <br/><br/>
