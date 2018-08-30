@@ -14,6 +14,11 @@
     <p class="form_email">
         <?= form_input('email') ?>
     </p>
+    <?= form_label('Address') ?>
+    <p class="form_address">
+        <?= form_textarea('address') ?>
+    </p>
+    
     <?= form_label('Subject') ?>
     <p class="form_subject">
         <?= form_input('subject') ?>
