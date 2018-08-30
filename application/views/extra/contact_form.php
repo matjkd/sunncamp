@@ -2,19 +2,19 @@
     <?= form_open('email/send'); ?>
     <br/>
     <p class="form_name">
-        <?= form_label('Full Name') ?><br/>
+        <?= form_label('Full Name *') ?><br/>
         <?= form_input('name', set_value('name')) ?>
     </p>
 
     <p class="form_phone">
-        <?= form_label('Phone Number') ?><br/>
+        <?= form_label('Phone Number *') ?><br/>
         <?= form_input('phone', set_value('phone')) ?>
     </p>
-    <?= form_label('Email') ?>
+    <?= form_label('Email *') ?>
     <p class="form_email">
         <?= form_input('email') ?>
     </p>
-    <?= form_label('Address') ?>
+    <?= form_label('Full Postal Address *') ?>
     <p class="form_address">
         <?= form_textarea('address') ?>
     </p>
