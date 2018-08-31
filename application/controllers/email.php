@@ -19,7 +19,11 @@ class Email extends My_Controller {
         $this->form_validation->set_rules('name', 'name', 'trim|required');
         $this->form_validation->set_rules('phone', 'phone', 'trim|required');
         $this->form_validation->set_rules('email', 'email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('address', 'address', 'trim|required');
+        $this->form_validation->set_rules('address1', 'address1', 'trim|required');
+	    $this->form_validation->set_rules('address2', 'address2', 'trim|required');
+	    $this->form_validation->set_rules('town', 'town', 'trim|required');
+	    $this->form_validation->set_rules('county', 'county', 'trim|required');
+	    $this->form_validation->set_rules('postcode', 'postcode', 'trim|required');
 	$this->form_validation->set_rules('subject', 'subject', 'trim');
         $this->form_validation->set_rules('message', 'message', 'trim');
        // $this->form_validation->set_rules('captcha', 'captcha', 'trim|required');
@@ -28,7 +32,11 @@ class Email extends My_Controller {
         $data['phone'] = $this->input->post('phone');
         $data['email'] = $this->input->post('email');
         $data['subject'] = $this->input->post('subject');
-	$data['address'] = $this->input->post('address');
+	$data['address1'] = $this->input->post('address1');
+	    $data['address2'] = $this->input->post('address2');
+	    $data['town'] = $this->input->post('town');
+	    $data['county'] = $this->input->post('county');
+	    $data['postcode'] = $this->input->post('postcode');
         $data['message'] = $this->input->post('message');
         $word = $this->input->post('captcha');
         $time = $this->input->post('time');
@@ -74,7 +82,13 @@ class Email extends My_Controller {
 					<br/>
 					email: " . $data['email'] . "
 					<br/>
-					address: " . $data['address'] . "
+					address: 
+					<br/>
+					" . $data['address1'] . "</br>
+					" . $data['address2'] . "</br>
+					" . $data['town'] . "</br>
+					" . $data['county'] . "</br>
+					" . $data['postcode'] . "</br>
 					<br/>
 					subject: " . $data['subject'] . "
 				    <br/><br/>
