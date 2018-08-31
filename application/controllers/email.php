@@ -84,11 +84,11 @@ class Email extends My_Controller {
 					<br/>
 					address: 
 					<br/>
-					" . $data['address1'] . "</br>
-					" . $data['address2'] . "</br>
-					" . $data['town'] . "</br>
-					" . $data['county'] . "</br>
-					" . $data['postcode'] . "</br>
+					" . $data['address1'] . "<br/>
+					" . $data['address2'] . "<br/>
+					" . $data['town'] . "<br/>
+					" . $data['county'] . "<br/>
+					" . $data['postcode'] . "<br/>
 					<br/>
 					subject: " . $data['subject'] . "
 				    <br/><br/>
