@@ -14,11 +14,26 @@
     <p class="form_email">
         <?= form_input('email') ?>
     </p>
-    <?= form_label('Full Postal Address *') ?>
+    <?= form_label('Address 1 *') ?>
     <p class="form_address">
-        <?= form_textarea('address') ?>
+        <?= form_input('address1') ?>
     </p>
-    
+    <?= form_label('Address 2 *') ?>
+    <p class="form_address">
+        <?= form_input('address2') ?>
+    </p>
+    <?= form_label('Town *') ?>
+    <p class="form_town">
+        <?= form_input('town') ?>
+    </p>
+    <?= form_label('County *') ?>
+    <p class="form_address">
+        <?= form_input('county') ?>
+    </p>
+    <?= form_label('Postcode *') ?>
+    <p class="form_address">
+        <?= form_input('postcode') ?>
+    </p>
     <?= form_label('Subject') ?>
     <p class="form_subject">
         <?= form_input('subject') ?>
@@ -28,7 +43,7 @@
         <?= form_textarea('message') ?>
     </p>
     <p><div class="g-recaptcha" data-sitekey="6LdsD2YUAAAAACECQ2_K2nPfioNHDKm1w4Ua5J96"></div></p>
-
+* required fields
   </div>
 <?= form_hidden('ip_address', $this->input->ip_address()) ?>
 <?= form_hidden('time', $captcha['time']) ?>
