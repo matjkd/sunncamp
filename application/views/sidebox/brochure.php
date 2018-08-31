@@ -1,3 +1,3 @@
 <?=$this->load->view('sidebox/search')?>
 
-<a href="<?=base_url()?>brochures"><img style="width:263px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SunnCamp2018brochure.jpg"/></a>
+<a href="<?=base_url()?>brochures"><img style="width:263px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/brochure2019link.png"/></a>
