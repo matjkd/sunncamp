@@ -24,6 +24,13 @@ box-shadow: 10px 6px 29px #ddd;
 	Tent and Awning 2019
 </div>
 
+<div class="brochureLinks">
+	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/sunncamp2018brochure.pdf">
+		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SunnCamp2018brochure.jpg"/></a>
+	<br/>
+	Tent and Awning 2018
+</div>
+
 
 <div class="brochureLinks">
 	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SunnCamp+AccessoriesBroc2018.pdf">
