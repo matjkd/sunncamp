@@ -33,10 +33,10 @@ box-shadow: 10px 6px 29px #ddd;
 
 
 <div class="brochureLinks">
-	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SunnCamp+AccessoriesBroc2018.pdf">
-		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SunnCampAccessoriesBroc2018.jpg"/></a>
+	<a href="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/SunnCampAccessories2019.pdf">
+		<img style="height:90px;" src="https://s3-eu-west-1.amazonaws.com/sunncamp/brochures/2019accessories.png"/></a>
 	<br/>
-	Accessory Brochure 2018
+	Accessory Brochure 2019
 </div>
 
 
