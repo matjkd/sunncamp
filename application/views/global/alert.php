@@ -1,6 +1,6 @@
 <?php
 
-$notice = NULL;
+$notice = "Please Note, we are now closed for Christmas, and will open again on January 2nd 2019";
 if (isset($message))
 {
 ?>
