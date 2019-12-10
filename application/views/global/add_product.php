@@ -19,7 +19,7 @@
                 //check if s3 file exists
                 $remoteFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
                 
-                if(file_exists($remotefile)){
+                if(is_file($remotefile)){
                  echo "s3 ".$image->filename;   
                 } else {
                     echo "local ".$image->filename;
