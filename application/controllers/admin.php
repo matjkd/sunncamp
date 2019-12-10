@@ -308,8 +308,8 @@ class Admin extends MY_Controller {
 			}
 			//delete files from server
 			$this->gallery_path = "./images/temp";
-			unlink($this->gallery_path . '/' . $fileName . '');
-			unlink($this->gallery_path . '/thumbs/' . $fileName . '');
+			//unlink($this->gallery_path . '/' . $fileName . '');
+			//unlink($this->gallery_path . '/thumbs/' . $fileName . '');
 		} else {
 
 			$this->session->set_flashdata('message', 'News Added');
