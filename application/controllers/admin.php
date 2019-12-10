@@ -655,7 +655,7 @@ echo "...upload done";
 			   }
 			   else
 			   {
-				   echo "error2"; die();
+				   //echo "error2"; die();
 			   }
 			$this->s3->putObject($medium, $this->bucket, $mediumfilelocation, S3:: ACL_PUBLIC_READ);
 			$this->s3->putObject($large, $this->bucket, $largefilelocation, S3:: ACL_PUBLIC_READ);
@@ -664,7 +664,8 @@ echo "...upload done";
 //TODO need to remove old folders
 	$delpath = $this->config_base_path . $this->gallery_path;
 	echo "delete ".$delpath;
-	delete_files($delpath, true);
+	//temp disable delete cos s3 upload is borked
+			//delete_files($delpath, true);
 		redirect("admin/add_product/$id");
 		}
 	}
