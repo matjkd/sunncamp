@@ -649,7 +649,8 @@ echo "...upload done";
 				
 			echo "error"; 	
 			}
-			if($this->s3->putObject($thumb, $this->bucket, $thumbfilelocation, S3:: ACL_PUBLIC_READ)}
+			
+			if($this->s3->putObject($thumb, $this->bucket, $thumbfilelocation, S3:: ACL_PUBLIC_READ))
 			   {
 			   }
 			   else
