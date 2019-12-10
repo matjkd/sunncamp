@@ -18,13 +18,14 @@
                 
                 //check if s3 file exists
                 $remoteFile = "https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>";
-                $handle = @fopen($remoteFile), 'r');
-                if(!handle){
-                    echo 'local';
+                
+                if(file_exists($remotefile)){
+                 echo "s3";   
+                } else {
+                    echo "local";
                 }
-    else {
-     echo 's3';   
-    }
+               
+    
                 ?>
                             <img height="100px" width="135px" src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>" />
                           <!--  <img height="100px" width="135px" src="/images/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>"/> -->
