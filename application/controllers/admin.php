@@ -646,6 +646,10 @@ echo "...upload done";
 			if($this->s3->putObject($regular, $this->bucket, $regularfilelocation, S3:: ACL_PUBLIC_READ)){
 			echo "upload to s3 success"; die();	
 			} else {
+				catch(Exception $e) 
+				{
+					echo "MESSAGE - ".$e->getMessage();
+				}
 			echo "error"; die();	
 			}
 			$this->s3->putObject($thumb, $this->bucket, $thumbfilelocation, S3:: ACL_PUBLIC_READ);
