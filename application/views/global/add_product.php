@@ -14,7 +14,20 @@
                 <li id="pageorder_<?= $image->product_image_id ?>">
                     <div class="thumb" >
                         <a href="#">
+                            <?php
+                
+                //check if s3 file exists
+                $remoteFile = "https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>";
+                $handle = @fopen($remoteFile), 'r');
+                if(!handle){
+                    echo 'local';
+                }
+    else {
+     echo 's3';   
+    }
+                ?>
                             <img height="100px" width="135px" src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>" />
+                          <!--  <img height="100px" width="135px" src="/images/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>"/> -->
                         </a>
 
 
