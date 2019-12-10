@@ -644,9 +644,9 @@ echo "...upload done";
 			$large = file_get_contents($base_path.$largefilelocation, true);
 
 			if($this->s3->putObject($regular, $this->bucket, $regularfilelocation, S3:: ACL_PUBLIC_READ)){
-			echo "upload to s3 success"; exit;	
+			echo "upload to s3 success"; die();	
 			} else {
-			echo "error"; exit;	
+			echo "error"; die();	
 			}
 			$this->s3->putObject($thumb, $this->bucket, $thumbfilelocation, S3:: ACL_PUBLIC_READ);
 			$this->s3->putObject($medium, $this->bucket, $mediumfilelocation, S3:: ACL_PUBLIC_READ);
