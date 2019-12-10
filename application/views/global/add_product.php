@@ -17,12 +17,12 @@
                             <?php
                 
                 //check if s3 file exists
-                $remoteFile = "/images/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>";
+                $remoteFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
                 
-                if(getimagesize($remotefile)){
-                 echo "s3";   
+                if(file_exists($remotefile)){
+                 echo "s3 ".$image->filename;   
                 } else {
-                    echo "local";
+                    echo "local ".$image->filename;
                 }
                
     
