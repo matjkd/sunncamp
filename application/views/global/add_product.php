@@ -20,9 +20,9 @@
                 $remoteFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
                 
                 if(getimagesize($remotefile)){
-                 echo "s3 ".$image->filename;   
+                 echo "s3 ".$remoteFile;   
                 } else {
-                    echo "local ".$image->filename;
+                    echo "local ".$remoteFile;
                 }
                
     
