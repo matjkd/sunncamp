@@ -760,7 +760,7 @@ $product_image_id =  $row->product_image_id;
 			echo "putObject(". $this->bucket." ".$regularfilelocation."<br/>";
 			$this->s3->putObject($regular, $this->bucket, $regularfilelocation, S3:: ACL_PUBLIC_READ);
 		} else {
-			echo "no regular file<br/>";
+			echo "no regular file<br/>".$id;
 		}
 			
 		if(file_exists($base_path.$thumbfilelocation)){
