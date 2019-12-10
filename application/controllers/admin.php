@@ -834,7 +834,7 @@ $product_image_id =  $row->product_image_id;
 		//delete images from server
 
 		unlink($this->gallery_path . '/' . $product_id . '/' . $filename . '');
-		// unlink($this->gallery_path . '/' . $product_id . '/large/' . $filename . '');
+		unlink($this->gallery_path . '/' . $product_id . '/large/' . $filename . '');
 		unlink($this->gallery_path . '/' . $product_id . '/medium/' . $filename . '');
 		unlink($this->gallery_path . '/' . $product_id . '/thumbs/' . $filename . '');
 
