@@ -17,7 +17,7 @@
                             <?php
                 
                 //check if s3 file exists
-                $remoteFile = "https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>";
+                $remoteFile = "/images/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>";
                 
                 if(file_exists($remotefile)){
                  echo "s3";   
