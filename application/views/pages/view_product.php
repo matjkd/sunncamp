@@ -24,21 +24,7 @@
 
         <?php if($defaultimage != NULL) { foreach ($defaultimage as $row): ?>
 	    
-	                                <?php
-                
-                //check if s3 file exists
-                $remoteFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
-                
-                if(!getimagesize($remoteFile)){
-                 echo "local ";
-                    $fileLocation = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$product_id."/thumbs/".$image->filename;
-                } else {
-                    echo "s3 ";
-                    $fileLocation = $remoteFile;
-                }
-               
-    
-                ?>
+	                        
 	    
 	    
             <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/large/<?= $row -> filename ?>' class = 'cloud-zoom' id='zoom1'
@@ -80,7 +66,21 @@
                     $x = $x + 1;
                     ?>
 
-
+        <?php
+                
+                //check if s3 file exists
+                $remoteFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
+                
+                if(!getimagesize($remoteFile)){
+                 echo "local ";
+                    $fileLocation = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$product_id."/thumbs/".$image->filename;
+                } else {
+                    echo "s3 ";
+                    $fileLocation = $remoteFile;
+                }
+               
+    
+                ?>
 
                     <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/large/<?= $row -> filename ?>' class='cloud-zoom-gallery' title='Thumbnail 1'
                        rel="useZoom: 'zoom1', smallImage: 'https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/medium/<?= $row -> filename ?>' ">
