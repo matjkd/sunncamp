@@ -20,14 +20,16 @@
                 $remoteFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
                 
                 if(getimagesize($remoteFile)){
-                 echo "s3 ".$remoteFile;   
+                 echo "local ".$remoteFile;
+                    $fileLocation = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$product_id."/thumbs/".$image->filename;
                 } else {
-                    echo "local ".$remoteFile;
+                    echo "s3 ".$remoteFile;
+                    $fileLocation = $remoteFile;
                 }
                
     
                 ?>
-                            <img height="100px" width="135px" src="https://s3-eu-west-1.amazonaws.com/<?=$bucket?>/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>" />
+                            <img height="100px" width="135px" src="<?=$fileLocation?>" />
                           <!--  <img height="100px" width="135px" src="/images/products/<?= $product_id ?>/thumbs/<?= $image->filename ?>"/> -->
                         </a>
 
