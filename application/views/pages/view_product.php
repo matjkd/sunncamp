@@ -90,8 +90,8 @@
                 ?>
 
                     <a href="<?=$fileLarge?>" class='cloud-zoom-gallery' title='Thumbnail 1'
-                       rel="useZoom: 'zoom1', smallImage: '<?=fileMedium?>' ">
-                        <img src="<?=fileThumb?>" alt = "Thumbnail 1"/></a>
+                       rel="useZoom: 'zoom1', smallImage: '<?=$fileMedium?>' ">
+                        <img src="<?=$fileThumb?>" alt = "Thumbnail 1"/></a>
 
 
 
