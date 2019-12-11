@@ -69,11 +69,11 @@
         <?php
                 
                 //check if s3 file exists
-                $remoteFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
+                $remoteFile = base_url()."images/products/".$row -> product_id."/thumbs/".$row->filename;
                 
                 if(!getimagesize($remoteFile)){
                  echo "local ";
-                    $fileLocation = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$product_id."/thumbs/".$image->filename;
+                    $fileLocation = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$row -> product_id."/thumbs/".$row->filename;
                 } else {
                     echo "s3 ";
                     $fileLocation = $remoteFile;
