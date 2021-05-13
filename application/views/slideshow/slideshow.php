@@ -2,7 +2,7 @@
 
     <div class="frontpage_slideshow">
   		<img src="<?= base_url() ?>images/slides/Slide_1.jpg"/>
-         <img src="sunncamp.s3-eu-west-1.amazonaws.com/images/iconair2021.png"/>
+         <img src="http://sunncamp.s3-eu-west-1.amazonaws.com/images/iconair2021.png"/>
 		
 		 <!-- <img src="<?= base_url() ?>images/slides/AirVolution_Tents.jpg"/> -->
 		 
