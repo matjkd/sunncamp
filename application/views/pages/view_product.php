@@ -24,7 +24,21 @@
 
         <?php if($defaultimage != NULL) { foreach ($defaultimage as $row): ?>
 	    
-	                        
+                         
+                <?php
+                //check if s3 file exists
+                $remoteFile = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$product_id."/thumbs/".$row->filename;
+                $localFile = base_url()."images/products/".$product_id."/thumbs/".$row->filename;
+                if(getimagesize($remoteFile)){
+                 echo "s3 ";
+                    $fileLocation = $remoteFile;
+                } else {
+                    echo "local ";
+                    $fileLocation = $localFile;
+                }
+               ?>
+    
+                	                        
 	    
 	    
             <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/large/<?= $row -> filename ?>' class = 'cloud-zoom' id='zoom1'
