@@ -38,13 +38,13 @@
                //  echo "s3 ";
                     $fileLocation = $remoteFile;
 			$filelocationMedium = $remotefileMedium;
-			$filelocaionLarge = $remotefileLarge;
+			$filelocationLarge = $remotefileLarge;
                 } else {
                //     echo "local ";
                     $fileLocation = $localFile;
 			
 			$filelocationMedium = $localfileMedium;
-			$filelocaionLarge = $localfileLarge;
+			$filelocationLarge = $localfileLarge;
                 }
                ?>
     
@@ -53,7 +53,7 @@
 	    
             <a href='<?=$filelocationMedium?>' class = 'cloud-zoom' id='zoom1'
                rel="adjustX: 0, adjustY:0, position: 'inside', ">
-                <img src="<?=$filelocationMedium?>" alt='' />
+                <img src="<?=$filelocationLarge?>" alt='' />
             </a>
         <?php endforeach;  ?>
 
