@@ -20,11 +20,11 @@
                 $remoteFile = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$product_id."/thumbs/".$image->filename;
                 $localFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
                 if(getimagesize($remoteFile)){
-                 echo "local ";
-                    $fileLocation = $localFile;
-                } else {
-                    echo "s3 ";
+                 echo "s3 ";
                     $fileLocation = $remoteFile;
+                } else {
+                    echo "local ";
+                    $fileLocation = $localFile;
                 }
                
     
