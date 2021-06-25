@@ -51,9 +51,9 @@
                 	                        
 	    
 	    
-            <a href='<?=$filelocationMedium?>' class = 'cloud-zoom' id='zoom1'
+            <a href='<?=$filelocationLarge?>' class = 'cloud-zoom' id='zoom1'
                rel="adjustX: 0, adjustY:0, position: 'inside', ">
-                <img src="<?=$filelocationLarge?>" alt='' />
+                <img src="<?=$filelocationMedium?>" alt='' />
             </a>
         <?php endforeach;  ?>
 
