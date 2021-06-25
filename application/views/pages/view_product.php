@@ -37,14 +37,14 @@
 		if(getimagesize($remoteFile)){
                //  echo "s3 ";
                     $fileLocation = $remoteFile;
-			$filelocationMedium = $remotefileMedium;
-			$filelocationLarge = $remotefileLarge;
+			$filelocationMedium = $remoteFileMedium;
+			$filelocationLarge = $remoteFileLarge;
                 } else {
                //     echo "local ";
                     $fileLocation = $localFile;
 			
-			$filelocationMedium = $localfileMedium;
-			$filelocationLarge = $localfileLarge;
+			$filelocationMedium = $localFileMedium;
+			$filelocationLarge = $localFileLarge;
                 }
                ?>
     
