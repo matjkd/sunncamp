@@ -55,7 +55,7 @@
                rel="adjustX: 0, adjustY:0, position: 'inside', ">
                 <img src="<?=$filelocationMedium?>" alt='' />
             </a>
-        <?php endforeach; ?>
+        <?php endforeach; } ?>
 
 
 
