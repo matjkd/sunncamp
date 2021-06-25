@@ -95,15 +95,15 @@
                 //check if s3 file exists
                 $remoteFile = base_url()."images/products/".$row -> product_id."/thumbs/".$row->filename;
                 
-                if(!getimagesize($remoteFile)){
-                // echo "s3 ";
+                if(getimagesize($remoteFile)){
+                 echo "s3 ";
                     $fileThumb = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$row -> product_id."/thumbs/".$row->filename;
                     $fileMedium = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$row -> product_id."/medium/".$row->filename;
                     $fileLarge = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$row -> product_id."/large/".$row->filename;
                 
 		
 		} else {
-                  //  echo "local ";
+                    echo "local ";
 			$fileThumb = base_url()."images/products/".$row -> product_id."/thumbs/".$row->filename;
                     $fileMedium = base_url()."images/products/".$row -> product_id."/medium/".$row->filename;
                     $fileLarge = base_url()."images/products/".$row -> product_id."/large/".$row->filename;
