@@ -41,9 +41,9 @@
                 	                        
 	    
 	    
-            <a href='https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/large/<?= $row -> filename ?>' class = 'cloud-zoom' id='zoom1'
+            <a href='<?=$filelocation?>' class = 'cloud-zoom' id='zoom1'
                rel="adjustX: 0, adjustY:0, position: 'inside', ">
-                <img src="https://s3-eu-west-1.amazonaws.com/<?=$bucket ?>/products/<?= $row -> product_id ?>/medium/<?= $row -> filename ?>" alt='' />
+                <img src="<?=$filelocation?>" alt='' />
             </a>
         <?php endforeach; ?>
 
