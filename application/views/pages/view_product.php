@@ -38,13 +38,13 @@
                  echo "s3 ";
                     $fileLocation = $remoteFile;
 			$filelocationMedium = $remotefileMedium;
-			$filelocaionLarge = $remotefileLarge
+			$filelocaionLarge = $remotefileLarge;
                 } else {
                     echo "local ";
                     $fileLocation = $localFile;
 			
 			$filelocationMedium = $localfileMedium;
-			$filelocaionLarge = $localfileLarge
+			$filelocaionLarge = $localfileLarge;
                 }
                ?>
     
