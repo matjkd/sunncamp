@@ -29,21 +29,31 @@
                 //check if s3 file exists
                 $remoteFile = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$row->product_id."/thumbs/".$row->filename;
                 $localFile = base_url()."images/products/".$row->product_id."/thumbs/".$row->filename;
-                if(getimagesize($remoteFile)){
+		$remoteFileMedium = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$row->product_id."/medium/".$row->filename;
+                $localFileMedium = base_url()."images/products/".$row->product_id."/medium/".$row->filename;
+                $remoteFileLarge = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$row->product_id."/large/".$row->filename;
+                $localFileLarge = base_url()."images/products/".$row->product_id."/large/".$row->filename;
+					 
+		if(getimagesize($remoteFile)){
                  echo "s3 ";
                     $fileLocation = $remoteFile;
+			$filelocationMedium = $remotefileMedium;
+			$filelocaionLarge = $remotefileLarge
                 } else {
                     echo "local ";
                     $fileLocation = $localFile;
+			
+			$filelocationMedium = $localfileMedium;
+			$filelocaionLarge = $localfileLarge
                 }
                ?>
     
                 	                        
 	    
 	    
-            <a href='<?=$filelocation?>' class = 'cloud-zoom' id='zoom1'
+            <a href='<?=$filelocationMedium?>' class = 'cloud-zoom' id='zoom1'
                rel="adjustX: 0, adjustY:0, position: 'inside', ">
-                <img src="<?=$filelocation?>" alt='' />
+                <img src="<?=$filelocationLarge?>" alt='' />
             </a>
         <?php endforeach; ?>
 
