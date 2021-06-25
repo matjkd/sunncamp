@@ -17,11 +17,11 @@
                             <?php
                 
                 //check if s3 file exists
-                $remoteFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
-                
-                if(!getimagesize($remoteFile)){
+                $remoteFile = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$product_id."/thumbs/".$image->filename;
+                $localFile = base_url()."images/products/".$product_id."/thumbs/".$image->filename;
+                if(!getimagesize($localFile)){
                  echo "local ";
-                    $fileLocation = "https://s3-eu-west-1.amazonaws.com/".$bucket."/products/".$product_id."/thumbs/".$image->filename;
+                    $fileLocation = $localFile;
                 } else {
                     echo "s3 ";
                     $fileLocation = $remoteFile;
